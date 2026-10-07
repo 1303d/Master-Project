@@ -1,0 +1,121 @@
+1.	It: director of IT: 
+
+IT leadership; cloud migration; cybersecurity; ERP implementation (Microsoft Dynamics 365); IT infrastructure design; infrastructure implementation; 
+2.	IT: network administrator:
+
+Windows Server administration; Active Directory; Azure AD; Microsoft 365; Azure; Intune; SharePoint; virtualization (vSphere, Hyper-V); Citrix; storage (NAS/SAN); networking (UTM Gateways , SD-WAN, wireless, switching/routing); firewalls; backup and recovery; technical consulting; client support; communication; Cybersecurity Frameworks Data
+3.	IT: Datacenter network technician:
+server OS installation; server configuration; firmware/BIOS updates; hardware issue troubleshooting; server and rack mounting; data center inventory management; vendor coordination; network connectivity; cabling and labeling; PDU/ATS installation; Remedy ticketing
+4.	Principal, technology strategy:
+
+technology strategy; management consulting; digital transformation; team leadership; business development; client relationship management; Agile methodologies; system architecture; cloud; workshop facilitation; stakeholder management
+5.	software developer:
+
+Java; Spring Boot; REST API development; Kafka; Go; Python; microservices; cloud platforms; Agile tools (Jira, Confluence); secure SDLC; communication
+6.	Production support engineer: 
+
+Linux/Unix administration; shell scripting; SQL; databases (Oracle, Sybase); monitoring tools (Splunk, ITRS Geneos); job scheduling (Autosys); incident and problem management; production support; troubleshooting; root cause analysis; Remedy ticketing
+7.	Programmer Analyst: Data/API Modeler:
+
+data modeling; API modeling; data and process analysis; conceptual/logical data model design; object-oriented design; programming; DB2; XML; JSON; test planning; documentation; problem-solving; communication
+8.	Linux Systems:
+Linux administration (RHEL/CentOS); Elastic Stack (Elasticsearch, Logstash, Kibana); systems administration; ETL pipeline design; dashboard creation; Python; Ansible; Bash; regex; Tomcat; MySQL; nginx; security hardening; SSL/SSO/LDAP; high-availability design; load balancing; REST APIs; CI/CD (Git, Ansible); performance monitoring; capacity planning; documentation
+9.	Principal Application Engineer (iOS Developer):
+iOS development; Swift; Objective-C; React Native; JavaScript; Xcode; Git; Fastlane; CocoaPods/Carthage; TestFlight; mobile app development; CI/CD pipelines; SDK integration
+10.	UI React Developer:
+ReactJS; JavaScript; UI development; HTML; CSS; REST APIs; Redux; TypeScript; Git; CI/CD; web accessibility standards
+11.	Staff Software Engineer (Mobile), Bitkey:
+mobile development; Kotlin; Kotlin Multiplatform; Android development; Swift; API design; Gradle; mobile CI/CD; SQLite; AWS; Rust; Git; cross-functional collaboration
+12.	DevSecOps Engineer (Active Secret Clearance) – REMOTE:
+DevSecOps; software development; CI/CD (Jenkins, Git, Artifactory, SonarQube); infrastructure automation (Terraform); AWS; Azure; security controls; data modeling; database design; application performance optimization; Agile; communication
+13.	Tableau Developer (Only on W2):
+Tableau (Desktop and Server); data visualization; dashboard development; SQL; database management; data analysis; requirements gathering; troubleshooting; training; communication
+14.	Site Reliability Engineer:
+site reliability engineering; DevOps; AWS (EC2, EKS); Unix/Linux administration; shell scripting; Python; Go; networking; monitoring (Grafana, Datadog, OpenSearch); MySQL; Oracle; Docker; Kubernetes; Jenkins; Terraform
+15.	Network Security Engineer:
+network security; firewall management (Fortinet); routing and switching; IDS/IPS; NAC; SD-WAN; VPN; BGP; OSPF; MPLS; TCP/IP; packet capture analysis (Wireshark); troubleshooting; capacity planning; vendor management; documentation
+
+
+
+1. Chairperson, Department of Ob/Gyn, Overlook Medical Center:
+obstetrics and gynecology; clinical leadership; physician leadership; department administration; quality and safety management; medical education; perioperative services management
+2. Director of Quality and Risk:
+healthcare quality management; risk management; regulatory compliance; quality improvement programs; accreditation standards (Joint Commission); incident reporting; corrective action planning; policy development; leadership; conflict resolution
+3. Group Director of Case Management:
+case management; utilization management; discharge/transition planning; revenue cycle management; denial prevention; care coordination; regulatory compliance (CMS, Joint Commission); McKesson InterQual; physician education; nursing; leadership
+4. Board Certified Internal Medicine Physician:
+internal medicine; primary care; physical examination; diagnosis; laboratory/test interpretation; treatment planning; patient care; mentoring
+5. Lead Clinical Social Worker Child & Adolescent Full Time:
+clinical social work; mental health therapy; individual/group/family therapy; psychosocial assessment; treatment planning; crisis intervention and de-escalation; discharge planning; case management; clinical supervision; staff training; documentation; leadership
+6. CERTIFIED NURSING ASSISTANT - THE FOLEY CENTER AT CHESTNUT RIDGE:
+certified nursing assistance; activities of daily living (ADL) support; personal hygiene care; oral/denture care; patient care documentation; intake and output recording; geriatric care
+7. Health Center Manager (San Mateo):
+healthcare operations management; staff supervision; leadership; strategic planning; budget and financial management; quality assurance; risk management; HIPAA compliance; inventory management; scheduling; medical billing (NextGen); performance management; community outreach
+8. LICENSED PRACTICAL NURSE - MARY GRAN:
+licensed practical nursing; patient observation and assessment; nursing care delivery; delegation and supervision; physician order implementation; geriatric nursing; CPR; documentation
+9. Licensed Practical Nurse (Daily Pay):
+licensed practical nursing; medication administration; vital signs monitoring; patient care planning; wound care; injections; patient education; documentation; CPR; communication
+10. Travel/Contract - Physical Therapist: 
+physical therapy; patient assessment; treatment planning; therapeutic exercise; therapy modalities; patient education; documentation; CPR; communication
+11. Clinical Radiology Manager:
+radiology department management; radiologic technology; PACS administration; radiology equipment operation (CR, DR, C-Arm, ultrasound, MRI); quality assurance; equipment troubleshooting; staff supervision and hiring; scheduling; vendor management; RFP process; radiology safety compliance; mentoring
+12. Physician Psychiatry: 
+psychiatry; clinical patient care; diagnosis and treatment; medical leadership
+13. Patient Care Associate - Cardiology Clinic - Full Time:
+patient care; vital signs measurement; phlebotomy; EKG; specimen collection; dressing changes; clerical duties; appointment scheduling; medical records; Basic Life Support (BLS); communication
+14. Supplemental Critical Care Valley Hospital:
+registered nursing; critical care nursing; nursing process (assessment, planning, delegation); patient care; care coordination; Basic Life Support (BLS); ACLS; patient advocacy; collaboration
+15. LPN - Variable Shift:
+licensed practical nursing; patient assessment; medication administration; IV therapy; diagnostic testing; patient education; SOAP charting; controlled substance handling; CPR; infection control
+
+1. Digital Marketing Specialist: 
+digital marketing; digital campaign management; client relationship management; customer service; SEO; email marketing; display advertising; social media marketing; website content management; CRM software; performance reporting; data analysis; upselling; Microsoft Office; communication
+2. Content Marketing Manager:
+content marketing; SEO content development; thought leadership content; copywriting; multimedia content creation; content strategy; financial markets knowledge; project management; cross-functional collaboration; data analysis
+3. Area Sales Director - IgG4 (Southeast) Rare Disease – Amgen:
+pharmaceutical sales; sales leadership; team management; territory management; market analysis; sales strategy; account management; coaching and mentoring; regulatory compliance; KPI management
+4. Social Media Content Producer:
+social media content creation; copywriting; photography; video production; visual design; branding; digital engagement analytics; market research; communication; time management
+5. Retail Sales Associate, Chapel Hills - Full Time:
+customer service; selling; product knowledge; merchandising; order fulfillment; pricing and markdowns; point-of-sale systems; teamwork
+6. Inside Sales Representative:
+customer satisfaction; lead generation; account management; customer service; lead generation; relationship building; communication; teamwork
+7. Retail Sales Technology Associate:
+customer service; technology sales; selling; technology product knowledge; cashiering; merchandising; teamwork
+8. Director Business Development Pharma:
+business development; pharmaceutical and technical sales; lead generation; prospecting; pipeline development; project management; negotiation; relationship building; market penetration strategy; presentation
+
+1.Environmental Field Technician:
+environmental remediation; industrial maintenance; field work; safety compliance; vehicle safety inspection; manual labor; documentation and reporting
+
+2. Sr. Principal Auditor - Health, Safety, & Environmental (HSE):
+HSE auditing; health and safety regulations; environmental regulatory compliance; audit planning and execution; HSE management systems; process safety management (PSM); audit team leadership; report writing; communication; Microsoft Office
+
+3. Shuttle Driver:
+driving; vehicle transport; tire mounting and balancing; oil changes; basic automotive maintenance; customer service; safety
+
+4. Food Service Cook:
+cooking; food preparation; food safety and sanitation; customer service; food presentation
+
+5. Store Clerk:
+customer service; cashiering; payment processing; merchandising; inventory management; loss prevention; restocking; basic math; safety compliance
+6. Scan Coordinator:
+price accuracy and tag integrity; price auditing; price discrepancy research; shelf 
+tag and signage management; customer service; attention to detail
+
+7. Package Handler: 
+package loading and unloading; package sorting; warehouse operations; safety compliance
+
+1. Avionics System Engineer-communications – 1897722:
+avionics systems engineering; military communications systems; navigation systems; electrical engineering; systems integration; systems evaluation; requirements specification; written and verbal communication
+
+2. Tool and Mold Design Engineer:
+tool design; mold design; 3D CAD modeling (SolidWorks, AutoCAD, MasterCAM); specification development; material selection; manufacturing engineering; communication
+
+3. Senior Electrical Engineer:
+electrical engineering; embedded controller design; embedded software (C, Assembly); FPGA (Xilinx); microcontrollers/DSP; analog/digital circuit design; board-level DC power design; servo drive design; closed-loop control; harness and cabling design; schematic capture and board layout (OrCAD, Mentor Graphics); troubleshooting; project scheduling; communication
+4. Power Systems Academy:
+generator maintenance; power equipment servicing; generator troubleshooting; preventive maintenance; mechanical aptitude; customer service; critical thinking; problem-solving
+5. Design Supervisor - EE Wiring:
+electrical wiring design; CAD modeling (Siemens NX); Teamcenter PLM; 3D modeling; design supervision; GD&T; automotive design; product lifecycle management; project coordination; leadership; communication
+

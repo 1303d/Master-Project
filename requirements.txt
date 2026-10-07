@@ -1,0 +1,6 @@
+kagglehub[pandas-datasets]
+pandas
+pyarrow
+openpyxl
+requests
+python-dotenv

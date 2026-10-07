@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill Vocabulary Plan</title>
+<style>
+  :root {
+    --bg: #f5f7f6; --card: #ffffff; --text: #1b2421; --muted: #5d6b66; --line: #dbe2df;
+    --accent: #0f766e; --accent-soft: #d9f0ec; --warn: #b45309; --warn-soft: #fdf0dc;
+    --bad: #b91c1c; --good: #15803d; --code: #eef2f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121816; --card: #1a2220; --text: #e4ece9; --muted: #9db0a9; --line: #2c3834;
+      --accent: #5eead4; --accent-soft: #163a35; --warn: #fbbf24; --warn-soft: #3a2e14;
+      --bad: #f87171; --good: #4ade80; --code: #222c29; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121816; --card: #1a2220; --text: #e4ece9; --muted: #9db0a9; --line: #2c3834;
+    --accent: #5eead4; --accent-soft: #163a35; --warn: #fbbf24; --warn-soft: #3a2e14;
+    --bad: #f87171; --good: #4ade80; --code: #222c29; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 0 0 10px; }
+  h3 { font-size: 1rem; margin: 14px 0 6px; }
+  p { margin: 0 0 10px; max-width: 68ch; }
+  .sub { color: var(--muted); margin-bottom: 18px; }
+  code { background: var(--code); padding: 1px 6px; border-radius: 4px; font-size: .88em; }
+  .why { background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; margin: 14px 0; }
+  .warn { background: var(--warn-soft); border-left: 4px solid var(--warn); border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 12px 0; }
+  /* flow */
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+  .flow button { flex: 1 1 110px; min-width: 0; border: 2px solid var(--line); background: var(--card); color: var(--text);
+    border-radius: 10px; padding: 10px 8px; font: inherit; font-size: .88rem; cursor: pointer; text-align: left; }
+  .flow button b { display: block; font-size: .75rem; color: var(--muted); }
+  .flow button.on { border-color: var(--accent); background: var(--accent-soft); }
+  .flow button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .panel[hidden] { display: none; }
+  .io { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+  @media (max-width: 600px) { .io { grid-template-columns: 1fr; } }
+  .io > div { background: var(--code); border-radius: 8px; padding: 10px 12px; min-width: 0; font-size: .9rem; }
+  .io b { display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-size: .78rem; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; margin: 8px 0; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .st-ok { color: var(--good); font-weight: 600; } .st-rev { color: var(--warn); font-weight: 600; } .st-new { color: var(--bad); font-weight: 600; }
+  /* try it */
+  .try { margin-top: 26px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .try input { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--bg); color: var(--text); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .chips button { border: 1px solid var(--line); background: var(--bg); color: var(--text); border-radius: 999px; padding: 4px 10px; font: inherit; font-size: .82rem; cursor: pointer; }
+  .out { display: grid; gap: 6px; margin-top: 12px; font-size: .92rem; }
+  .out div { display: grid; grid-template-columns: 130px 1fr; gap: 8px; }
+  @media (max-width: 480px) { .out div { grid-template-columns: 1fr; } }
+  .out span:first-child { color: var(--muted); }
+  .bar { height: 8px; background: var(--code); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .bar i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+  @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+  .q { margin-top: 26px; }
+  .q button.opt { display: block; width: 100%; text-align: left; margin: 6px 0; padding: 8px 12px; font: inherit;
+    border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; }
+  .q button.right { border-color: var(--good); color: var(--good); }
+  .q button.wrong { border-color: var(--bad); color: var(--bad); }
+  .fb { font-size: .9rem; color: var(--muted); min-height: 1.3em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Skill Vocabulary Plan</h1>
+  <p class="sub">An open, growing skill list for our gold set, linked to ESCO. No 500 limit, and labels are never forced into a list.</p>
+
+  <div class="why">
+    <b>The problem:</b> three people write the same skill three ways ("MS Excel", "Microsoft Excel", "Excel"). Scoring then counts correct answers as wrong.
+    <br><b>The fix:</b> label freely, then clean the names and link each one to ESCO automatically. People check only the doubtful ones.
+  </div>
+
+  <p><b>Click each step</b> to see what it does, what goes in and comes out, and why we need it.</p>
+  <div class="flow" id="flow" role="tablist"></div>
+  <div id="panels"></div>
+
+  <div class="try">
+    <h2>Try it: steps 3 to 5 on one skill</h2>
+    <p>Type a skill the way a person might write it, or click an example. This demo uses a tiny 20-skill sample of ESCO and simple word matching. The real version uses all ~14k ESCO skills and embeddings.</p>
+    <input id="skillIn" type="text" value="strong MS Excel skills" aria-label="Skill to test">
+    <div class="chips" id="examples"></div>
+    <div class="out" id="out"></div>
+  </div>
+
+  <div class="q">
+    <h2>Quick check</h2>
+    <div id="quiz"></div>
+  </div>
+</main>
+
+<script>
+const steps = [
+  { t: "Fix open labels", tag: "Step 0", time: "15 min",
+    what: "Add back the skills the checker flagged in #18, #47 and #56 (e.g. depositions, personal injury litigation, U-Visa). This is optional, but it gives us cleaner input.",
+    inp: "data/gold/gold_labels.csv (7 labelled postings)", out: "The same file with corrected rows",
+    why: "Garbage in, garbage out. Linking to ESCO cannot fix a skill that was never labelled." },
+  { t: "Get ESCO", tag: "Step 1", time: "10 min",
+    what: "Download the official ESCO skills list (English CSV, free). It has about 14,000 skills. Each one has a preferred name, alternative names, a description, and a type (skill vs knowledge).",
+    inp: "ESCO download portal (you may need to fill a short form)", out: "data/reference/esco_skills.parquet",
+    why: "ESCO is Section B's reference standard. Using it now saves work in Sprint 4 and gives every skill a definition, so we do not need law knowledge." },
+  { t: "Clean names", tag: "Step 2", time: "auto",
+    what: "Apply simple rules to every gold skill: lowercase; remove filler words (skills, strong, proficiency in, knowledge of); unify spellings (MS → Microsoft); singular/plural.",
+    inp: "Raw gold skills", out: "data/gold/skill_aliases.csv  (raw → clean name)",
+    why: "'Organizational Skills' and 'organizational' become one entry. The alias table grows by itself, and anyone can add a row by hand." },
+  { t: "Embed", tag: "Step 3", time: "auto, ~5 min",
+    what: "Turn each clean skill and each ESCO name into a vector (a list of numbers that captures meaning). We use a free local model, all-MiniLM-L6-v2. No API calls and no cost.",
+    inp: "Clean skills + ESCO names", out: "Vectors (cached on disk)",
+    why: "Spelling match fails on 'taking depositions' vs 'conduct depositions'. Meaning match catches it." },
+  { t: "Match to ESCO", tag: "Step 4", time: "auto",
+    what: "For each skill, find the 3 closest ESCO skills and a similarity score from 0 to 1. Then sort it into one of three buckets: ≥ 0.80 auto-accept; 0.60–0.80 needs review; < 0.60 possibly a new skill.",
+    inp: "Vectors", out: "Top-3 ESCO candidates + score per skill",
+    why: "Most skills match clearly. People only look at the unclear ones, which saves time." },
+  { t: "Human review", tag: "Step 5", time: "~20 min",
+    what: "Open the review sheet. For each doubtful skill, pick one of: accept the top match, choose candidate 2 or 3, or mark it 'new' (not in ESCO).",
+    inp: "data/gold/esco_review.csv", out: "Decisions saved in the same file",
+    why: "The model proposes and a person decides. The report can say: 'X% matched automatically, Y% reviewed by hand'." },
+  { t: "Vocabulary", tag: "Step 6", time: "auto",
+    what: "Build the final sheet: one row per unique skill, with clean name, type, ESCO link, score, status (auto / reviewed / new), how many postings use it, and in which sectors.",
+    inp: "Aliases + matches + review decisions", out: "data/gold/skill_vocabulary.csv",
+    why: "This is your 'one single sheet' glossary, built from real data instead of a guessed top-500." },
+  { t: "Use it", tag: "Step 7", time: "every run",
+    what: "(a) Score Gemini against gold using clean names, so 'MS Excel' = 'Excel' counts as correct. (b) Run the same steps on Gemini output. (c) Report ESCO coverage and the share of 'new' skills. (d) Re-run after each batch of labels, and the sheet grows.",
+    inp: "Gold labels + Gemini output", out: "Fairer precision/recall + coverage numbers for the report",
+    why: "One tool serves three jobs: labeling consistency, fair scoring, and a head start on Sprint 4." },
+];
+
+const flow = document.getElementById('flow'), panels = document.getElementById('panels');
+steps.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.id = 'tab' + i; b.setAttribute('role', 'tab');
+  b.innerHTML = `<b>${s.tag}</b>${s.t}`;
+  b.onclick = () => show(i);
+  flow.appendChild(b);
+  const p = document.createElement('section');
+  p.className = 'panel'; p.id = 'p' + i; p.hidden = true; p.setAttribute('role', 'tabpanel');
+  p.innerHTML = `<h2>${s.tag}: ${s.t}</h2><p>${s.what}</p>
+    <div class="io"><div><b>In</b>${s.inp}</div><div><b>Out</b>${s.out}</div></div>
+    <p><b>Why:</b> ${s.why}</p>
+    <div class="meta"><span class="tag">Time: ${s.time}</span>${i === 3 ? '<span class="tag">Needs: py -m pip install sentence-transformers (~500 MB once)</span>' : ''}${i === 1 ? '<span class="tag">If auto-download fails, you download it manually</span>' : ''}</div>
+    ${i === 4 ? `<div class="tablewrap"><table><tr><th>Our skill</th><th>Best ESCO match</th><th>Score</th><th>Bucket</th></tr>
+      <tr><td>Excel</td><td>Microsoft Excel</td><td>0.93</td><td class="st-ok">auto-accept</td></tr>
+      <tr><td>depositions</td><td>conduct depositions</td><td>0.74</td><td class="st-rev">review</td></tr>
+      <tr><td>U-Visa</td><td>immigration law</td><td>0.48</td><td class="st-new">maybe new</td></tr></table></div>
+      <p style="color:var(--muted);font-size:.85rem">Example numbers only. We set the real thresholds after checking a sample by hand.</p>` : ''}
+    ${i === 6 ? `<div class="tablewrap"><table><tr><th>skill</th><th>type</th><th>ESCO</th><th>status</th><th>postings</th><th>sectors</th></tr>
+      <tr><td>Excel</td><td>tool</td><td>Microsoft Excel</td><td class="st-ok">auto</td><td>4</td><td>Legal, Finance</td></tr>
+      <tr><td>depositions</td><td>skill</td><td>conduct depositions</td><td class="st-rev">reviewed</td><td>1</td><td>Legal</td></tr>
+      <tr><td>U-Visa</td><td>knowledge</td><td>–</td><td class="st-new">new</td><td>1</td><td>Legal</td></tr></table></div>` : ''}`;
+  panels.appendChild(p);
+});
+function show(i) {
+  steps.forEach((_, j) => { document.getElementById('p' + j).hidden = j !== i; document.getElementById('tab' + j).classList.toggle('on', j === i); });
+}
+show(0);
+
+// try-it demo
+const esco = ["Microsoft Excel","Microsoft Word","Microsoft Outlook","conduct depositions","perform legal research","draft legal documents",
+  "immigration law","family law","litigation procedure","negotiate settlements","use communication techniques","organise information",
+  "manage time","attention to detail","customer service","data entry","civil procedure","contract law","case management","written communication"];
+const alias = { "ms": "microsoft", "excel": "excel", "organizational": "organise", "organized": "organise", "organization": "organise",
+  "time-management": "time", "deposition": "depositions", "drafting": "draft" };
+const filler = ["strong","excellent","solid","skills","skill","proficiency","proficient","in","knowledge","of","the","with","experience","advanced"];
+const ex = ["strong MS Excel skills","taking depositions","Organizational Skills","knowledge of family law","U-Visa petitions","legal drafting"];
+const exBox = document.getElementById('examples');
+ex.forEach(e => { const b = document.createElement('button'); b.textContent = e; b.onclick = () => { inp.value = e; run(); }; exBox.appendChild(b); });
+const inp = document.getElementById('skillIn'); inp.oninput = run;
+function clean(s) {
+  let w = s.toLowerCase().replace(/[^a-z0-9\- ]/g, ' ').split(/\s+/).filter(x => x && !filler.includes(x));
+  return w.map(x => alias[x] || x).join(' ');
+}
+function score(a, b) {
+  const A = new Set(a.split(' ')), B = b.toLowerCase().split(/\s+/);
+  let hit = 0; A.forEach(w => { if (B.some(t => t.startsWith(w.slice(0, 5)) || w.startsWith(t.slice(0, 5)))) hit++; });
+  return A.size ? hit / Math.max(A.size, B.length * 0.8) : 0;
+}
+function run() {
+  const raw = inp.value, c = clean(raw);
+  const ranked = esco.map(e => [e, score(c, e)]).sort((x, y) => y[1] - x[1]);
+  const [best, s] = ranked[0], sc = Math.min(1, s);
+  const bucket = sc >= .8 ? ['auto-accept', 'st-ok'] : sc >= .45 ? ['needs review', 'st-rev'] : ['maybe new skill', 'st-new'];
+  document.getElementById('out').innerHTML = `
+    <div><span>Step 2 · clean</span><span><code>${c || '(empty)'}</code></span></div>
+    <div><span>Step 4 · best ESCO</span><span>${sc > 0 ? best : '–'}<div class="bar"><i style="width:${Math.round(sc * 100)}%"></i></div></span></div>
+    <div><span>Bucket</span><span class="${bucket[1]}">${bucket[0]}</span></div>
+    <div><span>Runner-ups</span><span>${ranked.slice(1, 3).filter(r => r[1] > 0).map(r => r[0]).join(', ') || '–'}</span></div>`;
+}
+run();
+
+// quiz
+const qs = [
+  ["Does the vocabulary limit what we label?", ["Yes, only skills on the list", "No, we label freely and map afterwards"], 1, "Labels follow the posting text. The list only cleans names and links them to ESCO."],
+  ["A skill scores 0.52 against its best ESCO match. What happens?", ["Auto-accepted", "A person reviews it, and it may be marked 'new'", "Deleted"], 1, "Low scores go to a person, and new skills are a useful finding for the report."],
+  ["Why do we need clean names before scoring Gemini?", ["So 'MS Excel' and 'Excel' count as the same skill", "To make the file smaller"], 0, "Without it, correct answers look wrong and precision drops unfairly."],
+];
+const qb = document.getElementById('quiz');
+qs.forEach(([q, opts, a, why]) => {
+  const d = document.createElement('div'); d.innerHTML = `<p><b>${q}</b></p>`;
+  const fb = document.createElement('div'); fb.className = 'fb';
+  opts.forEach((o, i) => { const b = document.createElement('button'); b.className = 'opt'; b.textContent = o;
+    b.onclick = () => { d.querySelectorAll('.opt').forEach(x => x.classList.remove('right', 'wrong')); b.classList.add(i === a ? 'right' : 'wrong'); fb.textContent = (i === a ? 'Correct. ' : 'Not quite. ') + why; };
+    d.appendChild(b); });
+  d.appendChild(fb); qb.appendChild(d);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# secrets
+.env
+
+# data and caches (too big for Git)
+data/raw/*
+data/interim/*
+data/processed/*
+cache/*
+!**/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# dashboard data built from the gold set (regenerate with src/make_dashboard_data.py)
+dashboard_kaggle/
+
+# teammate repo (has its own git) and local envs
+taxonomy-skill-project/
+.venv/
