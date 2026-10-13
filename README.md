@@ -20,6 +20,43 @@ LLM skill extraction scored against 100 hand-labelled postings (1,317 gold skill
 - Full report (by sector, error samples, tokens): `reports/sprint2_extraction_quality_qwen_qwen3.8-27b.md`.
 - Slides: `docs/sprint2_slides_content.pdf`.
 
+## Sprint 2 flow (LLM skill extraction)
+
+```mermaid
+flowchart LR
+    A[Kaggle postings<br/>data/raw/linkedin/] --> B[clean_postings.py<br/>tag duplicates, keep line breaks]
+    B --> C[postings_clean.parquet<br/>106,909 usable]
+    C --> D[make_gold_sample.py<br/>100 postings, 9 sectors]
+    D --> E[Humans label skills<br/>gold_labels.csv]
+    D --> F[extract_skills.py<br/>prompt + LLM, JSON out]
+    P[prompts/<br/>skill_extraction_v1.txt] --> F
+    F <--> K[(cache/<br/>saved LLM answers)]
+    F --> G[statements_model.csv<br/>skill + evidence]
+    F --> T[token_usage.csv]
+    E --> H[evaluate.py<br/>match gold vs LLM]
+    G --> H
+    H --> R[Quality report<br/>precision / recall / F1]
+```
+
+### Files used in Sprint 2
+
+| Step | File | Role |
+|---|---|---|
+| Clean | `src/clean_postings.py` | Normalise text, tag duplicates / short / missing (nothing deleted) |
+| Sample | `src/make_gold_sample.py` | Pick the 100 gold postings, stratified by sector (seed 42) |
+| Label | `data/gold/LABELING_RULES.md` | What counts as a skill |
+| Label | `src/gold_tool.py`, `data/gold/CLAUDE_LABELING_PROMPT.md` | Show postings, save labels |
+| Label | `data/gold/gold_labels.csv` | **Gold set**: 100 postings, 1,317 skills |
+| Label | `data/gold/second_annotations.csv` | Double-labelled postings (agreement) |
+| Check | `src/check_skill.py` (in `taxonomy-skill-project`) | Look up a skill in ESCO / O\*NET |
+| Extract | `prompts/skill_extraction_v1.txt` | Instructions sent to the LLM |
+| Extract | `src/extract_skills.py` | Calls the LLM (Groq / Gemini), caches, retries, logs tokens |
+| Extract | `data/processed/statements_<model>.csv` | **Statements**: one row per extracted skill (on Drive) |
+| Evaluate | `src/evaluate.py` | Precision / recall / F1, strict and lenient, by sector |
+| Report | `reports/sprint2_extraction_quality_qwen_qwen3.8-27b.md` | Scores, errors, token usage |
+| Report | `reports/token_usage.csv` | Tokens per run |
+| Report | `docs/sprint2_slides_content.pdf` | Presentation content |
+
 ## Folders
 
 | Folder | What goes here | In Git? |
