@@ -57,19 +57,6 @@ flowchart LR
 | Report | `reports/token_usage.csv` | Tokens per run |
 | Report | `docs/sprint2_slides_content.pdf` | Presentation content |
 
-## Folders
-
-| Folder | What goes here | In Git? |
-|---|---|---|
-| `data/raw/` | Kaggle download, never edited | No (Drive / download script) |
-| `data/interim/` | Cleaned, tagged postings (`postings_clean.parquet`) | No (Drive) |
-| `data/gold/` | Gold labels, labelling rules, labelling prompt | Yes (posting text `gold_postings.csv` is on Drive) |
-| `data/processed/` | LLM output: `statements_<model>.csv`, `extraction_postings_<model>.csv` | No (Drive) |
-| `cache/` | Every LLM response; re-runs are free | No (Drive, optional) |
-| `prompts/` | Versioned extraction prompt | Yes |
-| `src/` | Python scripts | Yes |
-| `reports/` | Quality reports, token log | Yes |
-| `docs/` | Plans, slides | Yes |
 
 **Data (Google Drive):** <ADD DRIVE LINK HERE>. Put each file in the folder shown above.
 
