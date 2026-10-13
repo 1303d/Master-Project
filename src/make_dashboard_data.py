@@ -46,12 +46,13 @@ def main():
     rows, manifest = [], []
     for g in gold.itertuples():
         company = g.company_name if isinstance(g.company_name, str) else "(unknown)"
+        sector = g.sector_fixed if isinstance(g.sector_fixed, str) else g.sector  # sector_fixed only set once labelled
         rows.append((SNAPSHOT, g.posting_id, company, g.title, g.location, len(g.clean_text.split()),
-                     "", None, 0, g.sector_fixed, g.clean_text))
+                     "", None, 0, sector, g.clean_text))
         manifest.append(dict.fromkeys(MANIFEST_FIELDS, "") | {
             "snapshot_id": SNAPSHOT, "posting_id": g.posting_id, "split": "evaluation",
             "company_name": company, "title": g.title, "location": g.location,
-            "first_department": g.sector_fixed, "group_id": g.posting_id, "group_size": 1,
+            "first_department": sector, "group_id": g.posting_id, "group_size": 1,
             "clean_text_sha256": hashlib.sha256(g.clean_text.encode("utf-8")).hexdigest(),
             "seed": 42, "selection_version": "kaggle-gold-v1"})
     con.executemany("INSERT INTO postings VALUES (?,?,?,?,?,?,?,?,?,?,?)", rows)

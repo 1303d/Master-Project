@@ -20,3 +20,6 @@ dashboard_kaggle/
 # teammate repo (has its own git) and local envs
 taxonomy-skill-project/
 .venv/
+
+# posting text is shared via Google Drive, not Git
+data/gold/gold_postings.csv

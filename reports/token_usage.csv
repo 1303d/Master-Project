@@ -1,0 +1,5 @@
+run_at,provider,model,prompt_version,postings,api_calls,tokens_in,tokens_out
+2026-10-09T09:09:56+00:00,google-ai-studio,gemini-3.8-flash,skill_extraction_v1,3,3,2353,1477
+2026-10-09T09:31:04+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v1,3,3,2502,1477
+2026-10-09T10:08:14+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v1,100,97,89052,40425
+2026-10-09T19:35:59+00:00,google-ai-studio,gemini-3.8-flash,skill_extraction_v1,100,1,470,504
