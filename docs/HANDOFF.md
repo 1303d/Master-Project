@@ -1,5 +1,34 @@
 # HANDOFF — Section B Skill Taxonomy (Sprint 2)
 
+## ⏸ RESUME HERE (frozen 2026-10-21, afternoon — user went to class)
+**Where we are:** Sprint 2 closed and pushed (`c9336d3` "code fix + security update" on `main`). Starting Sprint 3.
+Prototype demo **Friday 2026-10-23, 3 pm**. End goal (brief): initiative → ranked tasks + skills with postings.
+
+**Done today:** Supabase (2,453 postings; Haiku 2,000 research benchmark + growing Qwen), view
+`current_statements` (one model per posting — embeddings/RAG read ONLY this) + contract view `statements`
+(kind = skill); live Greenhouse pipeline + LiteLLM router (Groq Qwen → Gemini) + UI (`app/server.py`);
+ESCO/O*NET rule E (`link_reference.py`); Sprint 2 gap fixes (validation, max-matching scorer, 16 tests,
+`verify_db.py` 10 PASS, `make_gold_postings.py`); gold complete (5 postings re-reviewed, 1,333 skills).
+**Official test score (Qwen v3): strict 0.66 / lenient 0.74.** Final report `reports/sprint2_final_report.md`.
+
+**Running on its own (Windows Task Scheduler, survives closing VS Code / Claude):**
+- `SkillPipeline\QwenBatch` — free Groq Qwen on the 2,000 sample (~110/day; 87 done at freeze). Restarted
+  2026-10-21 after Windows killed it on battery; **all 3 tasks now allowed on battery** (laptop must stay on).
+- `SkillPipeline\LoadQwen` hourly → Supabase; `SkillPipeline\NightlyGreenhouse` 02:00 (first run tonight).
+
+**Next, in order:**
+1. User: reset the Supabase DB password (old one was in a deleted screenshot, never pushed) → update `.env`
+   → Claude checks `py src/db.py --check`.
+2. **Sprint 3:** embed unique skills from `current_statements` with `BAAI/bge-small-en-v1.5` → store in
+   Supabase (pgvector, keep model tag) → cluster with 2 methods (HDBSCAN + agglomerative), parameter sweep,
+   stability report → topic + topic-membership tables (contract §4–5) → UMAP 3D "Skill map" tab in the UI
+   (top-20 topics, hover names, search highlight).
+3. Optional: Langfuse keys in `.env` (UI button + tracing).
+4. Thursday evening: demo rehearsal (story in chat 2026-10-21: rules → model choice → live UI → scale).
+**Team-owed:** confirm rules A–E, official gold version (v1 / v2), disagreements, data contract with Section A,
+Drive link for the README.
+**Gotcha:** use `C:\Users\dhanu\AppData\Local\Programs\Python\Python311\python.exe` (not `py`).
+
 ## ▶ CURRENT STATUS (2026-10-20) — extractor optimisation before Sprint 3 (read this first)
 Sprint 2 is done (see README). Now improving the extractor before the 2,000-posting run.
 - Gold split 50/50: `data/gold/gold_split.csv`, `gold_postings_dev.csv` / `_test.csv` (`src/make_gold_split.py`).
