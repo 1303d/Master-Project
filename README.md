@@ -3,9 +3,72 @@
 Taxonomy of Work capstone (Northeastern × Workhuman), Group 3. We build a skill taxonomy from public
 job postings: **collect → extract → organize**. Section A builds the task taxonomy.
 
-**Status:** Sprint 2 (Text Extraction) done. Next: Sprint 3 (Representation & Clustering).
+**Status:** Sprint 2 done; extractor frozen and a live pipeline (Supabase + UI) running.
+**Now: Sprint 3 (Representation & Clustering).** End goal (brief): *given a business initiative, which tasks
+does it involve and which skills are needed* — Section A's task taxonomy + our skill taxonomy, joined in Sprint 5.
 
-## Sprint 2 results
+## Sprint 3 — where we are
+
+```mermaid
+flowchart LR
+    K[Kaggle sample<br/>2,000 postings] --> C
+    G[Greenhouse API<br/>5 boards, nightly] --> C[clean + dedupe<br/>text_hash, any source]
+    C --> X[LLM extractor<br/>prompt v3]
+    R{{LiteLLM router<br/>Groq Qwen → Gemini}} --> X
+    X --> E[evidence check<br/>quote must be in posting]
+    E --> L[ESCO + O*NET check<br/>rule E]
+    L -->|known skill| DB[(Supabase)]
+    L -->|trait| T[excluded, kept with verdict]
+    L -->|unknown| H[human review queue] --> DB
+    DB --> V[current_statements<br/>one model per posting]
+    V --> S3[Sprint 3: embed → cluster → topics]
+```
+
+### Extractor selection (after Sprint 2)
+
+The gold set was split **50 dev** (used to tune prompts) / **50 test** (scored once, at the end).
+All models use prompt `prompts/skill_extraction_v3.txt`.
+
+| Model | Dev strict F1 | Dev lenient F1 | Test strict / lenient F1 | Note |
+|---|---|---|---|---|
+| **Qwen3.8 27B** (Groq, free) | 0.65 | 0.74 | **0.66 / 0.75** | pipeline extractor |
+| Claude Haiku 5.5 | 0.65 | 0.75 | 0.66 / 0.75 | research benchmark only (2,000 postings) |
+| gpt-oss-120b (Groq) | 0.59 | 0.71 | — | more extra skills |
+| Gemini 3.5 Flash-Lite | 0.64 | 0.71 | — | precise, misses list items |
+| Nemotron 3 Ultra 550B (OpenRouter) | 0.51 | 0.60 | — | over-extracts |
+
+- Prompt v4 (more rules, ideas from SkillSpan / SKORE / GoLLIE papers) gave no gain → v3 frozen.
+- Human-vs-human agreement on 3 double-labelled postings: lenient 0.73, so models sit at the label ceiling.
+- **Bias check** (`src/bias_check.py`): gold labels were LLM-drafted (Claude), so recall is split into
+  skills *kept from the draft* vs *added by humans*. Test: Haiku .79 / .80, Qwen .77 / .75 — no drafter bias.
+- **Rule E** (`data/gold/LABELING_RULES.md`): ESCO v1.2 + O\*NET 31.0 are the rule book for skill vs trait.
+  Traits = O\*NET Work Styles + ESCO's transversal "attitudes and values" (e.g. attention to detail).
+  `src/link_reference.py` gives every skill a verdict: on the Haiku 2,000, known skill 69% · trait 2% ·
+  new candidate 29% (often real US skills missing from both libraries, e.g. GAAP, CI/CD → human review).
+
+### Live pipeline
+
+| Part | File | What it does |
+|---|---|---|
+| Database | `sql/supabase_schema.sql`, `src/db.py` | 6 tables + view `current_statements`; RLS on, no public access |
+| Kaggle load | `src/load_supabase.py` | Postings + skills from the LLM cache (resumable; `--benchmark` keeps another model side by side) |
+| Live feed | `src/pipeline.py`, `config/boards.yaml` | Greenhouse → clean → dedupe → extract (queue) → link → Supabase; every stage logged |
+| LLM router | `src/llm_router.py` | LiteLLM: Groq Qwen, falls back to Gemini on rate limits; Langfuse tracing when keys are set |
+| UI | `app/server.py`, `app/static/` | Pipeline status (stages, active model, fallbacks, DB size), human review queue, skills explorer |
+| Schedule | `scripts/*.cmd` (Windows Task Scheduler) | Hourly Qwen load, nightly Greenhouse run, daily Qwen batch restart |
+
+**One model per posting:** embeddings and search read only `current_statements` — Qwen rows where Qwen has
+done the posting, otherwise the Haiku benchmark rows. As the free Qwen batch progresses, postings switch to
+Qwen automatically. Every row keeps its model name.
+
+### Sprint 3 plan
+
+1. Embed the unique skills in `current_statements` with `BAAI/bge-small-en-v1.5` (384 numbers each) → Supabase (pgvector).
+2. Cluster with two methods (HDBSCAN, agglomerative), parameter sweep, stability report.
+3. Decide multi-topic membership; write topic and topic-membership tables.
+4. UMAP 384 → 3 for an interactive 3D "Skill map" tab in the UI.
+
+## Sprint 2 results (first run, gold v1, all 100 postings)
 
 LLM skill extraction scored against 100 hand-labelled postings (1,317 gold skills):
 
@@ -63,9 +126,13 @@ flowchart LR
 ## Setup (Windows: use `py`)
 
 1. Install packages: `py -m pip install -r requirements.txt`
-2. Copy `.env.example` to `.env` and add your keys (`GROQ_API_KEY`, `GEMINI_API_KEY`). Never commit `.env`.
+2. Copy `.env.example` to `.env` and add your keys (`GROQ_API_KEY`, `GEMINI_API_KEY`; for the pipeline also
+   `SUPABASE_DB_URL` = Supabase "Session pooler" URI; optional `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`,
+   `LANGFUSE_HOST`). Never commit `.env`.
 3. Get the data: download it with `py src/download_data.py`, then run `py src/clean_postings.py`,
-   or copy the Drive files into the folders above.
+   or copy the Drive files into the folders above. Reference libraries: `py src/download_reference.py`.
+4. Pipeline: `py src/db.py --init` (tables), `py src/load_supabase.py` (Kaggle), `py src/pipeline.py --max-new 10`
+   (Greenhouse), then `py app/server.py` → http://127.0.0.1:8765.
 
 ## Pipeline
 

@@ -1,0 +1,438 @@
+﻿item_id,n,skill,source,runs
+1,2,competitor analysis,model-only (extra),v2+v3
+2,2,customer feedback analysis,model-only (extra),v2+v3
+3,2,sales plans,gold-only (missed by model),v2+v3
+4,2,residential solar market,model-only (extra),v2+v3
+5,2,relationship building,model-only (extra),v2+v3
+6,2,reporting,model-only (extra),v2+v3
+7,2,client relationships,gold-only (missed by model),v2+v3
+8,2,market expansion,model-only (extra),v3
+9,2,teamwork,model-only (extra),v2+v3
+10,2,logical thinking,model-only (extra),v3
+11,2,sales planning,model-only (extra),v2+v3
+12,2,marketing activities,model-only (extra),v2+v3
+13,2,brand localization,gold-only (missed by model),v2
+14,3,CNG vehicle maintenance,gold-only (missed by model),v2+v3
+15,3,work independently,model-only (extra),v2+v3
+16,3,accurate records,model-only (extra),v2
+17,3,electric vehicle maintenance,gold-only (missed by model),v2+v3
+18,3,hand tools,gold-only (missed by model),v2
+19,3,hydraulic equipment maintenance,gold-only (missed by model),v2+v3
+20,3,power tools,gold-only (missed by model),v2
+21,3,heavy-duty truck repair,gold-only (missed by model),v2+v3
+22,3,record keeping,model-only (extra),v3
+23,3,maintenance scheduling,gold-only (missed by model),v2+v3
+24,5,prospecting,gold-only (missed by model),v2+v3
+25,5,prioritization,model-only (extra),v2+v3
+26,6,problem solving,model-only (extra),v2+v3
+27,6,resource management,gold-only (missed by model),v2+v3
+28,6,conflict resolution,gold-only (missed by model),v2+v3
+29,6,construction documents,gold-only (missed by model),v2+v3
+30,6,supervision,model-only (extra),v2+v3
+31,6,construction contract administration,gold-only (missed by model),v2+v3
+32,6,construction plans and specifications,gold-only (missed by model),v2+v3
+33,6,communication,model-only (extra),v2+v3
+34,8,organizational,gold-only (missed by model),v2+v3
+35,8,post-grant,model-only (extra),v2+v3
+36,8,organization,model-only (extra),v2+v3
+37,10,verification and validation,gold-only (missed by model),v2+v3
+38,10,embedded Electronic Control Unit,gold-only (missed by model),v3
+39,10,ECU diagnostics,gold-only (missed by model),v2+v3
+40,10,Software Defined Vehicle,model-only (extra),v2+v3
+41,10,simulation,model-only (extra),v2+v3
+42,10,signal data transmission,model-only (extra),v3
+43,10,Virtual Electronic Control Units,model-only (extra),v2+v3
+44,11,triaging patients,gold-only (missed by model),v2+v3
+45,11,triage,model-only (extra),v2+v3
+46,11,phone communication,model-only (extra),v2+v3
+47,11,Urology,gold-only (missed by model),v2+v3
+48,11,infection control,gold-only (missed by model),v3
+49,11,OSHA compliance,model-only (extra),v2
+50,11,equipment maintenance,gold-only (missed by model),v2+v3
+51,11,OSHA/MOSHA compliance,model-only (extra),v3
+52,11,biomedical waste disposal,model-only (extra),v3
+53,11,verbal communication,model-only (extra),v2+v3
+54,11,microscopic preparation,gold-only (missed by model),v2
+55,11,disinfection,gold-only (missed by model),v3
+56,12,AWS,gold-only (missed by model),v2+v3
+57,12,API testing,gold-only (missed by model),v2+v3
+58,13,independence,model-only (extra),v3
+59,13,physical inventories,gold-only (missed by model),v2+v3
+60,13,counting,gold-only (missed by model),v2+v3
+61,13,material handling equipment,gold-only (missed by model),v2+v3
+62,13,distribution,gold-only (missed by model),v2+v3
+63,13,shrink-wrap machine,gold-only (missed by model),v2+v3
+64,13,cycle counts,gold-only (missed by model),v2+v3
+65,13,inventory management,model-only (extra),v2
+66,13,OSHA standards,gold-only (missed by model),v2+v3
+67,13,OSHA compliance,model-only (extra),v2
+68,13,warehousing,gold-only (missed by model),v2+v3
+69,13,stock rotation,gold-only (missed by model),v2+v3
+70,19,testing,gold-only (missed by model),v2
+71,19,performance optimization,model-only (extra),v3
+72,19,UAT,gold-only (missed by model),v2
+73,19,data models,gold-only (missed by model),v2+v3
+74,19,macros,gold-only (missed by model),v2+v3
+75,19,slowly changing dimensions,model-only (extra),v2+v3
+76,19,data modeling,model-only (extra),v2+v3
+77,19,cost efficiency,model-only (extra),v3
+78,19,documentation,model-only (extra),v3
+79,19,code reviews,model-only (extra),v3
+80,19,data warehousing,model-only (extra),v2+v3
+81,19,data warehouse,gold-only (missed by model),v2+v3
+82,19,troubleshooting,model-only (extra),v3
+83,19,data integrity,model-only (extra),v3
+84,19,data pipelines,gold-only (missed by model),v2
+85,19,data lineage,model-only (extra),v3
+86,21,third-party IT vendors,model-only (extra),v2
+87,21,Evidence Analysis & Documentation,gold-only (missed by model),v2+v3
+88,21,Risk-Based Audit Planning,gold-only (missed by model),v2+v3
+89,21,testing approach,model-only (extra),v2
+90,21,governance,model-only (extra),v2
+91,21,Third-Party IT Risk Assessment,gold-only (missed by model),v2+v3
+92,21,audit reports,model-only (extra),v2+v3
+93,21,written reports,model-only (extra),v2
+94,21,document review,model-only (extra),v2
+95,21,work papers,model-only (extra),v2+v3
+96,21,Stakeholder Presentation,gold-only (missed by model),v2+v3
+97,21,oral presentations,model-only (extra),v2+v3
+98,21,interviewing,model-only (extra),v3
+99,21,IT consulting,model-only (extra),v2+v3
+100,21,risk-based annual internal audit plan,model-only (extra),v2+v3
+101,21,Audit Reporting,gold-only (missed by model),v2+v3
+102,21,Audit Testing & Scope Development,gold-only (missed by model),v3
+103,21,third-party IT vendor assessment,model-only (extra),v3
+104,21,interviews,model-only (extra),v2
+105,21,written communication,model-only (extra),v3
+106,24,teamwork,model-only (extra),v2+v3
+107,24,safety regulations,gold-only (missed by model),v2+v3
+108,24,GUEST service model,model-only (extra),v2+v3
+109,24,product knowledge,model-only (extra),v2+v3
+110,24,proper lifting procedures,gold-only (missed by model),v2+v3
+111,26,grooming,model-only (extra),v2+v3
+112,26,bathing,model-only (extra),v2+v3
+113,26,toileting,model-only (extra),v2+v3
+114,29,attention to detail,gold-only (missed by model),v2+v3
+115,29,Executive Order 12866,model-only (extra),v3
+116,29,statistical software,gold-only (missed by model),v2+v3
+117,29,Paperwork Reduction Act,model-only (extra),v3
+118,29,Unfunded Mandates Reform Act,model-only (extra),v3
+119,29,Administrative Procedure Act,model-only (extra),v3
+120,29,legislative frameworks,gold-only (missed by model),v2+v3
+121,29,OMB Circular A-4,model-only (extra),v3
+122,29,teamwork,model-only (extra),v2
+123,29,Regulatory Flexibility Act,model-only (extra),v3
+124,30,safety procedures,model-only (extra),v2+v3
+125,30,safety inspections,gold-only (missed by model),v2+v3
+126,30,palletizing,gold-only (missed by model),v2+v3
+127,31,software testing principles,gold-only (missed by model),v2+v3
+128,31,code reviews,model-only (extra),v2+v3
+129,31,teamwork,model-only (extra),v3
+130,31,API testing,gold-only (missed by model),v3
+131,31,automated test frameworks,model-only (extra),v3
+132,31,automated testing,gold-only (missed by model),v2+v3
+133,31,test automation frameworks,gold-only (missed by model),v3
+134,31,test cases,gold-only (missed by model),v2+v3
+135,31,test plans,gold-only (missed by model),v2+v3
+136,31,software quality assurance,gold-only (missed by model),v2+v3
+137,31,collaboration,model-only (extra),v2
+138,33,attention to detail,model-only (extra),v2+v3
+139,33,software implementation,gold-only (missed by model),v2
+140,33,analytical skills,model-only (extra),v2+v3
+141,34,patient care,model-only (extra),v2+v3
+142,35,Hazard Communication,model-only (extra),v2+v3
+143,35,high pressure hose operation,model-only (extra),v3
+144,35,Personal Protective equipment,model-only (extra),v2+v3
+145,35,animal welfare,gold-only (missed by model),v3
+146,35,Lock out Tag out,model-only (extra),v2+v3
+147,35,safety policies and procedures,gold-only (missed by model),v2+v3
+148,35,grading,gold-only (missed by model),v2
+149,35,chicken processing,model-only (extra),v2+v3
+150,35,biosecurity,gold-only (missed by model),v3
+151,35,Respiratory Protection,model-only (extra),v2+v3
+152,35,toe trim machine,gold-only (missed by model),v2+v3
+153,35,toe trimming,model-only (extra),v2+v3
+154,40,oncology physical therapy,model-only (extra),v2
+155,40,vestibular therapy,model-only (extra),v2
+156,40,pelvic health,model-only (extra),v2+v3
+157,40,oncology,model-only (extra),v3
+158,40,community networking,model-only (extra),v3
+159,40,industrial services,gold-only (missed by model),v2
+160,40,team building,model-only (extra),v2+v3
+161,40,orthopedic physical therapy,model-only (extra),v2
+162,40,concussion treatment,model-only (extra),v2
+163,40,business owner mindset,model-only (extra),v3
+164,40,neuro,model-only (extra),v3
+165,40,concussion conditions,model-only (extra),v3
+166,40,business management,model-only (extra),v2
+167,40,neurological physical therapy,model-only (extra),v2
+168,40,industrial physical therapy,model-only (extra),v2
+169,40,vestibular,model-only (extra),v3
+170,40,physician relationships,model-only (extra),v2+v3
+171,40,sports medicine,model-only (extra),v2+v3
+172,41,CAO,model-only (extra),v2+v3
+173,41,organization,gold-only (missed by model),v2+v3
+174,41,food preparation,model-only (extra),v3
+175,41,ACIS,model-only (extra),v2+v3
+176,41,sanitation,gold-only (missed by model),v2+v3
+177,41,organizational skills,model-only (extra),v2+v3
+178,42,API integration,model-only (extra),v2
+179,42,certificates,model-only (extra),v3
+180,42,VPN,gold-only (missed by model),v2
+181,42,firewall rules,gold-only (missed by model),v2
+182,42,VPC,gold-only (missed by model),v2
+183,42,APIs,model-only (extra),v3
+184,42,SDK,model-only (extra),v3
+185,42,SSL,gold-only (missed by model),v2
+186,42,load balancers,gold-only (missed by model),v2
+187,42,clusters,gold-only (missed by model),v2
+188,42,Mule flows,gold-only (missed by model),v2+v3
+189,42,servers,gold-only (missed by model),v2
+190,44,Word,gold-only (missed by model),v2
+191,44,Traditional project management,model-only (extra),v2
+192,44,creative development,gold-only (missed by model),v3
+193,44,SharePoint,gold-only (missed by model),v2
+194,44,multitasking,model-only (extra),v2+v3
+195,44,cross portfolio reporting,gold-only (missed by model),v2+v3
+196,44,risk & issue management,gold-only (missed by model),v2+v3
+197,44,product launches,gold-only (missed by model),v3
+198,44,Outlook,gold-only (missed by model),v2
+199,44,project controls,gold-only (missed by model),v2+v3
+200,44,teamwork,model-only (extra),v2+v3
+201,44,tactical communications,gold-only (missed by model),v3
+202,44,Microsoft Suite of Office,gold-only (missed by model),v3
+203,44,attention to detail,model-only (extra),v2+v3
+204,44,key performance indicators,gold-only (missed by model),v2+v3
+205,44,Teams,gold-only (missed by model),v2
+206,44,Marketing planning,gold-only (missed by model),v3
+207,44,PPT,gold-only (missed by model),v2
+208,44,Commercial sales,gold-only (missed by model),v2+v3
+209,44,Excel,gold-only (missed by model),v2
+210,44,organization,model-only (extra),v2+v3
+211,44,agile frameworks,model-only (extra),v2+v3
+212,44,change controls,gold-only (missed by model),v2+v3
+213,44,Traditional project approaches,model-only (extra),v3
+214,44,global marketing,gold-only (missed by model),v2+v3
+215,45,policy and procedure improvement,gold-only (missed by model),v2+v3
+216,45,scheduling,gold-only (missed by model),v2+v3
+217,45,medical records management,gold-only (missed by model),v2+v3
+218,45,patient education,gold-only (missed by model),v2+v3
+219,46,email,model-only (extra),v2+v3
+220,46,flow chart protocols,gold-only (missed by model),v2
+221,46,therapies,gold-only (missed by model),v2+v3
+222,46,Respiratory Care modalities,gold-only (missed by model),v3
+223,46,HIPAA compliance,model-only (extra),v2+v3
+224,46,hand held scanner,gold-only (missed by model),v2
+225,46,patient care,model-only (extra),v3
+226,46,respiratory care equipment,gold-only (missed by model),v2
+227,46,typing,model-only (extra),v2+v3
+228,46,continuous quality improvement,gold-only (missed by model),v2
+229,46,isolation policies,gold-only (missed by model),v2
+230,46,computers,gold-only (missed by model),v2+v3
+231,47,client counseling,gold-only (missed by model),v2+v3
+232,47,organizational,gold-only (missed by model),v2+v3
+233,47,drafting discovery responses,model-only (extra),v3
+234,47,state rules of civil procedure,gold-only (missed by model),v2
+235,47,Professional Liability,model-only (extra),v2+v3
+236,47,written communication,model-only (extra),v3
+237,47,Labor and Employment,model-only (extra),v2+v3
+238,47,Healthcare,model-only (extra),v2+v3
+239,47,General Liability,model-only (extra),v2+v3
+240,47,legal analysis,gold-only (missed by model),v2+v3
+241,47,organization,model-only (extra),v2+v3
+242,47,legal writing,gold-only (missed by model),v2+v3
+243,47,drafting settlement agreements,model-only (extra),v3
+244,47,client communication,gold-only (missed by model),v2+v3
+245,47,legal memorandum drafting,gold-only (missed by model),v2+v3
+246,47,case evaluation,gold-only (missed by model),v2
+247,47,drafting court orders,model-only (extra),v3
+248,47,writing,gold-only (missed by model),v3
+249,47,drafting affidavits,model-only (extra),v3
+250,49,state tax,model-only (extra),v2+v3
+251,49,month-end close,model-only (extra),v2+v3
+252,49,Expense Reimbursement Management,gold-only (missed by model),v3
+253,49,teamwork,model-only (extra),v2+v3
+254,49,accounts reconciliation,gold-only (missed by model),v3
+255,49,federal tax,model-only (extra),v2+v3
+256,49,financial closing,gold-only (missed by model),v2+v3
+257,49,customer invoices,model-only (extra),v2
+258,49,sales tax,model-only (extra),v2+v3
+259,49,vendors invoices,model-only (extra),v2
+260,49,collaboration,gold-only (missed by model),v2+v3
+261,49,bank reconciliation,model-only (extra),v2+v3
+262,55,prioritization,model-only (extra),v2+v3
+263,55,system performance monitoring,model-only (extra),v3
+264,55,network infrastructure,gold-only (missed by model),v2
+265,55,systems administration,gold-only (missed by model),v2+v3
+266,55,virtualization technologies,gold-only (missed by model),v2+v3
+267,55,troubleshooting,gold-only (missed by model),v3
+268,55,documentation,model-only (extra),v3
+269,55,user provisioning,model-only (extra),v3
+270,55,security configurations,model-only (extra),v3
+271,55,license management,model-only (extra),v3
+272,62,ingestion patterns,gold-only (missed by model),v2+v3
+273,62,analytics design,gold-only (missed by model),v2+v3
+274,62,Matilion,model-only (extra),v2+v3
+275,62,ETL design,gold-only (missed by model),v2
+276,62,Matillion,gold-only (missed by model),v2+v3
+277,64,team management,model-only (extra),v2+v3
+278,64,resource allocation,gold-only (missed by model),v2+v3
+279,64,data driven decision making,gold-only (missed by model),v2+v3
+280,64,operational leadership,gold-only (missed by model),v2+v3
+281,64,internal controls,gold-only (missed by model),v2+v3
+282,64,strategic leadership,model-only (extra),v2+v3
+283,64,contingency plans,gold-only (missed by model),v2+v3
+284,64,key performance indicators,gold-only (missed by model),v2+v3
+285,65,business relationships,gold-only (missed by model),v2+v3
+286,65,sales,model-only (extra),v2+v3
+287,65,sales reporting,model-only (extra),v3
+288,65,selling,gold-only (missed by model),v2+v3
+289,65,customer relationships,gold-only (missed by model),v2
+290,65,prioritizing,model-only (extra),v3
+291,65,territory analysis,gold-only (missed by model),v2+v3
+292,69,financial transactions,model-only (extra),v2+v3
+293,69,billing,model-only (extra),v2+v3
+294,69,WIP reports,model-only (extra),v2+v3
+295,69,work-in-progress reporting,gold-only (missed by model),v2+v3
+296,69,communication skills,model-only (extra),v3
+297,69,organization,model-only (extra),v2
+298,69,project financial reviews,model-only (extra),v2+v3
+299,69,archiving procedures,gold-only (missed by model),v2
+300,69,communication,model-only (extra),v2
+301,69,organizational skills,gold-only (missed by model),v2
+302,69,Project Close-out Documentation,gold-only (missed by model),v2
+303,69,accounting system,model-only (extra),v2+v3
+304,71,health care,model-only (extra),v3
+305,72,containerization,gold-only (missed by model),v2+v3
+306,72,deployment,model-only (extra),v2+v3
+307,72,back-end development,gold-only (missed by model),v2+v3
+308,72,documentation,model-only (extra),v2+v3
+309,72,container orchestration,gold-only (missed by model),v2+v3
+310,72,telemetry collection,gold-only (missed by model),v2+v3
+311,72,architectural design,model-only (extra),v2+v3
+312,72,DevOps,gold-only (missed by model),v2+v3
+313,72,requirements gathering,model-only (extra),v2+v3
+314,72,observability,gold-only (missed by model),v2+v3
+315,74,communication,gold-only (missed by model),v2+v3
+316,74,sales analysis,gold-only (missed by model),v2+v3
+317,74,data analysis,model-only (extra),v2
+318,74,customer development,model-only (extra),v2+v3
+319,74,vendor account management,model-only (extra),v2+v3
+320,74,English,gold-only (missed by model),v2+v3
+321,74,supply chain management,model-only (extra),v2+v3
+322,74,Korean,gold-only (missed by model),v2+v3
+323,74,purchasing forecasting,model-only (extra),v2+v3
+324,74,filing,model-only (extra),v3
+325,74,inventory management,model-only (extra),v2+v3
+326,74,vendor development,model-only (extra),v2+v3
+327,74,report preparation,model-only (extra),v2+v3
+328,74,complaint resolution,model-only (extra),v2+v3
+329,74,order documentation,model-only (extra),v2+v3
+330,74,vendor relationships,gold-only (missed by model),v2+v3
+331,74,teamwork,model-only (extra),v2+v3
+332,74,customer relationships,gold-only (missed by model),v2+v3
+333,74,relationship management,model-only (extra),v2
+334,75,bidding,model-only (extra),v2+v3
+335,75,competitive bids,gold-only (missed by model),v2+v3
+336,75,plan reading,gold-only (missed by model),v2+v3
+337,75,budgeting,model-only (extra),v2+v3
+338,75,construction,model-only (extra),v2+v3
+339,76,telephone answering,model-only (extra),v2
+340,76,security procedures,gold-only (missed by model),v2+v3
+341,76,computer system navigation,model-only (extra),v2+v3
+342,76,internet search,model-only (extra),v2+v3
+343,76,safe deposit,model-only (extra),v2
+344,76,Operational Loss Control,gold-only (missed by model),v2+v3
+345,76,Customer Problem Resolution,gold-only (missed by model),v3
+346,76,Sales Experience,gold-only (missed by model),v2+v3
+347,76,Team Collaboration,gold-only (missed by model),v2+v3
+348,79,teamwork,model-only (extra),v2+v3
+349,79,technical writing,model-only (extra),v2+v3
+350,79,regulatory documents,gold-only (missed by model),v2+v3
+351,79,regulatory affairs,model-only (extra),v2+v3
+352,79,21CFR Part 820,model-only (extra),v2+v3
+353,79,technical documents,gold-only (missed by model),v2+v3
+354,79,ISO 11135,model-only (extra),v2+v3
+355,79,documentation,model-only (extra),v2+v3
+356,80,process optimization,gold-only (missed by model),v2+v3
+357,80,SAP,model-only (extra),v2+v3
+358,80,Enterprise Accounting Systems (SAP/Chempax/Concur),gold-only (missed by model),v2+v3
+359,80,Concur,model-only (extra),v2+v3
+360,80,Standard Operating Procedure (SOP) Documentation,gold-only (missed by model),v2+v3
+361,80,continuous improvement,gold-only (missed by model),v2+v3
+362,80,financial compliance,model-only (extra),v2+v3
+363,80,financial reporting,gold-only (missed by model),v2+v3
+364,80,Chempax,model-only (extra),v2+v3
+365,80,accounting,gold-only (missed by model),v2+v3
+366,80,Auditor Collaboration,gold-only (missed by model),v2+v3
+367,82,dashboard creation,model-only (extra),v3
+368,82,G Suite,gold-only (missed by model),v2
+369,82,talent development,model-only (extra),v3
+370,82,organizational strategy,model-only (extra),v3
+371,82,reporting,model-only (extra),v2
+372,82,Human Resource management,gold-only (missed by model),v2+v3
+373,82,employee engagement,model-only (extra),v3
+374,82,"diversity, equity and inclusion",model-only (extra),v3
+375,82,culture development,model-only (extra),v3
+376,82,supervision,model-only (extra),v3
+377,82,report generation,model-only (extra),v3
+378,82,supervisory skills,gold-only (missed by model),v2+v3
+379,82,PC applications,model-only (extra),v2+v3
+380,82,talent acquisition,model-only (extra),v2+v3
+381,82,HR Systems,model-only (extra),v2+v3
+382,82,Mac applications,model-only (extra),v2+v3
+383,82,compensation,gold-only (missed by model),v2
+384,83,Internet Information Services,gold-only (missed by model),v2
+385,83,.Net solutions,model-only (extra),v2+v3
+386,83,Microsoft Windows,gold-only (missed by model),v2
+387,83,troubleshooting,gold-only (missed by model),v2+v3
+388,83,installation,gold-only (missed by model),v2+v3
+389,83,business processes,gold-only (missed by model),v2+v3
+390,83,IIS,model-only (extra),v2
+391,83,configuration,gold-only (missed by model),v2+v3
+392,83,cloud migration,gold-only (missed by model),v2+v3
+393,83,leadership,model-only (extra),v2+v3
+394,83,.NET based solutions,model-only (extra),v3
+395,83,mentoring,model-only (extra),v2
+396,89,clinical communication,gold-only (missed by model),v2+v3
+397,89,in-home supervisory visits,gold-only (missed by model),v2+v3
+398,89,Service request approval,gold-only (missed by model),v2+v3
+399,89,Reimbursement,model-only (extra),v2+v3
+400,89,scheduling oversight,gold-only (missed by model),v2+v3
+401,89,physician order auditing,gold-only (missed by model),v2+v3
+402,89,patient recertification and discharge management,gold-only (missed by model),v2+v3
+403,89,Home Health regulations,model-only (extra),v2+v3
+404,89,laboratory report review,gold-only (missed by model),v2+v3
+405,90,event planning,gold-only (missed by model),v2+v3
+406,90,data management,gold-only (missed by model),v2+v3
+407,90,travel arrangements,gold-only (missed by model),v2+v3
+408,94,motion drafting,gold-only (missed by model),v3
+409,94,pre-trial motions,model-only (extra),v3
+410,94,brief drafting,gold-only (missed by model),v2+v3
+411,94,briefing,model-only (extra),v2+v3
+412,94,post-judgment motions,model-only (extra),v3
+413,94,dispositive motions,model-only (extra),v3
+414,94,appellate briefs,model-only (extra),v2+v3
+415,95,program oversight,gold-only (missed by model),v2+v3
+416,95,policy application,gold-only (missed by model),v2+v3
+417,95,problem solving,model-only (extra),v2
+418,95,departmental operations assistance,gold-only (missed by model),v2+v3
+419,95,nursing,model-only (extra),v2+v3
+420,95,delegation of authority,gold-only (missed by model),v2
+421,95,leadership,gold-only (missed by model),v2+v3
+422,95,training,model-only (extra),v3
+423,95,governmental regulations,model-only (extra),v2+v3
+424,96,business practices,gold-only (missed by model),v2+v3
+425,96,data readiness,gold-only (missed by model),v2+v3
+426,97,health and safety standards,gold-only (missed by model),v2+v3
+427,97,teamwork,gold-only (missed by model),v2+v3
+428,97,upselling,gold-only (missed by model),v2+v3
+429,97,computerized ordering system,gold-only (missed by model),v2+v3
+430,100,OSHA regulations,model-only (extra),v2+v3
+431,100,personnel management,model-only (extra),v2+v3
+432,100,continuous improvement,model-only (extra),v3
+433,100,decision making,model-only (extra),v2+v3
+434,100,financial planning,model-only (extra),v2+v3
+435,100,DOT regulations,model-only (extra),v2+v3
+436,100,safety regulations,gold-only (missed by model),v2+v3
+437,100,operations management,gold-only (missed by model),v2+v3

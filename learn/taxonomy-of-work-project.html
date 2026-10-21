@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taxonomy of Work — Project Map</title>
+<style>
+  :root { --bg:#f7f7f5; --panel:#fff; --text:#1d1f23; --muted:#626872; --line:#dfe1e5;
+    --a:#2f5bd3; --a-soft:#e5ecfc; --b:#1f7a4d; --b-soft:#dff3e8; --j:#8a5a00; --j-soft:#fbefd6;
+    --warn:#a4301d; --warn-soft:#fbe3de; --r:10px; --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#15171a; --panel:#1d2024; --text:#e7e9ec; --muted:#9aa1ab; --line:#30343a;
+    --a:#8aa8ff; --a-soft:#233056; --b:#6fd3a0; --b-soft:#183a2a; --j:#f0c46a; --j-soft:#3b2f15; --warn:#ff9a85; --warn-soft:#43221c; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 var(--font); }
+  header { padding:18px 16px 8px; max-width:1100px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; } h2 { font-size:18px; margin:28px 0 8px; }
+  .sub { color:var(--muted); }
+  main { max-width:1100px; margin:0 auto; padding:0 16px 48px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px; }
+  .tabs button { border:1px solid var(--line); background:var(--panel); color:var(--text); padding:7px 14px; border-radius:999px; cursor:pointer; font:inherit; }
+  .tabs button[aria-selected="true"] { background:var(--a); color:#fff; border-color:var(--a); }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:var(--r); padding:16px; margin-top:12px; }
+  .hidden { display:none; }
+  svg { width:100%; height:auto; display:block; }
+  .node { cursor:pointer; }
+  .node rect { stroke-width:1.5; transition: transform .15s; }
+  .node:hover rect, .node.sel rect { stroke-width:3; }
+  .info { margin-top:10px; padding:12px 14px; border-radius:8px; background:var(--a-soft); min-height:64px; }
+  .info b { display:block; margin-bottom:2px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:var(--panel); }
+  .card .k { color:var(--muted); font-size:12.5px; } .card .v { font-size:20px; font-weight:700; }
+  .sprint { display:flex; gap:8px; flex-wrap:wrap; }
+  .sp { flex:1 1 120px; border:1px solid var(--line); border-radius:8px; padding:10px; cursor:pointer; background:var(--panel); }
+  .sp.done { border-color:var(--b); background:var(--b-soft); } .sp.now { border-color:var(--a); background:var(--a-soft); outline:2px solid var(--a); }
+  .sp .n { font-weight:700; } .sp .t { font-size:12.5px; color:var(--muted); }
+  .flowbox { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:10px 0; }
+  .chip { border:1px solid var(--line); border-radius:999px; padding:4px 10px; background:var(--panel); font-size:13.5px; opacity:.25; transition:opacity .4s, background .4s; }
+  .chip.on { opacity:1; background:var(--b-soft); border-color:var(--b); }
+  .chip.trait.on { background:var(--warn-soft); border-color:var(--warn); }
+  .chip.new.on { background:var(--j-soft); border-color:var(--j); }
+  .posting { font-family:ui-monospace,Consolas,monospace; font-size:13px; background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:10px; white-space:pre-wrap; }
+  mark { background:#fff0a8; color:inherit; border-radius:3px; padding:0 2px; }
+  @media (prefers-color-scheme: dark) { mark { background:#5a4d12; } }
+  button.go { border:1px solid var(--a); background:var(--a); color:#fff; border-radius:6px; padding:6px 14px; cursor:pointer; font:inherit; }
+  .step-label { font-weight:600; margin:10px 0 4px; }
+  .quiz .q { margin:14px 0 6px; font-weight:600; }
+  .quiz label { display:block; padding:6px 10px; border:1px solid var(--line); border-radius:6px; margin:4px 0; cursor:pointer; }
+  .quiz label.right { border-color:var(--b); background:var(--b-soft); } .quiz label.wrong { border-color:var(--warn); background:var(--warn-soft); }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--muted); margin-top:6px; }
+  .sw { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:middle; }
+  @keyframes dash { to { stroke-dashoffset: -20; } }
+  .flowline { stroke-dasharray:6 4; animation: dash 1s linear infinite; }
+  @media (prefers-reduced-motion: reduce) { .flowline { animation:none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Taxonomy of Work — the whole project on one page</h1>
+  <div class="sub">Click the tabs, click the boxes, press the buttons. Everything is clickable.</div>
+  <nav class="tabs" role="tablist">
+    <button data-t="goal" aria-selected="true">1 · The goal</button>
+    <button data-t="pipe" aria-selected="false">2 · The pipeline</button>
+    <button data-t="try" aria-selected="false">3 · Try one posting</button>
+    <button data-t="sprints" aria-selected="false">4 · Sprints &amp; where we are</button>
+    <button data-t="quiz" aria-selected="false">5 · Quiz</button>
+  </nav>
+</header>
+<main>
+
+<!-- 1. GOAL -->
+<section id="t-goal" class="panel">
+  <h2 style="margin-top:0">The one question the final system answers</h2>
+  <p>A user types a <b>business initiative</b>. The system answers: <b>which tasks</b> does it involve, and <b>which skills</b> are needed?</p>
+  <svg viewBox="0 0 900 230" role="img" aria-label="initiative to tasks to skills">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <g style="color:var(--muted)">
+      <line x1="230" y1="115" x2="320" y2="115" stroke="currentColor" stroke-width="2" marker-end="url(#ar)" class="flowline"/>
+      <line x1="560" y1="115" x2="650" y2="115" stroke="currentColor" stroke-width="2" marker-end="url(#ar)" class="flowline"/>
+    </g>
+    <rect x="10" y="60" width="220" height="110" rx="12" fill="var(--j-soft)" stroke="var(--j)"/>
+    <text x="120" y="98" text-anchor="middle" font-weight="700" fill="var(--text)">Initiative</text>
+    <text x="120" y="124" text-anchor="middle" font-size="13" fill="var(--muted)">"Launch a telehealth</text>
+    <text x="120" y="142" text-anchor="middle" font-size="13" fill="var(--muted)">app for clinics"</text>
+    <rect x="330" y="40" width="230" height="150" rx="12" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="445" y="70" text-anchor="middle" font-weight="700" fill="var(--text)">TASKS (Section A)</text>
+    <text x="445" y="98" text-anchor="middle" font-size="13" fill="var(--text)">• design patient intake flow</text>
+    <text x="445" y="120" text-anchor="middle" font-size="13" fill="var(--text)">• ensure data privacy</text>
+    <text x="445" y="142" text-anchor="middle" font-size="13" fill="var(--text)">• build mobile app</text>
+    <text x="445" y="172" text-anchor="middle" font-size="12" fill="var(--muted)">reference: O*NET</text>
+    <rect x="660" y="40" width="230" height="150" rx="12" fill="var(--b-soft)" stroke="var(--b)"/>
+    <text x="775" y="70" text-anchor="middle" font-weight="700" fill="var(--text)">SKILLS (Section B = us)</text>
+    <text x="775" y="98" text-anchor="middle" font-size="13" fill="var(--text)">• UX design</text>
+    <text x="775" y="120" text-anchor="middle" font-size="13" fill="var(--text)">• HIPAA compliance</text>
+    <text x="775" y="142" text-anchor="middle" font-size="13" fill="var(--text)">• Swift, React Native</text>
+    <text x="775" y="172" text-anchor="middle" font-size="12" fill="var(--muted)">reference: ESCO, Lightcast</text>
+  </svg>
+  <p>Both lists come with <b>supporting job postings</b> as proof. To get there, each section first builds a <b>taxonomy</b>:
+     a tidy tree of all tasks (A) or all skills (B) found in real job postings.</p>
+  <div class="info"><b>What is a taxonomy?</b>A tree that groups similar things. Example: Skills → Software → Programming languages → Python.
+    We build it from the bottom (thousands of skill phrases) to the top (a few big groups).</div>
+</section>
+
+<!-- 2. PIPELINE -->
+<section id="t-pipe" class="panel hidden">
+  <h2 style="margin-top:0">The pipeline — click any box</h2>
+  <svg viewBox="0 0 960 340" id="pipe-svg" role="img" aria-label="pipeline diagram">
+    <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+    <g id="pipe-lines" stroke="var(--muted)" stroke-width="2" fill="none"></g>
+    <g id="pipe-nodes"></g>
+  </svg>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--b-soft);border:1px solid var(--b)"></span>done</span>
+    <span><span class="sw" style="background:var(--a-soft);border:1px solid var(--a)"></span>now (Sprint 3)</span>
+    <span><span class="sw" style="background:var(--panel);border:1px solid var(--line)"></span>later</span>
+    <span><span class="sw" style="background:var(--j-soft);border:1px solid var(--j)"></span>joint with Section A</span>
+  </div>
+  <div class="info" id="pipe-info"><b>Click a box</b>Each box shows what it does, the file that does it, and its status.</div>
+</section>
+
+<!-- 3. TRY -->
+<section id="t-try" class="panel hidden">
+  <h2 style="margin-top:0">Follow one posting through the pipeline</h2>
+  <p>Press <b>Next step</b> to see what each stage does to this small posting.</p>
+  <div class="posting" id="posting">We are hiring a Data Analyst. You will build weekly sales reports.
+Requirements: 3+ years of SQL and Python. Experience with Tableau or Power BI.
+Strong communication skills. Detail-oriented. Bachelor's degree required.</div>
+  <div class="step-label" id="step-label">Step 0 — the raw posting</div>
+  <div class="flowbox" id="chips"></div>
+  <div class="info" id="step-info">This is what a job posting looks like when it arrives from Kaggle or Greenhouse.</div>
+  <p><button class="go" id="next">Next step →</button> <button class="go" id="reset" style="background:transparent;color:var(--text);border-color:var(--line)">Reset</button></p>
+</section>
+
+<!-- 4. SPRINTS -->
+<section id="t-sprints" class="panel hidden">
+  <h2 style="margin-top:0">7 sprints, 2 weeks each — click a sprint</h2>
+  <div class="sprint" id="sprints"></div>
+  <div class="info" id="sprint-info"><b>Click a sprint</b>to see its goal and deliverable.</div>
+  <h2>Where we are (2026-10-21)</h2>
+  <div class="grid">
+    <div class="card"><div class="k">Job postings in Supabase</div><div class="v">2,453</div><div class="k">2,000 Kaggle + 453 live Greenhouse</div></div>
+    <div class="card"><div class="k">Skill statements</div><div class="v">29,150</div><div class="k">Haiku benchmark + Qwen (growing daily)</div></div>
+    <div class="card"><div class="k">Extractor quality (test set)</div><div class="v">F1 0.75</div><div class="k">lenient; about as good as two humans agree (~0.73)</div></div>
+    <div class="card"><div class="k">ESCO / O*NET check</div><div class="v">69 / 2 / 29 %</div><div class="k">known skill / trait / new candidate</div></div>
+  </div>
+</section>
+
+<!-- 5. QUIZ -->
+<section id="t-quiz" class="panel hidden quiz">
+  <h2 style="margin-top:0">Quick check — 4 questions</h2>
+  <div id="quiz"></div>
+  <p id="score" class="sub"></p>
+</section>
+</main>
+
+<script>
+// ---------- tabs ----------
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.querySelectorAll("main > section").forEach(s => s.classList.toggle("hidden", s.id !== "t-" + b.dataset.t));
+});
+
+// ---------- pipeline diagram ----------
+const NODES = [
+  {id:"post", x:10, y:20,  w:150, t:"Job postings", s:"done", d:"Kaggle LinkedIn 2024 (2,000 sample) + live Greenhouse boards (5 companies).", f:"src/download_data.py, src/pipeline.py"},
+  {id:"clean", x:200, y:20, w:150, t:"Clean + dedupe", s:"done", d:"HTML → text, mask emails/phones, drop duplicates (same text from any source).", f:"src/clean_postings.py, src/pipeline.py"},
+  {id:"ext", x:390, y:20, w:170, t:"LLM extractor", s:"done", d:"An LLM reads each posting and lists atomic skills, each with an exact evidence quote. LiteLLM switches model if one is rate-limited (Groq Qwen → Gemini).", f:"src/extract_skills.py, src/llm_router.py, prompts/skill_extraction_v3.txt"},
+  {id:"gold", x:390, y:140, w:170, t:"Gold set check", s:"done", d:"100 hand-labelled postings (50 dev to tune, 50 test scored once). Measures precision / recall / F1. Test lenient F1 = 0.75.", f:"src/evaluate.py, data/gold/"},
+  {id:"ref", x:600, y:20, w:170, t:"ESCO + O*NET check", s:"done", d:"Rule E: the libraries decide skill vs trait. Known skill → keep, trait → exclude, unknown → human review queue.", f:"src/link_reference.py, data/reference/"},
+  {id:"db", x:810, y:20, w:140, t:"Supabase", s:"done", d:"Postgres database: postings, skill statements, links, review decisions, pipeline events. The UI reads it live.", f:"sql/supabase_schema.sql, src/db.py, app/server.py"},
+  {id:"emb", x:810, y:140, w:140, t:"Embed", s:"now", d:"Turn every skill phrase into a vector (list of numbers) so similar skills are close together. Model: BAAI/bge-small-en-v1.5.", f:"Sprint 3 (next)"},
+  {id:"clu", x:600, y:140, w:170, t:"Cluster → leaf topics", s:"now", d:"Group close vectors into topics (e.g. 'Python', 'py', 'Python 3' → one topic). Compare ≥ 2 methods (HDBSCAN, k-means…), sweep parameters, report stability.", f:"Sprint 3 (next)"},
+  {id:"lab", x:600, y:260, w:170, t:"Label + hierarchy", s:"later", d:"Name each topic and stack topics into parent groups → the skill taxonomy tree. Evaluate against ESCO / Lightcast.", f:"Sprint 4"},
+  {id:"map", x:390, y:260, w:170, t:"Task ↔ skill map", s:"joint", d:"Join Section A's task taxonomy with our skill taxonomy (co-occurrence in postings, similarity, O*NET links). Gold set of 30 initiatives.", f:"Sprint 5 (joint)"},
+  {id:"ui", x:120, y:260, w:230, t:"UI: initiative → tasks → skills", s:"joint", d:"One command runs everything; one interface answers the question with supporting postings. 15-minute live demo in week 15.", f:"Sprints 6–7"},
+];
+const EDGES = [["post","clean"],["clean","ext"],["ext","ref"],["ref","db"],["ext","gold"],["db","emb"],["emb","clu"],["clu","lab"],["lab","map"],["map","ui"]];
+const COL = {done:["var(--b-soft)","var(--b)"], now:["var(--a-soft)","var(--a)"], later:["var(--panel)","var(--line)"], joint:["var(--j-soft)","var(--j)"]};
+const H = 64, byId = Object.fromEntries(NODES.map(n => [n.id, n]));
+const ns = "http://www.w3.org/2000/svg";
+const lines = document.getElementById("pipe-lines"), gNodes = document.getElementById("pipe-nodes");
+EDGES.forEach(([a, b]) => {
+  const A = byId[a], B = byId[b];
+  const ax = A.x + A.w / 2, ay = A.y + H / 2, bx = B.x + B.w / 2, by = B.y + H / 2;
+  let x1, y1, x2, y2;
+  if (Math.abs(ay - by) < 5) { x1 = ax < bx ? A.x + A.w : A.x; x2 = ax < bx ? B.x - 4 : B.x + B.w + 4; y1 = y2 = ay; }
+  else { x1 = x2 = Math.abs(ax - bx) < 5 ? ax : bx; y1 = ay < by ? A.y + H : A.y; y2 = ay < by ? B.y - 4 : B.y + H + 4; if (Math.abs(ax - bx) >= 5) x1 = ax; }
+  const l = document.createElementNS(ns, "line");
+  Object.entries({x1, y1, x2, y2, "marker-end": "url(#ar2)", class: "flowline"}).forEach(([k, v]) => l.setAttribute(k, v));
+  lines.appendChild(l);
+});
+NODES.forEach(n => {
+  const g = document.createElementNS(ns, "g"); g.setAttribute("class", "node"); g.setAttribute("tabindex", "0");
+  const [fill, stroke] = COL[n.s];
+  g.innerHTML = `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${H}" rx="10" fill="${fill}" stroke="${stroke}"/>
+    <text x="${n.x + n.w / 2}" y="${n.y + 30}" text-anchor="middle" font-weight="700" font-size="14" fill="var(--text)">${n.t}</text>
+    <text x="${n.x + n.w / 2}" y="${n.y + 49}" text-anchor="middle" font-size="12" fill="var(--muted)">${n.s === "now" ? "← we are here" : n.s}</text>`;
+  const show = () => {
+    gNodes.querySelectorAll(".node").forEach(x => x.classList.remove("sel")); g.classList.add("sel");
+    document.getElementById("pipe-info").innerHTML = `<b>${n.t}</b>${n.d}<br><span class="sub">Files / when: ${n.f}</span>`;
+  };
+  g.onclick = show; g.onkeydown = e => { if (e.key === "Enter") show(); };
+  gNodes.appendChild(g);
+});
+
+// ---------- try one posting ----------
+const RAW = document.getElementById("posting").textContent;
+const STEPS = [
+  {l:"Step 1 — LLM extractor", i:"The LLM lists atomic skills and quotes the evidence. It skips the degree, the years and the duty ('build weekly sales reports' names no tool).",
+   chips:[["SQL",""],["Python",""],["Tableau",""],["Power BI",""],["communication",""],["attention to detail",""]],
+   marks:["SQL","Python","Tableau","Power BI","communication skills","Detail-oriented"]},
+  {l:"Step 2 — evidence check", i:"Every skill must quote text that really appears in the posting. All 6 quotes are found, so nothing was invented (99% pass rate on real data).",
+   chips:[["SQL ✓",""],["Python ✓",""],["Tableau ✓",""],["Power BI ✓",""],["communication ✓",""],["attention to detail ✓",""]], marks:null},
+  {l:"Step 3 — ESCO + O*NET check (rule E)", i:"'attention to detail' matches an O*NET Work Style, so it is a TRAIT and is excluded. The rest match library skills. An unknown skill would go to the human review queue.",
+   chips:[["SQL → ESCO",""],["Python → ESCO",""],["Tableau → O*NET software",""],["Power BI → O*NET software",""],["communication → ESCO",""],["attention to detail → TRAIT","trait"]], marks:null},
+  {l:"Step 4 — store in Supabase", i:"The posting and its 5 skills are saved with the model name and the verdicts. The UI's status page updates live.",
+   chips:[["postings +1",""],["skill_statements +6",""],["skill_links: 5 known, 1 trait",""]], marks:null},
+  {l:"Step 5 — embed + cluster (Sprint 3)", i:"Each skill becomes a vector. 'Power BI' lands near 'Tableau' and 'Looker' → topic 'BI / dashboard tools'. 'SQL' joins 'MySQL', 'T-SQL' → topic 'SQL databases'.",
+   chips:[["topic: SQL databases",""],["topic: BI / dashboard tools",""],["topic: Python programming",""],["topic: communication","new"]], marks:null},
+  {l:"Step 6 — hierarchy + mapping (Sprints 4–5)", i:"Topics stack into a tree: Technical → Data → BI tools. Section A's task 'build sales reports' links to 'BI / dashboard tools' and 'SQL databases'. Now an initiative like 'improve sales reporting' can return these skills, with this posting as proof.",
+   chips:[["Technical › Data › BI tools",""],["task 'build sales reports' ↔ BI tools",""],["initiative → tasks → skills ✓",""]], marks:null},
+];
+let step = 0;
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function render() {
+  const p = document.getElementById("posting");
+  if (step === 0) {
+    p.innerHTML = esc(RAW); document.getElementById("chips").innerHTML = "";
+    document.getElementById("step-label").textContent = "Step 0 — the raw posting";
+    document.getElementById("step-info").textContent = "This is what a job posting looks like when it arrives from Kaggle or Greenhouse.";
+    return;
+  }
+  const s = STEPS[step - 1];
+  document.getElementById("step-label").textContent = s.l;
+  document.getElementById("step-info").textContent = s.i;
+  if (s.marks) { let h = esc(RAW); s.marks.forEach(m => h = h.replace(m, `<mark>${m}</mark>`)); p.innerHTML = h; }
+  const c = document.getElementById("chips");
+  c.innerHTML = s.chips.map(([t, k]) => `<span class="chip ${k}">${t}</span>`).join("");
+  [...c.children].forEach((el, i) => setTimeout(() => el.classList.add("on"), 120 * i + 30));
+}
+document.getElementById("next").onclick = () => { step = step >= STEPS.length ? 0 : step + 1; render(); };
+document.getElementById("reset").onclick = () => { step = 0; render(); };
+
+// ---------- sprints ----------
+const SPR = [
+  ["1","Data","done","Assemble the corpus and agree the data contract with Section A.","Populated database + exploration notebook."],
+  ["2","Extraction","done","Turn each posting into atomic skill statements; build a hand-labelled gold set.","Statements table + extraction quality report (P/R/F1, tokens)."],
+  ["3","Embed + cluster","now","Embed skills, cluster into leaf topics, compare ≥ 2 methods, sweep parameters, decide multi-topic membership.","Topic + topic-membership tables, stability report."],
+  ["4","Label + hierarchy","later","Name every topic, build parent levels, evaluate vs ESCO / Lightcast, review by hand.","Labelled hierarchical taxonomy + evaluation report."],
+  ["5","Task ↔ skill","joint","Link the task and skill taxonomies; gold set of 30 initiatives; initiative → tasks → skills end to end.","Mapping table, gold set, evaluation notebook."],
+  ["6","Integrate","joint","One command runs the pipeline; one UI answers the initiative question; logging + token costs.","Working end-to-end solution with README."],
+  ["7","Demo","joint","Demo script, practice, final fixes. Week 15: 15-minute live demo.","Demo-ready solution + slides."],
+];
+document.getElementById("sprints").innerHTML = SPR.map(([n, t, s]) =>
+  `<div class="sp ${s === "done" ? "done" : s === "now" ? "now" : ""}" data-n="${n}"><div class="n">Sprint ${n}</div><div class="t">${t}${s === "now" ? " · now" : s === "done" ? " · done" : ""}</div></div>`).join("");
+document.querySelectorAll(".sp").forEach(el => el.onclick = () => {
+  const r = SPR[+el.dataset.n - 1];
+  document.getElementById("sprint-info").innerHTML = `<b>Sprint ${r[0]} — ${r[1]}</b>${r[3]}<br><span class="sub">Deliverable: ${r[4]}</span>`;
+});
+
+// ---------- quiz ----------
+const QUIZ = [
+  ["What does the final system answer?", ["Which jobs match my resume", "Which tasks and skills a business initiative needs", "How much a job pays"], 1],
+  ["Who decides 'skill or trait' for doubtful items?", ["The LLM alone", "ESCO + O*NET (rule E)", "Whoever labels first"], 1],
+  ["Why do we keep 50 test postings untouched until the end?", ["To save money", "So the final score is honest (not tuned to the test)", "Because they are broken"], 1],
+  ["What happens in Sprint 3?", ["Embed skills and cluster them into topics", "Collect job postings", "Build the final UI"], 0],
+];
+let score = 0, answered = 0;
+document.getElementById("quiz").innerHTML = QUIZ.map(([q, opts], i) =>
+  `<div class="q">${i + 1}. ${q}</div>` + opts.map((o, j) => `<label data-q="${i}" data-o="${j}"><input type="radio" name="q${i}"> ${o}</label>`).join("")).join("");
+document.querySelectorAll(".quiz label").forEach(l => l.onclick = () => {
+  const q = +l.dataset.q;
+  if (document.querySelector(`.quiz label[data-q="${q}"].right, .quiz label[data-q="${q}"].wrong`)) return;
+  const ok = +l.dataset.o === QUIZ[q][2];
+  l.classList.add(ok ? "right" : "wrong");
+  if (!ok) document.querySelector(`.quiz label[data-q="${q}"][data-o="${QUIZ[q][2]}"]`).classList.add("right");
+  score += ok; answered++;
+  document.getElementById("score").textContent = `Score: ${score}/${answered}` + (answered === QUIZ.length ? (score === QUIZ.length ? " — perfect!" : " — check the green answers") : "");
+});
+</script>
+</body>
+</html>

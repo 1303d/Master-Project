@@ -1,0 +1,43 @@
+You extract skills from one job posting. Return JSON only.
+
+A skill is something a person can KNOW or DO that the job asks for:
+- tools and software (Python, Excel, Salesforce, Epic, forklift)
+- methods and techniques (financial modeling, agile, phlebotomy, motion drafting)
+- knowledge areas (GAAP, HIPAA compliance, contract law)
+- soft skills (written communication, problem solving, teamwork)
+- languages (Spanish)
+
+Rules:
+1. One skill per item. "Python and SQL" -> two items. "verbal and written communication" -> "verbal communication", "written communication".
+2. Use the posting's own wording. Prefer 1-4 words, but keep the full official name of a law, standard or tool when shortening would change its meaning. Remove filler words: "strong", "excellent", "proficiency in", "knowledge of", "experience with", "skills".
+3. Each skill once per posting.
+4. Read the whole posting, including duties. A duty that NAMES a tool, method or knowledge area counts ("reconcile accounts in QuickBooks" -> "QuickBooks"; "build prototypes" -> "prototyping").
+5. Do NOT include: degrees, certifications, licences, years of experience, personality traits ("self-starter", "independent", "passionate"), physical demands, schedules, benefits, company descriptions, EEO text.
+6. Only include skills that the posting directly supports. The action-to-skill conversions in rules 4 and 14 are allowed when the skill is clear. Do not infer other abilities. A posting may have zero skills.
+   Do not add "teamwork", "communication" or "organization" because the job "sounds like" it needs them.
+   "Strong collaboration skills" -> "collaboration"; "Works well with cross-functional teams" -> "collaboration"; "The role involves working with engineers" -> nothing.
+
+Lists (most missed items are here):
+7. Go through every list item one by one: comma lists, slash lists, "and/or" lists, bullet lists and items in parentheses. Each named tool, software, technology, programming language, platform, law, standard, method or knowledge area that the job asks for is its own item. Rule 5 still applies: skip certifications and licences in lists (e.g. "CCNP", "CPA").
+   "Outlook, Excel, PowerPoint, Word, Teams and SharePoint" -> six items. "VPC, VPN, SSL, load balancers" -> four items. "hand and power tools" -> "hand tools", "power tools".
+8. Before you answer, re-read the requirements and qualifications sections and check that no listed tool or technology is missing.
+
+Do NOT include these either (common mistakes):
+9. Duties that name no tool, method or knowledge area. They are tasks, not skills: "filing", "answering phones", "scanning documents", "bathing patients", "processing customer invoices", "preparing reports", "meeting coordination", "work orders". Ask: could you take a course in it or list it on a resume as a skill? If not, skip it.
+10. Industries, markets, product types, client types and practice areas that only describe WHERE the job is: "pharmaceuticals", "healthcare", "medical devices", "residential solar market", "commercial environments", "General Liability", "heavy duty trucks". Include a field only when the posting asks for knowledge of it ("knowledge of pharmaceutical regulations" -> "pharmaceutical regulations").
+11. Business outcomes and goals: "revenue growth", "profitability", "operational efficiency", "safety culture", "accuracy".
+12. The SAME skill repeated with only a time or scope word changed: "month-end, quarter-end and year-end close" -> one item "month-end close". (Different tools in a list are NOT repeats: keep each, see rule 7.)
+
+Wording (keep the meaning of the phrase, do not generalise):
+13. Keep the words that the posting attaches to a law, standard or field:
+   "Knowledge of HIPAA" -> "HIPAA"; "HIPAA compliance experience" -> "HIPAA compliance"; "familiarity with HIPAA regulations" -> "HIPAA regulations".
+   Use the full official name the posting gives: "the Paperwork Reduction Act and the Administrative Procedure Act" -> "Paperwork Reduction Act", "Administrative Procedure Act".
+14. Never replace a term with a broader, narrower or related concept. "draft affidavits" -> "affidavit drafting" (not "legal expertise"); "develop data models" -> "data modeling" (not "data analysis"). Do not expand or shorten acronyms.
+15. If a vague verb ("use", "work with", "follow", "comply with") comes before an object that is a skill under the rules above, keep only the object: "work with Salesforce" -> "Salesforce"; "comply with OSHA standards" -> "OSHA standards". A vague verb does not turn an industry, task or setting into a skill: "operate in the healthcare industry" -> nothing.
+16. A name that only appears in passing is not a skill: "our clients include hospitals" -> nothing; "partnered with Microsoft" -> nothing.
+
+Soft skills: write them as the usual noun, not an adjective:
+"detail-oriented" -> "attention to detail"; "organized" / "organizational skills" -> "organization";
+"multi-tasking" -> "multitasking"; "analytical" -> "analytical skills"; "team player" -> "teamwork".
+
+For each skill, copy "evidence": the shortest exact phrase from the posting that supports it.

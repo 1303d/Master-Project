@@ -4,7 +4,9 @@
     py src/extract_skills.py --provider groq --model qwen/qwen3.8-27b --limit 3   # small test
     py src/extract_skills.py --provider gemini --model gemini-3.8-flash           # all 100 gold postings
 
-Providers: gemini (Google AI Studio, GEMINI_API_KEY) and groq (GROQ_API_KEY). Keys are read from .env.
+Providers: gemini (Google AI Studio, GEMINI_API_KEY), groq (GROQ_API_KEY), openrouter (OPENROUTER_API_KEY)
+and anthropic (ANTHROPIC_API_KEY).
+Keys are read from .env.
 The model is never guessed: pass --model.
 
 Input:  data/gold/gold_postings.csv (contacts already masked)
@@ -119,7 +121,77 @@ class GroqBackend:
         return json.loads(d["choices"][0]["message"]["content"]), u.get("prompt_tokens", 0), u.get("completion_tokens", 0)
 
 
-BACKENDS = {"gemini": GeminiBackend, "groq": GroqBackend}
+class OpenRouterBackend(GroqBackend):
+    """OpenRouter speaks the same OpenAI-compatible API as Groq; only the URL and key differ."""
+
+    name = "openrouter"
+    URL = "https://openrouter.ai/api/v1"
+
+    def __init__(self, model):
+        key = os.getenv("OPENROUTER_API_KEY") or sys.exit("OPENROUTER_API_KEY is missing in .env")
+        self.headers, self.model = {"Authorization": f"Bearer {key}"}, model
+
+
+class AnthropicBackend:
+    """Claude via the official anthropic SDK; output_config.format forces JSON that matches SCHEMA."""
+
+    name = "anthropic"
+    # strict structured output needs additionalProperties: false on every object
+    STRICT = {**SCHEMA, "additionalProperties": False,
+              "properties": {"skills": {"type": "array", "items": {**SCHEMA["properties"]["skills"]["items"],
+                                                                   "additionalProperties": False}}}}
+
+    def __init__(self, model):
+        import anthropic
+        os.getenv("ANTHROPIC_API_KEY") or sys.exit("ANTHROPIC_API_KEY is missing in .env")
+        self.client, self.model = anthropic.Anthropic(), model
+
+    def list_models(self):
+        return sorted(m.id for m in self.client.models.list())
+
+    def extract(self, system, text):
+        import anthropic
+        try:
+            r = self.client.messages.create(
+                model=self.model, max_tokens=16000, system=system,
+                messages=[{"role": "user", "content": text}],
+                output_config={"format": {"type": "json_schema", "schema": self.STRICT}})
+        except anthropic.APIStatusError as e:
+            ra = e.response.headers.get("retry-after")
+            raise ApiError(e.status_code, str(e.message)[:200], float(ra) if ra else None)
+        except anthropic.APIConnectionError as e:
+            raise ApiError(599, str(e)[:200])
+        if r.stop_reason != "end_turn":
+            raise ValueError(f"stop_reason {r.stop_reason}")
+        out = next(b.text for b in r.content if b.type == "text")
+        return json.loads(out), r.usage.input_tokens, r.usage.output_tokens
+
+
+BACKENDS = {"gemini": GeminiBackend, "groq": GroqBackend, "openrouter": OpenRouterBackend,
+            "anthropic": AnthropicBackend}
+
+DEV_POSTINGS = ROOT / "data" / "gold" / "gold_postings_dev.csv"
+GOLD_LABELS = ROOT / "data" / "gold" / "gold_labels.csv"
+EMBED_MODEL = "BAAI/bge-small-en-v1.5"
+
+
+def build_examples(posts, k):
+    """Semantic search: for each posting, k worked examples = the k shortest of its 5 most similar
+    DEV gold postings (never itself, never a test posting), shown with their human-labelled skills."""
+    from sentence_transformers import SentenceTransformer
+    dev = pd.read_csv(DEV_POSTINGS, encoding="utf-8-sig").merge(
+        pd.read_csv(GOLD_LABELS)[["posting_id", "gold_skills"]], on="posting_id")
+    model = SentenceTransformer(EMBED_MODEL)
+    dev_vec = model.encode(dev.description.tolist(), normalize_embeddings=True)
+    post_vec = model.encode(posts.description.tolist(), normalize_embeddings=True)
+    blocks = {}
+    for i, pid in enumerate(posts.posting_id):
+        nearest = [j for j in (dev_vec @ post_vec[i]).argsort()[::-1] if dev.posting_id.iat[j] != pid][:5]
+        chosen = sorted(nearest, key=lambda j: len(dev.description.iat[j]))[:k]
+        blocks[pid] = "\n\n".join(
+            f"EXAMPLE POSTING:\n{dev.description.iat[j]}\nSKILLS (labelled by a human): {dev.gold_skills.fillna('').iat[j]}"
+            for j in chosen)
+    return blocks
 
 
 def call_with_retry(backend, system, text, attempts=8):
@@ -139,9 +211,14 @@ def main():
     ap.add_argument("--provider", choices=BACKENDS, required=True)
     ap.add_argument("--model", default=None)
     ap.add_argument("--limit", type=int, default=None, help="only the first N postings")
+    ap.add_argument("--postings", type=Path, default=POSTINGS, help="CSV with n, posting_id, description")
+    ap.add_argument("--tag", default="", help="output suffix, e.g. sample2000 -> statements_<model>_sample2000.csv")
     ap.add_argument("--delay", type=float, default=4.0, help="seconds between API calls (free-tier pacing)")
     ap.add_argument("--list-models", action="store_true")
+    ap.add_argument("--prompt", type=Path, default=PROMPT, help="prompt file; its file name is the prompt_version")
+    ap.add_argument("--examples", type=int, default=0, help="add K similar dev gold postings as examples (semantic search)")
     args = ap.parse_args()
+    prompt_version = args.prompt.stem + (f"+knn{args.examples}" if args.examples else "")
     load_dotenv(ROOT / ".env")
     Backend = BACKENDS[args.provider]
 
@@ -152,17 +229,20 @@ def main():
         sys.exit("Pass --model <id> (run --list-models first).")
     model = args.model
 
-    system = PROMPT.read_text(encoding="utf-8")
+    system = args.prompt.read_text(encoding="utf-8")
     prompt_sha = hashlib.sha256(system.encode()).hexdigest()
-    posts = pd.read_csv(POSTINGS, encoding="utf-8-sig")
+    posts = pd.read_csv(args.postings, encoding="utf-8-sig")
     if args.limit:
         posts = posts.head(args.limit)
     cache = ROOT / "cache" / args.provider
     cache.mkdir(parents=True, exist_ok=True)
     backend, rows, done, failed, calls, tok_in, tok_out = None, [], [], [], 0, 0, 0
 
+    blocks = build_examples(posts, args.examples) if args.examples else {}
     for p in posts.itertuples():
-        key = hashlib.sha256(f"{model}|{prompt_sha}|{p.description}".encode()).hexdigest()
+        text = (f"{blocks[p.posting_id]}\n\nNOW EXTRACT THE SKILLS FROM THIS POSTING:\n{p.description}"
+                if blocks else p.description)
+        key = hashlib.sha256(f"{model}|{prompt_sha}|{text}".encode()).hexdigest()
         path = cache / f"{key}.json"
         if path.exists():
             data = json.loads(path.read_text(encoding="utf-8"))
@@ -171,13 +251,13 @@ def main():
             if calls:
                 time.sleep(args.delay)
             try:
-                out, t_in, t_out = call_with_retry(backend, system, p.description)
+                out, t_in, t_out = call_with_retry(backend, system, text)
             except (ApiError, ValueError, KeyError) as e:  # keep going; a re-run retries only uncached postings
                 print(f"#{p.n} {p.posting_id}: FAILED ({str(e)[:80]})", flush=True)
                 failed.append(p.posting_id)
                 continue
             data = {"posting_id": p.posting_id, "provider": Backend.name, "model": model,
-                    "prompt_version": PROMPT_VERSION, "prompt_sha256": prompt_sha,
+                    "prompt_version": prompt_version, "prompt_sha256": prompt_sha,
                     "tokens_in": t_in, "tokens_out": t_out, "output": out}
             path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
             calls, tok_in, tok_out = calls + 1, tok_in + t_in, tok_out + t_out
@@ -190,20 +270,21 @@ def main():
             ev = str(s.get("evidence", "")).strip()
             rows.append({"statement_id": f"{p.posting_id}:skill:{i}", "posting_id": p.posting_id,
                          "skill": s["skill"].strip(), "evidence": ev, "evidence_in_text": bool(ev) and ev.lower() in low,
-                         "provider": Backend.name, "model": model, "prompt_version": PROMPT_VERSION})
+                         "provider": Backend.name, "model": model, "prompt_version": prompt_version})
 
     PROCESSED.mkdir(parents=True, exist_ok=True)
-    out_path = PROCESSED / f"statements_{slug(model)}.csv"
+    suffix = f"{slug(model)}_{args.tag}" if args.tag else slug(model)
+    out_path = PROCESSED / f"statements_{suffix}.csv"
     pd.DataFrame(rows, columns=["statement_id", "posting_id", "skill", "evidence", "evidence_in_text", "provider",
                                 "model", "prompt_version"]).to_csv(out_path, index=False)
-    pd.DataFrame(done).to_csv(PROCESSED / f"extraction_postings_{slug(model)}.csv", index=False)
+    pd.DataFrame(done).to_csv(PROCESSED / f"extraction_postings_{suffix}.csv", index=False)
     new = not USAGE.exists()
     with USAGE.open("a", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         if new:
             w.writerow(["run_at", "provider", "model", "prompt_version", "postings", "api_calls", "tokens_in", "tokens_out"])
         w.writerow([datetime.now(timezone.utc).isoformat(timespec="seconds"), Backend.name, model,
-                    PROMPT_VERSION, len(posts), calls, tok_in, tok_out])
+                    prompt_version, len(posts), calls, tok_in, tok_out])
     if failed:
         print(f"\n{len(failed)} postings FAILED (not scored). Re-run the same command to retry them.")
     print(f"\n{len(rows)} statements -> {out_path.relative_to(ROOT)} | new API calls {calls} | tokens in {tok_in:,} out {tok_out:,}")

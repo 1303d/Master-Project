@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill Pipeline</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Skill Pipeline — Section B</h1>
+      <span class="sub">Kaggle + Greenhouse → LLM extractor → ESCO / O*NET → Supabase · <span id="updated">…</span></span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-view="status" aria-selected="true">Pipeline status</button>
+      <button role="tab" data-view="review" aria-selected="false">Review queue</button>
+      <button role="tab" data-view="skills" aria-selected="false">Skills</button>
+    </nav>
+    <div class="top-actions">
+      <span class="muted"><span id="lf-dot" class="dot"></span>Langfuse</span>
+      <a id="langfuse" class="button" href="https://cloud.langfuse.com" target="_blank" rel="noopener">Open Langfuse ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Pipeline status -->
+    <section id="view-status" class="view">
+      <div class="cards" id="status-cards"></div>
+      <h3>Latest run <span id="run-title" class="muted"></span></h3>
+      <div class="flow" id="flow"></div>
+      <div class="model-box">
+        <span class="muted">Active model (LiteLLM router):</span> <span id="active-model" class="model-chip">—</span>
+        <span id="fallback-note" class="muted"></span>
+      </div>
+      <h3>ESCO / O*NET verdicts (share of skill statements)</h3>
+      <div class="bar" id="verdict-bar"></div>
+      <div class="legend" id="verdict-legend"></div>
+      <div class="cols">
+        <div>
+          <h3>Events</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Time</th><th>Stage</th><th>Status</th><th>Model</th><th>Message</th></tr></thead>
+            <tbody id="events"></tbody></table></div>
+        </div>
+        <div>
+          <h3>Statements by model</h3>
+          <div class="table-wrap small"><table><thead><tr><th>Model</th><th>Statements</th></tr></thead>
+            <tbody id="models"></tbody></table></div>
+          <h3>Model switches (fallbacks)</h3>
+          <ul class="list" id="switches"></ul>
+          <h3>Recent runs</h3>
+          <ul class="list" id="runs"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Review queue -->
+    <section id="view-review" class="view" hidden>
+      <div class="banner ai">Unknown skills: in neither ESCO nor O*NET. Your decision is saved and reused, so each skill is reviewed once.</div>
+      <div class="toolbar">
+        <label>Reviewer ID <input id="reviewer" placeholder="e.g. lochan" autocomplete="off" spellcheck="false"></label>
+        <label class="grow">Search <input id="queue-q" type="search" placeholder="e.g. gaap"></label>
+        <span id="queue-count" class="muted"></span>
+      </div>
+      <div id="save-status" class="save-status" role="status" aria-live="polite"></div>
+      <div class="review-grid">
+        <aside class="review-nav"><ul id="queue" class="list"></ul></aside>
+        <section id="examples" class="detail pane empty-state">Select a skill to see where it was found.</section>
+        <section id="decide" class="detail pane empty-state">Decision panel</section>
+      </div>
+    </section>
+
+    <!-- 3. Skills -->
+    <section id="view-skills" class="view" hidden>
+      <div class="filters">
+        <label>Verdict <select id="s-verdict">
+          <option value="">All</option><option value="known_skill">known_skill</option><option value="trait">trait</option>
+          <option value="new_candidate">new_candidate</option><option value="not_a_skill">not_a_skill</option></select></label>
+        <label class="grow">Skill contains <input id="s-q" type="search" placeholder="e.g. python"></label>
+        <span id="skills-count" class="muted"></span>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Skill</th><th>Statements</th><th>Verdict</th><th>Matched entry</th><th>Source</th><th>Review</th></tr></thead>
+        <tbody id="skills"></tbody></table></div>
+    </section>
+  </main>
+</body>
+</html>

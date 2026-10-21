@@ -1,0 +1,365 @@
+error,n,skill
+missed,1,litigation
+missed,1,organized
+missed,1,drafting discovery
+missed,4,inside sales
+missed,4,outside sales
+missed,7,transcribe information
+missed,9,Google Office Suite
+missed,16,Routing
+missed,17,information analysis
+missed,17,administrative
+missed,17,multitasking
+missed,17,Microsoft Office
+missed,18,administrative
+missed,18,clerical
+missed,18,document management
+missed,18,court filing
+missed,18,document naming
+missed,18,document uploading
+missed,18,correspondence preparation
+missed,18,legal document preparation
+missed,18,scheduling
+missed,18,written communication
+missed,18,filing
+missed,18,indexing
+missed,18,fax filing
+missed,18,Microsoft Outlook
+missed,18,working relationships
+missed,18,keyboard
+missed,18,multitasking
+missed,18,adaptability
+missed,18,workflow adaptation
+missed,18,best practices implementation
+missed,18,electronic case management
+missed,20,custom connectors
+missed,20,error handling
+missed,20,access control
+missed,20,data protection
+missed,20,data privacy
+missed,23,MAT
+missed,23,OTP
+missed,27,training programs
+missed,27,influencing
+missed,28,manufacturing maintenance
+missed,28,CNC programming
+missed,28,Fanuc Controls
+missed,32,business relationships
+missed,32,supply chain strategies
+missed,32,sourcing
+missed,32,analytical
+missed,32,computer skills
+missed,32,organization
+missed,32,multitasking
+missed,36,patch management
+missed,37,communication
+missed,38,cash applications
+missed,38,Mathematical Calculation
+missed,38,enterprise resource planning (ERP)
+missed,38,Credit and Collections Procedures
+missed,38,Accounting Adjustments & Refunds
+missed,39,PLC
+missed,39,PAC
+missed,39,electrical calculations
+missed,39,arc flash
+missed,39,Codes and Standards
+missed,39,presentations
+missed,48,medication-related interventions
+missed,48,MDS
+missed,48,CAA’s
+missed,48,long-term care
+missed,50,application security
+missed,51,supervision
+missed,51,management
+missed,51,medical practice management
+missed,54,FW
+missed,54,debugging
+missed,54,Shift Left
+missed,54,negotiation
+missed,56,reviewing application packets
+missed,56,immigration strategy
+missed,56,legal drafting
+missed,56,supervision
+missed,56,delegation
+missed,56,case management
+missed,56,legal team communication
+missed,56,customer service
+missed,56,continuous improvement
+missed,56,prioritization
+missed,56,communication
+missed,56,adaptability
+missed,56,self-organization
+missed,56,independent work
+missed,56,IT
+missed,56,Monday.com
+missed,56,responsiveness
+missed,56,attention to detail
+missed,56,legal writing
+missed,56,client communication
+missed,57,Informatica MDM
+missed,57,project planning
+missed,58,nvestment banking
+missed,58,healthcare transactions
+missed,58,negotiation
+missed,58,managing multiple projects
+missed,59,site design analysis
+missed,59,site plans
+missed,59,construction drawings
+missed,60,calendar management
+missed,60,scheduling
+missed,60,file organization
+missed,61,financial reporting
+missed,61,Budgeting and Forecasting
+missed,61,Audit Support
+missed,61,problem-solving
+missed,63,capex accruals
+missed,63,Capital Expenditure Tracking
+missed,63,multitasking
+missed,63,prioritizing deadlines
+missed,66,pre-trip inspections
+missed,66,post-trip inspections
+missed,66,communication
+missed,66,two-wheeler
+missed,66,lift gate
+missed,73,Web3 and Crypto Protocols
+missed,73,training
+missed,73,Taxonomy Auditing & Quality Control
+missed,77,warehousing
+missed,78,web technologies
+missed,78,cloud technologies
+missed,78,microservices
+missed,78,database technologies
+missed,78,leadership
+missed,78,communication
+missed,81,industrial pull/push carts
+missed,81,teamwork
+missed,81,Data File Management / Extraction
+missed,84,collaboration
+missed,85,performance monitoring
+missed,85,multitasking
+missed,86,property showings
+missed,86,organization
+missed,86,negotiation
+missed,87,care planning
+missed,87,patient rehabilitation participation
+missed,88,installation
+missed,88,configuration
+missed,88,performance tuning
+missed,88,troubleshooting
+missed,88,high availability
+missed,88,disaster recovery
+missed,88,database security
+missed,88,task scripting
+missed,92,cleaning
+missed,92,cleaning supply inventory management
+missed,93,Word
+missed,93,Excel
+missed,93,Outlook
+missed,93,onboarding
+missed,98,retail sales
+extra,1,preparing discovery
+extra,1,filing documents
+extra,1,preparing trial exhibits
+extra,1,interpersonal skills
+extra,1,organization
+extra,7,meal selection
+extra,7,patient meal orders
+extra,7,Intermountain Modified Diet Guideline
+extra,7,meal ordering platform
+extra,7,room service call center
+extra,7,Bedside Connect
+extra,7,calorie count
+extra,7,keyboarding
+extra,7,transcription
+extra,7,food service
+extra,7,healthcare
+extra,7,Nutrition
+extra,9,legal document preparation
+extra,9,reading and interpreting rules and regulations
+extra,9,drafting Department Orders
+extra,9,drafting Director's Instruction
+extra,9,federal government websites
+extra,9,state and federal laws
+extra,9,basic subsistence benefits
+extra,9,legislative branch knowledge
+extra,9,judicial branch knowledge
+extra,9,executive branch knowledge
+extra,9,judicial proceedings
+extra,9,administrative proceedings
+extra,9,litigation process
+extra,17,contract management system
+extra,17,MS Office Suite
+extra,17,Word
+extra,17,Excel
+extra,17,PowerPoint
+extra,17,Outlook
+extra,17,Teams
+extra,17,insurance industry knowledge
+extra,18,MS Outlook
+extra,18,multi tasking
+extra,20,governance policies
+extra,20,security settings
+extra,20,workflow design
+extra,20,system integration
+extra,20,process optimization
+extra,20,API integration
+extra,20,cloud services
+extra,20,performance optimization
+extra,20,security best practices
+extra,20,compliance standards
+extra,22,phone communication
+extra,22,email communication
+extra,22,customer support platforms
+extra,22,video calls
+extra,22,operational processes
+extra,23,patient documentation
+extra,23,treatment planning
+extra,23,patient assessments
+extra,23,MAT/OTP
+extra,25,service protocol
+extra,25,professionalism
+extra,27,training plan development
+extra,27,influence
+extra,27,team management
+extra,28,CNC/Fanuc Controls
+extra,32,report building
+extra,32,organizational skills
+extra,32,tire industry knowledge
+extra,32,automotive parts knowledge
+extra,32,supply chain strategy
+extra,36,information security risk management
+extra,36,regulatory and compliance issues
+extra,37,hand tools
+extra,38,cash receipts
+extra,38,credit card authorizations
+extra,38,credit memos
+extra,38,bank deposits
+extra,38,debit and credit adjustments
+extra,38,invoicing
+extra,38,vendor portals
+extra,38,customer account statements
+extra,38,computer
+extra,38,ERP system
+extra,39,electrical design
+extra,39,PLC/PAC
+extra,39,process equipment
+extra,39,arch flash
+extra,39,NEC
+extra,39,IEEE
+extra,39,NFPA
+extra,39,IEC
+extra,48,supervision
+extra,48,medication administration
+extra,48,health assessment
+extra,48,plan of care development
+extra,48,MDS/CAA completion
+extra,50,audits
+extra,50,reviews
+extra,50,automation
+extra,53,Med Surg
+extra,53,Home Health
+extra,53,BLS
+extra,53,Heart Failure
+extra,53,Diabetics
+extra,53,oncology
+extra,53,post surgeries
+extra,53,Ortho
+extra,54,product requirements
+extra,54,Area
+extra,54,cost management
+extra,54,technical publications
+extra,54,trainings
+extra,54,executive briefings
+extra,54,mentoring
+extra,54,technical specifications
+extra,54,IP blocks
+extra,54,Firmware
+extra,54,Software
+extra,54,architectural solutions
+extra,54,architecture analysis
+extra,54,debug
+extra,54,Micro-Architectural features
+extra,54,performance bottlenecks
+extra,54,circuit levels
+extra,54,management
+extra,56,immigration law
+extra,56,family law
+extra,56,Monday
+extra,57,requirements gathering
+extra,57,effort estimates
+extra,57,functional specifications
+extra,57,technical specifications
+extra,57,code reviews
+extra,57,design reviews
+extra,57,production deployment
+extra,57,Informatic MDM
+extra,58,negotiating deal terms
+extra,58,industry analysis
+extra,59,documentation
+extra,61,financial records
+extra,61,financial analysis
+extra,61,financial reports
+extra,61,budget modeling
+extra,61,forecast modeling
+extra,61,auditing
+extra,63,portfolio tracking
+extra,63,financial reviews
+extra,63,reporting
+extra,63,performance tracking
+extra,63,project allocations
+extra,63,CapEx investments
+extra,63,business reviews
+extra,63,opex/capex accruals
+extra,63,business partnering
+extra,63,annual plan
+extra,63,forecast
+extra,63,multi-task
+extra,63,prioritize deadlines
+extra,66,safety checks
+extra,66,freight inspection
+extra,66,paperwork completion
+extra,66,route delivery
+extra,66,unloading products
+extra,66,damage control checks
+extra,66,scanning
+extra,66,cash collection
+extra,66,housekeeping
+extra,67,sales
+extra,67,direct sales
+extra,67,persuasion
+extra,67,door knocking
+extra,67,record keeping
+extra,67,product knowledge
+extra,67,compliance
+extra,70,online scheduling
+extra,73,DeFi
+extra,73,NFT
+extra,73,L1s
+extra,73,L2s
+extra,77,warehouse
+extra,77,equipment
+extra,78,architecture
+extra,78,coding
+extra,78,hiring
+extra,84,teamwork
+extra,84,Microsoft Office
+extra,85,NOC experience
+extra,85,managing multiple tasks
+extra,86,sales
+extra,86,organizational skills
+extra,86,negotiating lease rates
+extra,86,in-person showings
+extra,87,patient care
+extra,88,database performance optimization
+extra,88,database upgrade
+extra,88,database consolidation
+extra,88,documentation
+extra,91,written communication
+extra,91,phone communication
+extra,91,email communication
+extra,91,chat communication
+extra,93,troubleshooting
+extra,98,inventory
+extra,98,displays
+extra,98,store systems
+extra,99,tracking and reporting

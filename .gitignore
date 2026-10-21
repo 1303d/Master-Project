@@ -23,3 +23,14 @@ taxonomy-skill-project/
 
 # posting text is shared via Google Drive, not Git
 data/gold/gold_postings.csv
+data/gold/gold_postings_dev.csv
+data/gold/gold_postings_test.csv
+
+# never commit: screenshots with credentials, local Claude Code state
+Supabase.png
+.claude/
+
+# downloads that scripts recreate, copyrighted papers, run logs
+data/reference/
+data/gold/reference/*.pdf
+reports/*.log

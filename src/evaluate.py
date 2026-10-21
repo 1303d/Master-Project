@@ -8,7 +8,8 @@ Output: reports/sprint2_extraction_quality_<model>.md
 
 Matching (one-to-one, per posting), after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
-- strict:  normalised names are equal
+- strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
+           "analyses" is read as "analysis"
 - lenient: equal, OR all words of one name appear in the other
            ("prototyping" ~ "high-fidelity prototyping", "Visio" ~ "Microsoft Visio")
 The gold set has no evidence offsets, so matching is by name only.
@@ -36,7 +37,9 @@ def split(s):
 
 def norm(name):
     words = re.sub(r"[^\w+#./ ]", " ", name.lower().replace("&", " and ")).split()
-    words = [w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w for w in words]
+    words = [w[:-4] + "ysis" if w.endswith("yses") else w for w in words]  # analyses -> analysis
+    words = [w[:-3] + "y" if len(w) > 4 and w.endswith("ies") else w for w in words]  # strategies -> strategy
+    words = [w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith(("ss", "sis")) else w for w in words]
     return tuple(w for w in words if w not in FILLER) or tuple(words)
 
 
@@ -44,7 +47,7 @@ def match(gold, pred, lenient):
     """Greedy one-to-one matching. Exact pairs first, then (lenient) word-subset pairs."""
     g, p = [norm(x) for x in gold], [norm(x) for x in pred]
     used_g, used_p = set(), set()
-    tests = [lambda a, b: a == b]
+    tests = [lambda a, b: a == b or "".join(a) == "".join(b)]  # "multi tasking" == "multitasking"
     if lenient:
         tests.append(lambda a, b: set(a) <= set(b) or set(b) <= set(a))
     for test in tests:
@@ -67,12 +70,30 @@ def prf(tp, n_pred, n_gold):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", required=True, help="model id used in extract_skills.py")
-    m = slug(ap.parse_args().model)
+    ap.add_argument("--tag", default="", help="same --tag as extract_skills.py")
+    ap.add_argument("--split", choices=["all", "dev", "test"], default="all", help="gold half to score (gold_split.csv)")
+    ap.add_argument("--gold", type=Path, default=GOLD, help="gold file, e.g. data/gold/gold_labels_v2.csv")
+    ap.add_argument("--links", type=Path, default=None,
+                    help="skill_links.csv from link_reference.py: drop predicted skills linked as traits (rule E)")
+    args = ap.parse_args()
+    m = f"{slug(args.model)}_{args.tag}" if args.tag else slug(args.model)
     PRED, DONE = PROCESSED / f"statements_{m}.csv", PROCESSED / f"extraction_postings_{m}.csv"
-    REPORT = ROOT / "reports" / f"sprint2_extraction_quality_{m}.md"
-    gold = pd.read_csv(GOLD)
+    name = m if args.split == "all" else f"{m}_{args.split}"
+    if args.gold.resolve() != GOLD.resolve():
+        name += "_" + args.gold.stem.removeprefix("gold_labels_")
+    if args.links:
+        name += "_notraits"
+    REPORT = ROOT / "reports" / f"sprint2_extraction_quality_{name}.md"
+    gold = pd.read_csv(args.gold)
     gold["sector_eval"] = gold.sector_fixed.fillna(gold.sector)
+    if args.split != "all":
+        halves = pd.read_csv(ROOT / "data" / "gold" / "gold_split.csv")
+        gold = gold[gold.posting_id.isin(halves.loc[halves.split == args.split, "posting_id"])]
     pred = pd.read_csv(PRED)
+    if args.links:
+        links = pd.read_csv(args.links)
+        traits = set(links.loc[links.verdict == "trait", "skill"])
+        pred = pred[~pred.skill.str.strip().str.lower().isin(traits)]
     by_post = pred.groupby("posting_id").skill.apply(list).to_dict()
     done = pd.read_csv(DONE)
     gold = gold[gold.posting_id.isin(done.posting_id)]  # only postings the extractor ran on
@@ -86,6 +107,8 @@ def main():
         misses += [(r.n, x) for x in fn]
         extras += [(r.n, x) for x in fp]
     df = pd.DataFrame(rows)
+    pd.DataFrame([("missed", n, x) for n, x in misses] + [("extra", n, x) for n, x in extras],
+                 columns=["error", "n", "skill"]).to_csv(ROOT / "reports" / f"errors_{name}.csv", index=False)
 
     def line(d, label):
         ps, rs, fs = prf(d.tp_strict.sum(), d.pred.sum(), d.gold.sum())
@@ -101,9 +124,12 @@ def main():
 
     out = [f"# Sprint 2 — Extraction quality report (Section B, skills)", "",
            f"- **Extractor:** `{model}` via {pred.provider.iloc[0] if len(pred) else '?'}, prompt `{pred.prompt_version.iloc[0] if len(pred) else '?'}`",
-           f"- **Gold set:** {len(df)} postings, {df.gold.sum()} gold skills (`data/gold/gold_labels.csv`).",
-           "  Labels are LLM-suggested and human-corrected (Claude/ChatGPT suggestions; Gemini was not used), "
-           "so the extractor is independent of the label suggestions.",
+           f"- **Gold set:** {len(df)} postings, {df.gold.sum()} gold skills (`{args.gold.resolve().relative_to(ROOT)}`)."
+           + (" Predicted skills linked as traits (ESCO/O*NET, rule E) are dropped." if args.links else ""),
+           "  Labels are LLM-suggested (Claude/ChatGPT) and human-corrected."
+           + (" **The extractor is a Claude model, so it is not independent of the suggestions** "
+              "(see `src/bias_check.py`)." if "claude" in model.lower() else
+              " The extractor is not one of the suggesting models."),
            f"- **Evidence check:** {ev:.0%} of predicted evidence phrases occur verbatim in the posting.",
            "", "## Overall (micro-averaged)", "", head, line(df, "**All**"), "",
            "## By sector", "", head] + [line(d, s) for s, d in df.groupby("sector")] + [

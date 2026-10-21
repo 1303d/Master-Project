@@ -5,3 +5,9 @@ openpyxl
 requests
 python-dotenv
 google-genai
+anthropic
+psycopg[binary]
+litellm
+langfuse
+pyyaml
+sentence-transformers>=3.0

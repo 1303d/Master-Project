@@ -98,3 +98,9 @@ Not a git repo yet. Python 3.11 at `C:\Users\dhanu\AppData\Local\Programs\Python
 - Two project folders exist: this one and an older `C:\Master's Project` (space) with an ETL for a
   **2026-only** corpus and a note that free Lightcast access is nonprofit-only/capped. See HANDOFF.
 - Raw postings contain recruiter emails/phones (personal data) — mask before sharing.
+
+<!-- claude-reflect: learned rules (saved from the band; edit freely) -->
+## Learned rules
+- Classify extracted skills strictly according to ESCO and O*NET definitions, not as traits, and treat them as the grounding rule book.
+- Do not use the professor's provided model or API key for pipeline work; it is only for Claude Code and research.
+<!-- end claude-reflect -->

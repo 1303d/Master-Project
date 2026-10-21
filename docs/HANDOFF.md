@@ -1,5 +1,100 @@
 # HANDOFF — Section B Skill Taxonomy (Sprint 2)
 
+## ▶ CURRENT STATUS (2026-10-20) — extractor optimisation before Sprint 3 (read this first)
+Sprint 2 is done (see README). Now improving the extractor before the 2,000-posting run.
+- Gold split 50/50: `data/gold/gold_split.csv`, `gold_postings_dev.csv` / `_test.csv` (`src/make_gold_split.py`).
+  **Test half is untouched** — score it once, after everything is frozen.
+- New CLI: `extract_skills.py --postings --tag --prompt --examples K`; `evaluate.py --tag --split dev|test`
+  (also writes `reports/errors_<tag>_<split>.csv`); `src/list_recall.py` (recall on list items).
+- Dev results (lenient P/R/F1 · list-item recall): v1 .68/.77/.72 · v2 .75/.72/.74 · v2+kNN-examples .75/.72/.74
+  (+72% tokens → dropped) · **v3 .72/.75/.74, list recall .83** (working prompt). Strict F1 .63/.65/.65/.65.
+- Human-vs-human agreement (3 postings only): strict .63, lenient .73.
+- Labeling rules A–D added to `data/gold/LABELING_RULES.md` (still marked PROPOSED → team confirms → AGREED).
+- Audit: `data/gold/AUDIT_CHECKLIST.md`, blind sheet `reports/audit_dev_blind.csv` (437 items), hidden key
+  `reports/audit_dev_key.csv`.
+- Agreed sequence: rules AGREED → blind gold audit (dev + test, same rules) → gold_labels_v2.csv →
+  alias table (from dev errors only) + alias-adjusted F1 → prompt v4 mirrors agreed rules → re-score on dev
+  (gold v1 and v2) → freeze prompt/aliases/scorer → score test once → run 2,000 postings
+  (`data/processed/extraction_sample_2000.csv`, `src/make_extraction_sample.py`) → Supabase.
+- Report: strict F1, alias-adjusted F1, list-item recall; pre- and post-audit scores.
+- Waiting on user: team confirms rules, fills blind sheet, creates Supabase project (`SUPABASE_DB_URL` in `.env`).
+- Nightly pipeline idea (extract → ESCO/O*NET linking → Supabase) agreed in principle; no Google search
+  (cost, ToS, not reproducible).
+
+### Update 2026-10-20 (later) — model comparison, extractor chosen
+- Papers in `data/gold/reference/` read (SkillSpan, Rethinking SE, SKORE, GoLLIE). Prompt v4 (rules A–D +
+  paper ideas) = no gain (dev strict .63 / lenient .73) → **v3 stays frozen**.
+- Dev, prompt v3 (strict F1 / lenient F1 / list recall): Qwen 27B (Groq) .65/.74/.83 · gpt-oss-120b .59/.71/.84 ·
+  Nemotron 3 Ultra 550B (OpenRouter free) .51/.60 · **Claude Haiku 5.5 .65/.75/.86**. Gemini 3.8 Flash free tier
+  stopped at 20/50 (daily cap). Gemma 4 31B free: upstream 429s.
+- Bias check (`src/bias_check.py`): dev gold = 55% kept from the Claude draft, 45% human-added. Haiku recall
+  kept .83 vs Qwen .73, human-added .79 vs .78 → Haiku's gain is drafter bias. Report human-added recall as the fair number.
+- **Chosen for the 2,000 run: Claude Haiku 5.5 + v3** (class Anthropic key, ~$2; no rate limits).
+  Output `statements_claude-haiku-5-5_sample2000.csv`, log `reports/extract_sample2000_haiku.log`.
+  **Done 2026-10-20:** 2,000/2,000 postings, 0 failures, 28,834 statements, 11,410 unique skills (lowercase),
+  71 postings with zero skills, evidence verbatim 99.2%, tokens 4.74M in / 2.53M out (≈ $1.74).
+  **Test (gold v1, scored once):** Haiku strict .66 / lenient .75 (P .72 R .78); Qwen strict .66 / lenient .75.
+  Test bias check: recall kept/human-added — Haiku .79/.80, Qwen .77/.75 (no drafter bias visible on test).
+- **Rule E (LABELING_RULES.md): ESCO + O\*NET are the rule book** for skill vs trait. Traits = O\*NET Work
+  Styles + ESCO's 18 transversal attitudes (incl. attention to detail). Reference data: `src/download_reference.py`
+  → `data/reference/` (ESCO 13,479 skills, 443 attitude-group items, 6 O\*NET 31.0 files).
+- New providers in `extract_skills.py`: `openrouter`, `anthropic`. `py` currently lacks pandas → use
+  `C:\Users\dhanu\AppData\Local\Programs\Python\Python311\python.exe`.
+
+- **Reference linking built (`src/link_reference.py`)** → `data/processed/skill_links.csv` (12,875 unique skills).
+  Exact match, then bge-small cosine ≥ 0.85 (skills) / ≥ 0.88 (traits; lower gave wrong traits such as
+  "change control" → "adapt to change"). Sample2000: known_skill 69% · trait 2% · new_candidate 29%.
+  New candidates are often real US skills missing from both libraries (month-end close, journal entries, GAAP,
+  CI/CD, OSHA, KPIs) → keep them, human review. `--write-gold-v2` → `data/gold/gold_labels_v2.csv`
+  (20 trait items removed, column `removed_traits`). `evaluate.py --gold … --links …` scores on v2 with
+  predicted traits dropped: F1 unchanged (Haiku dev .65/.75, test .66/.75), since traits are only ~2%.
+
+### ROADMAP (keep this current; the user relies on it)
+Target pipeline: postings (Kaggle static + Greenhouse live API) → clean/dedupe → LLM extractor →
+ESCO/O\*NET check → unknown skills to human review → processing → Supabase.
+**Rule (2026-10-20): the professor's Anthropic key is NOT used in the pipeline** (research / Claude Code only).
+Pipeline extractor = free provider; Groq Qwen 27B + v3 matches Haiku on test (.66 / .75).
+**Demo: Friday 2026-10-23, 3 pm** (prototype showcase). Target ≥ 1,000 Kaggle postings extracted by then.
+1. ✅ Haiku sample2000 = research data only (CSV, not in Supabase). Qwen batch re-run started 2026-10-20 ~22:30
+   on the free Groq tier (`reports/extract_sample2000_qwen.log`, ~30 postings/h; laptop stays on overnight).
+2. 🟡 Supabase: code ready — `sql/supabase_schema.sql`, `src/db.py --init/--check`, `src/load_supabase.py`
+   (loads postings + skills straight from the Groq cache, so it can run any time). Needs `SUPABASE_DB_URL` in `.env`.
+3. ✅ Greenhouse: `src/pipeline.py` (boards from `config/boards.yaml`, copied from Lochan's repo) — fetch → clean →
+   dedupe (text_hash, any source) → extract → load → link; every stage writes `pipeline_events`.
+4. ✅ `src/llm_router.py`: LiteLLM Router, Groq Qwen → Gemini Flash fallback (tested: fallback worked while Groq
+   was rate-limited), Langfuse via `langfuse_otel` when `LANGFUSE_PUBLIC_KEY/SECRET_KEY/HOST` are set.
+   UI: `app/server.py` (stdlib WSGI, http://127.0.0.1:8765) + `app/static/` (Lochan's CSS) — tabs Pipeline status
+   (stage flow, active model, fallbacks, verdict bar, Kaggle batch progress, events), Review queue (unknown skills,
+   evidence highlighted, decisions → `review_decisions` + `skill_links.review_status = reviewed`), Skills; Langfuse button.
+   **2026-10-21:** Supabase loaded (2,453 postings; 29k statements incl. the Haiku 2,000 *research benchmark*,
+   statement_id `<posting>:claude-haiku-5-5:skill:<i>`, loaded with `load_supabase.py --benchmark`).
+   View **`current_statements`** = one model per posting (Qwen where done, else Haiku; Greenhouse all) —
+   embeddings / RAG read ONLY this view; vectors keep the model name so Haiku can be filtered out.
+   Windows tasks: `SkillPipeline\LoadQwen` hourly (`scripts/load_qwen.cmd`, `--if-new`, log
+   `reports/task_load_qwen.log`), `SkillPipeline\NightlyGreenhouse` 02:00 (`scripts/nightly_greenhouse.cmd`,
+   `--max-new 30`, log `reports/task_greenhouse.log`), `SkillPipeline\QwenBatch` daily 02:20 + started
+   2026-10-21 02:16 (`scripts/qwen_batch.cmd`, the 2,000 Kaggle batch, resumable, log
+   `reports/extract_sample2000_qwen.log`). Remove with `schtasks /delete /tn "SkillPipeline\<name>"`.
+   UI is not a task: start it with `python app/server.py` (Python 3.11 path) → http://127.0.0.1:8765.
+   Paused 2026-10-21 02:20. **Next: Sprint 3** (embed `current_statements` → 2 clustering methods → sweep →
+   stability → topic tables); Langfuse keys still missing; demo rehearsal Thursday evening; demo Fri 3 pm.
+   Project end goal (brief): initiative → tasks → skills with supporting postings (not an ATS matcher).
+   Explainer: `learn/taxonomy-of-work-project.html`.
+5. ⬜ Sprint 3: embed `current_statements` skills (bge-small) → cluster (≥ 2 methods, sweep, stability) → topics tables.
+6. ⬜ Report: test scores, bias check, rule E, model comparison, ceiling (human agreement on more postings).
+
+### Plan — reference linking (skill vs trait verdict), Sprint 3
+Problem: the LLM decides "skill or trait?" from its own judgement; no shared rule to land on.
+1. Download ESCO v1.2 CSV (skills + "attitudes and values") and O\*NET database text files (Skills, Knowledge,
+   Technology Skills, Tools Used, **Work Styles** = traits). Store in `data/reference/` (not edited).
+2. `src/link_reference.py`: match every extracted skill to these lists — exact/alias first, then embedding
+   similarity with `BAAI/bge-small-en-v1.5` (installed).
+3. Verdict per skill: `known_skill` (ESCO/O\*NET skill/knowledge/tool, keep ID) · `trait` (O\*NET Work Style /
+   ESCO attitude → excluded) · `new_candidate` (no match → **kept**, flagged; humans review frequent ones).
+   Never delete unmatched items: ESCO missed ~half of US legal terms, and new skills are what the taxonomy must find.
+4. Tune the similarity threshold on dev gold only; freeze; then report bucket shares + precision per bucket on test.
+5. The evidence check (skill phrase quoted from the posting, 99% verbatim) stays as the anti-hallucination guard.
+
 Last updated: 2026-10-06 (end of a ~3-day Claude Code session, 2026-10-05 → 2026-10-06).
 Summary/conventions: [../CLAUDE.md](../CLAUDE.md). Secrets: only variable names are mentioned here.
 

@@ -1,0 +1,111 @@
+error,n,skill
+missed,2,sales plans
+missed,2,sales strategies
+missed,2,market dynamics
+missed,2,brand localization
+missed,2,client relationships
+missed,3,Diesel mechanics
+missed,3,safety regulations
+missed,3,CNG vehicle maintenance
+missed,3,electric vehicle maintenance
+missed,3,heavy-duty truck repair
+missed,3,maintenance scheduling
+missed,5,prospecting
+missed,6,construction plans and specifications
+missed,6,construction documents
+missed,8,organizational
+missed,10,embedded Electronic Control Unit
+missed,10,verification and validation
+missed,11,equipment maintenance
+missed,11,microscopic preparation
+missed,11,triaging patients
+missed,11,obtaining vitals
+missed,11,computer software
+missed,11,database skills
+missed,11,Urology
+missed,13,distribution
+missed,13,warehousing
+missed,13,physical inventories
+missed,13,stock rotation
+missed,13,reading
+missed,13,counting
+missed,13,legible writing
+missed,14,RF boards
+missed,19,data warehouse
+missed,19,data models
+missed,19,testing
+missed,19,ETL
+missed,19,ELT
+missed,21,Risk-Based Audit Planning
+missed,21,IT Governance and Controls
+missed,21,Audit Testing & Scope Development
+missed,21,Data Flow Analysis
+missed,21,Third-Party IT Risk Assessment
+missed,21,Evidence Analysis & Documentation
+missed,21,Audit Reporting
+missed,21,Stakeholder Presentation
+missed,24,multiple selling
+missed,24,closing
+missed,24,proper lifting procedures
+missed,24,safety regulations
+missed,26,skin care
+missed,29,statistical models
+missed,29,statistical software
+missed,29,legislative frameworks
+missed,30,palletizing
+missed,31,test automation frameworks
+missed,31,test plans
+missed,31,test cases
+missed,33,administrative support
+missed,34,patient rights
+extra,2,sales planning
+extra,2,teamwork
+extra,6,procurement
+extra,6,coaching
+extra,6,continuous improvement
+extra,6,performance reviews
+extra,8,post-grant
+extra,8,organization
+extra,8,client service
+extra,10,Virtual Electronic Control Units
+extra,10,Software Defined Vehicle
+extra,10,simulation
+extra,10,Vehicle Intelligent Platform
+extra,10,Adaptive AUTOSAR
+extra,11,patient care
+extra,11,taking vital signs
+extra,11,triage
+extra,11,OSHA
+extra,11,MOSHA
+extra,11,verbal communication
+extra,13,teamwork
+extra,14,X-Band
+extra,19,data warehousing
+extra,19,slowly changing dimensions
+extra,19,data modeling
+extra,19,cloud ETL/ELT tools
+extra,19,code reviews
+extra,19,data lineage
+extra,21,IT consulting
+extra,21,internal audit
+extra,21,audit reports
+extra,21,oral presentations
+extra,21,IT general controls
+extra,24,product knowledge
+extra,24,teamwork
+extra,29,Administrative Procedure Act
+extra,29,Regulatory Flexibility Act
+extra,29,Paperwork Reduction Act
+extra,29,Unfunded Mandates Reform Act
+extra,29,Executive Order 12866
+extra,29,OMB Circular A-4
+extra,29,statistical modeling
+extra,31,automated test frameworks
+extra,31,testing of web and mobile applications
+extra,31,mentoring
+extra,31,code reviews
+extra,31,collaboration
+extra,33,analytical skills
+extra,33,attention to detail
+extra,34,patient care
+extra,34,collaboration
