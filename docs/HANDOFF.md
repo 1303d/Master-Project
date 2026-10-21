@@ -76,6 +76,16 @@ Pipeline extractor = free provider; Groq Qwen 27B + v3 matches Haiku on test (.6
    2026-10-21 02:16 (`scripts/qwen_batch.cmd`, the 2,000 Kaggle batch, resumable, log
    `reports/extract_sample2000_qwen.log`). Remove with `schtasks /delete /tn "SkillPipeline\<name>"`.
    UI is not a task: start it with `python app/server.py` (Python 3.11 path) → http://127.0.0.1:8765.
+   **2026-10-21 Sprint 2 gap fixes** (roommate's review list): extractor validates answers before caching +
+   per-call token log `reports/token_calls.csv` + summary written on stop; evaluate.py uses maximum matching
+   (order-independent; no reported number changed) + coverage line; `tests/test_core.py` (16 pass);
+   `src/verify_db.py` (10 PASS); contract view `statements` (kind = skill); `src/make_gold_postings.py`
+   (reproduces gold_postings.csv exactly with the original US-phone masker); final report
+   `reports/sprint2_final_report.md` (honest test-set wording §4). **Gold review 2026-10-21:** postings 37, 76, 80, 84, 96
+   (labeller was unrecorded) re-reviewed by Dhanush vs ESCO/O*NET (+ Lightcast web for 96) → gold 1,317 → 1,333 skills;
+   posting 11 sector_fixed = Health Care. New official numbers: Qwen test strict .66 / lenient **.74** (was .75),
+   Haiku test .66 / .75; gold v2 removes 19 traits. `data/gold/gold_labels_review.xlsx` = CSV export, reviewed rows green.
+   Team still owes: rules A–E, official gold version, disagreements, data contract, Drive link.
    Paused 2026-10-21 02:20. **Next: Sprint 3** (embed `current_statements` → 2 clustering methods → sweep →
    stability → topic tables); Langfuse keys still missing; demo rehearsal Thursday evening; demo Fri 3 pm.
    Project end goal (brief): initiative → tasks → skills with supporting postings (not an ATS matcher).

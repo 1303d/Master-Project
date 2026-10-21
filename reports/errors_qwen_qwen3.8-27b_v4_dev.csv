@@ -24,7 +24,7 @@ missed,11,equipment maintenance
 missed,11,disinfection
 missed,11,triaging patients
 missed,11,Urology
-missed,12,AWS
+missed,12,AWS IAM
 missed,12,API testing
 missed,13,distribution
 missed,13,warehousing
@@ -91,7 +91,7 @@ missed,55,systems administration
 missed,55,troubleshooting
 missed,55,virtualization technologies
 missed,55,network infrastructure
-missed,62,DW
+missed,62,DW modeling
 missed,62,ETL design
 missed,62,ELT design
 missed,62,ingestion patterns
@@ -127,19 +127,24 @@ missed,74,Korean
 missed,74,English
 missed,75,competitive bids
 missed,75,plan reading
-missed,76,Sales Experience
-missed,76,Customer Problem Resolution
+missed,76,retail sales
+missed,76,financial sales
+missed,76,problem resolution
+missed,76,complaint resolution
+missed,76,personal computer
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,accounting
+missed,80,financial management
+missed,80,cost accounting
 missed,80,process optimization
 missed,80,continuous improvement
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,collaboration
+missed,80,meet deadlines
 missed,82,Human Resource management
 missed,83,installation
 missed,83,configuration
@@ -161,7 +166,6 @@ missed,95,program oversight
 missed,95,departmental operations assistance
 missed,95,leadership
 missed,95,supervision
-missed,96,data readiness
 missed,96,business practices
 missed,97,upselling
 missed,97,computerized ordering system
@@ -272,8 +276,8 @@ extra,44,commercial environments
 extra,44,pharmaceuticals
 extra,44,healthcare
 extra,44,project planning
-extra,44,agile frameworks
 extra,44,agile practices
+extra,44,Agile
 extra,44,Traditional project approaches
 extra,44,collaboration
 extra,44,teamwork
@@ -311,13 +315,13 @@ extra,64,strategic leadership
 extra,64,team management
 extra,65,sales
 extra,65,prioritizing
-extra,69,billing
 extra,69,organization
-extra,69,communication
 extra,69,financial transactions
 extra,69,project financial reviews
 extra,69,invoicing
 extra,69,work-in-progress (WIP) reports
+extra,69,retention billing
+extra,69,verbal communication
 extra,71,health care
 extra,72,requirements gathering
 extra,72,architectural design
@@ -327,8 +331,6 @@ extra,74,report preparation
 extra,74,teamwork
 extra,75,bidding
 extra,75,budgeting
-extra,76,internet search
-extra,76,computer system navigation
 extra,79,21CFR Part 820
 extra,79,ISO 11135
 extra,79,testing
@@ -336,10 +338,6 @@ extra,79,documentation
 extra,79,regulatory affairs
 extra,79,technical writing
 extra,79,teamwork
-extra,80,Excel analysis
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,82,Mac applications
 extra,82,PC applications
 extra,82,HR Systems
@@ -362,6 +360,7 @@ extra,94,post-judgment motion drafting
 extra,95,governmental regulations
 extra,95,nursing practices
 extra,95,training
+extra,96,attention to detail
 extra,100,continuous improvement
 extra,100,financial planning
 extra,100,personnel management

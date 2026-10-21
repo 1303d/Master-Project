@@ -1,15 +1,16 @@
 # Sprint 2 — Extraction quality report (Section B, skills)
 
 - **Extractor:** `nvidia/nemotron-3-ultra-550b-a55b:free` via openrouter, prompt `skill_extraction_v3`
-- **Gold set:** 49 postings, 663 gold skills (`data/gold/gold_labels.csv`).
-  Labels are LLM-suggested and human-corrected (Claude/ChatGPT suggestions; Gemini was not used), so the extractor is independent of the label suggestions.
+- **Gold set:** 49 postings, 672 gold skills (`data\gold\gold_labels.csv`).
+  Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. The extractor is not one of the suggesting models.
+- **Coverage:** 49 of 50 gold postings scored; NOT scored (failed or not run): li_3902780709.
 - **Evidence check:** 97% of predicted evidence phrases occur verbatim in the posting.
 
 ## Overall (micro-averaged)
 
 | Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient |
 |---|---|---|---|---|---|---|---|---|---|
-| **All** | 49 | 663 | 1169 | 0.40 | 0.70 | 0.51 | 0.47 | 0.84 | 0.60 |
+| **All** | 49 | 672 | 1169 | 0.41 | 0.71 | 0.52 | 0.48 | 0.83 | 0.61 |
 
 ## By sector
 
@@ -17,7 +18,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | Admin / HR / Customer Service | 4 | 43 | 92 | 0.39 | 0.84 | 0.53 | 0.42 | 0.91 | 0.58 |
 | Engineering | 3 | 38 | 98 | 0.28 | 0.71 | 0.40 | 0.38 | 0.97 | 0.54 |
-| Finance + Accounting | 6 | 97 | 192 | 0.29 | 0.57 | 0.38 | 0.40 | 0.79 | 0.53 |
+| Finance + Accounting | 6 | 106 | 192 | 0.33 | 0.60 | 0.43 | 0.44 | 0.79 | 0.56 |
 | Health Care | 8 | 72 | 126 | 0.36 | 0.62 | 0.45 | 0.42 | 0.74 | 0.54 |
 | IT | 9 | 203 | 277 | 0.59 | 0.81 | 0.68 | 0.66 | 0.90 | 0.76 |
 | Legal | 4 | 41 | 43 | 0.56 | 0.59 | 0.57 | 0.70 | 0.73 | 0.71 |
@@ -31,7 +32,8 @@
 
 ## Matching rules
 
-(one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"

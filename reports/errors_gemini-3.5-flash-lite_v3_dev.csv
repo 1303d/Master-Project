@@ -35,7 +35,7 @@ missed,11,disinfection
 missed,11,triaging patients
 missed,11,typing
 missed,11,Urology
-missed,12,AWS
+missed,12,AWS IAM
 missed,12,API testing
 missed,13,distribution
 missed,13,warehousing
@@ -125,12 +125,12 @@ missed,47,litigation
 missed,47,legal drafting
 missed,47,pleading drafting
 missed,47,legal memorandum drafting
-missed,47,legal writing
 missed,47,case evaluation
 missed,47,legal analysis
 missed,47,negotiation
 missed,47,client counseling
 missed,47,client communication
+missed,47,writing
 missed,47,organizational
 missed,47,state rules of civil procedure
 missed,49,accounting
@@ -195,29 +195,35 @@ missed,75,estimating
 missed,75,pre-construction
 missed,75,competitive bids
 missed,75,subcontractor relations
-missed,76,Sales Experience
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
 missed,76,transaction reconciliation
-missed,76,Data Protection & Confidentiality
-missed,76,Basic Computer Proficiency & Data Entry
+missed,76,confidentiality
+missed,76,personal computer
+missed,76,computer systems
 missed,76,compliance standards
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,Ethylene oxide
 missed,79,data analysis
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,accounting
+missed,80,financial management
 missed,80,financial statement analysis
 missed,80,financial reporting
+missed,80,cost accounting
 missed,80,process optimization
 missed,80,continuous improvement
 missed,80,internal controls
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
-missed,80,Excel Modeling & Analysis
-missed,80,PowerPoint presentation skills
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,collaboration
+missed,80,meet deadlines
+missed,80,Excel
+missed,80,Excel modeling
+missed,80,PowerPoint
 missed,82,Human Resource management
 missed,82,employee benefits
 missed,82,succession planning
@@ -246,8 +252,7 @@ missed,95,policy application
 missed,95,delegation of authority
 missed,95,leadership
 missed,95,supervision
-missed,96,SOX process walkthroughs
-missed,96,data readiness
+missed,96,SOX
 missed,96,business practices
 missed,97,upselling
 missed,97,computerized ordering system
@@ -312,28 +317,23 @@ extra,64,process improvement
 extra,64,compliance processes
 extra,65,prioritizing
 extra,69,organization
-extra,69,communication skills
+extra,69,verbal communication
 extra,72,architectural design
 extra,74,inventory management
 extra,74,teamwork
 extra,76,customer engagement
-extra,76,systems data entry
-extra,76,internet search
 extra,79,ISO 11135
 extra,79,testing
 extra,79,technical writing
 extra,79,teamwork
 extra,80,financial modeling
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,82,investigations
 extra,82,Performance Review
 extra,82,Mac
 extra,82,PC applications
 extra,82,G Guite
 extra,82,HR Systems
-extra,83,.NET
+extra,83,.NET Framework
 extra,89,Home Health regulations
 extra,89,Reimbursement
 extra,94,briefing
@@ -342,4 +342,5 @@ extra,95,problem solving
 extra,96,accounting
 extra,96,finance
 extra,96,internal audit
+extra,96,attention to detail
 extra,100,OSHA safety regulations

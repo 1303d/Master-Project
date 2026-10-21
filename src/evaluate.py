@@ -6,7 +6,8 @@ Input:  data/gold/gold_labels.csv (gold_skills, ";"-separated),
         data/processed/statements_<model>.csv, data/processed/extraction_postings_<model>.csv
 Output: reports/sprint2_extraction_quality_<model>.md
 
-Matching (one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+Matching (one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"
@@ -43,22 +44,32 @@ def norm(name):
     return tuple(w for w in words if w not in FILLER) or tuple(words)
 
 
+def pairs_ok(a, b, lenient):
+    if a == b or "".join(a) == "".join(b):  # "multi tasking" == "multitasking"
+        return True
+    return lenient and (set(a) <= set(b) or set(b) <= set(a))
+
+
 def match(gold, pred, lenient):
-    """Greedy one-to-one matching. Exact pairs first, then (lenient) word-subset pairs."""
+    """One-to-one matching with the most possible pairs (maximum bipartite matching, augmenting paths).
+    Unlike a greedy pass, the number of matches does not depend on the order of the lists."""
     g, p = [norm(x) for x in gold], [norm(x) for x in pred]
-    used_g, used_p = set(), set()
-    tests = [lambda a, b: a == b or "".join(a) == "".join(b)]  # "multi tasking" == "multitasking"
-    if lenient:
-        tests.append(lambda a, b: set(a) <= set(b) or set(b) <= set(a))
-    for test in tests:
-        for i, a in enumerate(g):
-            if i in used_g:
-                continue
-            for j, b in enumerate(p):
-                if j not in used_p and test(a, b):
-                    used_g.add(i), used_p.add(j)
-                    break
-    return len(used_g), [gold[i] for i in range(len(g)) if i not in used_g], [pred[j] for j in range(len(p)) if j not in used_p]
+    edges = [[j for j, b in enumerate(p) if pairs_ok(a, b, lenient)] for a in g]
+    owner = {}  # predicted index -> gold index
+
+    def augment(i, seen):
+        for j in edges[i]:
+            if j not in seen:
+                seen.add(j)
+                if j not in owner or augment(owner[j], seen):
+                    owner[j] = i
+                    return True
+        return False
+
+    for i in range(len(g)):
+        augment(i, set())
+    used_g, used_p = set(owner.values()), set(owner)
+    return len(owner), [gold[i] for i in range(len(g)) if i not in used_g], [pred[j] for j in range(len(p)) if j not in used_p]
 
 
 def prf(tp, n_pred, n_gold):
@@ -96,7 +107,14 @@ def main():
         pred = pred[~pred.skill.str.strip().str.lower().isin(traits)]
     by_post = pred.groupby("posting_id").skill.apply(list).to_dict()
     done = pd.read_csv(DONE)
+    if "status" in done:  # newer runs also list failed postings
+        done = done[done.status == "done"]
+    n_gold = len(gold)
+    missing = sorted(set(gold.posting_id) - set(done.posting_id))
     gold = gold[gold.posting_id.isin(done.posting_id)]  # only postings the extractor ran on
+    coverage = f"{len(gold)} of {n_gold} gold postings scored" + (
+        f"; NOT scored (failed or not run): {', '.join(missing)}" if missing else "")
+    print(coverage)
 
     rows, misses, extras = [], [], []
     for r in gold.itertuples():
@@ -130,6 +148,7 @@ def main():
            + (" **The extractor is a Claude model, so it is not independent of the suggestions** "
               "(see `src/bias_check.py`)." if "claude" in model.lower() else
               " The extractor is not one of the suggesting models."),
+           f"- **Coverage:** {coverage}.",
            f"- **Evidence check:** {ev:.0%} of predicted evidence phrases occur verbatim in the posting.",
            "", "## Overall (micro-averaged)", "", head, line(df, "**All**"), "",
            "## By sector", "", head] + [line(d, s) for s, d in df.groupby("sector")] + [

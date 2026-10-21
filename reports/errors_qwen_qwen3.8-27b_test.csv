@@ -27,7 +27,6 @@ missed,18,fax filing
 missed,18,Microsoft Outlook
 missed,18,working relationships
 missed,18,keyboard
-missed,18,multitasking
 missed,18,adaptability
 missed,18,workflow adaptation
 missed,18,best practices implementation
@@ -45,7 +44,6 @@ missed,28,manufacturing maintenance
 missed,28,CNC programming
 missed,28,Fanuc Controls
 missed,32,business relationships
-missed,32,supply chain strategies
 missed,32,sourcing
 missed,32,analytical
 missed,32,computer skills
@@ -53,6 +51,8 @@ missed,32,organization
 missed,32,multitasking
 missed,36,patch management
 missed,37,communication
+missed,37,customer service
+missed,37,follow directions
 missed,38,cash applications
 missed,38,Mathematical Calculation
 missed,38,enterprise resource planning (ERP)
@@ -81,22 +81,22 @@ missed,56,immigration strategy
 missed,56,legal drafting
 missed,56,supervision
 missed,56,delegation
-missed,56,case management
 missed,56,legal team communication
 missed,56,customer service
 missed,56,continuous improvement
 missed,56,prioritization
-missed,56,communication
 missed,56,adaptability
 missed,56,self-organization
 missed,56,independent work
 missed,56,IT
 missed,56,Monday.com
+missed,56,immigration case management systems
 missed,56,responsiveness
 missed,56,attention to detail
 missed,56,legal writing
 missed,56,client communication
-missed,57,Informatica MDM
+missed,56,written communication
+missed,57,Informatica DVO
 missed,57,project planning
 missed,58,nvestment banking
 missed,58,healthcare transactions
@@ -134,7 +134,11 @@ missed,78,communication
 missed,81,industrial pull/push carts
 missed,81,teamwork
 missed,81,Data File Management / Extraction
+missed,84,care planning
+missed,84,medications
+missed,84,medication administration
 missed,84,collaboration
+missed,84,driving
 missed,85,performance monitoring
 missed,85,multitasking
 missed,86,property showings
@@ -196,7 +200,6 @@ extra,17,Outlook
 extra,17,Teams
 extra,17,insurance industry knowledge
 extra,18,MS Outlook
-extra,18,multi tasking
 extra,20,governance policies
 extra,20,security settings
 extra,20,workflow design
@@ -209,8 +212,8 @@ extra,20,security best practices
 extra,20,compliance standards
 extra,22,phone communication
 extra,22,email communication
-extra,22,customer support platforms
 extra,22,video calls
+extra,22,customer experience
 extra,22,operational processes
 extra,23,patient documentation
 extra,23,treatment planning
@@ -226,7 +229,6 @@ extra,32,report building
 extra,32,organizational skills
 extra,32,tire industry knowledge
 extra,32,automotive parts knowledge
-extra,32,supply chain strategy
 extra,36,information security risk management
 extra,36,regulatory and compliance issues
 extra,37,hand tools
@@ -324,10 +326,10 @@ extra,66,damage control checks
 extra,66,scanning
 extra,66,cash collection
 extra,66,housekeeping
-extra,67,sales
 extra,67,direct sales
 extra,67,persuasion
 extra,67,door knocking
+extra,67,sales closing
 extra,67,record keeping
 extra,67,product knowledge
 extra,67,compliance
@@ -338,11 +340,10 @@ extra,73,L1s
 extra,73,L2s
 extra,77,warehouse
 extra,77,equipment
-extra,78,architecture
 extra,78,coding
 extra,78,hiring
+extra,78,Micro Frontend Architecture
 extra,84,teamwork
-extra,84,Microsoft Office
 extra,85,NOC experience
 extra,85,managing multiple tasks
 extra,86,sales

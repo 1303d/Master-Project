@@ -26,7 +26,7 @@ missed,18,correspondence preparation
 missed,18,legal document preparation
 missed,18,scheduling
 missed,18,written communication
-missed,18,filing
+missed,18,fax filing
 missed,18,Microsoft Outlook
 missed,18,working relationships
 missed,18,keyboard
@@ -42,12 +42,12 @@ missed,25,dining service
 missed,25,serving
 missed,25,buffet setting
 missed,28,manufacturing maintenance
-missed,28,electrical systems
 missed,32,large account selling
 missed,32,business relationships
 missed,32,sourcing
 missed,32,computer skills
 missed,37,reading
+missed,37,follow directions
 missed,38,cash applications
 missed,38,Mathematical Calculation
 missed,38,Organizational Skills
@@ -73,17 +73,17 @@ missed,56,reviewing application packets
 missed,56,legal drafting
 missed,56,supervision
 missed,56,delegation
-missed,56,case management
 missed,56,immigration court hearings
 missed,56,legal team communication
 missed,56,customer service
 missed,56,independent work
 missed,56,IT
 missed,56,Monday.com
+missed,56,immigration case management systems
 missed,56,responsiveness
 missed,56,client communication
 missed,56,written communication
-missed,57,Informatica
+missed,57,Informatica DVO
 missed,57,project planning
 missed,57,test plan
 missed,57,test case
@@ -125,7 +125,10 @@ missed,81,quality validation
 missed,81,industrial pull/push carts
 missed,81,Manual Document Insertion
 missed,81,Data File Management / Extraction
+missed,84,care planning
+missed,84,medication administration
 missed,84,collaboration
+missed,84,driving
 missed,86,real estate leasing
 missed,86,property showings
 missed,87,patient rehabilitation participation
@@ -179,10 +182,10 @@ extra,20,workflow design
 extra,20,APIs
 extra,20,databases
 extra,20,cloud services
-extra,20,connectors
 extra,20,design patterns
 extra,20,best practices
 extra,20,process optimization
+extra,20,custom connectors
 extra,20,expressions
 extra,20,functions
 extra,20,custom code
@@ -209,7 +212,6 @@ extra,25,professionalism
 extra,25,punctuality
 extra,27,team management
 extra,27,training delivery
-extra,28,electronic test equipment
 extra,28,continuous improvement
 extra,28,coworker training
 extra,32,relationship building
@@ -231,7 +233,6 @@ extra,36,consulting
 extra,36,relationship management
 extra,37,hand tools
 extra,37,report evaluation
-extra,37,customer service
 extra,37,attention to detail
 extra,37,react under pressure
 extra,38,computational skills
@@ -271,11 +272,11 @@ extra,56,T-visa
 extra,56,waiver petitions
 extra,56,supervising
 extra,56,delegating
-extra,56,creative problem solving
 extra,56,flexibility
 extra,56,customer focus
 extra,56,empathy
 extra,56,clarity
+extra,56,problem solving
 extra,57,automation tools
 extra,57,requirements gathering
 extra,57,effort estimation
@@ -320,9 +321,7 @@ extra,78,talent development
 extra,78,solution architecture
 extra,78,software testing
 extra,81,adaptability
-extra,84,Microsoft Office
 extra,84,teamwork
-extra,84,medications
 extra,84,policies and procedures
 extra,84,plan of care development
 extra,85,NOC experience

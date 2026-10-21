@@ -71,7 +71,7 @@ missed,49,Expense Reimbursement Management
 missed,55,systems administration
 missed,55,troubleshooting
 missed,55,network infrastructure
-missed,62,DW
+missed,62,DW modeling
 missed,62,ingestion patterns
 missed,62,cloud technologies
 missed,64,operational leadership
@@ -96,17 +96,20 @@ missed,74,Korean
 missed,74,English
 missed,75,competitive bids
 missed,75,plan reading
-missed,76,Sales Experience
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
 missed,76,transaction reconciliation
 missed,76,compliance standards
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,collaboration
+missed,80,meet deadlines
+missed,80,Excel modeling
 missed,82,Human Resource management
 missed,83,installation
 missed,83,business processes
@@ -127,7 +130,6 @@ missed,95,program oversight
 missed,95,departmental operations assistance
 missed,95,leadership
 missed,95,supervision
-missed,96,data readiness
 missed,97,computerized ordering system
 extra,2,logical thinking
 extra,2,teamwork
@@ -244,11 +246,11 @@ extra,44,creative briefs
 extra,44,KPIs
 extra,44,regulatory requirements
 extra,44,conflict resolution
-extra,44,team management
 extra,44,issue resolution
 extra,44,project interdependency management
 extra,44,project planning
 extra,44,PowerPoint
+extra,44,Teams
 extra,44,product launch management
 extra,44,agile frameworks
 extra,44,multitasking
@@ -299,14 +301,11 @@ extra,74,supply chain
 extra,74,relationship building
 extra,74,data analysis
 extra,74,teamwork
-extra,75,cost estimating
+extra,75,estimating
 extra,75,bidding
 extra,75,budgeting
 extra,75,negotiation
 extra,75,communication
-extra,76,personal computer
-extra,76,internet search
-extra,76,computer systems
 extra,76,regulatory compliance
 extra,76,risk assessment
 extra,79,21CFR Part 820
@@ -315,13 +314,8 @@ extra,79,regulatory liaison
 extra,79,regulatory writing
 extra,79,technical writing
 extra,79,teamwork
-extra,80,financial management
 extra,80,presentation skills
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,80,financial compliance
-extra,80,change management
 extra,82,"federal, state, and local employment laws"
 extra,82,investigations
 extra,82,policy administration
@@ -333,7 +327,7 @@ extra,82,"diversity, equity and inclusion"
 extra,82,Mac applications
 extra,82,PC applications
 extra,82,succession planning
-extra,83,architecture
+extra,83,.NET Framework
 extra,83,design
 extra,83,business process alignment
 extra,83,project lifecycle management
@@ -350,6 +344,7 @@ extra,95,training
 extra,96,SEC rules
 extra,96,analysis
 extra,96,professionalism
+extra,96,attention to detail
 extra,97,customer focus
 extra,97,adaptability
 extra,100,financial planning

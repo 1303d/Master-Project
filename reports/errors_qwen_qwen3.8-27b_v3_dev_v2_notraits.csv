@@ -21,7 +21,7 @@ missed,11,equipment maintenance
 missed,11,disinfection
 missed,11,triaging patients
 missed,11,Urology
-missed,12,AWS
+missed,12,AWS IAM
 missed,12,API testing
 missed,13,distribution
 missed,13,warehousing
@@ -121,20 +121,26 @@ missed,74,Korean
 missed,74,English
 missed,75,competitive bids
 missed,75,plan reading
-missed,76,Sales Experience
-missed,76,Customer Problem Resolution
+missed,76,retail sales
+missed,76,financial sales
+missed,76,problem resolution
+missed,76,complaint resolution
+missed,76,personal computer
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,accounting
+missed,80,financial management
 missed,80,financial reporting
+missed,80,cost accounting
 missed,80,process optimization
 missed,80,continuous improvement
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,collaboration
+missed,80,meet deadlines
+missed,80,Excel modeling
 missed,82,Human Resource management
 missed,82,supervisory skills
 missed,83,installation
@@ -158,7 +164,6 @@ missed,95,program oversight
 missed,95,departmental operations assistance
 missed,95,policy application
 missed,95,leadership
-missed,96,data readiness
 missed,96,business practices
 missed,97,upselling
 missed,97,computerized ordering system
@@ -290,12 +295,12 @@ extra,64,team management
 extra,65,sales
 extra,65,sales reporting
 extra,65,prioritizing
-extra,69,communication skills
 extra,69,financial transactions
 extra,69,project financial reviews
-extra,69,billing
 extra,69,WIP reports
 extra,69,accounting system
+extra,69,retention billing
+extra,69,verbal communication
 extra,71,health care
 extra,72,requirements gathering
 extra,72,architectural design
@@ -315,17 +320,12 @@ extra,74,filing
 extra,75,bidding
 extra,75,budgeting
 extra,75,construction
-extra,76,internet search
-extra,76,computer system navigation
 extra,79,21CFR Part 820
 extra,79,ISO 11135
 extra,79,documentation
 extra,79,regulatory affairs
 extra,79,technical writing
 extra,79,teamwork
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,80,financial compliance
 extra,82,supervision
 extra,82,Mac applications

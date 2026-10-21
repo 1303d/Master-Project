@@ -1,15 +1,16 @@
 # Sprint 2 — Extraction quality report (Section B, skills)
 
 - **Extractor:** `claude-haiku-5-5` via anthropic, prompt `skill_extraction_v3`
-- **Gold set:** 50 postings, 642 gold skills (`data\gold\gold_labels.csv`).
+- **Gold set:** 50 postings, 649 gold skills (`data\gold\gold_labels.csv`).
   Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. **The extractor is a Claude model, so it is not independent of the suggestions** (see `src/bias_check.py`).
+- **Coverage:** 50 of 50 gold postings scored.
 - **Evidence check:** 99% of predicted evidence phrases occur verbatim in the posting.
 
 ## Overall (micro-averaged)
 
 | Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient |
 |---|---|---|---|---|---|---|---|---|---|
-| **All** | 50 | 642 | 702 | 0.63 | 0.69 | 0.66 | 0.72 | 0.78 | 0.75 |
+| **All** | 50 | 649 | 702 | 0.64 | 0.69 | 0.66 | 0.72 | 0.78 | 0.75 |
 
 ## By sector
 
@@ -18,11 +19,11 @@
 | Admin / HR / Customer Service | 5 | 39 | 48 | 0.54 | 0.67 | 0.60 | 0.67 | 0.82 | 0.74 |
 | Engineering | 3 | 74 | 79 | 0.71 | 0.76 | 0.73 | 0.75 | 0.80 | 0.77 |
 | Finance + Accounting | 6 | 96 | 90 | 0.66 | 0.61 | 0.63 | 0.78 | 0.73 | 0.75 |
-| Health Care | 7 | 51 | 68 | 0.51 | 0.69 | 0.59 | 0.62 | 0.82 | 0.71 |
+| Health Care | 7 | 56 | 68 | 0.54 | 0.66 | 0.60 | 0.65 | 0.79 | 0.71 |
 | IT | 9 | 147 | 179 | 0.68 | 0.83 | 0.75 | 0.75 | 0.91 | 0.82 |
 | Legal | 5 | 119 | 114 | 0.54 | 0.52 | 0.53 | 0.65 | 0.62 | 0.64 |
-| Management | 5 | 26 | 31 | 0.52 | 0.62 | 0.56 | 0.58 | 0.69 | 0.63 |
-| Mixed | 5 | 38 | 36 | 0.81 | 0.76 | 0.78 | 0.89 | 0.84 | 0.86 |
+| Management | 5 | 28 | 31 | 0.55 | 0.61 | 0.58 | 0.61 | 0.68 | 0.64 |
+| Mixed | 5 | 38 | 36 | 0.81 | 0.76 | 0.78 | 0.92 | 0.87 | 0.89 |
 | Sales + Marketing | 5 | 52 | 57 | 0.67 | 0.73 | 0.70 | 0.72 | 0.79 | 0.75 |
 
 ## Zero-skill postings
@@ -31,7 +32,8 @@
 
 ## Matching rules
 
-(one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"

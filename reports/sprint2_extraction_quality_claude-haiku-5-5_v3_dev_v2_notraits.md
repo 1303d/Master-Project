@@ -1,15 +1,16 @@
 # Sprint 2 — Extraction quality report (Section B, skills)
 
 - **Extractor:** `claude-haiku-5-5` via anthropic, prompt `skill_extraction_v3`
-- **Gold set:** 50 postings, 665 gold skills (`data\gold\gold_labels_v2.csv`). Predicted skills linked as traits (ESCO/O*NET, rule E) are dropped.
+- **Gold set:** 50 postings, 675 gold skills (`data\gold\gold_labels_v2.csv`). Predicted skills linked as traits (ESCO/O*NET, rule E) are dropped.
   Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. **The extractor is a Claude model, so it is not independent of the suggestions** (see `src/bias_check.py`).
+- **Coverage:** 50 of 50 gold postings scored.
 - **Evidence check:** 99% of predicted evidence phrases occur verbatim in the posting.
 
 ## Overall (micro-averaged)
 
 | Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient |
 |---|---|---|---|---|---|---|---|---|---|
-| **All** | 50 | 665 | 757 | 0.61 | 0.70 | 0.65 | 0.71 | 0.80 | 0.75 |
+| **All** | 50 | 675 | 757 | 0.64 | 0.71 | 0.67 | 0.72 | 0.80 | 0.76 |
 
 ## By sector
 
@@ -17,7 +18,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | Admin / HR / Customer Service | 4 | 42 | 52 | 0.63 | 0.79 | 0.70 | 0.69 | 0.86 | 0.77 |
 | Engineering | 3 | 38 | 53 | 0.49 | 0.68 | 0.57 | 0.57 | 0.79 | 0.66 |
-| Finance + Accounting | 6 | 95 | 105 | 0.52 | 0.58 | 0.55 | 0.71 | 0.79 | 0.75 |
+| Finance + Accounting | 6 | 105 | 105 | 0.69 | 0.69 | 0.69 | 0.79 | 0.79 | 0.79 |
 | Health Care | 8 | 70 | 71 | 0.58 | 0.59 | 0.58 | 0.70 | 0.71 | 0.71 |
 | IT | 9 | 199 | 212 | 0.74 | 0.79 | 0.76 | 0.83 | 0.88 | 0.85 |
 | Legal | 4 | 41 | 41 | 0.51 | 0.51 | 0.51 | 0.68 | 0.68 | 0.68 |
@@ -31,7 +32,8 @@
 
 ## Matching rules
 
-(one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"

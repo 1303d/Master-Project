@@ -105,3 +105,22 @@ where p.source = 'greenhouse'
    or s.model = 'qwen/qwen3.8-27b'
    or not exists (select 1 from skill_statements q
                   where q.posting_id = s.posting_id and q.model = 'qwen/qwen3.8-27b');
+
+-- Shared data contract (taxonomy-skill-project/docs/data_contract.md §3): statements with kind = 'skill'.
+-- Section A adds its own kind = 'task' rows; both are read through the same column names.
+-- statement_id follows the contract: {run_id}:{posting_id}:{kind}:{n}, n 0-based within the posting.
+-- Built on current_statements, so consumers get one model per posting. posting_id keeps our format
+-- (li_<id> / gh_<board>_<id>); the contract's "greenhouse:{board}:{id}" form is still to be agreed (D4).
+create or replace view statements with (security_invoker = true) as
+select coalesce(s.run_id, 'norun') || ':' || s.posting_id || ':skill:' ||
+         (split_part(s.statement_id, ':', -1)::int - 1)                  as statement_id,
+       s.posting_id,
+       null::text                                                         as snapshot_id,
+       'skill'::text                                                      as kind,
+       s.skill                                                            as text,
+       s.evidence                                                         as source_span,
+       null::text                                                         as section,
+       'llm:' || s.model                                                  as extraction_method,
+       s.run_id,
+       s.statement_id                                                     as source_statement_id
+from current_statements s;

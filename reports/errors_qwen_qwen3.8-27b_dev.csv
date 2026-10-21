@@ -3,7 +3,6 @@ missed,2,sales plans
 missed,2,brand localization
 missed,2,client relationships
 missed,3,Diesel mechanics
-missed,3,electric vehicle maintenance
 missed,3,maintenance scheduling
 missed,5,prospecting
 missed,5,organization
@@ -19,7 +18,7 @@ missed,11,triaging patients
 missed,11,obtaining vitals
 missed,11,attention to detail
 missed,11,Urology
-missed,12,AWS
+missed,12,AWS IAM
 missed,12,API testing
 missed,12,attention to detail
 missed,13,distribution
@@ -72,17 +71,17 @@ missed,46,respiratory care equipment
 missed,46,isolation policies
 missed,46,computers
 missed,47,legal memorandum drafting
-missed,47,legal writing
 missed,47,case evaluation
 missed,47,legal analysis
 missed,47,client counseling
 missed,47,client communication
+missed,47,writing
 missed,47,state rules of civil procedure
 missed,49,financial closing
 missed,55,systems administration
 missed,55,virtualization technologies
 missed,55,network infrastructure
-missed,62,DW
+missed,62,DW modeling
 missed,62,ETL design
 missed,62,ELT design
 missed,62,ingestion patterns
@@ -115,19 +114,22 @@ missed,74,Korean
 missed,74,English
 missed,75,competitive bids
 missed,75,plan reading
-missed,76,Sales Experience
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
+missed,76,personal computer
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,accounting
+missed,80,cost accounting
 missed,80,process optimization
 missed,80,continuous improvement
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
+missed,80,procedure documentation
+missed,80,change management
+missed,80,collaboration
+missed,80,meet deadlines
 missed,80,analytical skills
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
 missed,82,Human Resource management
 missed,82,compensation
 missed,82,organization
@@ -170,7 +172,6 @@ extra,3,diagnose
 extra,3,gas
 extra,3,electrically operated equipment
 extra,3,work orders
-extra,3,hydraulic equipment
 extra,3,record keeping
 extra,5,organizational skills
 extra,5,prioritization
@@ -267,7 +268,7 @@ extra,44,commercial environments
 extra,44,pharmaceuticals
 extra,44,healthcare
 extra,44,English
-extra,44,agile frameworks
+extra,44,Agile
 extra,44,Traditional project approaches
 extra,44,Medical Devices
 extra,44,Biologics
@@ -286,9 +287,9 @@ extra,45,liaison
 extra,45,laboratory analysis
 extra,45,x-rays
 extra,46,patient assessment
-extra,46,documentation
 extra,46,HIPAA compliance
 extra,46,typing
+extra,46,electronic documentation
 extra,46,email
 extra,47,General Liability
 extra,47,Professional Liability
@@ -317,12 +318,12 @@ extra,65,sales tracking
 extra,65,reporting
 extra,65,prioritizing
 extra,65,organizational skills
-extra,69,communication skills
 extra,69,financial transactions
 extra,69,project financial reviews
-extra,69,billing
 extra,69,WIP reports
 extra,69,accounting system
+extra,69,retention billing
+extra,69,verbal communication
 extra,71,health care
 extra,72,requirements gathering
 extra,72,architectural design
@@ -344,22 +345,14 @@ extra,75,budgets
 extra,75,construction
 extra,76,telephone answering
 extra,76,safe deposit
-extra,76,internet search
-extra,76,computer system navigation
 extra,79,21CFR Part 820
 extra,79,ISO 11135
 extra,79,testing
 extra,79,documentation
 extra,79,Regulatory/technical documents
 extra,79,teamwork
-extra,80,financial management
 extra,80,desk procedures
-extra,80,auditing
 extra,80,financial analysis
-extra,80,Excel analysis
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,82,organizational skills
 extra,82,Mac applications
 extra,82,PC applications
@@ -381,6 +374,8 @@ extra,95,nursing
 extra,95,supervisory experience
 extra,95,CPR
 extra,95,problem solving
+extra,96,data readiness
+extra,96,attention to detail
 extra,97,customer service
 extra,97,cleaning
 extra,100,entrepreneurial thinking

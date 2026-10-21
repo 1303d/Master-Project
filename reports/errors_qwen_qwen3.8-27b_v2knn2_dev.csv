@@ -24,7 +24,7 @@ missed,11,infection control
 missed,11,equipment maintenance
 missed,11,triaging patients
 missed,11,Urology
-missed,12,AWS
+missed,12,AWS IAM
 missed,12,API testing
 missed,13,distribution
 missed,13,warehousing
@@ -92,10 +92,10 @@ missed,47,discovery drafting
 missed,47,motion drafting
 missed,47,pleading drafting
 missed,47,legal memorandum drafting
-missed,47,legal writing
 missed,47,case evaluation
 missed,47,legal analysis
 missed,47,client counseling
+missed,47,writing
 missed,47,organizational
 missed,47,Microsoft Word
 missed,47,Microsoft Excel
@@ -140,17 +140,22 @@ missed,74,English
 missed,75,pre-construction
 missed,75,competitive bids
 missed,75,plan reading
-missed,76,Sales Experience
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
+missed,76,personal computer
 missed,76,security procedures
-missed,76,Team Collaboration
-missed,76,Operational Loss Control
+missed,76,collaboration
 missed,79,regulatory documents
 missed,79,technical documents
 missed,80,continuous improvement
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,collaboration
 missed,80,oral communication
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,meet deadlines
+missed,80,Excel modeling
 missed,82,Human Resource management
 missed,82,compensation
 missed,82,HR analytics
@@ -179,7 +184,6 @@ missed,95,departmental operations assistance
 missed,95,policy application
 missed,95,leadership
 missed,95,supervision
-missed,96,data readiness
 missed,96,business practices
 missed,97,upselling
 missed,97,computerized ordering system
@@ -264,7 +268,7 @@ extra,41,ACIS
 extra,41,CAO
 extra,42,API design
 extra,42,API development
-extra,42,MuleSoft integrations
+extra,42,MuleSoft CloudHub
 extra,42,Cloud/SaaS integration
 extra,42,MuleSoft security
 extra,42,certificates
@@ -298,12 +302,12 @@ extra,65,sales analysis
 extra,65,reporting
 extra,65,prioritizing
 extra,69,organization
-extra,69,communication
 extra,69,financial transactions
-extra,69,billing
 extra,69,financial reviews
 extra,69,invoicing
 extra,69,WIP reports
+extra,69,verbal communication
+extra,69,retention billing
 extra,69,accounting closing
 extra,72,requirements gathering
 extra,72,architectural design
@@ -312,21 +316,15 @@ extra,72,deployment
 extra,74,report preparation
 extra,74,teamwork
 extra,75,bidding
-extra,76,internet search
-extra,76,computer system navigation
 extra,79,21CFR Part 820
 extra,79,ISO 11135
 extra,79,documentation
 extra,79,regulatory affairs
 extra,79,technical writing
 extra,79,teamwork
-extra,80,financial management
 extra,80,audit support
 extra,80,verbal communication
 extra,80,financial modeling
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,80,teamwork
 extra,82,Microsoft Office
 extra,82,data analytics
@@ -344,6 +342,7 @@ extra,95,governmental regulations
 extra,95,nursing practices
 extra,95,problem solving
 extra,96,internal audit
+extra,96,attention to detail
 extra,100,continuous improvement
 extra,100,financial planning
 extra,100,personnel management

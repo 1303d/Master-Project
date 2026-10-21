@@ -26,21 +26,23 @@ flowchart LR
 
 ### Extractor selection (after Sprint 2)
 
-The gold set was split **50 dev** (used to tune prompts) / **50 test** (scored once, at the end).
-All models use prompt `prompts/skill_extraction_v3.txt`.
+The gold set was split **50 dev** (used to tune prompts) / **50 test** (held out from all tuning; scored after
+prompt v3 was frozen, for Qwen and Haiku, on gold v1 and the provisional v2 — details in
+[`reports/sprint2_final_report.md`](reports/sprint2_final_report.md) §4). All models use prompt
+`prompts/skill_extraction_v3.txt`.
 
 | Model | Dev strict F1 | Dev lenient F1 | Test strict / lenient F1 | Note |
 |---|---|---|---|---|
-| **Qwen3.8 27B** (Groq, free) | 0.65 | 0.74 | **0.66 / 0.75** | pipeline extractor |
-| Claude Haiku 5.5 | 0.65 | 0.75 | 0.66 / 0.75 | research benchmark only (2,000 postings) |
-| gpt-oss-120b (Groq) | 0.59 | 0.71 | — | more extra skills |
+| **Qwen3.8 27B** (Groq, free) | 0.66 | 0.74 | **0.66 / 0.74** | pipeline extractor |
+| Claude Haiku 5.5 | 0.67 | 0.76 | 0.66 / 0.75 | research benchmark only (2,000 postings) |
+| gpt-oss-120b (Groq) | 0.61 | 0.71 | — | more extra skills |
 | Gemini 3.5 Flash-Lite | 0.64 | 0.71 | — | precise, misses list items |
-| Nemotron 3 Ultra 550B (OpenRouter) | 0.51 | 0.60 | — | over-extracts |
+| Nemotron 3 Ultra 550B (OpenRouter) | 0.52 | 0.61 | — | over-extracts |
 
 - Prompt v4 (more rules, ideas from SkillSpan / SKORE / GoLLIE papers) gave no gain → v3 frozen.
 - Human-vs-human agreement on 3 double-labelled postings: lenient 0.73, so models sit at the label ceiling.
 - **Bias check** (`src/bias_check.py`): gold labels were LLM-drafted (Claude), so recall is split into
-  skills *kept from the draft* vs *added by humans*. Test: Haiku .79 / .80, Qwen .77 / .75 — no drafter bias.
+  skills *kept from the draft* vs *added by humans*. Test: Haiku .79 / .79, Qwen .77 / .74 — no drafter bias on test.
 - **Rule E** (`data/gold/LABELING_RULES.md`): ESCO v1.2 + O\*NET 31.0 are the rule book for skill vs trait.
   Traits = O\*NET Work Styles + ESCO's transversal "attitudes and values" (e.g. attention to detail).
   `src/link_reference.py` gives every skill a verdict: on the Haiku 2,000, known skill 69% · trait 2% ·
@@ -67,6 +69,12 @@ Qwen automatically. Every row keeps its model name.
 2. Cluster with two methods (HDBSCAN, agglomerative), parameter sweep, stability report.
 3. Decide multi-topic membership; write topic and topic-membership tables.
 4. UMAP 384 → 3 for an interactive 3D "Skill map" tab in the UI.
+
+### Tests and checks
+
+`py -m pytest tests -q` (16 tests: scoring, output validation, cleaning, reproduces the test score) ·
+`py src/verify_db.py` (Supabase vs source files) · `py src/make_gold_postings.py` (rebuilds the gold posting
+text exactly). Final Sprint 2 report: [`reports/sprint2_final_report.md`](reports/sprint2_final_report.md).
 
 ## Sprint 2 results (first run, gold v1, all 100 postings)
 
@@ -109,7 +117,7 @@ flowchart LR
 | Sample | `src/make_gold_sample.py` | Pick the 100 gold postings, stratified by sector (seed 42) |
 | Label | `data/gold/LABELING_RULES.md` | What counts as a skill |
 | Label | `src/gold_tool.py`, `data/gold/CLAUDE_LABELING_PROMPT.md` | Show postings, save labels |
-| Label | `data/gold/gold_labels.csv` | **Gold set**: 100 postings, 1,317 skills |
+| Label | `data/gold/gold_labels.csv` | **Gold set**: 100 postings, 1,333 skills (1,317 at the first run) |
 | Label | `data/gold/second_annotations.csv` | Double-labelled postings (agreement) |
 | Check | `src/check_skill.py` (in `taxonomy-skill-project`) | Look up a skill in ESCO / O\*NET |
 | Extract | `prompts/skill_extraction_v1.txt` | Instructions sent to the LLM |

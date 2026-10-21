@@ -1,15 +1,16 @@
 # Sprint 2 — Extraction quality report (Section B, skills)
 
 - **Extractor:** `qwen/qwen3.8-27b` via groq, prompt `skill_extraction_v2`
-- **Gold set:** 50 postings, 675 gold skills (`data/gold/gold_labels.csv`).
-  Labels are LLM-suggested and human-corrected (Claude/ChatGPT suggestions; Gemini was not used), so the extractor is independent of the label suggestions.
+- **Gold set:** 50 postings, 684 gold skills (`data\gold\gold_labels.csv`).
+  Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. The extractor is not one of the suggesting models.
+- **Coverage:** 50 of 50 gold postings scored.
 - **Evidence check:** 99% of predicted evidence phrases occur verbatim in the posting.
 
 ## Overall (micro-averaged)
 
 | Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient |
 |---|---|---|---|---|---|---|---|---|---|
-| **All** | 50 | 675 | 647 | 0.66 | 0.64 | 0.65 | 0.75 | 0.72 | 0.74 |
+| **All** | 50 | 684 | 647 | 0.68 | 0.65 | 0.66 | 0.76 | 0.72 | 0.74 |
 
 ## By sector
 
@@ -17,7 +18,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | Admin / HR / Customer Service | 4 | 43 | 42 | 0.74 | 0.72 | 0.73 | 0.83 | 0.81 | 0.82 |
 | Engineering | 3 | 38 | 37 | 0.84 | 0.82 | 0.83 | 0.84 | 0.82 | 0.83 |
-| Finance + Accounting | 6 | 97 | 107 | 0.50 | 0.55 | 0.52 | 0.68 | 0.75 | 0.72 |
+| Finance + Accounting | 6 | 106 | 107 | 0.61 | 0.61 | 0.61 | 0.72 | 0.73 | 0.72 |
 | Health Care | 8 | 72 | 71 | 0.54 | 0.53 | 0.53 | 0.62 | 0.61 | 0.62 |
 | IT | 9 | 203 | 176 | 0.85 | 0.73 | 0.79 | 0.90 | 0.78 | 0.84 |
 | Legal | 4 | 41 | 40 | 0.60 | 0.59 | 0.59 | 0.78 | 0.76 | 0.77 |
@@ -31,7 +32,8 @@
 
 ## Matching rules
 
-(one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"
@@ -50,6 +52,9 @@ Total for the 50 scored postings (each paid once, cached after): **59,645 input*
 | 2026-10-15T20:52:25+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 3 | 3 | 2769 | 1195 |
 | 2026-10-15T21:17:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2 | 50 | 50 | 59645 | 18337 |
 | 2026-10-17T16:16:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2+knn2 | 50 | 50 | 102589 | 19369 |
+| 2026-10-18T20:53:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 50 | 50 | 68045 | 20842 |
+| 2026-10-20T17:45:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v4 | 50 | 50 | 89995 | 21473 |
+| 2026-10-20T23:43:49+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 100 | 50 | 69209 | 19178 |
 
 ## Error samples (lenient)
 
@@ -78,7 +83,7 @@ Total for the 50 scored postings (each paid once, cached after): **59,645 input*
 - #11: microscopic preparation
 - #11: triaging patients
 - #11: Urology
-- #12: AWS
+- #12: AWS IAM
 - #12: API testing
 
 **Extra predicted skills (false positives), first 25:**

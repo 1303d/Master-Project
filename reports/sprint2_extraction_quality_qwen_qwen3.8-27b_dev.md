@@ -1,15 +1,16 @@
 # Sprint 2 — Extraction quality report (Section B, skills)
 
 - **Extractor:** `qwen/qwen3.8-27b` via groq, prompt `skill_extraction_v1`
-- **Gold set:** 50 postings, 675 gold skills (`data/gold/gold_labels.csv`).
-  Labels are LLM-suggested and human-corrected (Claude/ChatGPT suggestions; Gemini was not used), so the extractor is independent of the label suggestions.
+- **Gold set:** 50 postings, 684 gold skills (`data\gold\gold_labels.csv`).
+  Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. The extractor is not one of the suggesting models.
+- **Coverage:** 50 of 50 gold postings scored.
 - **Evidence check:** 100% of predicted evidence phrases occur verbatim in the posting.
 
 ## Overall (micro-averaged)
 
 | Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient |
 |---|---|---|---|---|---|---|---|---|---|
-| **All** | 50 | 675 | 758 | 0.59 | 0.67 | 0.63 | 0.68 | 0.77 | 0.72 |
+| **All** | 50 | 684 | 758 | 0.61 | 0.67 | 0.64 | 0.69 | 0.77 | 0.73 |
 
 ## By sector
 
@@ -17,12 +18,12 @@
 |---|---|---|---|---|---|---|---|---|---|
 | Admin / HR / Customer Service | 4 | 43 | 59 | 0.58 | 0.79 | 0.67 | 0.66 | 0.91 | 0.76 |
 | Engineering | 3 | 38 | 47 | 0.68 | 0.84 | 0.75 | 0.68 | 0.84 | 0.75 |
-| Finance + Accounting | 6 | 97 | 109 | 0.50 | 0.57 | 0.53 | 0.68 | 0.76 | 0.72 |
+| Finance + Accounting | 6 | 106 | 109 | 0.58 | 0.59 | 0.59 | 0.73 | 0.75 | 0.74 |
 | Health Care | 8 | 72 | 80 | 0.46 | 0.51 | 0.49 | 0.56 | 0.62 | 0.59 |
 | IT | 9 | 203 | 192 | 0.80 | 0.75 | 0.77 | 0.85 | 0.80 | 0.83 |
 | Legal | 4 | 41 | 42 | 0.57 | 0.59 | 0.58 | 0.81 | 0.83 | 0.82 |
 | Management | 5 | 50 | 50 | 0.60 | 0.60 | 0.60 | 0.64 | 0.64 | 0.64 |
-| Mixed | 5 | 64 | 93 | 0.43 | 0.62 | 0.51 | 0.54 | 0.78 | 0.64 |
+| Mixed | 5 | 64 | 93 | 0.43 | 0.62 | 0.51 | 0.55 | 0.80 | 0.65 |
 | Sales + Marketing | 6 | 67 | 86 | 0.53 | 0.69 | 0.60 | 0.57 | 0.73 | 0.64 |
 
 ## Zero-skill postings
@@ -31,7 +32,8 @@
 
 ## Matching rules
 
-(one-to-one, per posting), after normalising both names (lowercase, filler words removed,
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
 simple plural -> singular):
 - strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
            "analyses" is read as "analysis"
@@ -48,6 +50,11 @@ Total for the 100 scored postings (each paid once, cached after): **91,554 input
 | 2026-10-09T09:31:04+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 3 | 3 | 2502 | 1477 |
 | 2026-10-09T10:08:14+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 100 | 97 | 89052 | 40425 |
 | 2026-10-15T20:52:25+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 3 | 3 | 2769 | 1195 |
+| 2026-10-15T21:17:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2 | 50 | 50 | 59645 | 18337 |
+| 2026-10-17T16:16:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2+knn2 | 50 | 50 | 102589 | 19369 |
+| 2026-10-18T20:53:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 50 | 50 | 68045 | 20842 |
+| 2026-10-20T17:45:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v4 | 50 | 50 | 89995 | 21473 |
+| 2026-10-20T23:43:49+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 100 | 50 | 69209 | 19178 |
 
 ## Error samples (lenient)
 
@@ -57,7 +64,6 @@ Total for the 100 scored postings (each paid once, cached after): **91,554 input
 - #2: brand localization
 - #2: client relationships
 - #3: Diesel mechanics
-- #3: electric vehicle maintenance
 - #3: maintenance scheduling
 - #5: prospecting
 - #5: organization
@@ -73,11 +79,12 @@ Total for the 100 scored postings (each paid once, cached after): **91,554 input
 - #11: obtaining vitals
 - #11: attention to detail
 - #11: Urology
-- #12: AWS
+- #12: AWS IAM
 - #12: API testing
 - #12: attention to detail
 - #13: distribution
 - #13: warehousing
+- #13: material handling equipment
 
 **Extra predicted skills (false positives), first 25:**
 
@@ -95,7 +102,6 @@ Total for the 100 scored postings (each paid once, cached after): **91,554 input
 - #3: gas
 - #3: electrically operated equipment
 - #3: work orders
-- #3: hydraulic equipment
 - #3: record keeping
 - #5: organizational skills
 - #5: prioritization
@@ -106,3 +112,4 @@ Total for the 100 scored postings (each paid once, cached after): **91,554 input
 - #6: contract compliance
 - #6: contract clarification
 - #6: supervision
+- #6: coaching

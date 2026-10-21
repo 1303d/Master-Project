@@ -11,9 +11,11 @@ The model is never guessed: pass --model.
 
 Input:  data/gold/gold_postings.csv (contacts already masked)
 Output: data/processed/statements_<model>.csv          one row per skill statement
-        data/processed/extraction_postings_<model>.csv every posting run (incl. zero-skill), tokens
-        reports/token_usage.csv                        one row per run: calls, tokens in/out
-Cache:  cache/<provider>/<sha256>.json                 key = model + prompt + text; re-runs are free
+        data/processed/extraction_postings_<model>.csv every posting (status done / failed, incl. zero-skill), tokens
+        reports/token_usage.csv                        one row per run: calls, tokens in/out (written even if stopped)
+        reports/token_calls.csv                        one row per paid API call, written at once
+Cache:  cache/<provider>/<sha256>.json                 key = model + prompt + text; re-runs are free.
+        Answers are validated first: a malformed answer counts as FAILED and is never cached.
 """
 import argparse
 import csv
@@ -46,6 +48,31 @@ SCHEMA = {
     "required": ["skills"],
 }
 JSON_HINT = '\nReturn exactly this JSON shape: {"skills": [{"skill": "...", "evidence": "..."}]}'
+# The cache key stays model + prompt + text (existing caches remain valid); the JSON hint is recorded in each
+# new cache file instead, and a changed hint is reported when an old answer is reused.
+SETTINGS = {"json_hint_sha256": hashlib.sha256(JSON_HINT.encode()).hexdigest()[:16]}
+CALLS_LOG = ROOT / "reports" / "token_calls.csv"
+
+
+def validate_output(out):
+    """Return (skills, n_dropped). Raises ValueError when the answer is not {"skills": [...]}, so a malformed
+    answer is reported as a failure and never cached. Items without a non-empty text "skill" are dropped."""
+    if not isinstance(out, dict) or not isinstance(out.get("skills"), list):
+        raise ValueError(f"malformed output: expected {{'skills': [...]}}, got {type(out).__name__}")
+    skills = [{"skill": s["skill"].strip(), "evidence": str(s.get("evidence") or "").strip()}
+              for s in out["skills"] if isinstance(s, dict) and isinstance(s.get("skill"), str) and s["skill"].strip()]
+    return skills, len(out["skills"]) - len(skills)
+
+
+def log_call(provider, model, prompt_version, posting_id, t_in, t_out):
+    """Append one paid API call at once, so tokens are counted even if the run is killed later."""
+    new = not CALLS_LOG.exists()
+    with CALLS_LOG.open("a", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        if new:
+            w.writerow(["called_at", "provider", "model", "prompt_version", "posting_id", "tokens_in", "tokens_out"])
+        w.writerow([datetime.now(timezone.utc).isoformat(timespec="seconds"), provider, model, prompt_version,
+                    posting_id, t_in, t_out])
 
 
 def slug(model):
@@ -237,53 +264,67 @@ def main():
     cache = ROOT / "cache" / args.provider
     cache.mkdir(parents=True, exist_ok=True)
     backend, rows, done, failed, calls, tok_in, tok_out = None, [], [], [], 0, 0, 0
+    warned = False
 
     blocks = build_examples(posts, args.examples) if args.examples else {}
-    for p in posts.itertuples():
-        text = (f"{blocks[p.posting_id]}\n\nNOW EXTRACT THE SKILLS FROM THIS POSTING:\n{p.description}"
-                if blocks else p.description)
-        key = hashlib.sha256(f"{model}|{prompt_sha}|{text}".encode()).hexdigest()
-        path = cache / f"{key}.json"
-        if path.exists():
-            data = json.loads(path.read_text(encoding="utf-8"))
-        else:
-            backend = backend or Backend(model)
-            if calls:
-                time.sleep(args.delay)
+    try:  # the summary below is written even if the run stops early (Ctrl+C, crash)
+        for p in posts.itertuples():
+            text = (f"{blocks[p.posting_id]}\n\nNOW EXTRACT THE SKILLS FROM THIS POSTING:\n{p.description}"
+                    if blocks else p.description)
+            key = hashlib.sha256(f"{model}|{prompt_sha}|{text}".encode()).hexdigest()
+            path = cache / f"{key}.json"
             try:
-                out, t_in, t_out = call_with_retry(backend, system, text)
+                if path.exists():
+                    data = json.loads(path.read_text(encoding="utf-8"))
+                    if not warned and data.get("settings", SETTINGS) != SETTINGS:
+                        print("  note: some cached answers were made with a different JSON hint", flush=True)
+                        warned = True
+                    skills, dropped = validate_output(data["output"])
+                else:
+                    backend = backend or Backend(model)
+                    if calls:
+                        time.sleep(args.delay)
+                    out, t_in, t_out = call_with_retry(backend, system, text)
+                    calls, tok_in, tok_out = calls + 1, tok_in + t_in, tok_out + t_out
+                    log_call(Backend.name, model, prompt_version, p.posting_id, t_in, t_out)
+                    skills, dropped = validate_output(out)  # malformed -> ValueError -> not cached
+                    data = {"posting_id": p.posting_id, "provider": Backend.name, "model": model,
+                            "prompt_version": prompt_version, "prompt_sha256": prompt_sha, "settings": SETTINGS,
+                            "tokens_in": t_in, "tokens_out": t_out, "output": out}
+                    path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
             except (ApiError, ValueError, KeyError) as e:  # keep going; a re-run retries only uncached postings
                 print(f"#{p.n} {p.posting_id}: FAILED ({str(e)[:80]})", flush=True)
                 failed.append(p.posting_id)
                 continue
-            data = {"posting_id": p.posting_id, "provider": Backend.name, "model": model,
-                    "prompt_version": prompt_version, "prompt_sha256": prompt_sha,
-                    "tokens_in": t_in, "tokens_out": t_out, "output": out}
-            path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
-            calls, tok_in, tok_out = calls + 1, tok_in + t_in, tok_out + t_out
-        skills = [s for s in data["output"].get("skills", []) if s.get("skill")]
-        print(f"#{p.n} {p.posting_id}: {len(skills)} skills", flush=True)
-        done.append({"posting_id": p.posting_id, "n_skills": len(skills),  # tokens paid once, when first called
-                     "tokens_in": data["tokens_in"], "tokens_out": data["tokens_out"]})
-        low = p.description.lower()
-        for i, s in enumerate(skills, 1):
-            ev = str(s.get("evidence", "")).strip()
-            rows.append({"statement_id": f"{p.posting_id}:skill:{i}", "posting_id": p.posting_id,
-                         "skill": s["skill"].strip(), "evidence": ev, "evidence_in_text": bool(ev) and ev.lower() in low,
-                         "provider": Backend.name, "model": model, "prompt_version": prompt_version})
+            print(f"#{p.n} {p.posting_id}: {len(skills)} skills" + (f" ({dropped} malformed items dropped)" if dropped else ""),
+                  flush=True)
+            done.append({"posting_id": p.posting_id, "status": "done", "n_skills": len(skills),
+                         "tokens_in": data["tokens_in"], "tokens_out": data["tokens_out"]})  # tokens paid once
+            low = p.description.lower()
+            for i, s in enumerate(skills, 1):
+                ev = s["evidence"]
+                rows.append({"statement_id": f"{p.posting_id}:skill:{i}", "posting_id": p.posting_id,
+                             "skill": s["skill"], "evidence": ev, "evidence_in_text": bool(ev) and ev.lower() in low,
+                             "provider": Backend.name, "model": model, "prompt_version": prompt_version})
+    finally:
+        write_outputs(args, model, prompt_version, posts, rows, done, failed, calls, tok_in, tok_out, Backend.name)
 
+
+def write_outputs(args, model, prompt_version, posts, rows, done, failed, calls, tok_in, tok_out, provider):
     PROCESSED.mkdir(parents=True, exist_ok=True)
     suffix = f"{slug(model)}_{args.tag}" if args.tag else slug(model)
     out_path = PROCESSED / f"statements_{suffix}.csv"
     pd.DataFrame(rows, columns=["statement_id", "posting_id", "skill", "evidence", "evidence_in_text", "provider",
                                 "model", "prompt_version"]).to_csv(out_path, index=False)
-    pd.DataFrame(done).to_csv(PROCESSED / f"extraction_postings_{suffix}.csv", index=False)
+    pd.DataFrame(done + [{"posting_id": pid, "status": "failed"} for pid in failed],
+                 columns=["posting_id", "status", "n_skills", "tokens_in", "tokens_out"]
+                 ).to_csv(PROCESSED / f"extraction_postings_{suffix}.csv", index=False)
     new = not USAGE.exists()
     with USAGE.open("a", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         if new:
             w.writerow(["run_at", "provider", "model", "prompt_version", "postings", "api_calls", "tokens_in", "tokens_out"])
-        w.writerow([datetime.now(timezone.utc).isoformat(timespec="seconds"), Backend.name, model,
+        w.writerow([datetime.now(timezone.utc).isoformat(timespec="seconds"), provider, model,
                     prompt_version, len(posts), calls, tok_in, tok_out])
     if failed:
         print(f"\n{len(failed)} postings FAILED (not scored). Re-run the same command to retry them.")

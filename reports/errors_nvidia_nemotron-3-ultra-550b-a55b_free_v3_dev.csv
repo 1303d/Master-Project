@@ -35,15 +35,15 @@ missed,44,global marketing
 missed,44,Microsoft Suite of Office
 missed,45,patient education
 missed,45,policy and procedure improvement
-missed,46,respiratory therapy
 missed,46,respiratory care equipment
+missed,46,therapies
 missed,46,computers
 missed,47,legal drafting
 missed,47,pleading drafting
 missed,47,legal memorandum drafting
-missed,47,legal writing
 missed,47,case evaluation
 missed,47,client counseling
+missed,47,writing
 missed,47,organizational
 missed,47,state rules of civil procedure
 missed,49,accounting
@@ -77,16 +77,18 @@ missed,74,Korean
 missed,74,English
 missed,75,estimating
 missed,75,plan reading
+missed,76,financial sales
+missed,76,complaint resolution
 missed,76,transaction reconciliation
-missed,76,Basic Computer Proficiency & Data Entry
-missed,76,Operational Loss Control
 missed,79,Quality System Regulation
 missed,79,regulatory documents
 missed,79,technical documents
-missed,80,accounting
-missed,80,Standard Operating Procedure (SOP) Documentation
-missed,80,Auditor Collaboration
-missed,80,Enterprise Accounting Systems (SAP/Chempax/Concur)
+missed,80,financial management
+missed,80,cost accounting
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,meet deadlines
 missed,82,Human Resource management
 missed,82,G Suite
 missed,82,organization
@@ -459,18 +461,18 @@ extra,44,creative agency coordination
 extra,44,legal and regulatory compliance
 extra,44,KPIs
 extra,44,meeting facilitation
-extra,44,team management
 extra,44,team motivation
 extra,44,conflict resolution
 extra,44,technical issue resolution
 extra,44,process issue resolution
-extra,44,Traditional project management
 extra,44,global marketing/commercial environments
 extra,44,multi-project management
 extra,44,project interdependency management
+extra,44,Teams
 extra,44,project planning with interdependencies
 extra,44,product launch planning
 extra,44,cross-cultural communication
+extra,44,agile frameworks
 extra,44,agile practices
 extra,44,collaboration
 extra,44,teamwork
@@ -598,28 +600,24 @@ extra,75,collecting and analyzing information
 extra,75,obtain accurate quotes
 extra,75,cost estimates
 extra,75,read plans
-extra,76,compliance
-extra,76,computer system navigation
+extra,76,compliance standards
 extra,76,customer complaints
 extra,76,customer engagement
+extra,76,customer service
 extra,76,daily planning
 extra,76,digital solutions
 extra,76,document transactions
 extra,76,follow-up
-extra,76,internet search
 extra,76,laws
 extra,76,loss mitigation
 extra,76,partnership
-extra,76,personal computer
 extra,76,policies and procedures
-extra,76,problem resolution
 extra,76,product knowledge
 extra,76,referral
 extra,76,regulations
 extra,76,reconcile transactions
 extra,76,risk assessment
 extra,76,safe deposit
-extra,76,systems data entry
 extra,76,telephone answering
 extra,79,21CFR Part 820
 extra,79,testing
@@ -634,12 +632,7 @@ extra,79,technical writing
 extra,79,regulatory writing
 extra,79,teamwork
 extra,80,desk procedures
-extra,80,audit collaboration
 extra,80,financial reporting systems
-extra,80,Excel analysis
-extra,80,SAP
-extra,80,Chempax
-extra,80,Concur
 extra,80,teamwork
 extra,80,deadline management
 extra,82,"diversity, equity and inclusion"
@@ -650,9 +643,9 @@ extra,82,talent acquisition
 extra,82,onboarding
 extra,82,culture development
 extra,82,employee engagement
-extra,82,employee experience
 extra,82,retention
 extra,82,rewards and recognition
+extra,82,employee benefits
 extra,82,benefits administration
 extra,82,investigations
 extra,82,employment law compliance
@@ -660,7 +653,6 @@ extra,82,policy administration
 extra,82,process improvement
 extra,82,stakeholder management
 extra,82,influence
-extra,82,HRIS data management
 extra,82,report generation
 extra,82,dashboard creation
 extra,82,open enrollment management
@@ -671,6 +663,7 @@ extra,82,G Guite
 extra,82,HR systems
 extra,82,Mac applications
 extra,82,PC applications
+extra,82,HRIS
 extra,83,IIS
 extra,83,IT systems alignment
 extra,83,.NET development
@@ -691,9 +684,11 @@ extra,94,pre-trial and post-judgment motion drafting
 extra,94,discovery supervision
 extra,95,governmental regulations
 extra,95,nursing practices
-extra,95,management
+extra,95,administrative management
 extra,95,program management
 extra,95,department operations
+extra,96,data readiness
+extra,96,attention to detail
 extra,97,POS system
 extra,97,cash handling
 extra,97,food preparation
@@ -706,7 +701,7 @@ extra,97,time management
 extra,97,sanitation
 extra,100,continuous improvement
 extra,100,financial planning
-extra,100,military operations management
+extra,100,operations management
 extra,100,entrepreneurial thinking
 extra,100,sense of urgency
 extra,100,decision making
