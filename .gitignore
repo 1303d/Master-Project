@@ -37,3 +37,6 @@ reports/*.log
 
 # hand-off bundles for teammates (contain posting text): share via Drive, never Git
 exports/
+
+# macOS folder metadata
+.DS_Store

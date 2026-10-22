@@ -11,3 +11,4 @@ litellm
 langfuse
 pyyaml
 sentence-transformers>=3.0
+numpy
