@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clustering Methods Playground</title>
+<style>
+  :root { --bg:#f7f7f5; --panel:#fff; --text:#1d1f23; --muted:#626872; --line:#dfe1e5; --a:#2f5bd3; --a-soft:#e5ecfc;
+    --ok:#1f7a4d; --ok-soft:#dff3e8; --warn:#a4301d; --warn-soft:#fbe3de; --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#15171a; --panel:#1d2024; --text:#e7e9ec; --muted:#9aa1ab; --line:#30343a;
+    --a:#8aa8ff; --a-soft:#233056; --ok:#6fd3a0; --ok-soft:#183a2a; --warn:#ff9a85; --warn-soft:#43221c; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 var(--font); }
+  main { max-width:1100px; margin:0 auto; padding:16px; }
+  h1 { font-size:22px; margin:6px 0 2px; } .sub { color:var(--muted); }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:10px 0; }
+  button { font:inherit; border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:999px; padding:6px 14px; cursor:pointer; }
+  button.on { background:var(--a); color:#fff; border-color:var(--a); }
+  button.go { border-radius:6px; background:var(--a); color:#fff; border-color:var(--a); }
+  .grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:14px; align-items:start; }
+  @media (max-width:860px) { .grid { grid-template-columns:1fr; } }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  canvas { width:100%; height:auto; display:block; border-radius:8px; background:var(--bg); border:1px solid var(--line); }
+  label.s { display:flex; gap:8px; align-items:center; font-size:14px; color:var(--muted); }
+  input[type=range] { width:180px; }
+  .info h2 { font-size:17px; margin:0 0 6px; }
+  .good { color:var(--ok); } .bad { color:var(--warn); }
+  ul { margin:6px 0 6px 18px; padding:0; }
+  .ours { background:var(--ok-soft); border-left:4px solid var(--ok); padding:8px 10px; border-radius:6px; margin-top:8px; }
+  .stat { font-size:13px; color:var(--muted); margin-top:6px; }
+  .quiz .q { font-weight:600; margin:12px 0 4px; }
+  .quiz label { display:block; border:1px solid var(--line); border-radius:6px; padding:6px 10px; margin:4px 0; cursor:pointer; }
+  .quiz label.r { background:var(--ok-soft); border-color:var(--ok); } .quiz label.w { background:var(--warn-soft); border-color:var(--warn); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Clustering methods — play with them</h1>
+  <div class="sub">Each dot is a skill (squashed to 2-D). Pick a shape of data, pick a method, press Run. Watch how each method groups the dots.</div>
+
+  <div class="row"><b>1 · Data shape:</b>
+    <button data-ds="blobs" class="on">Round groups</button>
+    <button data-ds="moons">Curvy (two moons)</button>
+    <button data-ds="noisy">Groups + odd points</button>
+    <button data-ds="uneven">Big + tiny groups</button>
+  </div>
+  <div class="row"><b>2 · Method:</b>
+    <button data-m="kmeans" class="on">k-means</button>
+    <button data-m="hdbscan">HDBSCAN (density)</button>
+    <button data-m="agglo">Agglomerative (tree)</button>
+    <button data-m="gmm">Gaussian mixture (soft)</button>
+    <button data-m="graph">Graph / Leiden-style</button>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <canvas id="cv" width="640" height="460"></canvas>
+      <div class="row">
+        <button class="go" id="run">▶ Run</button>
+        <label class="s" id="ctl"></label>
+      </div>
+      <div class="stat" id="stat"></div>
+    </div>
+    <div class="panel info" id="info"></div>
+  </div>
+
+  <div class="panel quiz" style="margin-top:14px">
+    <b>Quick check</b>
+    <div id="quiz"></div><div class="stat" id="score"></div>
+  </div>
+</main>
+
+<script>
+// ---------------- data ----------------
+const W = 640, H = 460;
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+function blob(cx, cy, s, n) { return Array.from({ length: n }, () => [cx + gauss() * s, cy + gauss() * s]); }
+const DATA = {
+  blobs: () => [...blob(170, 150, 32, 70), ...blob(460, 140, 32, 70), ...blob(320, 340, 34, 70)],
+  moons: () => {
+    const a = [];
+    for (let i = 0; i < 110; i++) { const t = Math.PI * rnd(); a.push([230 + 140 * Math.cos(t) + gauss() * 9, 230 - 120 * Math.sin(t) + gauss() * 9]); }
+    for (let i = 0; i < 110; i++) { const t = Math.PI * rnd(); a.push([370 - 140 * Math.cos(t) + gauss() * 9, 290 + 120 * Math.sin(t) - 60 + gauss() * 9]); }
+    return a;
+  },
+  noisy: () => [...blob(180, 160, 28, 60), ...blob(460, 170, 28, 60), ...blob(330, 350, 28, 60),
+                ...Array.from({ length: 45 }, () => [30 + rnd() * 580, 30 + rnd() * 400])],
+  uneven: () => [...blob(220, 220, 60, 150), ...blob(500, 110, 14, 18), ...blob(510, 360, 14, 18)],
+};
+let ds = "blobs", method = "kmeans", pts = [], labels = [], soft = null, edges = [];
+function makeData() { seed = 7; pts = DATA[ds](); labels = pts.map(() => -2); soft = null; edges = []; draw(); }
+
+// ---------------- drawing ----------------
+const cv = document.getElementById("cv"), cx = cv.getContext("2d");
+const COLORS = ["#2f5bd3", "#1f7a4d", "#c2410c", "#7a3fb0", "#0f6d7a", "#b45309", "#be185d", "#4d7c0f"];
+const NOISE = "#9aa1ab";
+function draw(centers) {
+  cx.clearRect(0, 0, W, H);
+  cx.strokeStyle = "rgba(127,127,127,.25)"; cx.lineWidth = 1;
+  for (const [i, j] of edges) { cx.beginPath(); cx.moveTo(...pts[i]); cx.lineTo(...pts[j]); cx.stroke(); }
+  pts.forEach((p, i) => {
+    let col = "#626872";
+    if (soft) col = mix(soft[i]); else if (labels[i] === -1) col = NOISE; else if (labels[i] >= 0) col = COLORS[labels[i] % COLORS.length];
+    cx.beginPath(); cx.fillStyle = col; cx.globalAlpha = labels[i] === -1 ? .55 : .9;
+    cx.arc(p[0], p[1], labels[i] === -1 ? 3 : 4.2, 0, 7); cx.fill();
+  });
+  cx.globalAlpha = 1;
+  if (centers) centers.forEach((c, k) => { cx.strokeStyle = COLORS[k % COLORS.length]; cx.lineWidth = 3; cx.beginPath();
+    cx.moveTo(c[0] - 9, c[1] - 9); cx.lineTo(c[0] + 9, c[1] + 9); cx.moveTo(c[0] + 9, c[1] - 9); cx.lineTo(c[0] - 9, c[1] + 9); cx.stroke(); });
+}
+function hex(c) { return [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16)); }
+function mix(w) { const rgb = [0, 0, 0]; w.forEach((v, k) => { const c = hex(COLORS[k]); rgb[0] += v * c[0]; rgb[1] += v * c[1]; rgb[2] += v * c[2]; });
+  return `rgb(${rgb.map(Math.round).join(",")})`; }
+const d2 = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// ---------------- methods ----------------
+async function kmeans(k) {
+  seed = 11; let C = Array.from({ length: k }, () => pts[Math.floor(rnd() * pts.length)].slice());
+  for (let it = 0; it < 12; it++) {
+    labels = pts.map(p => C.reduce((b, c, j) => d2(p, c) < d2(p, C[b]) ? j : b, 0));
+    draw(C); await sleep(260);
+    C = C.map((c, j) => { const m = pts.filter((_, i) => labels[i] === j); return m.length ? [m.reduce((s, p) => s + p[0], 0) / m.length, m.reduce((s, p) => s + p[1], 0) / m.length] : c; });
+  }
+  draw(C);
+}
+function density(eps, minPts) {   // DBSCAN core idea; HDBSCAN = this over every radius, keeping the most stable groups
+  const e2 = eps * eps, nb = pts.map(p => pts.map((q, j) => d2(p, q) <= e2 ? j : -1).filter(j => j >= 0));
+  labels = pts.map(() => -1); let c = 0;
+  for (let i = 0; i < pts.length; i++) {
+    if (labels[i] !== -1 || nb[i].length < minPts) continue;
+    const stack = [i]; labels[i] = c;
+    while (stack.length) { const j = stack.pop(); if (nb[j].length < minPts) continue;
+      for (const q of nb[j]) if (labels[q] === -1) { labels[q] = c; stack.push(q); } }
+    c++;
+  }
+  const sizes = {}; labels.forEach(l => { if (l >= 0) sizes[l] = (sizes[l] || 0) + 1; });
+  labels = labels.map(l => l >= 0 && sizes[l] < minPts ? -1 : l);   // tiny groups -> noise
+  draw();
+}
+async function agglo(k) {   // average linkage, animated merges
+  let groups = pts.map((_, i) => [i]);
+  const dist = (A, B) => { let s = 0; for (const a of A) for (const b of B) s += Math.sqrt(d2(pts[a], pts[b])); return s / (A.length * B.length); };
+  // speed-up: first merge very close neighbours greedily
+  while (groups.length > 60) {
+    let best = [0, 1, Infinity];
+    for (let i = 0; i < groups.length; i++) { const ci = centroid(groups[i]);
+      for (let j = i + 1; j < groups.length; j++) { const v = d2(ci, centroid(groups[j])); if (v < best[2]) best = [i, j, v]; } }
+    groups[best[0]] = groups[best[0]].concat(groups[best[1]]); groups.splice(best[1], 1);
+  }
+  while (groups.length > k) {
+    let best = [0, 1, Infinity];
+    for (let i = 0; i < groups.length; i++) for (let j = i + 1; j < groups.length; j++) { const v = dist(groups[i], groups[j]); if (v < best[2]) best = [i, j, v]; }
+    groups[best[0]] = groups[best[0]].concat(groups[best[1]]); groups.splice(best[1], 1);
+    if (groups.length <= 12) { setLabels(groups); draw(); await sleep(450); }
+  }
+  setLabels(groups); draw();
+}
+function centroid(g) { return [g.reduce((s, i) => s + pts[i][0], 0) / g.length, g.reduce((s, i) => s + pts[i][1], 0) / g.length]; }
+function setLabels(groups) { labels = pts.map(() => 0); groups.sort((a, b) => b.length - a.length).forEach((g, k) => g.forEach(i => labels[i] = k)); }
+async function gmm(k) {
+  seed = 11; let mu = Array.from({ length: k }, () => pts[Math.floor(rnd() * pts.length)].slice()), va = Array(k).fill(2500), pi = Array(k).fill(1 / k);
+  for (let it = 0; it < 25; it++) {
+    soft = pts.map(p => { const w = mu.map((m, j) => pi[j] * Math.exp(-d2(p, m) / (2 * va[j])) / va[j]); const s = w.reduce((a, b) => a + b, 0) || 1; return w.map(x => x / s); });
+    for (let j = 0; j < k; j++) { const r = soft.map(w => w[j]), n = r.reduce((a, b) => a + b, 0) || 1e-9;
+      mu[j] = [r.reduce((s, v, i) => s + v * pts[i][0], 0) / n, r.reduce((s, v, i) => s + v * pts[i][1], 0) / n];
+      va[j] = Math.max(80, r.reduce((s, v, i) => s + v * d2(pts[i], mu[j]), 0) / (2 * n)); pi[j] = n / pts.length; }
+    labels = soft.map(w => w.indexOf(Math.max(...w)));
+    if (it % 3 === 0) { draw(mu); await sleep(200); }
+  }
+  draw(mu);
+}
+async function graph(kn) {   // k-nearest-neighbour graph + label propagation (a simple stand-in for Leiden)
+  edges = []; const nbr = pts.map((p, i) => pts.map((q, j) => [d2(p, q), j]).filter(x => x[1] !== i).sort((a, b) => a[0] - b[0]).slice(0, kn).map(x => x[1]));
+  nbr.forEach((ns, i) => ns.forEach(j => { if (i < j || !nbr[j].includes(i)) edges.push([i, j]); }));
+  const mutual = pts.map((_, i) => nbr[i].filter(j => nbr[j].includes(i)));
+  let lab = pts.map((_, i) => i); soft = null; labels = pts.map(() => -2); draw(); await sleep(400);
+  seed = 5;
+  for (let it = 0; it < 15; it++) {
+    const order = pts.map((_, i) => i).sort(() => rnd() - .5);
+    for (const i of order) { const cnt = {}; for (const j of mutual[i]) cnt[lab[j]] = (cnt[lab[j]] || 0) + 1;
+      const best = Object.entries(cnt).sort((a, b) => b[1] - a[1])[0]; if (best) lab[i] = +best[0]; }
+    const ids = [...new Set(lab)], size = {}; lab.forEach(l => size[l] = (size[l] || 0) + 1);
+    const big = ids.filter(l => size[l] >= 5).sort((a, b) => size[b] - size[a]);
+    labels = lab.map(l => big.indexOf(l) >= 0 ? big.indexOf(l) : -1);
+    draw(); await sleep(220);
+  }
+}
+
+// ---------------- UI ----------------
+const INFO = {
+  kmeans: { name: "k-means", ctl: ["Groups (k)", 2, 6, 3], how: "You choose k. It drops k centres (✕), gives every dot to its nearest centre, moves each centre to the middle of its dots, and repeats.",
+    good: ["Simple and fast", "Good baseline"], bad: ["You must guess k", "Every dot is forced into a group (no 'odd' bucket)", "Only finds round groups — try 'Curvy'"] },
+  hdbscan: { name: "HDBSCAN (density)", ctl: ["Neighbourhood size", 14, 60, 28], how: "Finds crowded areas. Dots in sparse areas stay grey = noise. Real HDBSCAN tries every neighbourhood size and keeps the most stable groups; this demo shows one size at a time (move the slider).",
+    good: ["Finds how many groups by itself", "Odd skills stay noise instead of polluting a topic", "Handles curvy shapes"], bad: ["Needs settings (min cluster size)", "Can label many short skills as noise"] },
+  agglo: { name: "Agglomerative (tree)", ctl: ["Cut the tree at k groups", 2, 8, 3], how: "Starts with every dot alone, then keeps joining the two closest groups. The joins form a family tree; you choose where to cut it.",
+    good: ["The tree is a ready-made hierarchy (great for Sprint 4)", "Works with cosine distance"], bad: ["You choose the cut", "Every dot gets a group", "A bad early join can't be undone"] },
+  gmm: { name: "Gaussian mixture (soft)", ctl: ["Groups (k)", 2, 6, 3], how: "Like k-means, but each dot gets a SHARE of every group. Mixed colours = a dot that belongs to two topics (e.g. 'SQL' in both 'data' and 'IT').",
+    good: ["Soft membership: one skill can sit in two topics"], bad: ["You choose k", "Assumes round, bell-shaped groups — skill vectors often aren't"] },
+  graph: { name: "Graph / Leiden-style", ctl: ["Neighbours per dot", 3, 12, 6], how: "Links each dot to its closest neighbours (grey lines), then finds communities: sets of dots linked more to each other than to the rest. Leiden is the careful version of this idea; the demo uses a simpler one.",
+    good: ["Finds the number of groups itself", "Handles curvy shapes", "Fits 'similar-skill networks' naturally"], bad: ["Needs the neighbour count", "Extra library; results vary run to run"] },
+};
+function showInfo() {
+  const m = INFO[method];
+  document.getElementById("info").innerHTML = `<h2>${m.name}</h2><p>${m.how}</p>
+    <b class="good">Good</b><ul>${m.good.map(x => `<li>${x}</li>`).join("")}</ul>
+    <b class="bad">Watch out</b><ul>${m.bad.map(x => `<li>${x}</li>`).join("")}</ul>
+    <div class="ours"><b>For our project:</b> ${method === "hdbscan" ? "our main pick — many odd one-off skills, unknown number of topics."
+      : method === "agglo" ? "our second pick — its tree becomes the Sprint 4 hierarchy."
+      : method === "kmeans" ? "only a simple baseline to compare against."
+      : method === "gmm" ? "skipped — the soft idea is nice, but its round-group assumption fits skill vectors poorly."
+      : "a good extra if time allows."}</div>`;
+  const [lab, lo, hi, def] = m.ctl;
+  document.getElementById("ctl").innerHTML = `${lab} <input type="range" id="k" min="${lo}" max="${hi}" value="${def}"> <span id="kv">${def}</span>`;
+  document.getElementById("k").oninput = e => { document.getElementById("kv").textContent = e.target.value; if (method === "hdbscan") run(); };
+}
+let busy = false;
+async function run() {
+  if (busy) return; busy = true; soft = null; edges = []; labels = pts.map(() => -2);
+  const k = +document.getElementById("k").value;
+  if (method === "kmeans") await kmeans(k); else if (method === "hdbscan") density(k, 5);
+  else if (method === "agglo") await agglo(k); else if (method === "gmm") await gmm(k); else await graph(k);
+  const g = new Set(labels.filter(l => l >= 0)).size, nz = labels.filter(l => l === -1).length;
+  document.getElementById("stat").textContent = `${g} groups found · ${nz} dots left as noise (grey)`;
+  busy = false;
+}
+document.querySelectorAll("[data-ds]").forEach(b => b.onclick = () => { if (busy) return;
+  document.querySelectorAll("[data-ds]").forEach(x => x.classList.toggle("on", x === b)); ds = b.dataset.ds; makeData(); document.getElementById("stat").textContent = ""; });
+document.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { if (busy) return;
+  document.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b)); method = b.dataset.m; showInfo(); makeData(); document.getElementById("stat").textContent = ""; });
+document.getElementById("run").onclick = run;
+
+// ---------------- quiz ----------------
+const Q = [
+  ["Which method leaves odd skills as 'noise' instead of forcing them into a group?", ["k-means", "HDBSCAN", "Agglomerative"], 1],
+  ["Try 'Curvy (two moons)' with k-means, k = 2. What happens?", ["It finds both moons", "It cuts the moons the wrong way", "It finds 10 groups"], 1],
+  ["Which method gives a family tree we can reuse for the Sprint 4 hierarchy?", ["Agglomerative", "Gaussian mixture", "k-means"], 0],
+  ["Mixed colours in Gaussian mixture mean…", ["an error", "a dot that partly belongs to two groups", "noise"], 1],
+];
+let sc = 0, done = 0;
+document.getElementById("quiz").innerHTML = Q.map(([q, o], i) => `<div class="q">${i + 1}. ${q}</div>` +
+  o.map((t, j) => `<label data-q="${i}" data-o="${j}"><input type="radio" name="q${i}"> ${t}</label>`).join("")).join("");
+document.querySelectorAll(".quiz label").forEach(l => l.onclick = () => {
+  const q = +l.dataset.q; if (document.querySelector(`.quiz label[data-q="${q}"].r, .quiz label[data-q="${q}"].w`)) return;
+  const ok = +l.dataset.o === Q[q][2]; l.classList.add(ok ? "r" : "w");
+  if (!ok) document.querySelector(`.quiz label[data-q="${q}"][data-o="${Q[q][2]}"]`).classList.add("r");
+  sc += ok; done++; document.getElementById("score").textContent = `Score ${sc}/${done}`;
+});
+
+showInfo(); makeData();
+</script>
+</body>
+</html>

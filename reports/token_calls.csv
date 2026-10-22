@@ -1,0 +1,4 @@
+called_at,provider,model,prompt_version,posting_id,tokens_in,tokens_out
+2026-10-21T18:23:17+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3904994321,1782,350
+2026-10-21T18:23:23+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3889457655,1523,404
+2026-10-21T18:23:29+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3903442977,1470,775

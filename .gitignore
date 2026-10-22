@@ -34,3 +34,6 @@ Supabase.png
 data/reference/
 data/gold/reference/*.pdf
 reports/*.log
+
+# hand-off bundles for teammates (contain posting text): share via Drive, never Git
+exports/

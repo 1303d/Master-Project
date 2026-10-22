@@ -16,7 +16,13 @@ ESCO/O*NET rule E (`link_reference.py`); Sprint 2 gap fixes (validation, max-mat
   2026-10-21 after Windows killed it on battery; **all 3 tasks now allowed on battery** (laptop must stay on).
 - `SkillPipeline\LoadQwen` hourly → Supabase; `SkillPipeline\NightlyGreenhouse` 02:00 (first run tonight).
 
+**Update 15:50:** QwenBatch stopped again at 14:23 (`^C`, exit 0xC000013A — its console window was closed;
+87/2,000 done). It auto-restarts at the 02:20 daily trigger. **Pending fix (user approved later):** run the task
+hidden so no window can be closed, then restart. Lochan's reconciliation done (read-only): 79 with skills,
+8 zero-skill, 0 failed, 1,913 not run; bundle `exports/sample2000_qwen_v3_2026-10-21_1545.zip` (gitignored, share via Drive).
+
 **Next, in order:**
+0. Make QwenBatch run hidden + restart it (user said hold until home, ~2 h).
 1. User: reset the Supabase DB password (old one was in a deleted screenshot, never pushed) → update `.env`
    → Claude checks `py src/db.py --check`.
 2. **Sprint 3:** embed unique skills from `current_statements` with `BAAI/bge-small-en-v1.5` → store in
