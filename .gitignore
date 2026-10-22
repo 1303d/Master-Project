@@ -34,3 +34,6 @@ Supabase.png
 data/reference/
 data/gold/reference/*.pdf
 reports/*.log
+
+# macOS folder metadata
+.DS_Store
