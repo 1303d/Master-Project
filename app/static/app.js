@@ -114,9 +114,10 @@ function renderPipe(s, extracting, loading) {
   const c = s.counts, b = s.batch, tx = s.taxonomy, n = (x) => (x ?? 0).toLocaleString();
   const known = s.verdicts.find((v) => v.verdict === "known_skill"), total = s.verdicts.reduce((a, v) => a + v.n, 0) || 1;
   const nodes = [
-    { ic: "📄", k: "Postings", n: n(c.kaggle), m: `Kaggle sample + ${n(c.greenhouse)} Greenhouse` },
+    { ic: "📄", k: "Postings", n: n(c.kaggle), m: `Kaggle sample + ${n(c.greenhouse)} Greenhouse`,
+      href: "https://www.kaggle.com/datasets/arshkon/linkedin-job-postings", more: "Kaggle dataset ↗" },
     { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: `Qwen3.8 27B on Groq (free)`, live: extracting, log: "qwen" },
-    { ic: "🧩", k: "Skill statements", n: n(c.statements), m: `${n(c.unique_skills)} unique skills`, live: loading },
+    { ic: "🧩", k: "Skill statements", n: n(c.statements), m: `${n(c.unique_skills)} unique skills`, live: loading, pad: true },
     { ic: "🔗", k: "Link ESCO / O*NET", n: known ? pct(known.n / total) : "—", m: "statements matched to a known skill", live: loading },
     { ic: "🗂️", k: "Cluster topics", n: tx ? n(tx.topics) : "—", m: "HDBSCAN on skill embeddings", off: true, href: "/learn/cluster-topics.html#big" },
     { ic: "⭐", k: "Skill library", n: tx ? n(tx.library) : "—", m: tx ? `cross-sector skills · ${n(tx.strong_links)} strong links` : "", off: true,
@@ -125,10 +126,11 @@ function renderPipe(s, extracting, loading) {
   const flows = [extracting, loading, loading, false, false];
   $("#pipe").innerHTML = nodes.map((d, i) =>
     `${i ? `<span class="link ${flows[i - 1] ? "flow" : ""}" aria-hidden="true"></span>` : ""}`
-    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : d.log ? `button type="button" data-log="${d.log}"` : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
+    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : d.log ? `button type="button" data-log="${d.log}"` : d.pad ? 'button type="button" data-pad="1"' : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
     + `<div class="ic" aria-hidden="true">${d.ic}</div><div class="k">${esc(d.k)}</div><div class="n">${esc(d.n)}</div>`
-    + `<div class="m">${esc(d.m)}</div>${d.href ? '<div class="more">How it works →</div>' : d.log ? '<div class="more">Live log →</div>' : ""}`
-    + `</${d.href ? "a" : d.log ? "button" : "div"}>`).join("");
+    + `<div class="m">${esc(d.m)}</div>${d.href ? `<div class="more">${esc(d.more || "How it works →")}</div>` : d.log ? '<div class="more">Live log →</div>' : d.pad ? '<div class="more">See an example →</div>' : ""}`
+    + `</${d.href ? "a" : d.log || d.pad ? "button" : "div"}>`).join("");
+  document.querySelectorAll("#pipe [data-pad]").forEach((el) => el.addEventListener("click", openPad));
   document.querySelectorAll("#pipe [data-log]").forEach((el) => el.addEventListener("click", () => openLog(el.dataset.log)));
   $("#pipe-note").textContent = "Solid boxes run on a schedule (extract continuously, load hourly). Dashed boxes are offline Sprint 3 steps."
     + ` Everything is stored in Supabase (${(c.db_bytes / 1e6).toFixed(1)} MB of 500 MB).`;
@@ -500,6 +502,39 @@ $("#log-name").addEventListener("change", () => refreshLog().then(() => { $("#lo
     if (e.key === "ArrowRight") { set(now - 40, true); e.preventDefault(); }
   });
 })();
+
+// ---------- statement notepad (Skill statements box) ----------
+async function loadPad() {
+  $("#pad-body").innerHTML = '<p class="muted">Loading a real example…</p>';
+  let d;
+  try { d = await api("/api/statements/sample"); } catch (e) { $("#pad-body").innerHTML = `<p class="muted">error: ${esc(e.message)}</p>`; return; }
+  const p = d.posting, st = d.statements, first = st[0] || {};
+  const json = '{"skills": [\n' + st.map((r) => "  " + JSON.stringify({ skill: r.skill, evidence: r.evidence })).join(",\n") + "\n]}";  // one skill per line
+  const row = first.statement_id ? JSON.stringify({ statement_id: first.statement_id, posting_id: p.posting_id, skill: first.skill,
+    skill_key: first.skill_key, evidence: first.evidence, evidence_in_text: first.evidence_in_text, provider: "groq", model: first.model,
+    prompt_version: first.prompt_version, run_id: first.run_id, created_at: first.created_at }, null, 2) : "(no statements)";
+  const tag = (t, cls) => `<span class="badge ${cls}">${esc(t)}</span>`;
+  $("#pad-body").innerHTML = `
+    <div class="flow"><span>posting</span>→<span>prompt v3 + Qwen3.8 27B (Groq)</span>→<span>JSON answer, validated, cached</span>→<span>one row per skill</span>→<span>alias → canonical skill</span>→<span>ESCO / O*NET verdict</span>→<span>topic + library</span></div>
+    <h3><span class="step">1 · Posting</span> ${esc(p.title || "")} · ${esc(p.company || "")} · ${esc(p.location || "")} <span class="muted">(${esc(p.posting_id)}, ${esc(p.source || "")})</span></h3>
+    <pre class="sheet">${esc(p.excerpt || "")}${p.excerpt && p.excerpt.length >= 700 ? " …" : ""}</pre>
+    <h3><span class="step">2 · What the model returned</span> <span class="muted">(prompts/skill_extraction_v3.txt asks for exactly this shape; a bad answer is rejected and never cached)</span></h3>
+    <pre class="sheet">${esc(json)}</pre>
+    <h3><span class="step">3 · One stored row</span> <span class="muted">(Supabase table skill_statements; statement_id = posting:skill:number)</span></h3>
+    <pre class="sheet">${esc(row)}</pre>
+    <h3><span class="step">4 · What happens to each skill</span> <span class="muted">(${st.length} statements)</span></h3>
+    <div class="tw"><table><thead><tr><th>Skill as written</th><th>Evidence in text?</th><th>Canonical skill</th><th>ESCO / O*NET</th><th>Topic</th><th>Library</th></tr></thead><tbody>
+    ${st.map((r) => `<tr><td>${esc(r.skill)}</td><td>${r.evidence_in_text ? tag("yes", "b-ok") : tag("no", "b-warn")}</td>
+      <td>${esc(r.canonical)}${r.alias_rule ? ` <span class="muted">(${esc(r.alias_rule)})</span>` : ""}</td>
+      <td>${tag(r.verdict || "unlinked", r.verdict === "known_skill" ? "b-ok" : r.verdict === "trait" ? "b-edited" : "b-warn")} <span class="muted">${esc(r.ref_label || "")}</span></td>
+      <td>${r.topic_id ? `${esc(r.topic_id)} ${esc(r.topic_label || "")} <span class="muted">${esc(r.topic_state || "")}</span>` : '<span class="muted">not in the clustering snapshot yet</span>'}</td>
+      <td>${r.in_library ? tag("library", "b-ok") : ""}</td></tr>`).join("")}
+    </tbody></table></div>
+    <p class="muted">Skills found after the 2026-10-22 snapshot have no topic yet; they join at the next clustering run.</p>`;
+}
+function openPad() { $("#pad-dialog").showModal(); loadPad(); }
+$("#pad-next").addEventListener("click", loadPad);
+$("#pad-close").addEventListener("click", () => $("#pad-dialog").close());
 
 loadStatus();
 if (location.hash) document.querySelector(`.tabs button[data-view="${CSS.escape(location.hash.slice(1).split("/")[0])}"]`)?.click();

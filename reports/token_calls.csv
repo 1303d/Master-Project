@@ -222,3 +222,4 @@ called_at,provider,model,prompt_version,posting_id,tokens_in,tokens_out
 2026-10-23T17:16:33+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3902759316,1256,232
 2026-10-23T17:27:01+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3903883762,1349,749
 2026-10-23T17:44:38+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3901964291,1620,109
+2026-10-23T17:54:03+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,li_3902922202,1354,415

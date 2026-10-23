@@ -240,6 +240,33 @@ class App:
                 "lines": text.splitlines()[-lines:], "modified": path.stat().st_mtime,
                 "logs": {k: v[0] for k, v in LOGS.items()}}
 
+    def statement_sample(self, q):
+        """One posting's journey: its statements as stored, plus alias -> canonical, verdict and topic per skill."""
+        pid = q.get("posting")
+        if not pid:  # a random Qwen-extracted posting with a handful of skills
+            row = self.q("""select posting_id from skill_statements where model = %(m)s
+                            group by 1 having count(*) between 5 and 14 order by random() limit 1""", {"m": BATCH_MODEL})
+            if not row:
+                raise ValueError("no extracted postings yet")
+            pid = row[0]["posting_id"]
+        post = self.q("""select posting_id, source, company, title, location, sector, left(description, 700) excerpt
+                         from postings where posting_id = %(p)s""", {"p": pid})
+        rows = self.q("""select s.statement_id, s.skill, s.skill_key, s.evidence, s.evidence_in_text, s.model, s.prompt_version,
+                                s.run_id, s.created_at, coalesce(a.skill_key, s.skill_key) canonical, a.rule alias_rule,
+                                l.verdict, l.source ref_source, l.ref_label, t.topic_id, t.state topic_state, tp.label topic_label
+                         from skill_statements s
+                         left join skill_aliases a on a.alias_key = s.skill_key
+                         left join skill_links l on l.skill_key = s.skill_key
+                         left join active_skill_topics t on t.skill_key = coalesce(a.skill_key, s.skill_key)
+                         left join topics tp on tp.topic_id = t.topic_id
+                         where s.posting_id = %(p)s and s.model = %(m)s order by s.statement_id""",
+                      {"p": pid, "m": q.get("model", BATCH_MODEL)})  # one model: the pipeline extractor
+        lib = {r["skill_key"] for r in self.q("select skill_key from skill_library")}
+        for r in rows:
+            r["in_library"] = r["canonical"] in lib
+            r["created_at"] = r["created_at"].isoformat() if r["created_at"] else None
+        return {"posting": post[0] if post else {"posting_id": pid}, "statements": rows}
+
     def tasks(self):
         """Status and next run of the scheduled jobs (schtasks), refreshed every 30 s. Empty off Windows."""
         if time.time() - self._tasks[0] > 30:
@@ -395,7 +422,8 @@ class App:
                           "/api/review/skill": lambda: self.skill(q.get("key", "").lower()),
                           "/api/skills": lambda: self.skills(q), "/api/reviews": self.reviews,
                           "/api/map": self.skill_map, "/api/library": self.library, "/api/models": self.models,
-                          "/api/intrusion/items": self.intrusion_items, "/api/logs": lambda: self.logs(q)}
+                          "/api/intrusion/items": self.intrusion_items, "/api/logs": lambda: self.logs(q),
+                          "/api/statements/sample": lambda: self.statement_sample(q)}
                 if path in routes:
                     return self.send(start, routes[path]())
             if method == "POST" and path == "/api/intrusion/answer":
