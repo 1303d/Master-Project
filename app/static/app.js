@@ -115,7 +115,7 @@ function renderPipe(s, extracting, loading) {
   const known = s.verdicts.find((v) => v.verdict === "known_skill"), total = s.verdicts.reduce((a, v) => a + v.n, 0) || 1;
   const nodes = [
     { ic: "📄", k: "Postings", n: n(c.kaggle), m: `Kaggle sample + ${n(c.greenhouse)} Greenhouse` },
-    { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: `Qwen3.8 27B on Groq (free)`, live: extracting },
+    { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: `Qwen3.8 27B on Groq (free)`, live: extracting, log: "qwen" },
     { ic: "🧩", k: "Skill statements", n: n(c.statements), m: `${n(c.unique_skills)} unique skills`, live: loading },
     { ic: "🔗", k: "Link ESCO / O*NET", n: known ? pct(known.n / total) : "—", m: "statements matched to a known skill", live: loading },
     { ic: "🗂️", k: "Cluster topics", n: tx ? n(tx.topics) : "—", m: "HDBSCAN on skill embeddings", off: true, href: "/learn/cluster-topics.html#big" },
@@ -125,9 +125,11 @@ function renderPipe(s, extracting, loading) {
   const flows = [extracting, loading, loading, false, false];
   $("#pipe").innerHTML = nodes.map((d, i) =>
     `${i ? `<span class="link ${flows[i - 1] ? "flow" : ""}" aria-hidden="true"></span>` : ""}`
-    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
+    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : d.log ? `button type="button" data-log="${d.log}"` : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
     + `<div class="ic" aria-hidden="true">${d.ic}</div><div class="k">${esc(d.k)}</div><div class="n">${esc(d.n)}</div>`
-    + `<div class="m">${esc(d.m)}</div>${d.href ? '<div class="more">How it works →</div>' : ""}</${d.href ? "a" : "div"}>`).join("");
+    + `<div class="m">${esc(d.m)}</div>${d.href ? '<div class="more">How it works →</div>' : d.log ? '<div class="more">Live log →</div>' : ""}`
+    + `</${d.href ? "a" : d.log ? "button" : "div"}>`).join("");
+  document.querySelectorAll("#pipe [data-log]").forEach((el) => el.addEventListener("click", () => openLog(el.dataset.log)));
   $("#pipe-note").textContent = "Solid boxes run on a schedule (extract continuously, load hourly). Dashed boxes are offline Sprint 3 steps."
     + ` Everything is stored in Supabase (${(c.db_bytes / 1e6).toFixed(1)} MB of 500 MB).`;
 }
@@ -436,6 +438,68 @@ function renderF1Chart() {
   $("#f1-note").textContent = "Partial runs stopped early on free-tier limits, so their scores are less reliable. "
     + "On the test half, Qwen v3 and Claude Haiku are almost tied (see the table, split = test).";
 }
+
+// ---------- live job log (Extract skills box) ----------
+let logTimer = null;
+function logClass(line) {
+  if (/FAILED|Error|Traceback|429/.test(line)) return "warn";
+  if (/: \d+ skills|done|finished|loaded/i.test(line)) return "ok";
+  return /^\s/.test(line) ? "dim" : "";
+}
+async function refreshLog() {
+  const name = $("#log-name").value || "qwen";
+  let d;
+  try { d = await api(`/api/logs?name=${encodeURIComponent(name)}&lines=300`); } catch (e) { $("#log-meta").textContent = `error: ${e.message}`; return; }
+  if (d.logs && $("#log-name").options.length < Object.keys(d.logs).length) {  // first answer brings the real list
+    $("#log-name").innerHTML = Object.entries(d.logs).map(([k, t]) => `<option value="${esc(k)}">${esc(t)}</option>`).join("");
+    $("#log-name").value = name;
+  }
+  const when = d.modified ? new Date(d.modified * 1000) : null;
+  const fresh = when && Date.now() - when < 15 * 60000;
+  $("#log-title").textContent = d.title;
+  $("#log-meta").textContent = `${d.path} · ${d.lines.length} last lines · `
+    + (when ? `last written ${ago(when)} (${when.toLocaleString()})${fresh ? " · job is writing" : " · no new lines recently: the job is idle, waiting on a rate limit, or stopped"}` : "no log file yet");
+  const box = $("#log-text"), atEnd = box.scrollTop + box.clientHeight >= box.scrollHeight - 30;
+  box.innerHTML = d.lines.map((l) => `<span class="${logClass(l)}">${esc(l)}</span>`).join("\n") || '<span class="dim">(empty)</span>';
+  if ($("#log-follow").checked && atEnd) box.scrollTop = box.scrollHeight;
+}
+function openLog(name) {
+  if ($("#log-name").options.length) $("#log-name").value = name;
+  else $("#log-name").innerHTML = `<option value="${esc(name)}">${esc(name)}</option>`;
+  $("#log-dialog").showModal();
+  $("#log-text").scrollTop = 1e9;
+  refreshLog().then(() => { $("#log-text").scrollTop = 1e9; });
+  clearInterval(logTimer);
+  logTimer = setInterval(() => { if (!document.hidden) refreshLog(); }, 3000);
+}
+$("#log-close").addEventListener("click", () => $("#log-dialog").close());
+$("#log-dialog").addEventListener("close", () => clearInterval(logTimer));
+$("#log-name").addEventListener("change", () => refreshLog().then(() => { $("#log-text").scrollTop = 1e9; }));
+
+// ---------- resizable library panel (Skill map) ----------
+(() => {
+  const grid = document.querySelector(".map-grid"), bar = $("#map-split");
+  const clamp = (w) => Math.round(Math.max(280, Math.min(w, grid.clientWidth * 0.7)));
+  const set = (w, save) => {
+    grid.style.setProperty("--lib-w", `${clamp(w)}px`);
+    if (save) store.set("libWidth", String(clamp(w)));
+    if (window.Plotly && $("#map").data) Plotly.Plots.resize("map");
+  };
+  const saved = +store.get("libWidth");
+  if (saved) grid.style.setProperty("--lib-w", `${saved}px`);
+  bar.addEventListener("pointerdown", (e) => {
+    bar.setPointerCapture(e.pointerId); bar.classList.add("drag");
+    const move = (ev) => set(grid.getBoundingClientRect().right - ev.clientX, false);
+    const up = (ev) => { bar.classList.remove("drag"); bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", up);
+      set(grid.getBoundingClientRect().right - ev.clientX, true); };
+    bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", up);
+  });
+  bar.addEventListener("keydown", (e) => {
+    const now = document.querySelector(".lib").getBoundingClientRect().width;
+    if (e.key === "ArrowLeft") { set(now + 40, true); e.preventDefault(); }
+    if (e.key === "ArrowRight") { set(now - 40, true); e.preventDefault(); }
+  });
+})();
 
 loadStatus();
 if (location.hash) document.querySelector(`.tabs button[data-view="${CSS.escape(location.hash.slice(1).split("/")[0])}"]`)?.click();

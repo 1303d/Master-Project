@@ -31,6 +31,11 @@ import db  # noqa: E402
 
 STATIC = Path(__file__).resolve().parent / "static"
 LEARN = ROOT / "learn"  # study pages, linked from the pipeline diagram
+LOGS = {  # the only files /api/logs may read (scheduled jobs; see scripts/*.cmd)
+    "qwen": ("Qwen batch (extract)", ROOT / "reports" / "extract_sample2000_qwen.log"),
+    "load": ("Hourly load to Supabase", ROOT / "reports" / "task_load_qwen.log"),
+    "greenhouse": ("Nightly Greenhouse", ROOT / "reports" / "task_greenhouse.log"),
+}
 INTRUSION = ROOT / "reports" / "intrusion"  # src/intrusion_test.py make -> items.json; the UI appends answers.csv
 SAMPLE = ROOT / "data" / "processed" / "extraction_sample_2000.csv"
 BATCH_MODEL, BATCH_PROMPT = "qwen/qwen3.8-27b", ROOT / "prompts" / "skill_extraction_v3.txt"
@@ -38,6 +43,65 @@ SKILL_MAP = ROOT / "data" / "processed" / "sprint3_full_2026-10-22" / "canonical
 STAGES = ["fetch", "clean", "dedupe", "extract", "link", "load"]
 TASKS = {"extract": r"\SkillPipeline\QwenBatch", "load": r"\SkillPipeline\LoadQwen"}  # Windows Task Scheduler
 DECISIONS = {"skill": "known_skill", "trait": "trait", "not_a_skill": "not_a_skill", "alias": "known_skill"}
+
+
+LOGIN_PAGE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in - Section B</title>
+<style>:root{color-scheme:light dark}body{margin:0;min-height:100vh;display:grid;place-items:center;
+font:15px/1.5 system-ui,Segoe UI,sans-serif;background:#15171a;color:#e7e9ec}
+form{background:#1d2024;border:1px solid #30343a;border-radius:10px;padding:22px 24px;width:min(340px,90vw);display:grid;gap:10px}
+h1{font-size:18px;margin:0}p{margin:0;color:#9aa1ab;font-size:13px}input,button{font:inherit;padding:8px 10px;border-radius:6px}
+input{border:1px solid #30343a;background:#15171a;color:inherit}button{border:0;background:#8aa8ff;color:#10131a;font-weight:600;cursor:pointer}
+.err{color:#ff9a85}</style></head><body><form method="post" action="/login">
+<h1>Skill Pipeline - Section B</h1><p>Enter the team password to open the dashboard.</p>
+<input type="password" name="password" autocomplete="current-password" aria-label="Password" autofocus required>
+{error}<button type="submit">Sign in</button></form></body></html>"""
+
+
+def session_token(password):
+    """Stateless session: HMAC of the password, so changing UI_PASSWORD logs everyone out."""
+    import hashlib
+    import hmac
+    return hmac.new(password.encode(), b"section-b-ui-session", hashlib.sha256).hexdigest()
+
+
+def authorized(environ):
+    """True when UI_PASSWORD is unset (local use), or the request has the session cookie / Basic auth (curl)."""
+    import base64
+    import hmac
+    from http.cookies import SimpleCookie
+    password = os.getenv("UI_PASSWORD")
+    if not password:
+        return True
+    cookie = SimpleCookie(environ.get("HTTP_COOKIE", ""))
+    if "sb_session" in cookie and hmac.compare_digest(cookie["sb_session"].value, session_token(password)):
+        return True
+    header = environ.get("HTTP_AUTHORIZATION", "")
+    if header.startswith("Basic "):
+        try:
+            given = base64.b64decode(header[6:]).decode("utf-8").split(":", 1)[1]
+            return hmac.compare_digest(given.encode(), password.encode())
+        except (ValueError, IndexError):
+            return False
+    return False
+
+
+def login(environ, start):
+    """GET: the sign-in page. POST: check the password, set a 7-day cookie, go to the dashboard."""
+    import hmac
+    error = ""
+    if environ["REQUEST_METHOD"] == "POST":
+        size = int(environ.get("CONTENT_LENGTH") or 0)
+        given = parse_qs(environ["wsgi.input"].read(size).decode("utf-8", errors="replace")).get("password", [""])[0]
+        password = os.getenv("UI_PASSWORD", "")
+        if password and hmac.compare_digest(given.encode(), password.encode()):
+            secure = "; Secure" if environ.get("HTTP_X_FORWARDED_PROTO") == "https" else ""
+            start("303 See Other", [("Location", "/"), ("Set-Cookie", f"sb_session={session_token(password)}; Path=/; "
+                                                                    f"Max-Age=604800; HttpOnly; SameSite=Lax{secure}")])
+            return [b""]
+        error = '<p class="err">Wrong password. Try again.</p>'
+    start("200 OK", [("Content-Type", "text/html; charset=utf-8"), ("Cache-Control", "no-store")])
+    return [LOGIN_PAGE.replace("{error}", error).encode("utf-8")]
 
 
 class App:
@@ -159,6 +223,23 @@ class App:
             w.writerow([item, choice, rater, time.strftime("%Y-%m-%dT%H:%M:%S")])
         return {"ok": True}
 
+    def logs(self, q):
+        """Last lines of one whitelisted job log, plus when it was last written."""
+        name = q.get("name", "qwen")
+        if name not in LOGS:
+            raise ValueError(f"unknown log: {name}")
+        title, path = LOGS[name]
+        lines = max(20, min(int(q.get("lines", 200)), 1000))
+        if not path.exists():
+            return {"name": name, "title": title, "path": path.relative_to(ROOT).as_posix(), "lines": [], "modified": None}
+        with path.open("rb") as f:  # read only the tail: the logs grow all day
+            f.seek(0, 2)
+            f.seek(max(0, f.tell() - 200_000))
+            text = f.read().decode("utf-8", errors="replace")
+        return {"name": name, "title": title, "path": path.relative_to(ROOT).as_posix(),
+                "lines": text.splitlines()[-lines:], "modified": path.stat().st_mtime,
+                "logs": {k: v[0] for k, v in LOGS.items()}}
+
     def tasks(self):
         """Status and next run of the scheduled jobs (schtasks), refreshed every 30 s. Empty off Windows."""
         if time.time() - self._tasks[0] > 30:
@@ -198,14 +279,18 @@ class App:
         models = self.q("select model, count(*) n from skill_statements group by 1 order by 2 desc")
         history = self.q("""select date_trunc('hour', created_at) ts, count(*) n from skill_statements
                             where model = %(m)s group by 1 order by 1""", {"m": BATCH_MODEL})
-        top = self.q("""select skill_key, count(distinct posting_id) n from skill_statements
-                        group by 1 order by 2 desc limit 15""")
         try:  # Sprint 3 taxonomy tables (sql/taxonomy_schema.sql); absent on an older database
             taxonomy = self.q("""select (select count(*) from topics where status = 'active') topics,
                 (select count(*) from skill_library) library,
                 (select count(*) from library_links where strength = 'strong') strong_links""")[0]
+            # counted on the cleaned names, like the taxonomy (excel + microsoft excel = one skill)
+            top = self.q("""select coalesce(a.skill_key, s.skill_key) skill_key, count(distinct s.posting_id) n
+                            from skill_statements s left join skill_aliases a on a.alias_key = s.skill_key
+                            group by 1 order by 2 desc limit 15""")
         except Exception:
             taxonomy = None
+            top = self.q("""select skill_key, count(distinct posting_id) n from skill_statements
+                            group by 1 order by 2 desc limit 15""")
         return {"counts": counts, "verdicts": verdicts, "runs": runs, "latest": latest, "events": events[-80:],
                 "stages": stages, "active_model": last["model"] if last else None, "switches": switches,
                 "models": models, "batch": self.batch_progress(), "tasks": self.tasks(),
@@ -289,6 +374,13 @@ class App:
     def __call__(self, environ, start):
         path, method = environ.get("PATH_INFO", "/"), environ["REQUEST_METHOD"]
         q = {k: v[0] for k, v in parse_qs(environ.get("QUERY_STRING", "")).items()}
+        if path == "/login":
+            return login(environ, start)
+        if not authorized(environ):  # only when UI_PASSWORD is set (sharing through a tunnel)
+            if path.startswith("/api/"):
+                return self.send(start, {"error": "not signed in"}, "401 Unauthorized")
+            start("303 See Other", [("Location", "/login")])
+            return [b""]
         try:
             if path == "/" or path.startswith(("/static/", "/learn/")):
                 base = LEARN if path.startswith("/learn/") else STATIC
@@ -303,7 +395,7 @@ class App:
                           "/api/review/skill": lambda: self.skill(q.get("key", "").lower()),
                           "/api/skills": lambda: self.skills(q), "/api/reviews": self.reviews,
                           "/api/map": self.skill_map, "/api/library": self.library, "/api/models": self.models,
-                          "/api/intrusion/items": self.intrusion_items}
+                          "/api/intrusion/items": self.intrusion_items, "/api/logs": lambda: self.logs(q)}
                 if path in routes:
                     return self.send(start, routes[path]())
             if method == "POST" and path == "/api/intrusion/answer":

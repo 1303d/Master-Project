@@ -109,6 +109,8 @@
       </div>
       <div class="map-grid">
         <div id="map" class="pane"></div>
+        <div id="map-split" class="splitter" role="separator" aria-orientation="vertical" aria-label="Resize the library panel"
+             tabindex="0" title="Drag to resize (or use the arrow keys)"></div>
         <aside class="pane lib">
           <h3>Skill library <span id="lib-count" class="muted"></span></h3>
           <p class="muted">Cross-sector skills and tools, kept as single entities. Click one to draw its links to
@@ -144,5 +146,16 @@
       <div class="code-map" id="code-map"></div>
     </section>
   </main>
+
+  <dialog id="log-dialog" aria-labelledby="log-title">
+    <div class="log-head">
+      <h2 id="log-title">Job log</h2>
+      <select id="log-name" aria-label="Which log"></select>
+      <label class="muted"><input type="checkbox" id="log-follow" checked> follow</label>
+      <button type="button" id="log-close">Close</button>
+    </div>
+    <p class="muted" id="log-meta"></p>
+    <pre id="log-text" class="log-text" tabindex="0"></pre>
+  </dialog>
 </body>
 </html>

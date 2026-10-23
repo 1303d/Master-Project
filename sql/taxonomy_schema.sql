@@ -132,3 +132,20 @@ select st.skill_key, st.topic_id, t.label as topic_label, t.parent_topic_id as f
 from skill_topics st
 join cluster_runs r on r.run_id = st.run_id and r.is_active
 left join topics t on t.topic_id = st.topic_id;
+
+-- The representation itself (brief, Sprint 3: "store it in the shared database"): one bge-small vector per
+-- canonical skill, keyed by the vectors file hash so a run can always find the exact vectors it was clustered on
+-- (cluster_runs.vectors_sha256). Loaded by src/load_embeddings.py. pgvector ships with Supabase.
+create extension if not exists vector with schema extensions;
+create table if not exists skill_embeddings (
+  vectors_sha256 text not null,                  -- sha256 of vectors.npy (= cluster_runs.vectors_sha256)
+  skill_key      text not null,
+  model_id       text not null,                  -- e.g. BAAI/bge-small-en-v1.5
+  revision       text not null,                  -- pinned model revision
+  embedding      extensions.vector(384) not null, -- L2-normalised, so cosine = dot product
+  created_at     timestamptz not null default now(),
+  primary key (vectors_sha256, skill_key)
+);
+create index if not exists skill_embeddings_hnsw on skill_embeddings
+  using hnsw (embedding extensions.vector_cosine_ops);
+alter table skill_embeddings enable row level security;

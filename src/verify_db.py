@@ -84,6 +84,14 @@ def main():
             check("Greenhouse postings with skills", True, f"{n} of {len(stored)} (extraction runs as a nightly queue)",
                   info=True)
 
+        with db.connect() as con:  # Sprint 3: the active clustering run must find every vector it was built on
+            run = con.execute("""select r.run_id, (select count(*) from skill_topics t where t.run_id = r.run_id),
+                                        (select count(*) from skill_embeddings e where e.vectors_sha256 = r.vectors_sha256)
+                                 from cluster_runs r where r.is_active""").fetchone()
+        if run:
+            check("Embeddings of the active run", run[1] == run[2],
+                  f"{run[2]} vectors in skill_embeddings for {run[1]} skill memberships ({run[0]})")
+
     fails = results.count("FAIL")
     print(f"\n{results.count('PASS')} passed, {fails} failed, {results.count('INFO')} info")
     sys.exit(1 if fails else 0)

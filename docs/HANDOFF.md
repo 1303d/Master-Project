@@ -68,6 +68,13 @@ skill_type, reuse_level (schema alter in taxonomy_schema.sql), loaded with `load
 UI library panel shows type + postings / templates. Still open from the list: #2 sensitivity, #3 sectors, #4 sample, #6
 topic-id matching; #1 / #7 are report wording.
 
+**Embeddings in Supabase (2026-10-22 ~23:30, brief Sprint 3 "store it in the shared database"):** pgvector enabled
+(`create extension vector with schema extensions` in taxonomy_schema.sql), table `skill_embeddings` (vectors_sha256,
+skill_key, model_id, revision, embedding vector(384), HNSW cosine index), loaded by `src/load_embeddings.py` (11,093
+rows for canonical_v2, cosine check vs numpy). verify_db has a check that the active run finds all its vectors.
+DB 99 MB / 500 MB. Committed a35f805 "sprint - 3 skill library updates" (not pushed); embeddings work is after it.
+Sprint 3 left: stability report (+ chosen parameters) in reports/.
+
 **Known weak spots:** topic labels = centroid skill (python topic shows "scala"); weak memberships can be odd
 (attention to detail → "zoom", margin 0.017); library ids/links tied to the HDBSCAN run (rebuild if Leiden wins).
 

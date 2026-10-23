@@ -1,0 +1,209 @@
+{
+ "seed": 42,
+ "runs": [
+  "data/processed/sprint3_full_2026-10-22/canonical/clusters/hdbscan_10_umap10_ms1",
+  "data/processed/sprint3_full_2026-10-22/canonical/clusters/leiden_20.0"
+ ],
+ "items": {
+  "1": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 377,
+   "intruder": "post acute care regulations"
+  },
+  "2": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 327,
+   "intruder": "cosmetic dentistry"
+  },
+  "3": {
+   "run": "leiden_20.0",
+   "topic": 165,
+   "intruder": "seo"
+  },
+  "4": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 52,
+   "intruder": "painting"
+  },
+  "5": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 47,
+   "intruder": "data analysis"
+  },
+  "6": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 279,
+   "intruder": "product knowledge"
+  },
+  "7": {
+   "run": "leiden_20.0",
+   "topic": 271,
+   "intruder": "gmp"
+  },
+  "8": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 114,
+   "intruder": "auditing"
+  },
+  "9": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 15,
+   "intruder": "crisis management"
+  },
+  "10": {
+   "run": "leiden_20.0",
+   "topic": 134,
+   "intruder": "kubernetes"
+  },
+  "11": {
+   "run": "leiden_20.0",
+   "topic": 152,
+   "intruder": "asset management"
+  },
+  "12": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 16,
+   "intruder": "pallet jack"
+  },
+  "13": {
+   "run": "leiden_20.0",
+   "topic": 1,
+   "intruder": "custodian platforms"
+  },
+  "14": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 140,
+   "intruder": "mechanical"
+  },
+  "15": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 216,
+   "intruder": "business intelligence"
+  },
+  "16": {
+   "run": "leiden_20.0",
+   "topic": 82,
+   "intruder": "emotional intelligence"
+  },
+  "17": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 302,
+   "intruder": "ccpa"
+  },
+  "18": {
+   "run": "leiden_20.0",
+   "topic": 259,
+   "intruder": "technical aptitude"
+  },
+  "19": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 57,
+   "intruder": "microsoft office"
+  },
+  "20": {
+   "run": "leiden_20.0",
+   "topic": 91,
+   "intruder": "microsoft office suite"
+  },
+  "21": {
+   "run": "leiden_20.0",
+   "topic": 256,
+   "intruder": "store operations"
+  },
+  "22": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 111,
+   "intruder": "cpt coding"
+  },
+  "23": {
+   "run": "leiden_20.0",
+   "topic": 276,
+   "intruder": "solarwinds"
+  },
+  "24": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 44,
+   "intruder": "litigation"
+  },
+  "25": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 71,
+   "intruder": "authorization"
+  },
+  "26": {
+   "run": "leiden_20.0",
+   "topic": 232,
+   "intruder": "appliance repair"
+  },
+  "27": {
+   "run": "leiden_20.0",
+   "topic": 320,
+   "intruder": "oral cancer screening"
+  },
+  "28": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 119,
+   "intruder": "splunk"
+  },
+  "29": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 12,
+   "intruder": "research"
+  },
+  "30": {
+   "run": "leiden_20.0",
+   "topic": 101,
+   "intruder": "activities of daily living"
+  },
+  "31": {
+   "run": "leiden_20.0",
+   "topic": 54,
+   "intruder": "270 eligibility"
+  },
+  "32": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 125,
+   "intruder": "aderant"
+  },
+  "33": {
+   "run": "leiden_20.0",
+   "topic": 0,
+   "intruder": "critical thinking"
+  },
+  "34": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 346,
+   "intruder": "contact lens dispensing"
+  },
+  "35": {
+   "run": "leiden_20.0",
+   "topic": 191,
+   "intruder": "accounting principles"
+  },
+  "36": {
+   "run": "leiden_20.0",
+   "topic": 78,
+   "intruder": "fundraising"
+  },
+  "37": {
+   "run": "leiden_20.0",
+   "topic": 311,
+   "intruder": "patience"
+  },
+  "38": {
+   "run": "leiden_20.0",
+   "topic": 306,
+   "intruder": "irs"
+  },
+  "39": {
+   "run": "hdbscan_10_umap10_ms1",
+   "topic": 379,
+   "intruder": "patient rights"
+  },
+  "40": {
+   "run": "leiden_20.0",
+   "topic": 80,
+   "intruder": "community management"
+  }
+ }
+}

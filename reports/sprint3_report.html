@@ -1,0 +1,303 @@
+<title>Sprint 3 Skill Topics Report</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (max 860px) with a contents strip; tables scroll inside their own box. */
+:root {
+  --bg: #f6f7f8; --paper: #ffffff; --ink: #1b2430; --muted: #5b6673; --line: #dde2e7;
+  --accent: #0f6e78; --accent-soft: #e1f0f1; --good: #1e7a46; --good-soft: #e2f3e8;
+  --warn: #9a5b00; --warn-soft: #fbefd9; --bad: #a3321f; --bad-soft: #fbe5e0;
+  --sans: "Libre Franklin", "Segoe UI", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12171c; --paper: #192027; --ink: #e5e9ed; --muted: #9aa5b1; --line: #2c3540;
+  --accent: #5cc2cc; --accent-soft: #163338; --good: #6fd49b; --good-soft: #15301f;
+  --warn: #f0b35a; --warn-soft: #382a12; --bad: #ff9a85; --bad-soft: #3d201b; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12171c; --paper: #192027; --ink: #e5e9ed; --muted: #9aa5b1; --line: #2c3540;
+  --accent: #5cc2cc; --accent-soft: #163338; --good: #6fd49b; --good-soft: #15301f;
+  --warn: #f0b35a; --warn-soft: #382a12; --bad: #ff9a85; --bad-soft: #3d201b; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15.5px/1.6 var(--sans); }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-size: 30px; line-height: 1.2; margin: 6px 0 4px; text-wrap: balance; }
+h2 { font-size: 20px; margin: 40px 0 8px; padding-top: 8px; border-top: 1px solid var(--line); text-wrap: balance; }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p, li { max-width: 68ch; } a { color: var(--accent); }
+.eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.meta { color: var(--muted); font-size: 14px; }
+code, .mono { font-family: var(--mono); font-size: 13px; }
+code { background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 18px 0 8px; font-size: 13.5px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
+.kpi { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.kpi .n { font: 600 22px/1.2 var(--mono); } .kpi .k { color: var(--muted); font-size: 12.5px; }
+.tw { overflow-x: auto; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
+tr.chosen td { background: var(--accent-soft); font-weight: 600; }
+tbody tr:last-child td { border-bottom: 0; }
+.tag { display: inline-block; font: 600 11.5px/1.6 var(--sans); border-radius: 999px; padding: 0 8px; white-space: nowrap; }
+.ok { color: var(--good); background: var(--good-soft); } .mid { color: var(--warn); background: var(--warn-soft); }
+.no { color: var(--bad); background: var(--bad-soft); }
+.note { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+.note.warn { border-left-color: var(--warn); }
+pre { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow-x: auto; font: 12.5px/1.55 var(--mono); }
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font: 12.5px var(--mono); margin: 10px 0; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+.flow b { color: var(--muted); font-weight: 400; }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">Section B · Skill taxonomy · Sprint 3 — Representation &amp; Clustering</div>
+  <h1>Sprint 3 report: from skill statements to leaf topics</h1>
+  <p class="meta">Northeastern "Taxonomy of Work" capstone · status 2026-10-22 (night) · written for the team, as the source for the demo slides.
+    Numbers come from the repo (<code>data/processed/sprint3_full_2026-10-22/canonical_v2/</code>, Supabase, <code>docs/HANDOFF.md</code>).</p>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#from-s2">1. From Sprint 2</a><a href="#what">2. What Sprint 3 is and how we did it</a><a href="#methods">3. Clustering methods and results</a>
+    <a href="#library">4. Skill library</a><a href="#sweep">5. Parameter sweep</a><a href="#final">6. Final result</a><a href="#repro">Appendix: reproduce</a>
+  </nav>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">11,093</div><div class="k">clean skills (from 11,449 names)</div></div>
+    <div class="kpi"><div class="n">374</div><div class="k">leaf topics (HDBSCAN)</div></div>
+    <div class="kpi"><div class="n">0.84</div><div class="k">stability AMI (80% subsets)</div></div>
+    <div class="kpi"><div class="n">196</div><div class="k">library skills · 249 strong links</div></div>
+  </div>
+
+  <!-- 1 -->
+  <h2 id="from-s2">1. How we progressed from Sprint 2</h2>
+  <p>Sprint 2 (Text Extraction) turned each posting into atomic skill statements and measured their quality. It ended with:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Sprint 2 output</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td>Corpus</td><td>Kaggle <code>arshkon/linkedin-job-postings</code>, 123,849 US postings (Mar–Apr 2024). Duplicates and short texts are tagged, not dropped (106,909 usable). Plus a live Greenhouse feed (453 postings).</td></tr>
+      <tr><td>Gold set</td><td>100 hand-labelled postings across 8 sectors, 1,333 gold skills, split 50 dev / 50 test. Labelling rules A–E; rule E makes ESCO + O*NET the rule book for skill vs trait.</td></tr>
+      <tr><td>Extractor</td><td><b>Qwen3.8 27B on Groq (free), prompt v3.</b> Test F1 strict .66 / lenient .74, a tie with Claude Haiku 5.5 (.66 / .75), so the free model is the pipeline model. Haiku was a research benchmark only.</td></tr>
+      <tr><td>Pipeline</td><td>Postings → clean / dedupe → LLM extract (LiteLLM router, Gemini fallback, Langfuse tracing, every call cached) → ESCO v1.2 / O*NET 31.0 link → Supabase.</td></tr>
+      <tr><td>Statements</td><td>Skill statements in Supabase with an ESCO / O*NET verdict: 69% known skill · 2% trait · 29% new candidate (sent to human review).</td></tr>
+    </tbody>
+  </table></div>
+  <p>What Sprint 3 had to start from: a list of skill <i>statements</i>, but no structure. "Excel", "microsoft excel" and "advanced excel" were three unrelated strings,
+    and nothing said which skills belong together. Sprint 2's final report: <code>reports/sprint2_final_report.md</code>.</p>
+
+  <!-- 2 -->
+  <h2 id="what">2. What Sprint 3 is, and how we did it</h2>
+  <p>The brief calls Sprint 3 <b>Representation &amp; Clustering</b>: "section statements into leaf topics". Its tasks: choose a representation and store it in the
+    shared database, fit and compare at least two clustering methods, run a parameter sweep with a stability report, and decide whether a statement may belong to
+    more than one topic. Deliverable: topic and topic-membership tables plus the stability report with chosen parameters.</p>
+  <h3>Our steps, in order</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Step</th><th>What we did</th><th>Script</th></tr></thead>
+    <tbody>
+      <tr><td>1. Snapshot</td><td>Froze the statements on 2026-10-22: 28,777 mentions from 1,931 postings, 11,449 distinct skill names. One model per posting (Qwen where its batch is done, the Haiku research run elsewhere; both score the same on test).</td><td><code>prepare_skills.py</code></td></tr>
+      <tr><td>2. Clean the names</td><td>Merged spelling variants and verified aliases: 11,449 → <b>11,093</b> skills (details below).</td><td><code>normalize_aliases.py</code>, <code>find_alias_candidates.py</code></td></tr>
+      <tr><td>3. Represent</td><td>Embedded each skill name with <b>BAAI/bge-small-en-v1.5</b> (384 numbers, pinned revision). Stored in Supabase with pgvector.</td><td><code>embed_skills.py</code>, <code>load_embeddings.py</code></td></tr>
+      <tr><td>4. Cluster + sweep</td><td>Tried 4 methods and 20 settings (sections 3 and 5).</td><td><code>cluster_skills.py</code></td></tr>
+      <tr><td>5. Stability</td><td>Re-ran the best settings on random 80% subsets and other seeds.</td><td><code>cluster_stability.py</code></td></tr>
+      <tr><td>6. Membership</td><td>One main topic per skill; noise skills become weak members of the nearest topic; top-3 related skills.</td><td><code>load_taxonomy.py</code></td></tr>
+      <tr><td>7. Skill library</td><td>Generic cross-sector skills get a library label and links to domain topics (section 4).</td><td><code>build_library.py</code>, <code>skill_types.py</code></td></tr>
+      <tr><td>8. Load + check</td><td>Topic, membership, library and embedding tables in Supabase; <code>verify_db.py</code> 10 pass.</td><td><code>load_taxonomy.py</code>, <code>verify_db.py</code></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Step 2 in detail: cleaning the skill names</h3>
+  <p>Each name becomes its own point in the embedding space, so "excel" and "microsoft excel" would split counts and blur topics. Four rules merge names:
+    R1 hyphens and punctuation (problem-solving = problem solving), R2 "ms" → "microsoft", R3 drop a trailing "skills", R4 a human-verified alias list.</p>
+  <p>The R4 list came from a cross-check with independent signals: spelling rules (plurals, spaces, "(ap)"), a level or vendor word ("adobe photoshop" = "photoshop"),
+    near-identical embeddings, and the same ESCO / O*NET entry. All 289 high and medium candidates were checked against the posting text:
+    <b>269 merged, 16 kept apart</b>. Kept apart, for example: canvas (Canvas LMS) ≠ canva, "SAPs" (lab analysis plans) ≠ SAP, routings (manufacturing) ≠ routing (networks),
+    CMM (measuring machine) ≠ CMMS. Pairs found only by meaning were usually broad vs narrow ("trend analysis" vs "market trend analysis") and were not merged.</p>
+  <div class="note warn"><b>Weakness found:</b> the embedding sees only the name. numpy lands next to "basic math", tensorflow next to airflow ("-flow"), and
+    "microsoft excel" falls between the Microsoft products topic and the spreadsheet topic. Planned fix in Sprint 4: embed the name plus a short description.</div>
+
+  <!-- 3 -->
+  <h2 id="methods">3. Clustering methods we tried, with results</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Method</th><th>How it groups skills</th><th>Best setting</th><th class="n">Topics</th><th class="n">Coverage</th><th class="n">AMI</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr class="chosen"><td>HDBSCAN</td><td>finds dense areas in a 10-dim UMAP space; leaves sparse skills as noise</td><td>size 10, min_samples 1</td><td class="n">374</td><td class="n">78%</td><td class="n">0.84</td><td><span class="tag ok">chosen</span></td></tr>
+      <tr><td>Leiden (RB modularity)</td><td>builds a graph of each skill's 15 nearest skills, finds communities</td><td>resolution 20</td><td class="n">323</td><td class="n">100%</td><td class="n">0.75</td><td><span class="tag mid">runner-up</span></td></tr>
+      <tr><td>Leiden (CPM)</td><td>same graph, another quality function (8 settings)</td><td>—</td><td class="n">148–441</td><td class="n">100%</td><td class="n">≤ 0.78</td><td><span class="tag no">rejected</span></td></tr>
+      <tr><td>Agglomerative (cosine)</td><td>merges the closest pairs step by step, cut at a distance</td><td>cut 0.4</td><td class="n">357</td><td class="n">100%</td><td class="n">0.61</td><td><span class="tag mid">hierarchy only</span></td></tr>
+      <tr><td>k-means</td><td>splits into k round groups</td><td>—</td><td class="n">—</td><td class="n">100%</td><td class="n">—</td><td><span class="tag no">not kept</span></td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>HDBSCAN</b> gives the steadiest topics on the skills it clusters, and honestly marks 22% as "does not fit". We keep those skills as weak members, so none is lost.</li>
+    <li><b>Leiden RB</b> covers every skill and has the best per-topic overlap (Jaccard 0.60), but its labels move more between subsets (AMI 0.75). On the 78% that HDBSCAN
+      clusters, the two agree (AMI 0.78, uncleaned run), so the choice is mainly about the hard 22%.</li>
+    <li><b>Leiden CPM</b> was suggested by a GPT review as "steadier as data grows". Our test said no: best per-topic Jaccard 0.53 vs 0.59 for RB.</li>
+    <li><b>Agglomerative</b> is the least stable on raw skills and jumps from thousands of tiny clusters to one giant cluster within a small change of the cut.
+      We keep it only for the Sprint 4 hierarchy over topic centres.</li>
+    <li><b>k-means</b> needs the number of topics in advance and cannot leave a skill out, which does not fit skill data (topics range from 10 to 90+ skills).</li>
+  </ul>
+  <h3>AI advice we tested instead of trusting</h3>
+  <div class="tw"><table>
+    <thead><tr><th>GPT review suggested</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Leiden with CPM is steadier</td><td><span class="tag no">rejected</span> CPM Jaccard 0.53 vs RB 0.59</td></tr>
+      <tr><td>Merge verified aliases first</td><td><span class="tag ok">done</span> 269 evidence-checked merges</td></tr>
+      <tr><td>Never force a skill into a topic: assigned / weak</td><td><span class="tag ok">done</span> with score and margin per skill</td></tr>
+      <tr><td>Build the hierarchy over topic centroids</td><td><span class="tag ok">agreed</span> Sprint 4</td></tr>
+      <tr><td>Give soft skills their own family</td><td><span class="tag ok">done differently</span> the skill library</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- 4 -->
+  <h2 id="library">4. Our skill library work</h2>
+  <h3>Why we built a skill library</h3>
+  <p>Clustering groups skills by what they <i>mean</i>, using only the skill name. It never looks at which jobs use a skill. That leaves a gap for the
+    generic skills that every sector asks for. We built the library for four reasons:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Reason</th><th>What happens without it</th><th>What the library adds</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. Generic skills get stranded</b></td><td>HDBSCAN puts many of them in noise (attention to detail has no topic at all) or in separate soft-skill topics
+        (39 topics), cut off from the domains that use them</td><td>Each generic skill is linked to the domain topics it really appears with</td></tr>
+      <tr><td><b>2. Our end goal needs them</b></td><td>For an initiative like "build a finance team" we could return accounting topics, but not that the same postings also ask
+        for excel and attention to detail</td><td>Links found in real postings: microsoft excel → payment reconciliation (lift 3.2)</td></tr>
+      <tr><td><b>3. The brief asks for it</b></td><td>"Decide whether a statement may belong to more than one topic" would be answered with one topic per skill only</td>
+        <td>A library skill belongs to its own topic and links to several domain topics: our multi-topic answer</td></tr>
+      <tr><td><b>4. It prepares Sprint 5</b></td><td>Task ↔ skill mapping would start from zero</td><td>The same co-occurrence maths (lift, p, q per template) will link Section A's tasks to our skills</td></tr>
+    </tbody>
+  </table></div>
+  <p>Example: communication appears in 603 postings across all 8 sectors. Its meaning puts it in a soft-skill topic, which tells us nothing about where it matters most.</p>
+  <p><b>The idea.</b> Keep two things apart: topics (meaning, from embeddings) and a library of cross-sector skills linked to the domain topics they really go with
+    (from counting postings). The library is a label on a skill, so nothing is duplicated.</p>
+  <h3>Who is in the library</h3>
+  <ul>
+    <li>A skill seen in ≥ 5 postings, in ≥ 4 of 8 sectors, with no sector holding more than 50% of its postings. Confirmed = ≥ 10 postings.
+      The rule was fixed before looking at the results.</li>
+    <li><b>196 library skills</b> (146 confirmed). Only 43 of them are HDBSCAN noise; the rest also have a normal topic.</li>
+    <li>Each has a <b>type</b> from its ESCO / O*NET link: 80 skill · 55 knowledge · 27 tool (excel, word) · 6 trait (attention to detail, leadership) · 28 unknown.</li>
+    <li>39 soft-skill topics (more than half their mentions are library skills) are flagged <i>transversal</i>.</li>
+  </ul>
+  <h3>How a library skill links to a topic</h3>
+  <ol>
+    <li>Count job templates (company + job title) that mention the skill, the topic, and both.</li>
+    <li><b>Lift</b> = observed ÷ expected by chance. Example: excel 191 postings, the accounts-payable topic 41, of 1,931 → chance ≈ 4 shared, seen 18, lift ≈ 4.4.</li>
+    <li><b>p</b> = hypergeometric test (could the overlap be luck?); <b>q</b> = Benjamini–Hochberg correction over all 65,584 pairs tested.</li>
+    <li><b>Strong</b> when ≥ 5 templates, lift ≥ 1.5 and q &lt; 0.05; otherwise weak. Result: <b>980 links, 249 strong</b>
+      (e.g. microsoft excel → payment reconciliation, lift 3.2).</li>
+  </ol>
+  <h3>How the library improved (v1 → v2)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Change</th><th>Why</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td>Name clean-up before building</td><td>excel / microsoft excel were counted apart</td><td>microsoft excel now one skill, 250 postings</td></tr>
+      <tr><td>Count per job template, not per posting</td><td>one job copied to many cities counted many times</td><td>255 → 249 strong; empathy (7 postings = 4 jobs) and writing lost strong links</td></tr>
+      <tr><td>Per whole company (tried)</td><td>—</td><td><span class="tag no">rejected</span> staffing firms post unrelated roles; 255 → 154 for the wrong reason</td></tr>
+      <tr><td>Skill type added</td><td>tools, traits and skills were mixed</td><td>traits can be filtered (rule E); tools are visible</td></tr>
+    </tbody>
+  </table></div>
+  <p>Study page with interactive examples: <code>learn/library-links.html</code>. In the UI: Skill map → click a library skill to see its links.</p>
+
+  <!-- 5 -->
+  <h2 id="sweep">5. How we did the parameter sweep</h2>
+  <p><b>Grid.</b> All runs on the final 11,093 skills, seed 42: HDBSCAN min cluster size 5 / 10 / 15 / 20 × min_samples default / 1 / 3 (12 settings);
+    Leiden resolution 5 / 10 / 20 / 30 (k = 15); agglomerative cut 0.30 / 0.35 / 0.40 / 0.45. Per run we record topics, noise share, median and largest topic size, silhouette.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Method</th><th>Setting</th><th class="n">Topics</th><th class="n">Noise</th><th class="n">Median size</th><th class="n">Largest</th></tr></thead>
+    <tbody>
+      <tr><td>HDBSCAN</td><td>size 5, default</td><td class="n">586</td><td class="n">27.0%</td><td class="n">10</td><td class="n">75</td></tr>
+      <tr><td>HDBSCAN</td><td>size 10, default</td><td class="n">275</td><td class="n">37.4%</td><td class="n">20</td><td class="n">132</td></tr>
+      <tr><td>HDBSCAN</td><td>size 15, default</td><td class="n">163</td><td class="n">42.7%</td><td class="n">31</td><td class="n">445</td></tr>
+      <tr><td>HDBSCAN</td><td>size 20, default</td><td class="n">113</td><td class="n">47.5%</td><td class="n">40</td><td class="n">411</td></tr>
+      <tr><td>HDBSCAN</td><td>size 5, min_samples 1</td><td class="n">752</td><td class="n">19.3%</td><td class="n">9</td><td class="n">78</td></tr>
+      <tr class="chosen"><td>HDBSCAN</td><td>size 10, min_samples 1 (chosen)</td><td class="n">374</td><td class="n">22.1%</td><td class="n">18.5</td><td class="n">91</td></tr>
+      <tr><td>HDBSCAN</td><td>size 15, min_samples 1</td><td class="n">244</td><td class="n">24.3%</td><td class="n">27</td><td class="n">202</td></tr>
+      <tr><td>HDBSCAN</td><td>size 20, min_samples 1</td><td class="n">184</td><td class="n">27.0%</td><td class="n">36</td><td class="n">202</td></tr>
+      <tr><td>HDBSCAN</td><td>size 5, min_samples 3</td><td class="n">691</td><td class="n">21.2%</td><td class="n">9</td><td class="n">78</td></tr>
+      <tr><td>HDBSCAN</td><td>size 10, min_samples 3</td><td class="n">363</td><td class="n">24.0%</td><td class="n">19</td><td class="n">134</td></tr>
+      <tr><td>HDBSCAN</td><td>size 15, min_samples 3</td><td class="n">236</td><td class="n">26.5%</td><td class="n">27</td><td class="n">201</td></tr>
+      <tr><td>HDBSCAN</td><td>size 20, min_samples 3</td><td class="n">177</td><td class="n">28.2%</td><td class="n">36</td><td class="n">201</td></tr>
+      <tr><td>Leiden</td><td>resolution 5</td><td class="n">116</td><td class="n">0%</td><td class="n">92</td><td class="n">273</td></tr>
+      <tr><td>Leiden</td><td>resolution 10</td><td class="n">212</td><td class="n">0%</td><td class="n">49</td><td class="n">143</td></tr>
+      <tr><td>Leiden</td><td>resolution 20</td><td class="n">323</td><td class="n">0%</td><td class="n">31</td><td class="n">101</td></tr>
+      <tr><td>Leiden</td><td>resolution 30</td><td class="n">412</td><td class="n">0%</td><td class="n">25</td><td class="n">78</td></tr>
+      <tr><td>Agglomerative</td><td>cut 0.30</td><td class="n">1,975</td><td class="n">0%</td><td class="n">3</td><td class="n">98</td></tr>
+      <tr><td>Agglomerative</td><td>cut 0.35</td><td class="n">1,012</td><td class="n">0%</td><td class="n">4</td><td class="n">206</td></tr>
+      <tr><td>Agglomerative</td><td>cut 0.40</td><td class="n">357</td><td class="n">0%</td><td class="n">8</td><td class="n">814</td></tr>
+      <tr><td>Agglomerative</td><td>cut 0.45</td><td class="n">67</td><td class="n">0%</td><td class="n">11</td><td class="n">5,028</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Reading the sweep:</b> bigger HDBSCAN sizes push more skills into noise and create one oversized topic; size 5 makes hundreds of tiny topics;
+    min_samples 1 keeps noise near 20%. An earlier sweep on the uncleaned names showed the same pattern.</p>
+  <p><b>Stability.</b> For the strongest settings we re-ran clustering on 5 random 80% subsets (only the data changes) and with 3 other seeds (only the seed changes).
+    <b>AMI</b> compares labels between runs (1 = identical, 0 = chance). <b>Per-topic Jaccard</b> (Hennig 2007) is each topic's best overlap with any subset cluster:
+    ≥ 0.75 stable, &lt; 0.5 dissolved.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Setting</th><th class="n">Topics</th><th class="n">AMI subsets</th><th class="n">AMI seeds</th><th class="n">Topic Jaccard</th><th class="n">Dissolved</th><th class="n">Coverage</th></tr></thead>
+    <tbody>
+      <tr><td>HDBSCAN 10, default</td><td class="n">275</td><td class="n">0.908</td><td class="n">0.974</td><td class="n">0.580</td><td class="n">42%</td><td class="n">63%</td></tr>
+      <tr><td>HDBSCAN 10, min_samples 3</td><td class="n">363</td><td class="n">0.853</td><td class="n">0.952</td><td class="n">0.538</td><td class="n">46%</td><td class="n">76%</td></tr>
+      <tr class="chosen"><td>HDBSCAN 10, min_samples 1</td><td class="n">374</td><td class="n">0.842</td><td class="n">0.946</td><td class="n">0.535</td><td class="n">45%</td><td class="n">78%</td></tr>
+      <tr><td>HDBSCAN 15, min_samples 1</td><td class="n">244</td><td class="n">0.838</td><td class="n">0.942</td><td class="n">0.498</td><td class="n">50%</td><td class="n">76%</td></tr>
+      <tr><td>Leiden RB res 20</td><td class="n">323</td><td class="n">0.746</td><td class="n">0.868</td><td class="n">0.596</td><td class="n">36%</td><td class="n">100%</td></tr>
+      <tr><td>Agglomerative 0.4</td><td class="n">357</td><td class="n">0.606</td><td class="n">1.000</td><td class="n">0.452</td><td class="n">57%</td><td class="n">100%</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>"HDBSCAN 10 default" scores highest only because it leaves 37% of skills out (HDBSCAN AMI is measured on clustered skills).</li>
+    <li>min_samples 3 is a near-tie (0.853 vs 0.842) with 2 points less coverage; we keep min_samples 1.</li>
+    <li>About half of the topics dissolve in some subset for every method, so topic-level claims need human review.</li>
+  </ul>
+
+  <!-- 6 -->
+  <h2 id="final">6. Final result of Sprint 3</h2>
+  <div class="note"><b>Chosen:</b> HDBSCAN, <code>min_cluster_size = 10</code>, <code>min_samples = 1</code>, on UMAP (10 dims, 15 neighbours, min_dist 0, cosine, seed 42)
+    of bge-small-en-v1.5 embeddings of 11,093 clean skill names. Noise skills are weak members of the nearest topic. Plus skill library v2.</div>
+  <div class="tw"><table>
+    <thead><tr><th>Result</th><th class="n">Value</th></tr></thead>
+    <tbody>
+      <tr><td>Clean skills (vector points)</td><td class="n">11,093</td></tr>
+      <tr><td>Leaf topics</td><td class="n">374</td></tr>
+      <tr><td>Skills in a topic / weak members</td><td class="n">8,646 / 2,447</td></tr>
+      <tr><td>Stability: AMI subsets / seeds / per-topic Jaccard</td><td class="n">0.84 / 0.95 / 0.53</td></tr>
+      <tr><td>Library skills (confirmed) · transversal topics</td><td class="n">196 (146) · 39</td></tr>
+      <tr><td>Library links (strong)</td><td class="n">980 (249)</td></tr>
+      <tr><td>Embeddings in Supabase (pgvector)</td><td class="n">11,093 × 384</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Brief checklist</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Sprint 3 task</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Representation chosen and stored in the shared database</td><td><span class="tag ok">done</span> <code>skill_embeddings</code></td></tr>
+      <tr><td>At least two clustering methods compared</td><td><span class="tag ok">done</span> four</td></tr>
+      <tr><td>Parameter sweep and stability report</td><td><span class="tag ok">done</span> this page</td></tr>
+      <tr><td>Multi-topic decision implemented</td><td><span class="tag ok">done</span> main topic + weak + library links</td></tr>
+      <tr><td>Topic and topic-membership tables</td><td><span class="tag ok">done</span> <code>topics</code>, <code>skill_topics</code> (run <code>hdbscan_10_umap10_ms1_2026-10-23</code>)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Limits to say out loud</h3>
+  <ul>
+    <li>About half the topics are fragile under resampling, for every method.</li>
+    <li>The embedding uses the name only; topic labels are still the centroid skill (the coding topic shows "scala").</li>
+    <li>Small sample (1,931 postings); the Qwen batch is slowed by the free tier, so the snapshot mixes Qwen and the Haiku research run.</li>
+    <li>Library thresholds were set by us and are not yet tested for sensitivity; sectors come from noisy LinkedIn tags.</li>
+  </ul>
+  <h3>Next</h3>
+  <ul>
+    <li><b>Sprint 4:</b> name every topic, build parent levels over topic centres, keep the library as a cross-sector branch (as ESCO does), evaluate against ESCO.</li>
+    <li><b>Sprint 5 (with Section A):</b> task ↔ skill mapping; needs shared posting ids (data contract).</li>
+  </ul>
+
+  <h2 id="repro">Appendix: reproduce</h2>
+  <p><code>D = data/processed/sprint3_full_2026-10-22</code>, <code>V = D/canonical_v2</code>; Python 3.11.</p>
+<pre>python src/normalize_aliases.py --mentions D/prepared_mentions.csv --skills D/unique_skills.csv --out-dir V
+python src/embed_skills.py --skills V/unique_skills.csv --model-config V/embedding_model.json --out-dir V/embeddings
+python src/cluster_skills.py --emb-dir V/embeddings --out-dir V/clusters --method hdbscan --param 10 --umap-dim 10 --min-samples 1
+python src/cluster_stability.py --emb-dir V/embeddings --out V/stability.csv --method hdbscan --param 10 --min-samples 1
+python src/skill_types.py --skills V/unique_skills.csv --out V/skill_types.csv
+python src/build_library.py --mentions D/prepared_mentions.csv --aliases V/aliases.csv \
+    --run V/clusters/hdbscan_10_umap10_ms1 --out-dir V/library_hdbscan_v2 --types V/skill_types.csv
+python src/load_taxonomy.py --run V/clusters/hdbscan_10_umap10_ms1 --library V/library_hdbscan_v2 \
+    --emb-dir V/embeddings --aliases V/aliases.csv --activate
+python src/load_embeddings.py --emb-dir V/embeddings
+python src/verify_db.py</pre>
+  <p class="meta">Slide text with speaker notes: <code>docs/sprint3_demo_slides.md</code>. Study pages: <code>learn/cluster-topics.html</code>, <code>learn/library-links.html</code>.</p>
+</div>
