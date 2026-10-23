@@ -1,4 +1,4 @@
-"""Section B pipeline UI: pipeline status, human review queue, skills explorer (reads/writes Supabase).
+"""Section B pipeline UI: pipeline status, review queue, skills explorer, 3D skill map (reads/writes Supabase).
 
     py app/server.py              # http://127.0.0.1:8765/   (Ctrl+C to stop)
     py app/server.py --port 8800
@@ -14,7 +14,11 @@ import argparse
 import hashlib
 import json
 import mimetypes
+import ast
+import csv
 import os
+import re
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -26,15 +30,19 @@ sys.path.insert(0, str(ROOT / "src"))
 import db  # noqa: E402
 
 STATIC = Path(__file__).resolve().parent / "static"
+LEARN = ROOT / "learn"  # study pages, linked from the pipeline diagram
+INTRUSION = ROOT / "reports" / "intrusion"  # src/intrusion_test.py make -> items.json; the UI appends answers.csv
 SAMPLE = ROOT / "data" / "processed" / "extraction_sample_2000.csv"
 BATCH_MODEL, BATCH_PROMPT = "qwen/qwen3.8-27b", ROOT / "prompts" / "skill_extraction_v3.txt"
+SKILL_MAP = ROOT / "data" / "processed" / "sprint3_full_2026-10-22" / "canonical_v2" / "skill_map_3d.csv"
 STAGES = ["fetch", "clean", "dedupe", "extract", "link", "load"]
+TASKS = {"extract": r"\SkillPipeline\QwenBatch", "load": r"\SkillPipeline\LoadQwen"}  # Windows Task Scheduler
 DECISIONS = {"skill": "known_skill", "trait": "trait", "not_a_skill": "not_a_skill", "alias": "known_skill"}
 
 
 class App:
     def __init__(self):
-        self.con, self._batch = None, (0, None)
+        self.con, self._batch, self._tasks, self._lf = None, (0, None), (0, {}), (0, None)
 
     def q(self, sql, params=None):
         """Rows as dicts; reconnects once if the pooled connection dropped."""
@@ -58,10 +66,114 @@ class App:
             import pandas as pd
             sha = hashlib.sha256(BATCH_PROMPT.read_text(encoding="utf-8").encode()).hexdigest()
             texts = pd.read_csv(SAMPLE, encoding="utf-8-sig").description
-            done = sum((ROOT / "cache" / "groq" /
-                        f"{hashlib.sha256(f'{BATCH_MODEL}|{sha}|{t}'.encode()).hexdigest()}.json").exists() for t in texts)
-            self._batch = (time.time(), {"model": BATCH_MODEL, "done": done, "total": len(texts)})
+            files = [ROOT / "cache" / "groq" / f"{hashlib.sha256(f'{BATCH_MODEL}|{sha}|{t}'.encode()).hexdigest()}.json"
+                     for t in texts]
+            times = [f.stat().st_mtime for f in files if f.exists()]
+            self._batch = (time.time(), {"model": BATCH_MODEL, "done": len(times), "total": len(texts),
+                                         "last_ts": max(times) if times else None, "times": sorted(times)})
         return self._batch[1]
+
+    def models(self):
+        """Extractor scores, read from the evaluate.py reports, plus a map of the code files (docstring line 1)."""
+        runs = []
+        for f in sorted((ROOT / "reports").glob("sprint2_extraction_quality_*.md")):
+            text = f.read_text(encoding="utf-8")
+            ex = re.search(r"\*\*Extractor:\*\* `([^`]+)` via (\S+), prompt `([^`]+)`", text)
+            gold = re.search(r"\*\*Gold set:\*\* (\d+) postings, (\d+) gold skills \(`([^`]+)`\)", text)
+            row = re.search(r"\| \*\*All\*\* \|(.+)", text)
+            if not (ex and gold and row):
+                continue
+            n = [float(x) for x in row.group(1).split("|") if x.strip()]
+            tag = f.stem.removeprefix("sprint2_extraction_quality_")
+            runs.append({"model": ex.group(1), "provider": ex.group(2), "prompt": ex.group(3).removeprefix("skill_extraction_"),
+                         "split": "test" if "_test" in tag else "dev" if "_dev" in tag else "all 100 (Sprint 2)",
+                         "gold": "v2 (traits dropped)" if "gold_labels_v2" in gold.group(3) else "v1",
+                         "variant": "kNN examples" if "knn" in tag else "", "postings": int(gold.group(1)),
+                         "p_strict": n[3], "r_strict": n[4], "f1_strict": n[5], "p_lenient": n[6], "r_lenient": n[7],
+                         "f1_lenient": n[8], "report": f"reports/{f.name}"})
+        files = []
+        for pattern in ("src/*.py", "app/server.py", "prompts/*.txt", "scripts/*.cmd", "sql/*.sql"):
+            for f in sorted(ROOT.glob(pattern)):
+                text = f.read_text(encoding="utf-8", errors="replace")
+                if f.suffix == ".py":
+                    doc = (ast.get_docstring(ast.parse(text)) or "").splitlines()[:1]
+                    doc = doc[0] if doc else ""
+                else:  # first comment line of a .cmd / .sql file; prompts have none
+                    doc = next((re.sub(r"^(rem|--)\s*", "", l.strip()) for l in text.splitlines()
+                                if l.strip().startswith(("rem ", "--"))), "")
+                files.append({"path": f.relative_to(ROOT).as_posix(), "doc": doc})
+        return {"runs": runs, "files": files, "root": ROOT.as_posix()}
+
+    def langfuse(self):
+        """Langfuse connection check (keys from .env, never sent to the browser), refreshed every 60 s."""
+        pk, sk = os.getenv("LANGFUSE_PUBLIC_KEY"), os.getenv("LANGFUSE_SECRET_KEY")
+        host = (os.getenv("LANGFUSE_HOST") or os.getenv("LANGFUSE_BASE_URL") or "https://cloud.langfuse.com").rstrip("/")
+        if not (pk and sk):
+            return {"state": "no_keys", "url": host}
+        if time.time() - self._lf[0] > 60:
+            import base64
+            import urllib.request
+            auth = {"Authorization": "Basic " + base64.b64encode(f"{pk}:{sk}".encode()).decode()}
+            get = lambda p: json.load(urllib.request.urlopen(urllib.request.Request(host + p, headers=auth), timeout=8))
+            try:
+                from urllib.parse import quote
+                project = get("/api/public/projects")["data"][0]["id"]
+                # v2 API (the v1 /traces endpoint answers 410 Gone): count LLM calls (GENERATION observations; each
+                # call also has a wrapper SPAN), then fetch the newest observation
+                q = {"view": "observations", "metrics": [{"measure": "count", "aggregation": "count"}], "dimensions": [],
+                     "filters": [{"column": "type", "operator": "=", "value": "GENERATION", "type": "string"}],
+                     "fromTimestamp": "2026-01-01T00:00:00Z", "toTimestamp": "2100-01-01T00:00:00Z"}
+                count = get("/api/public/v2/metrics?query=" + quote(json.dumps(q)))["data"][0]["count_count"]
+                newest = get("/api/public/v2/observations?limit=1&fromStartTime=2026-01-01T00:00:00Z")["data"]
+                out = {"state": "connected", "url": f"{host}/project/{project}/traces", "traces": int(count),
+                       "last_trace": newest[0].get("startTime") if newest else None}
+            except Exception as e:  # wrong keys, wrong region or offline: show it, do not break the page
+                out = {"state": "error", "url": host, "error": f"{type(e).__name__}: {str(e)[:120]}"}
+            self._lf = (time.time(), out)
+        return self._lf[1]
+
+    def intrusion_items(self):
+        """Blind test items (no key) plus the items this rater already answered."""
+        if not (INTRUSION / "items.json").exists():
+            raise ValueError("no test yet: run  py src/intrusion_test.py make ...")
+        items = json.loads((INTRUSION / "items.json").read_text(encoding="utf-8"))
+        done = {}
+        if (INTRUSION / "answers.csv").exists():
+            with (INTRUSION / "answers.csv").open(encoding="utf-8") as f:
+                done = {r["item"]: r["choice"] for r in csv.DictReader(f)}
+        return {"items": items, "answers": done}
+
+    def intrusion_answer(self, body):
+        items = {str(i["item"]): i for i in json.loads((INTRUSION / "items.json").read_text(encoding="utf-8"))}
+        item, choice, rater = str(body.get("item")), body.get("choice"), (body.get("rater") or "").strip()
+        if item not in items or choice not in items[item]["skills"]:
+            raise ValueError("unknown item or choice")
+        if not rater:
+            raise ValueError("enter your name first")
+        path = INTRUSION / "answers.csv"
+        new = not path.exists()
+        with path.open("a", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            if new:
+                w.writerow(["item", "choice", "rater", "answered_at"])
+            w.writerow([item, choice, rater, time.strftime("%Y-%m-%dT%H:%M:%S")])
+        return {"ok": True}
+
+    def tasks(self):
+        """Status and next run of the scheduled jobs (schtasks), refreshed every 30 s. Empty off Windows."""
+        if time.time() - self._tasks[0] > 30:
+            out = {}
+            for name, tn in TASKS.items():
+                try:
+                    r = subprocess.run(["schtasks", "/query", "/tn", tn, "/fo", "CSV", "/nh"],
+                                       capture_output=True, text=True, timeout=10)
+                    row = next(csv.reader(r.stdout.splitlines()), None)
+                    if row and len(row) >= 3:
+                        out[name] = {"task": tn, "next_run": row[1], "state": row[2]}
+                except (OSError, subprocess.SubprocessError):
+                    pass
+            self._tasks = (time.time(), out)
+        return self._tasks[1]
 
     def status(self):
         counts = self.q("""select
@@ -84,11 +196,21 @@ class App:
         last = next((e for e in reversed(events) if e["model"]), None)
         switches = self.q("select * from pipeline_events where stage = 'model_switch' order by id desc limit 10")
         models = self.q("select model, count(*) n from skill_statements group by 1 order by 2 desc")
+        history = self.q("""select date_trunc('hour', created_at) ts, count(*) n from skill_statements
+                            where model = %(m)s group by 1 order by 1""", {"m": BATCH_MODEL})
+        top = self.q("""select skill_key, count(distinct posting_id) n from skill_statements
+                        group by 1 order by 2 desc limit 15""")
+        try:  # Sprint 3 taxonomy tables (sql/taxonomy_schema.sql); absent on an older database
+            taxonomy = self.q("""select (select count(*) from topics where status = 'active') topics,
+                (select count(*) from skill_library) library,
+                (select count(*) from library_links where strength = 'strong') strong_links""")[0]
+        except Exception:
+            taxonomy = None
         return {"counts": counts, "verdicts": verdicts, "runs": runs, "latest": latest, "events": events[-80:],
                 "stages": stages, "active_model": last["model"] if last else None, "switches": switches,
-                "models": models, "batch": self.batch_progress(),
-                "langfuse": bool(os.getenv("LANGFUSE_PUBLIC_KEY")),
-                "langfuse_url": os.getenv("LANGFUSE_PROJECT_URL") or os.getenv("LANGFUSE_HOST") or "https://cloud.langfuse.com"}
+                "models": models, "batch": self.batch_progress(), "tasks": self.tasks(),
+                "history": history, "top_skills": top, "taxonomy": taxonomy,
+                "langfuse": self.langfuse()}
 
     def queue(self, q):
         return self.q("""select l.skill_key, l.ref_label, l.source, l.score, count(*) n
@@ -131,13 +253,47 @@ class App:
     def reviews(self):
         return self.q("select * from review_decisions order by id desc limit 50")
 
+    def skill_map(self):
+        """Active clustering run: 3D points (from SKILL_MAP, display only) + topic and library info per skill."""
+        if not SKILL_MAP.exists():
+            raise ValueError(f"no skill map file: run src/make_skill_map.py ({SKILL_MAP.name})")
+        import pandas as pd
+        pts = pd.read_csv(SKILL_MAP, keep_default_na=False)
+        mem = pd.DataFrame(self.q("""select a.skill_key, a.topic_id, a.state, (l.skill_key is not null) as lib
+            from active_skill_topics a left join skill_library l using (skill_key) where a.role = 'primary'"""))
+        if mem.empty:
+            raise ValueError("no active clustering run in Supabase: run src/load_taxonomy.py --activate")
+        pts = pts.merge(mem, on="skill_key")
+        run = self.q("select run_id, method from cluster_runs where is_active")[0]
+        topics = self.q("select topic_id, label, is_transversal from topics where status = 'active'")
+        return {"run": run, "topics": topics,
+                "points": {c: pts[c].tolist() for c in ["skill_key", "mention_count", "x", "y", "z", "topic_id",
+                                                         "state", "lib"]}}
+
+    def library(self):
+        rows = self.q("""select s.skill_key, s.status, s.n_postings, s.n_sectors, s.entropy, s.skill_type, s.reuse_level,
+                s.rule_version, l.topic_id, t.label, l.n_postings as link_postings, l.n_templates as link_templates,
+                l.lift, l.q_value, l.strength
+            from skill_library s left join library_links l using (skill_key) left join topics t using (topic_id)
+            order by s.n_postings desc, l.p_value""")
+        out = {}
+        for r in rows:
+            e = out.setdefault(r["skill_key"], {k: r[k] for k in ("skill_key", "status", "n_postings", "n_sectors",
+                                                                  "entropy", "skill_type", "reuse_level",
+                                                                  "rule_version")} | {"links": []})
+            if r["topic_id"]:
+                e["links"].append({k: r[k] for k in ("topic_id", "label", "link_postings", "link_templates", "lift",
+                                                     "q_value", "strength")})
+        return list(out.values())
+
     def __call__(self, environ, start):
         path, method = environ.get("PATH_INFO", "/"), environ["REQUEST_METHOD"]
         q = {k: v[0] for k, v in parse_qs(environ.get("QUERY_STRING", "")).items()}
         try:
-            if path == "/" or path.startswith("/static/"):
-                f = STATIC / ("index.html" if path == "/" else path.removeprefix("/static/"))
-                if f.resolve().parent != STATIC.resolve() or not f.is_file():  # no path tricks
+            if path == "/" or path.startswith(("/static/", "/learn/")):
+                base = LEARN if path.startswith("/learn/") else STATIC
+                f = base / ("index.html" if path == "/" else path.split("/", 2)[2])
+                if f.resolve().parent != base.resolve() or not f.is_file():  # no path tricks
                     return self.send(start, {"error": "not found"}, "404 Not Found")
                 start("200 OK", [("Content-Type", mimetypes.guess_type(f.name)[0] or "application/octet-stream"),
                                  ("Cache-Control", "no-store")])
@@ -145,9 +301,14 @@ class App:
             if method == "GET":
                 routes = {"/api/status": self.status, "/api/review/queue": lambda: self.queue(q),
                           "/api/review/skill": lambda: self.skill(q.get("key", "").lower()),
-                          "/api/skills": lambda: self.skills(q), "/api/reviews": self.reviews}
+                          "/api/skills": lambda: self.skills(q), "/api/reviews": self.reviews,
+                          "/api/map": self.skill_map, "/api/library": self.library, "/api/models": self.models,
+                          "/api/intrusion/items": self.intrusion_items}
                 if path in routes:
                     return self.send(start, routes[path]())
+            if method == "POST" and path == "/api/intrusion/answer":
+                size = int(environ.get("CONTENT_LENGTH") or 0)
+                return self.send(start, self.intrusion_answer(json.loads(environ["wsgi.input"].read(size) or b"{}")))
             if method == "POST" and path == "/api/review/decision":
                 size = int(environ.get("CONTENT_LENGTH") or 0)
                 return self.send(start, self.decide(json.loads(environ["wsgi.input"].read(size) or b"{}")))

@@ -221,6 +221,14 @@ def build_examples(posts, k):
     return blocks
 
 
+def langfuse_client():
+    """Langfuse client when LANGFUSE_PUBLIC_KEY / _SECRET_KEY are in .env, else None (tracing is optional)."""
+    if not (os.getenv("LANGFUSE_PUBLIC_KEY") and os.getenv("LANGFUSE_SECRET_KEY")):
+        return None
+    from langfuse import Langfuse
+    return Langfuse(host=os.getenv("LANGFUSE_HOST") or os.getenv("LANGFUSE_BASE_URL"))
+
+
 def call_with_retry(backend, system, text, attempts=8):
     for i in range(attempts):
         try:
@@ -264,7 +272,7 @@ def main():
     cache = ROOT / "cache" / args.provider
     cache.mkdir(parents=True, exist_ok=True)
     backend, rows, done, failed, calls, tok_in, tok_out = None, [], [], [], 0, 0, 0
-    warned = False
+    warned, lf = False, langfuse_client()
 
     blocks = build_examples(posts, args.examples) if args.examples else {}
     try:  # the summary below is written even if the run stops early (Ctrl+C, crash)
@@ -284,7 +292,17 @@ def main():
                     backend = backend or Backend(model)
                     if calls:
                         time.sleep(args.delay)
-                    out, t_in, t_out = call_with_retry(backend, system, text)
+                    gen = lf and lf.start_observation(  # one Langfuse generation per paid call (not cache hits)
+                        name="skill-extraction", as_type="generation", model=model, input=text,
+                        metadata={"posting_id": p.posting_id, "prompt_version": prompt_version, "tag": args.tag})
+                    try:
+                        out, t_in, t_out = call_with_retry(backend, system, text)
+                    except ApiError as e:
+                        if gen:
+                            gen.update(level="ERROR", status_message=str(e)[:200]).end()
+                        raise
+                    if gen:
+                        gen.update(output=out, usage_details={"input": t_in, "output": t_out}).end()
                     calls, tok_in, tok_out = calls + 1, tok_in + t_in, tok_out + t_out
                     log_call(Backend.name, model, prompt_version, p.posting_id, t_in, t_out)
                     skills, dropped = validate_output(out)  # malformed -> ValueError -> not cached
@@ -307,6 +325,8 @@ def main():
                              "skill": s["skill"], "evidence": ev, "evidence_in_text": bool(ev) and ev.lower() in low,
                              "provider": Backend.name, "model": model, "prompt_version": prompt_version})
     finally:
+        if lf:
+            lf.flush()
         write_outputs(args, model, prompt_version, posts, rows, done, failed, calls, tok_in, tok_out, Backend.name)
 
 

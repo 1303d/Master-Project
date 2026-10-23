@@ -23,6 +23,8 @@ from extract_skills import JSON_HINT
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
+if os.getenv("LANGFUSE_BASE_URL"):  # Langfuse's own name for the region URL; LiteLLM reads LANGFUSE_HOST
+    os.environ.setdefault("LANGFUSE_HOST", os.environ["LANGFUSE_BASE_URL"])
 PROMPT = ROOT / "prompts" / "skill_extraction_v3.txt"
 CHAIN = [  # (litellm model, key variable, extra provider params)
     ("groq/qwen/qwen3.8-27b", "GROQ_API_KEY", {"temperature": 0, "reasoning_format": "hidden"}),  # no <think> in JSON

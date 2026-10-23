@@ -94,6 +94,7 @@ Git repo (push to `main` only when asked). Python 3.11 at `C:\Users\dhanu\AppDat
 
 ## Known issues / gotchas
 - `python` on PATH is a venv without pip → always use `py`.
+- In PowerShell a quoted exe path needs `&`: `& "C:\...\Python311\python.exe" app\server.py`.
 - `cat > file` with no input hangs the Bash tool (happened once) — use heredocs.
 - `make_gold_sample.py` raises if `gold_labels.csv` exists (protects labels).
 - `check_gold.py` word matching is noisy (e.g. "organization" vs "organized" flagged).

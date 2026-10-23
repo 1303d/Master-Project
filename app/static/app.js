@@ -2,6 +2,7 @@
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const fmtTime = (t) => (t ? new Date(t).toLocaleTimeString() : "");
+const ago = (t) => { const m = Math.round((Date.now() - t) / 60000); return m < 1 ? "just now" : m < 90 ? `${m} min ago` : `${Math.round(m / 60)} h ago`; };
 const pct = (x) => `${Math.round(x * 100)}%`;
 const VERDICTS = ["known_skill", "trait", "new_candidate", "not_a_skill"];
 const store = {
@@ -25,6 +26,8 @@ document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("cli
   if (view === "status") loadStatus();
   if (view === "review") loadQueue();
   if (view === "skills") loadSkills();
+  if (view === "map") loadMap();
+  if (view === "models") loadModels();
 }));
 
 // ---------- 1. pipeline status ----------
@@ -32,28 +35,59 @@ function card(k, v, extra = "") { return `<div class="card"><div class="k">${esc
 
 async function loadStatus() {
   let s;
-  try { s = await api("/api/status"); } catch (e) { $("#updated").textContent = `error: ${e.message}`; return; }
+  try { s = await api("/api/status"); } catch (e) {
+    $("#updated").textContent = `error: ${e.message}`;
+    $("#offline").hidden = false;
+    $("#offline").textContent = /fetch/i.test(e.message)
+      ? "Cannot reach the UI server. The numbers below are old. Start app/server.py again."
+      : `The server answered with an error: ${e.message}`;
+    return;
+  }
+  $("#offline").hidden = true;
   $("#updated").textContent = `updated ${new Date().toLocaleTimeString()}`;
-  $("#langfuse").href = s.langfuse_url;
-  $("#lf-dot").className = `dot ${s.langfuse ? "on" : "off"}`;
-  $("#lf-dot").title = s.langfuse ? "Langfuse keys set: LLM calls are traced" : "No Langfuse keys in .env";
+  const lf = s.langfuse;
+  $("#langfuse").href = lf.url;
+  $("#lf-dot").className = `dot ${lf.state === "connected" ? "on" : "off"}`;
+  $("#lf-dot").title = lf.state === "connected" ? `Langfuse connected: ${lf.traces} LLM calls traced`
+    : lf.state === "error" ? `Langfuse keys set, but the check failed: ${lf.error}` : "No Langfuse keys in .env";
 
-  const c = s.counts, b = s.batch;
-  $("#status-cards").innerHTML = [
-    card("Kaggle postings", c.kaggle), card("Greenhouse postings", c.greenhouse),
-    card("Skill statements", c.statements), card("Unique skills", c.unique_skills),
-    card("Review decisions", c.decisions),
+  const c = s.counts, b = s.batch, t = s.tasks || {};
+  // "Now": plain answer to "what is the pipeline doing?" (two scheduled jobs: extract, then hourly load)
+  const ex = t.extract, ld = t.load, last = b && b.last_ts ? b.last_ts * 1000 : null;
+  const exRunning = ex && ex.state === "Running", fresh = last && Date.now() - last < 15 * 60000;
+  const exCls = exRunning ? (fresh ? "running" : "stalled") : "";
+  const exTitle = !b ? "Extraction: no batch file found"
+    : b.done >= b.total ? `Extraction finished: ${b.total}/${b.total} postings`
+    : exRunning ? (fresh ? `● Extracting skills now: ${b.done}/${b.total} postings (${pct(b.done / b.total)})`
+                         : `⚠ Extraction job is on, but no new posting for ${ago(last)} (Groq limit? PC asleep?)`)
+    : `○ Extraction paused: ${b.done}/${b.total} postings (${pct(b.done / b.total)})`;
+  const exMeta = [last ? `last posting extracted ${ago(last)} (${fmtTime(last)})` : "",
+    ex && !exRunning && ex.next_run !== "N/A" ? `restarts ${ex.next_run}` : ""].filter(Boolean).join(" · ");
+  renderPipe(s, exRunning && fresh, ld && ld.state === "Running");
+  renderCharts(s);
+  const run0 = s.runs[0];
+  const ldTitle = ld && ld.state === "Running" ? "● Loading new skills into Supabase now"
+    : `Load to Supabase (hourly): last ${run0 ? `${fmtTime(run0.started_at)} · ${run0.status}` : "never"}`;
+  const ldMeta = [ld && ld.next_run !== "N/A" ? `next load ${ld.next_run}` : "",
+    "copies the extracted postings into the database, then links skills to ESCO / O*NET"].filter(Boolean).join(" · ");
+  $("#now").innerHTML = `<div class="row ${exCls}"><div class="t">${esc(exTitle)}</div><div class="m">${esc(exMeta)} · Groq ${esc(b ? b.model : "")}</div></div>`
+    + `<div class="row ${ld && ld.state === "Running" ? "running" : ""}"><div class="t">${esc(ldTitle)}</div><div class="m">${esc(ldMeta)}</div></div>`;
+
+  $("#status-cards").innerHTML = [  // the big counts are in the diagram above; these are the extras
+    card("Greenhouse postings (live feed)", c.greenhouse), card("Review decisions", c.decisions),
+    card("Langfuse traces (LLM calls)", lf.state === "connected" ? lf.traces : lf.state === "error" ? "error" : "off",
+      `<div class="muted">${lf.state === "connected" ? (lf.last_trace ? `last ${esc(new Date(lf.last_trace).toLocaleString())}` : "none yet: first trace at the next pipeline run")
+        : lf.state === "error" ? esc(lf.error) : "add keys to .env"}</div>`),
     card("Database size (free: 500 MB)", `${(c.db_bytes / 1e6).toFixed(1)} MB`,
       `<div class="progress"><span style="width:${pct(Math.min(c.db_bytes / 500e6, 1))}"></span></div>`),
-    b ? card(`Kaggle batch (${b.model})`, `${b.done}/${b.total}`,
-      `<div class="progress"><span style="width:${pct(b.done / b.total)}"></span></div>`) : "",
   ].join("");
 
   const run = s.latest;
   $("#run-title").textContent = run ? `· ${run.source} · ${run.run_id} · ${run.status}` : "· no runs yet";
   $("#flow").innerHTML = Object.entries(s.stages).map(([name, st], i) => {
     const cls = st === "done" ? "done" : st === "error" ? "error" : st ? (run && run.status === "running" ? "running" : "done") : "";
-    const label = st === "done" ? "done" : st === "error" ? "error" : st ? (cls === "running" ? "running…" : st) : "not run";
+    const skip = run && run.source === "kaggle" && (name === "fetch" || name === "clean") ? "skipped (Kaggle file is fixed)" : "skipped";
+    const label = st === "error" ? "error" : cls === "running" ? "running…" : cls === "done" ? "done" : skip;
     return `${i ? '<span class="arrow">→</span>' : ""}<div class="stage ${cls}"><div class="name">${esc(name)}</div><div class="st">${esc(label)}</div></div>`;
   }).join("");
 
@@ -75,6 +109,60 @@ async function loadStatus() {
     || '<li class="muted">No fallbacks so far.</li>';
   $("#runs").innerHTML = s.runs.map((r) => `<li><div class="t">${esc(r.source)} · ${esc(r.status)}</div><div class="m">${esc(r.run_id)} · fetched ${r.n_fetched} · new ${r.n_new} · skills ${r.n_statements}</div></li>`).join("");
 }
+// Pipeline diagram: one box per step with live counts; dots move on the links while a job runs.
+function renderPipe(s, extracting, loading) {
+  const c = s.counts, b = s.batch, tx = s.taxonomy, n = (x) => (x ?? 0).toLocaleString();
+  const known = s.verdicts.find((v) => v.verdict === "known_skill"), total = s.verdicts.reduce((a, v) => a + v.n, 0) || 1;
+  const nodes = [
+    { ic: "📄", k: "Postings", n: n(c.kaggle), m: `Kaggle sample + ${n(c.greenhouse)} Greenhouse` },
+    { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: `Qwen3.8 27B on Groq (free)`, live: extracting },
+    { ic: "🧩", k: "Skill statements", n: n(c.statements), m: `${n(c.unique_skills)} unique skills`, live: loading },
+    { ic: "🔗", k: "Link ESCO / O*NET", n: known ? pct(known.n / total) : "—", m: "statements matched to a known skill", live: loading },
+    { ic: "🗂️", k: "Cluster topics", n: tx ? n(tx.topics) : "—", m: "HDBSCAN on skill embeddings", off: true, href: "/learn/cluster-topics.html#big" },
+    { ic: "⭐", k: "Skill library", n: tx ? n(tx.library) : "—", m: tx ? `cross-sector skills · ${n(tx.strong_links)} strong links` : "", off: true,
+      href: "/learn/library-links.html" },
+  ];
+  const flows = [extracting, loading, loading, false, false];
+  $("#pipe").innerHTML = nodes.map((d, i) =>
+    `${i ? `<span class="link ${flows[i - 1] ? "flow" : ""}" aria-hidden="true"></span>` : ""}`
+    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
+    + `<div class="ic" aria-hidden="true">${d.ic}</div><div class="k">${esc(d.k)}</div><div class="n">${esc(d.n)}</div>`
+    + `<div class="m">${esc(d.m)}</div>${d.href ? '<div class="more">How it works →</div>' : ""}</${d.href ? "a" : "div"}>`).join("");
+  $("#pipe-note").textContent = "Solid boxes run on a schedule (extract continuously, load hourly). Dashed boxes are offline Sprint 3 steps."
+    + ` Everything is stored in Supabase (${(c.db_bytes / 1e6).toFixed(1)} MB of 500 MB).`;
+}
+
+// Charts (Plotly, already loaded for the Skill map). One series each, so no legend; the caption names it.
+function renderCharts(s) {
+  if (!window.Plotly) return;
+  const css = getComputedStyle(document.documentElement), v = (k) => css.getPropertyValue(k).trim();
+  const ink = v("--text"), muted = v("--muted"), line = v("--line"), accent = v("--accent");
+  const base = () => ({ margin: { l: 44, r: 10, t: 6, b: 36 }, paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+    font: { family: v("--font"), size: 11, color: muted }, hoverlabel: { font: { color: ink } }, showlegend: false,
+    xaxis: { gridcolor: "rgba(0,0,0,0)", linecolor: line, zeroline: false, fixedrange: true },
+    yaxis: { gridcolor: line, zeroline: false, fixedrange: true, rangemode: "tozero" } });  // fresh each call: Plotly mutates layouts
+  const cfg = { displayModeBar: false, responsive: true };
+  const b = s.batch;
+  if (b && b.times) {
+    const times = b.times.map((t) => new Date(t * 1000));
+    Plotly.react("ch-progress", [{ x: times, y: times.map((_, i) => i + 1), type: "scatter", mode: "lines",
+      line: { color: accent, width: 2, shape: "hv" }, hovertemplate: "%{x|%b %d %H:%M}<br>%{y} postings<extra></extra>" }],
+      { ...base(), yaxis: { ...base().yaxis, range: [0, b.total * 1.02], title: { text: `of ${b.total}`, font: { size: 11 } } } }, cfg);
+  }
+  let run = 0;
+  const h = (s.history || []).map((r) => ({ x: new Date(r.ts), y: (run += r.n) }));
+  Plotly.react("ch-loads", [{ x: h.map((r) => r.x), y: h.map((r) => r.y), type: "scatter", mode: "lines+markers",
+    line: { color: accent, width: 2, shape: "hv" }, marker: { size: 8, color: accent },
+    hovertemplate: "%{x|%b %d %H:%M}<br>%{y} statements<extra></extra>" }], base(), cfg);
+  const t = (s.top_skills || []).slice().reverse();
+  Plotly.react("ch-top", [{ x: t.map((r) => r.n), y: t.map((r) => r.skill_key), type: "bar", orientation: "h",
+    marker: { color: accent }, text: t.map((r) => r.n), textposition: "outside", textfont: { color: muted },
+    cliponaxis: false, hovertemplate: "%{y}: %{x} postings<extra></extra>" }],
+    { ...base(), margin: { l: 130, r: 30, t: 6, b: 24 }, bargap: 0.25,
+      xaxis: { ...base().xaxis, showticklabels: false }, yaxis: { ...base().yaxis, gridcolor: "rgba(0,0,0,0)", automargin: true,
+        tickfont: { color: ink } } }, cfg);
+}
+
 setInterval(() => { if (view === "status" && !document.hidden) loadStatus(); }, 4000);
 
 // ---------- 2. review queue ----------
@@ -158,4 +246,196 @@ async function loadSkills() {
     <td>${r.review_status === "reviewed" ? '<span class="badge b-reviewed">reviewed</span>' : '<span class="muted">auto</span>'}</td></tr>`).join("");
 }
 
+// ---------- 4. skill map ----------
+const PALETTE = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#17becf", "#bcbd22",
+  "#393b79", "#ad494a", "#637939", "#8c6d31", "#7b4173", "#3182bd", "#e6550d", "#31a354", "#756bb1", "#636363", "#e7969c"];
+const TOP_TOPICS = 20; // coloured: biggest domain (non-transversal) topics by mentions of assigned skills
+const libColor = (i) => `hsl(${(i * 137.5) % 360}, 70%, 45%)`;
+let M = null, LIB = [], libSel = null;
+
+async function loadMap() {
+  if (!M) {
+    try {
+      const [m, lib] = await Promise.all([api("/api/map"), api("/api/library")]);
+      const p = m.points, n = p.skill_key.length;
+      const label = Object.fromEntries(m.topics.map((t) => [t.topic_id, t.label]));
+      const transversal = new Set(m.topics.filter((t) => t.is_transversal).map((t) => t.topic_id));
+      const cent = {}, mentions = {};
+      for (let i = 0; i < n; i++) {
+        const t = p.topic_id[i];
+        if (p.state[i] !== "assigned") continue;
+        if (!p.lib[i]) mentions[t] = (mentions[t] || 0) + p.mention_count[i];
+        const c = (cent[t] ||= [0, 0, 0, 0]);
+        c[0] += p.x[i]; c[1] += p.y[i]; c[2] += p.z[i]; c[3]++;
+      }
+      Object.values(cent).forEach((c) => { c[0] /= c[3]; c[1] /= c[3]; c[2] /= c[3]; });
+      const top = Object.keys(mentions).filter((t) => cent[t] && !transversal.has(t)).sort((a, b) => mentions[b] - mentions[a]).slice(0, TOP_TOPICS);
+      M = { ...m, n, label, cent, top };
+      LIB = lib.map((l, i) => ({ ...l, color: libColor(i) }));
+    } catch (e) { $("#map-info").textContent = `error: ${e.message}`; return; }
+  }
+  $("#map-info").textContent = `${M.n} skills · ${M.topics.length} topics · run ${M.run.run_id}`;
+  const pre = decodeURIComponent(location.hash.split("/")[1] || "");  // #map/<library skill> preselects it
+  if (pre && !libSel) { libSel = LIB.find((l) => l.skill_key === pre) || null; renderLibDetail(); }
+  renderLibList();
+  drawMap();
+}
+
+function drawMap() {
+  const p = M.points, idx = { top: {}, other: [], weak: [], lib: [] };
+  M.top.forEach((t) => (idx.top[t] = []));
+  for (let i = 0; i < M.n; i++) {
+    if (p.lib[i]) idx.lib.push(i);
+    else if (p.state[i] !== "assigned") idx.weak.push(i);
+    else if (idx.top[p.topic_id[i]]) idx.top[p.topic_id[i]].push(i);
+    else idx.other.push(i);
+  }
+  const hover = (i) => `${p.skill_key[i]}<br>topic ${p.topic_id[i]}: ${M.label[p.topic_id[i]] || ""}<br>${p.state[i]} · ×${p.mention_count[i]}`;
+  const pts = (ids, name, marker, visible = true) => ({
+    type: "scatter3d", mode: "markers", name, visible, hoverinfo: "text",
+    x: ids.map((i) => p.x[i]), y: ids.map((i) => p.y[i]), z: ids.map((i) => p.z[i]), text: ids.map(hover), marker,
+  });
+  const traces = [
+    pts(idx.other, "other topics", { size: 2, color: "#9aa1ab", opacity: 0.35 }),
+    pts(idx.weak, "weak (unclustered)", { size: 2, color: "#c9cdd3", opacity: 0.25 }, $("#m-weak").checked),
+    ...M.top.map((t, k) => pts(idx.top[t], `${t} ${M.label[t]}`, { size: 3, color: PALETTE[k], opacity: 0.85 })),
+    pts(idx.lib, "skill library", { size: 5, symbol: "diamond", color: idx.lib.map((i) => libColorOf(p.skill_key[i])), opacity: 1 }),
+  ];
+  const q = $("#m-q").value.trim().toLowerCase();
+  if (q) {
+    const hit = [];
+    for (let i = 0; i < M.n && hit.length < 300; i++) if (p.skill_key[i].includes(q)) hit.push(i);
+    traces.push(pts(hit, `match “${q}” (${hit.length})`, { size: 7, color: "#e11d48", line: { color: "#fff", width: 1 } }));
+  }
+  if (libSel) traces.push(...libLines(libSel));
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  Plotly.react("map", traces, {
+    margin: { l: 0, r: 0, t: 0, b: 0 }, paper_bgcolor: "rgba(0,0,0,0)", font: { color: dark ? "#e7e9ec" : "#1d1f23", size: 11 },
+    legend: { itemsizing: "constant", x: 0.01, y: 0.99, font: { size: 10 }, bgcolor: dark ? "rgba(29,32,36,.7)" : "rgba(255,255,255,.7)" },
+    uirevision: "keep", scene: { domain: { x: [0, 1], y: [0, 1] }, camera: { eye: { x: 0.85, y: 0.85, z: 0.6 } }, xaxis: { visible: false }, yaxis: { visible: false }, zaxis: { visible: false } },
+  }, { displaylogo: false, responsive: true });
+}
+
+function libColorOf(key) { return (LIB.find((l) => l.skill_key === key) || {}).color || "#000"; }
+
+function libLines(l) {
+  const p = M.points, i = p.skill_key.indexOf(l.skill_key);
+  if (i < 0) return [];
+  const seg = (strength) => {
+    const x = [], y = [], z = [];
+    l.links.filter((k) => k.strength === strength && M.cent[k.topic_id]).forEach((k) => {
+      const c = M.cent[k.topic_id];
+      x.push(p.x[i], c[0], null); y.push(p.y[i], c[1], null); z.push(p.z[i], c[2], null);
+    });
+    return { type: "scatter3d", mode: "lines", name: `${l.skill_key}: ${strength} links`, hoverinfo: "skip",
+      x, y, z, line: { color: l.color, width: strength === "strong" ? 8 : 2 } };
+  };
+  return [seg("strong"), seg("weak")];
+}
+
+function renderLibList() {
+  const f = $("#lib-q").value.trim().toLowerCase();
+  const rows = LIB.filter((l) => l.skill_key.includes(f));
+  $("#lib-count").textContent = `(${LIB.length})`;
+  $("#lib-list").innerHTML = rows.map((l) => `<button class="chip ${libSel === l ? "sel" : ""}" data-k="${esc(l.skill_key)}"
+      style="--c:${l.color}"><span class="sw"></span>${esc(l.skill_key)}</button>`).join("");
+  document.querySelectorAll("#lib-list .chip").forEach((b) => b.addEventListener("click", () => {
+    const l = LIB.find((x) => x.skill_key === b.dataset.k);
+    libSel = libSel === l ? null : l;
+    renderLibList(); renderLibDetail(); drawMap();
+  }));
+}
+
+function renderLibDetail() {
+  const l = libSel;
+  if (!l) { $("#lib-detail").innerHTML = ""; return; }
+  $("#lib-detail").innerHTML = `<h3 style="color:${l.color}">${esc(l.skill_key)}</h3>
+    <p class="muted">${l.status} · ${l.n_postings} postings · ${l.n_sectors} sectors · spread ${Number(l.entropy).toFixed(2)}</p>
+    <p><span class="badge b-edited" title="from its ESCO / O*NET link (skill_types.py)">type: ${esc(l.skill_type || "unknown")}</span>
+      ${l.reuse_level ? `<span class="badge b-edited" title="ESCO reuse level">${esc(l.reuse_level)}</span>` : ""}
+      <span class="muted">${esc(l.rule_version || "")}</span></p>
+    <table><thead><tr><th>Linked topic</th><th title="postings with both / distinct job templates (company + title)">Postings / templates</th><th>Lift</th><th>q</th><th></th></tr></thead><tbody>
+    ${l.links.map((k) => `<tr><td>${esc(k.topic_id)} ${esc(k.label)}</td><td>${k.link_postings}${k.link_templates != null ? ` / ${k.link_templates}` : ""}</td><td>${Number(k.lift).toFixed(2)}</td>
+      <td>${Number(k.q_value).toExponential(1)}</td><td><span class="badge b-${k.strength === "strong" ? "ok" : "edited"}">${k.strength}</span></td></tr>`).join("")}
+    </tbody></table>`;
+}
+
+let mTimer;
+$("#m-q").addEventListener("input", () => { clearTimeout(mTimer); mTimer = setTimeout(() => M && drawMap(), 300); });
+$("#m-weak").addEventListener("change", () => M && drawMap());
+$("#lib-q").addEventListener("input", () => M && renderLibList());
+
+
+// ---------- 5. models & code ----------
+const PROMPTS = {  // prompts have no docstring; one line each from docs/HANDOFF.md
+  "prompts/skill_extraction_v1.txt": "Prompt v1: first version (Sprint 2 baseline).",
+  "prompts/skill_extraction_v2.txt": "Prompt v2: tighter rules, better precision.",
+  "prompts/skill_extraction_v3.txt": "Prompt v3: FROZEN working prompt, targets skills inside lists (list recall .83).",
+  "prompts/skill_extraction_v4.txt": "Prompt v4: rules A-D + paper ideas; no gain, so v3 stays.",
+};
+const GROUPS = [
+  ["1. Data", ["download_data", "clean_postings", "make_extraction_sample", "download_reference"]],
+  ["2. Gold set & scoring", ["make_gold_sample", "make_gold_postings", "make_gold_split", "gold_tool", "check_gold", "evaluate",
+    "list_recall", "bias_check", "make_dashboard_data"]],
+  ["3. Extraction (LLM)", ["extract_skills", "llm_router", "skill_extraction_v1", "skill_extraction_v2", "skill_extraction_v3",
+    "skill_extraction_v4", "qwen_batch"]],
+  ["4. ESCO / O*NET linking + Supabase", ["link_reference", "load_supabase", "pipeline", "db", "verify_db", "supabase_schema",
+    "load_qwen", "nightly_greenhouse"]],
+  ["5. Clustering + library (Sprint 3)", ["prepare_skills", "normalize_aliases", "embed_skills", "cluster_skills", "cluster_stability",
+    "build_library", "load_taxonomy", "make_skill_map", "taxonomy_schema"]],
+  ["6. This UI", ["server"]],
+];
+let modelsData = null;
+const stem = (path) => path.split("/").pop().replace(/\.[^.]+$/, "");
+const vscode = (path) => `vscode://file/${modelsData.root}/${path}`;
+
+async function loadModels() {
+  if (!modelsData) {
+    try { modelsData = await api("/api/models"); } catch (e) { $("#m-rows").innerHTML = `<tr><td colspan="12">error: ${esc(e.message)}</td></tr>`; return; }
+    const known = new Set(GROUPS.flatMap(([, s]) => s));
+    const groups = GROUPS.map(([g, stems]) => [g, modelsData.files.filter((f) => stems.includes(stem(f.path)))]);
+    groups.push(["Other", modelsData.files.filter((f) => !known.has(stem(f.path)))]);
+    $("#code-map").innerHTML = groups.filter(([, fs]) => fs.length).map(([g, fs]) => `<div class="grp"><h4>${esc(g)}</h4><ul>${fs.map((f) =>
+      `<li><a href="${esc(vscode(f.path))}">${esc(f.path)}</a><div class="d">${esc(f.doc || PROMPTS[f.path] || "")}</div></li>`).join("")}</ul></div>`).join("");
+    $("#m-split").addEventListener("change", renderModelRows);
+    $("#m-gold").addEventListener("change", renderModelRows);
+  }
+  renderModelRows();
+  renderF1Chart();
+}
+
+function renderModelRows() {
+  const sp = $("#m-split").value, gd = $("#m-gold").value;
+  const rows = modelsData.runs.filter((r) => (!sp || r.split === sp) && (!gd || r.gold === gd));
+  const f = (x) => `<td class="num">${x.toFixed(2)}</td>`;
+  $("#m-rows").innerHTML = rows.map((r) => `<tr class="${r.model.includes("qwen") && r.prompt === "v3" ? "chosen" : ""}">`
+    + `<td><code>${esc(r.model)}</code>${r.postings < 50 ? ` <span class="badge b-warn" title="only ${r.postings} postings scored (rate limit)">partial</span>` : ""}</td>`
+    + `<td>${esc(r.prompt)}${r.variant ? ` · ${esc(r.variant)}` : ""}</td><td>${esc(r.split)}</td><td>${esc(r.gold)}</td><td class="num">${r.postings}</td>`
+    + f(r.p_strict) + f(r.r_strict) + f(r.f1_strict) + f(r.p_lenient) + f(r.r_lenient) + f(r.f1_lenient)
+    + `<td><a href="${esc(vscode(r.report))}">open</a></td></tr>`).join("")
+    || '<tr><td colspan="12" class="muted">No runs match these filters (gold v2 was scored only on dev and test).</td></tr>';
+}
+
+function renderF1Chart() {
+  if (!window.Plotly) return;
+  const rows = modelsData.runs.filter((r) => r.split === "dev" && r.prompt === "v3" && r.gold === "v1")
+    .sort((a, b) => a.f1_lenient - b.f1_lenient);
+  const css = getComputedStyle(document.documentElement), v = (k) => css.getPropertyValue(k).trim();
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light";
+  const [c1, c2] = dark ? ["#3987e5", "#d95926"] : ["#2a78d6", "#eb6834"];  // validated categorical slots 1-2 (dataviz palette)
+  const names = rows.map((r) => r.model.replace(/^.*\//, "").replace(":free", "") + (r.postings < 50 ? ` (${r.postings} postings)` : ""));
+  const bar = (key, name, color) => ({ type: "bar", orientation: "h", name, y: names, x: rows.map((r) => r[key]), marker: { color },
+    text: rows.map((r) => r[key].toFixed(2)), textposition: "outside", textfont: { color: v("--muted") }, cliponaxis: false,
+    hovertemplate: `%{y}<br>${name}: %{x:.2f}<extra></extra>` });
+  Plotly.react("ch-f1", [bar("f1_strict", "F1 strict", c1), bar("f1_lenient", "F1 lenient", c2)], {
+    barmode: "group", bargap: 0.3, bargroupgap: 0.1, margin: { l: 10, r: 40, t: 4, b: 30 },
+    paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { family: v("--font"), size: 11, color: v("--muted") },
+    legend: { orientation: "h", y: 1.08, x: 0, font: { color: v("--text") } },
+    xaxis: { range: [0, 1], gridcolor: v("--line"), zeroline: false, fixedrange: true },
+    yaxis: { automargin: true, tickfont: { color: v("--text") }, fixedrange: true } }, { displayModeBar: false, responsive: true });
+  $("#f1-note").textContent = "Partial runs stopped early on free-tier limits, so their scores are less reliable. "
+    + "On the test half, Qwen v3 and Claude Haiku are almost tied (see the table, split = test).";
+}
+
 loadStatus();
+if (location.hash) document.querySelector(`.tabs button[data-view="${CSS.escape(location.hash.slice(1).split("/")[0])}"]`)?.click();

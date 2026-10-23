@@ -1,6 +1,104 @@
 # HANDOFF — Section B Skill Taxonomy (Sprint 2)
 
-## ⏸ RESUME HERE (frozen 2026-10-21, afternoon — user went to class)
+## ⏸ RESUME HERE (frozen 2026-10-22 ~17:00, Thursday) — Sprint 3, demo Fri 2026-10-23 15:00
+**State:** all work below is **UNCOMMITTED** on `main` (ask before commit/push). Supabase is live with the new
+taxonomy tables loaded (HDBSCAN run active). UI has a working **Skill map** tab. QwenBatch is running headless.
+
+**Pipeline (run with the full Python path; in PowerShell prefix `&`):**
+`& "C:\Users\dhanu\AppData\Local\Programs\Python\Python311\python.exe" <script>`. Folder `D` =
+`data/processed/sprint3_full_2026-10-22/` (gitignored), canonical outputs in `D/canonical/`.
+1. `src/normalize_aliases.py` → `canonical/aliases.csv`, `unique_skills.csv` (rules R1 hyphens, R2 ms→microsoft
+   except MS-DRG, R3 drop "skills" if short form exists; 11,449 → 11,366). Re-embedded with Lochan's
+   `src/embed_skills.py` → `canonical/embeddings/` (GPU, 2 s).
+2. `src/cluster_skills.py --method hdbscan|leiden|agglomerative|kmeans --param ...` (+ `--min-samples`, `--knn`,
+   `--mutual`, `--partition rb|cpm`) → `canonical/clusters/<run_id>/` (assignments, topics, run.json) + sweep.csv.
+3. `src/cluster_stability.py` → `canonical/stability.csv` (5×80% subsamples, 3 seeds, AMI, per-topic Jaccard).
+4. `src/build_library.py --run <run>` → `canonical/library_hdbscan/` (library.csv keyed by skill_key, rule
+   library-v1: ≥5 postings, ≥4/8 sectors, top sector ≤50%; status confirmed ≥10 postings; entropy/ln8;
+   links = co-occurrence, hypergeometric p + BH q over the full family of 67,501 pairs; strong = ≥5 postings,
+   lift ≥1.5, q<0.05; groups.csv with is_transversal flag, 45 flagged). 197 library skills (148 confirmed),
+   985 links (272 strong). Tools (excel, word, power bi) stay IN the library (user decision).
+5. `src/load_taxonomy.py --activate` → Supabase (first load only; refuses a 2nd run until topic-ID matching
+   exists). Loaded `hdbscan_10_umap10_ms1_2026-10-22`: 388 topics, 11,366 memberships (2,474 weak),
+   34,098 related_to, 197 library, 985 links.
+6. `src/make_skill_map.py` → `canonical/skill_map_3d.csv` (UMAP 3D, display only).
+Schema: `sql/taxonomy_schema.sql` (skill_aliases, cluster_runs, topics[is_transversal], run_clusters,
+skill_topics, skill_relations, skill_library, library_links + view active_skill_topics), applied via
+`src/db.py --init` (now runs both schema files). `verify_db.py` 10 PASS, tests 41 pass.
+
+**UI:** `& "...python.exe" app\server.py` → http://127.0.0.1:8765/#map (deep link
+`#map/attention%20to%20detail` preselects a library skill). New endpoints `/api/map`, `/api/library`. Plotly from
+jsDelivr (`plotly.js-dist-min@2.35.2`) → needs internet. Top-20 *domain* (non-transversal) topics coloured, weak
+grey, library = diamonds; click a chip → thick (strong) / thin (weak) lines to linked topic centroids.
+
+**QwenBatch:** task action now `conhost.exe --headless scripts\qwen_batch.cmd` (no window to close). Restarted
+2026-10-22 ~16:00 at posting #93/2,000; Groq 429s are retried. Sleep/shutdown still stops it; it resumes from
+cache at the 02:20 trigger. Supabase DB password was reset by the user (works).
+
+**Key findings to tell in the demo / report:** HDBSCAN vs Leiden agree (AMI 0.78) on HDBSCAN's clustered 78%;
+choice is about the hard 22%. Noise ≠ rare skills (22.5% vs 19.5%); it is generic cross-sector skills → the
+library + ER links. Leiden resolutions not nested (48%) → hierarchy via agglomerative over topic centroids.
+CPM was NOT more stable than RB modularity (review page claim is wrong — fix `learn/clustering-review.html`).
+About half the topics are fragile (per-topic Jaccard ~0.5) for every method. Agglomerative least stable (0.61).
+GPT review of the library (pasted in chat) agreed: library = label on a skill, FDR, entropy, status; later:
+skill_type, title spread, sector-bias test, held-out validation, token benchmark.
+
+**DECISION (user, 2026-10-22 evening): method = HDBSCAN (10, ms1, UMAP 10D) + skill library + links.** Leiden is no
+longer a finalist. The intrusion test (`src/intrusion_test.py`, UI `/static/intrusion.html`, 40 blind items in
+`reports/intrusion/`) stays as evidence for the report. Hierarchy = Sprint 4 (brief p.2), not Sprint 3.
+Sprint 3 gaps vs brief: embeddings not in Supabase yet (pgvector 0.8.2 available, not enabled), stability report not written.
+Study pages: `learn/cluster-topics.html`, `learn/library-links.html` (entropy, lift, hypergeometric p, BH q).
+
+**Alias clean-up (2026-10-22 night):** `src/find_alias_candidates.py` (rule / level / vendor / embed / ref signals) →
+`reports/alias_candidates_reviewed.csv` (289 high+medium pairs checked against evidence: 269 yes, 16 no, 4 earlier).
+273 aliases in `config/skill_aliases_manual.csv` (rule R4 in normalize_aliases.py) and in Supabase review_decisions
+(reviewer Dhanush). Next rebuild: 11,366 → 11,093 canonical skills. **APPLIED 2026-10-22 ~22:30 (run v2):** new folder `D/canonical_v2/`
+(aliases, embeddings 11,093, clusters/hdbscan_10_umap10_ms1 = 374 topics / 22.1% noise, library_hdbscan = 196 lib /
+980 links / 255 strong, skill_map_3d.csv, stability.csv). Supabase taxonomy tables were backed up to
+`D/canonical/supabase_backup_before_v2/` then cleared and reloaded: active run `hdbscan_10_umap10_ms1_2026-10-23`.
+UI SKILL_MAP points to canonical_v2. Same statement snapshot as v1 (only aliases changed). microsoft excel is now
+HDBSCAN noise (weak member) but a confirmed library skill. Intrusion-test items (reports/intrusion/) are from v1.
+
+**Library-v2 (2026-10-22 ~23:00):** fixes #8 + #5 of the disadvantages list. `src/skill_types.py` ->
+`canonical_v2/skill_types.csv` (tool / knowledge / skill / trait / unknown from skill_links + ESCO reuse_level; aliases
+inherit). `build_library.py` rule library-v2 counts job TEMPLATES (company_id + normalised title; whole companies were
+tried and rejected: staffing firms mix roles -> 255 -> 154 strong). Result `canonical_v2/library_hdbscan_v2/`: 196 lib,
+980 links, 249 strong (was 255; empathy / writing lost = real template cases). Supabase: new columns n_templates,
+skill_type, reuse_level (schema alter in taxonomy_schema.sql), loaded with `load_taxonomy.py --library-only`.
+UI library panel shows type + postings / templates. Still open from the list: #2 sensitivity, #3 sectors, #4 sample, #6
+topic-id matching; #1 / #7 are report wording.
+
+**Known weak spots:** topic labels = centroid skill (python topic shows "scala"); weak memberships can be odd
+(attention to detail → "zoom", margin 0.017); library ids/links tied to the HDBSCAN run (rebuild if Leiden wins).
+
+**Next, in order:**
+1. Topic labels (better than centroid skill; e.g. top-3 member skills or a free LLM label, reviewed) → reload.
+2. Commit (ask the user first).
+3. **Fri morning:** PPT slides with content for the 15:00 demo (story: rules → model choice → pipeline →
+   clustering sweep/stability → library ER idea → live Skill map).
+4. After demo: daily "assign new skills" step after LoadQwen (embed new → kNN vote → assigned/weak);
+   human intrusion test (60 topics × 2 finalists); pick method; topic-ID matching; hierarchy; Sprint 3 report;
+   fix CPM line in `learn/clustering-review.html`; add `pglast` only if kept (dev-only parser check).
+
+## (older) Sprint 3 clustering notes (2026-10-22, before the library work)
+**Done 2026-10-22 (uncommitted):** Lochan's branch merged (`2894113`), full embedding 11,449×384
+(`data/processed/sprint3_full_2026-10-22/`). New: `src/cluster_skills.py` (hdbscan/agglomerative/kmeans/leiden,
+run_id folders, sweep.csv), `src/normalize_aliases.py` (R1–R3 → 11,366 canonical, `canonical/`),
+`src/cluster_stability.py` (5×80% subsamples + 3 seeds → `canonical/stability.csv`), draft
+`sql/taxonomy_schema.sql` (ER tables: aliases, cluster_runs, topics, run_clusters, skill_topics, skill_relations —
+**NOT applied**, user to review), `learn/clustering-review.html` (GPT-style review; its CPM recommendation is
+WRONG per stability — fix it). Installed umap-learn, leidenalg, igraph, pglast (add the first three to requirements).
+**Findings:** finalists = Leiden RB res 20 k15 (321 topics, 100% coverage, best per-topic Jaccard 0.59) and
+HDBSCAN 10 ms1 (388 topics, 78% coverage, AMI 0.85 but on clustered points only). Agglomerative least stable
+(AMI 0.61) → use only over centroids for hierarchy. Leiden resolutions not nested. ~half of topics fragile for
+every method. Only 5% of HDBSCAN noise has a near-duplicate (cos≥0.9) → handle noise via related_to/weak
+membership (ER model), not merging.
+**Plan:** user resumes Thu 2026-10-22 11:00; work all Thursday; Friday morning = PPT slides with content
+for the Fri 15:00 demo.
+**Next:** review + apply schema → load finalist into tables → human intrusion test (60 topics × 2) →
+pick method → hierarchy over centroids → topic labels → kNN assignment for new skills → Skill map tab → report.
+
+## (previous) RESUME HERE (frozen 2026-10-21, afternoon — user went to class)
 **Where we are:** Sprint 2 closed and pushed (`c9336d3` "code fix + security update" on `main`). Starting Sprint 3.
 Prototype demo **Friday 2026-10-23, 3 pm**. End goal (brief): initiative → ranked tasks + skills with postings.
 

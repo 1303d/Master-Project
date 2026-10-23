@@ -1,6 +1,6 @@
 """Supabase (Postgres) access for the skill pipeline. Reads SUPABASE_DB_URL from .env.
 
-    py src/db.py --init      # create the tables (sql/supabase_schema.sql); safe to re-run
+    py src/db.py --init      # create the tables (sql/supabase_schema.sql, sql/taxonomy_schema.sql); safe to re-run
     py src/db.py --check     # print row counts per table
 """
 import argparse
@@ -16,7 +16,10 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
-TABLES = ["postings", "skill_statements", "skill_links", "review_decisions", "pipeline_runs", "pipeline_events"]
+TABLES = ["postings", "skill_statements", "skill_links", "review_decisions", "pipeline_runs", "pipeline_events",
+          "skill_aliases", "cluster_runs", "topics", "run_clusters", "skill_topics", "skill_relations",
+          "skill_library", "library_links"]
+SCHEMAS = ["supabase_schema.sql", "taxonomy_schema.sql"]  # applied in this order by --init
 
 
 def connect():
@@ -107,8 +110,9 @@ def main():
     args = ap.parse_args()
     with connect() as con:
         if args.init:
-            con.execute((ROOT / "sql" / "supabase_schema.sql").read_text(encoding="utf-8"))
-            print("schema applied")
+            for name in SCHEMAS:
+                con.execute((ROOT / "sql" / name).read_text(encoding="utf-8"))
+                print(f"{name} applied")
         for t in TABLES:
             print(f"{t:18} {con.execute(f'select count(*) from {t}').fetchone()[0]:>8}")
 

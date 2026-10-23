@@ -25,3 +25,4 @@ run_at,provider,model,prompt_version,postings,api_calls,tokens_in,tokens_out
 2026-10-21T04:35:00+00:00,google-ai-studio,gemini-3.5-flash-lite,skill_extraction_v3,1,1,1075,160
 2026-10-21T04:35:04+00:00,google-ai-studio,gemini-flash-lite-latest,skill_extraction_v3,1,1,1075,160
 2026-10-21T04:44:06+00:00,google-ai-studio,gemini-3.5-flash-lite,skill_extraction_v3,50,49,64138,11238
+2026-10-22T23:49:40+00:00,groq,qwen/qwen3.8-27b,skill_extraction_v3,1,1,855,61

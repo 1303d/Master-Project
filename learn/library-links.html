@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Library Links Explained</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --text: #1d1f23; --muted: #626872; --line: #dfe1e5;
+  --accent: #2f5bd3; --accent-soft: #e5ecfc; --ok: #1f7a4d; --ok-soft: #dff3e8;
+  --bad: #a4301d; --bad-soft: #fbe3de; --mid: #8a5a00; --mid-soft: #fbefd6; --bar: #2a78d6; --hit: #eb6834;
+  --radius: 8px; --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15171a; --panel: #1d2024; --text: #e7e9ec; --muted: #9aa1ab; --line: #30343a;
+    --accent: #8aa8ff; --accent-soft: #233056; --ok: #6fd49b; --ok-soft: #173326;
+    --bad: #ff9a85; --bad-soft: #43221c; --mid: #f0c060; --mid-soft: #3a2e12; --bar: #3987e5; --hit: #d95926;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15171a; --panel: #1d2024; --text: #e7e9ec; --muted: #9aa1ab; --line: #30343a;
+  --accent: #8aa8ff; --accent-soft: #233056; --ok: #6fd49b; --ok-soft: #173326;
+  --bad: #ff9a85; --bad-soft: #43221c; --mid: #f0c060; --mid-soft: #3a2e12; --bar: #3987e5; --hit: #d95926;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 var(--font); }
+header, nav, main { max-width: 960px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+header { padding-top: 18px; } header h1 { margin: 0; font-size: 22px; } header p { margin: 4px 0 0; color: var(--muted); }
+a { color: var(--accent); }
+nav { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; padding-bottom: 10px; }
+nav button, .btn { font: inherit; font-size: 13.5px; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+nav button[aria-selected="true"], .btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+main { padding-bottom: 40px; } section[hidden] { display: none; }
+h2 { font-size: 18px; margin: 12px 0 6px; } h3 { font-size: 15px; margin: 14px 0 4px; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin: 10px 0; }
+.muted { color: var(--muted); font-size: 13px; }
+.term { border-bottom: 1px dotted var(--muted); cursor: help; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+input[type=number] { font: inherit; width: 70px; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.big { font-size: 22px; font-weight: 700; }
+.tag { display: inline-block; font-size: 12px; font-weight: 650; border-radius: 999px; padding: 1px 8px; }
+.t-ok { color: var(--ok); background: var(--ok-soft); } .t-bad { color: var(--bad); background: var(--bad-soft); } .t-mid { color: var(--mid); background: var(--mid-soft); }
+.grid8 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+@media (max-width: 560px) { .grid8 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.grid8 label { font-size: 12.5px; display: flex; flex-direction: column; gap: 2px; }
+.sbar { display: flex; height: 18px; border-radius: 4px; overflow: hidden; margin: 8px 0; gap: 2px; }
+.sbar span { background: var(--bar); transition: flex-grow .5s; min-width: 0; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; font-size: 14px; }
+.kv b { font-variant-numeric: tabular-nums; }
+svg text { fill: var(--text); font: 11px var(--font); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; background: var(--panel); }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; font-variant-numeric: tabular-nums; }
+th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+tr.pass td { background: var(--ok-soft); } tr.naive td:first-child { box-shadow: inset 3px 0 0 var(--mid); }
+.tw { overflow-x: auto; }
+.quiz .opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.quiz button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+.quiz button.right { border-color: var(--ok); background: var(--ok-soft); } .quiz button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+</style>
+</head>
+<body>
+<header>
+  <h1>How the skill library links work</h1>
+  <p>The maths behind "library skill", "lift", "p / q" and "strong vs weak", using real numbers from our HDBSCAN run
+    (1,931 Kaggle postings). <a href="/learn/cluster-topics.html#library">← back to the topics page</a></p>
+<p class="muted" style="border-left:3px solid var(--accent);padding-left:8px">Numbers on this page are from run v1 (before the alias clean-up). Current run v2 (2026-10-23): 11,093 skills, 374 topics, 22.1% noise, 2,447 weak, 196 library skills, 980 links (255 strong); "excel" + "microsoft excel" are now one skill (250 postings).</p>
+</header>
+<nav role="tablist">
+  <button data-tab="why">1. Why a library</button>
+  <button data-tab="spread">2. Spread (entropy)</button>
+  <button data-tab="lift">3. Overlap &amp; lift</button>
+  <button data-tab="p">4. Is it chance? (p)</button>
+  <button data-tab="fdr">5. Many tests (q)</button>
+  <button data-tab="strong">6. Strong or weak</button>
+  <button data-tab="quiz">7. Quiz</button>
+</nav>
+<main>
+
+<section id="tab-why">
+  <h2>Why we need a library at all</h2>
+  <div class="box">Topics group skills that <b>mean</b> similar things (excel, google sheets, vlookup). But some skills are used
+    <b>everywhere</b>: communication is in 603 postings across all 8 sectors. It does not belong to one domain topic.
+    HDBSCAN often marks such skills as noise (attention to detail has no topic at all).</div>
+  <div class="box">So we keep two separate ideas:
+    <ol>
+      <li><b>Topic</b> = which skills are similar in meaning (from the embeddings).</li>
+      <li><b>Library + links</b> = which generic skills show up <b>together with</b> which topics in real postings (from counting).</li>
+    </ol>
+    The library is only a <b>label</b> on a skill. The skill keeps its own id, so nothing is duplicated.</div>
+  <p class="muted">Steps: decide which skills are library skills (tab 2), then link each one to the topics it really goes with (tabs 3–6).</p>
+</section>
+
+<section id="tab-spread" hidden>
+  <h2>Is a skill spread across sectors?</h2>
+  <p>Each posting has a sector (its first LinkedIn job function, grouped into 8). For a skill, we count its postings per sector.
+    <span class="term" title="A measure of how evenly something is spread. We divide by ln 8 so the result is 0 to 1.">Entropy</span>
+    turns that into one number: <b>0</b> = all in one sector, <b>1</b> = perfectly even over all 8.</p>
+  <div class="row"><span class="muted">Load an example:</span>
+    <button class="btn" data-ex="comm">communication (real)</button>
+    <button class="btn" data-ex="nurse">a nursing-only skill</button>
+    <button class="btn" data-ex="few">too few postings</button></div>
+  <div class="box">
+    <div class="grid8" id="sectors"></div>
+    <div class="sbar" id="sbar" aria-hidden="true"></div>
+    <div class="kv" id="spread-out"></div>
+  </div>
+  <p class="muted">Rule library-v1 (fixed before looking at results): ≥ 5 postings, ≥ 4 of 8 sectors, top sector ≤ 50%.
+    Confirmed = ≥ 10 postings. "Mixed" and unknown-sector postings count as postings but not in the spread
+    (communication: 126 Mixed + 14 unknown on top of the 463 shown). Real values: communication entropy 0.93, attention to detail 0.96, excel 0.90.</p>
+</section>
+
+<section id="tab-lift" hidden>
+  <h2>Do a skill and a topic appear together more than expected?</h2>
+  <p>Pick a real pair. We count postings that mention the library skill, postings that mention <b>any</b> skill of the topic,
+    and postings that have <b>both</b>.</p>
+  <div class="row" id="pairs"></div>
+  <div class="box">
+    <svg id="venn" viewBox="0 0 520 170" width="100%" role="img" aria-label="Overlap of two posting sets"></svg>
+    <div class="kv" id="lift-out"></div>
+  </div>
+  <div class="box"><b>Lift</b> = observed ÷ expected. Expected = (skill postings × topic postings) ÷ all postings, i.e. how many
+    shared postings you would get if the two had nothing to do with each other. Lift 1 = no link; lift 4 = four times more often than chance.</div>
+</section>
+
+<section id="tab-p" hidden>
+  <h2>Could the overlap be luck? (hypergeometric test)</h2>
+  <p>Think of the 1,931 postings as balls in a bag. The topic's postings are coloured. The skill's postings are a handful we draw.
+    The <span class="term" title="The exact probability of drawing k coloured balls when you draw n balls without putting them back.">hypergeometric distribution</span>
+    says how many coloured balls a random handful would contain.</p>
+  <div class="row" id="pairs-p"></div>
+  <div class="box">
+    <svg id="pmf" viewBox="0 0 560 200" width="100%" role="img" aria-label="Chance distribution of the overlap"></svg>
+    <div class="row"><label>Try another observed overlap: <input type="number" id="obs" min="0"></label></div>
+    <div class="kv" id="p-out"></div>
+  </div>
+  <p class="muted">Blue bars = what chance gives. Orange bar = what we saw. p = the chance of seeing this many or more by luck.</p>
+</section>
+
+<section id="tab-fdr" hidden>
+  <h2>We ran 67,501 tests. Some small p-values are luck.</h2>
+  <p>197 library skills × 388 topics (minus excluded ones) = <b>67,501 pairs</b>. With the usual cut p &lt; 0.05,
+    about <b>3,375</b> pairs would pass by pure luck. Benjamini–Hochberg (BH) fixes this: it controls the
+    <span class="term" title="False discovery rate: among the links we call real, the expected share that are false.">false discovery rate</span>.</p>
+  <div class="box">
+    <b>How BH works</b> (here with 12 example p-values, m = 12):
+    <ol><li>Sort the p-values from small to large.</li><li>Give each a rank i = 1, 2, 3 …</li>
+      <li>Its <b>q-value</b> ≈ p × m ÷ i (made non-decreasing).</li><li>Keep the ones with q &lt; 0.05.</li></ol>
+    <div class="row"><button class="btn" id="fdr-shuffle">New random p-values</button></div>
+    <div class="tw"><table><thead><tr><th>rank i</th><th>p</th><th>q = p·m/i</th><th>p &lt; 0.05?</th><th>q &lt; 0.05?</th></tr></thead><tbody id="fdr-rows"></tbody></table></div>
+    <p class="muted" id="fdr-note"></p>
+  </div>
+</section>
+
+<section id="tab-strong" hidden>
+  <h2>Strong or weak: three checks, all must pass</h2>
+  <div class="box"><b>Strong link</b> = ≥ 5 shared postings <b>and</b> lift ≥ 1.5 <b>and</b> q &lt; 0.05. Otherwise weak.
+    Weak links are kept (thin lines on the Skill map), but are not claimed as real.</div>
+  <div class="tw"><table><thead><tr><th>Pair (real)</th><th>shared</th><th>lift</th><th>q</th><th>Result</th><th>Why</th></tr></thead><tbody id="strong-rows"></tbody></table></div>
+  <h3>Try it</h3>
+  <div class="box row">
+    <label>shared <input type="number" id="s-n" value="14"></label>
+    <label>lift <input type="number" id="s-l" value="2.04" step="0.1"></label>
+    <label>q <input type="number" id="s-q" value="0.153" step="0.01"></label>
+    <span id="s-out"></span>
+  </div>
+  <p class="muted">Result: 985 links kept (top links per skill), 272 strong. Library skills and transversal topics (45 soft-skill topics)
+    are not link targets, and a skill is never linked to its own topic.</p>
+</section>
+
+<section id="tab-quiz" hidden>
+  <h2>Quick check</h2>
+  <div class="quiz" id="quiz"></div>
+</section>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const N = 1931;
+// real pairs from canonical/library_hdbscan/library_links.csv (+ set sizes recomputed from prepared_mentions.csv)
+const PAIRS = [
+  { s: "excel", t: "accounts payable / receivable", sp: 191, gp: 41, both: 18, q: 1.73e-5 },
+  { s: "attention to detail", t: "editing / proofreading", sp: 359, gp: 52, both: 25, q: 6.75e-4 },
+  { s: "communication", t: "strategic planning / business development", sp: 603, gp: 99, both: 48, q: 0.0306 },
+  { s: "communication", t: "relationship building / management", sp: 603, gp: 220, both: 98, q: 0.00295 },
+  { s: "communication", t: "partnership management", sp: 603, gp: 22, both: 14, q: 0.153 },
+];
+
+// ---------- tabs ----------
+function show(tab) {
+  if (!document.getElementById("tab-" + tab)) tab = "why";
+  document.querySelectorAll("nav button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== "tab-" + tab));
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => { history.replaceState(null, "", "#" + b.dataset.tab); show(b.dataset.tab); }));
+
+// ---------- maths ----------
+function lgamma(x) {  // Lanczos approximation, accurate to ~1e-10 for x > 0
+  const g = 7, c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059,
+    12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+  if (x < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * x)) - lgamma(1 - x);
+  x -= 1; let a = c[0]; const t = x + g + 0.5;
+  for (let i = 1; i < 9; i++) a += c[i] / (x + i);
+  return 0.5 * Math.log(2 * Math.PI) + (x + 0.5) * Math.log(t) - t + Math.log(a);
+}
+const lchoose = (n, k) => lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1);
+const pmf = (k, Nn, K, n) => (k < Math.max(0, n - (Nn - K)) || k > Math.min(K, n)) ? 0 : Math.exp(lchoose(K, k) + lchoose(Nn - K, n - k) - lchoose(Nn, n));
+function sf(k, Nn, K, n) { let s = 0; for (let j = Math.max(0, k); j <= Math.min(K, n); j++) s += pmf(j, Nn, K, n); return Math.min(1, s); }
+const fmtP = (p) => (p < 1e-3 ? p.toExponential(2) : p.toFixed(4));
+
+// ---------- 2. spread ----------
+const SECT = ["IT", "Health Care", "Engineering", "Sales + Marketing", "Finance + Acc.", "Management", "Legal", "Admin / HR / CS"];
+const EXAMPLES = { comm: [48, 79, 48, 108, 52, 90, 9, 29], nurse: [0, 40, 0, 0, 0, 2, 0, 1], few: [1, 0, 1, 0, 1, 0, 0, 0] };
+$("#sectors").innerHTML = SECT.map((s, i) => `<label>${s}<input type="number" min="0" value="0" data-i="${i}"></label>`).join("");
+const sIn = [...document.querySelectorAll("#sectors input")];
+function spread() {
+  const c = sIn.map((x) => Math.max(0, +x.value || 0)), tot = c.reduce((a, b) => a + b, 0);
+  const pr = c.map((x) => (tot ? x / tot : 0)), H = -pr.filter((p) => p > 0).reduce((a, p) => a + p * Math.log(p), 0) / Math.log(8);
+  const nS = c.filter((x) => x > 0).length, top = Math.max(...pr);
+  $("#sbar").innerHTML = c.map((x) => `<span style="flex-grow:${x || 0.0001}" title="${x}"></span>`).join("");
+  const fails = [tot < 5 && "fewer than 5 postings", nS < 4 && "fewer than 4 sectors", top > 0.5 && "top sector over 50%"].filter(Boolean);
+  $("#spread-out").innerHTML = `<span>postings</span><b>${tot}</b><span>sectors used</span><b>${nS} of 8</b>`
+    + `<span>top sector share</span><b>${(top * 100).toFixed(0)}%</b><span>entropy (0–1)</span><b>${H.toFixed(2)}</b>`
+    + `<span>verdict</span><span>${fails.length ? `<span class="tag t-bad">not library</span> ${fails.join(", ")}` : `<span class="tag t-ok">library · ${tot >= 10 ? "confirmed" : "candidate"}</span>`}</span>`;
+}
+sIn.forEach((x) => x.addEventListener("input", spread));
+document.querySelectorAll("[data-ex]").forEach((b) => b.addEventListener("click", () => { EXAMPLES[b.dataset.ex].forEach((v, i) => (sIn[i].value = v)); spread(); }));
+EXAMPLES.comm.forEach((v, i) => (sIn[i].value = v)); spread();
+
+// ---------- 3. lift ----------
+const pairBtns = (el, fn) => { el.innerHTML = PAIRS.map((p, i) => `<button class="btn" data-i="${i}">${p.s} → ${p.t}</button>`).join("");
+  el.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { el.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); fn(PAIRS[+b.dataset.i]); }));
+  el.querySelector("button").click(); };
+function venn(p) {
+  const r1 = 30 + 50 * Math.sqrt(p.sp / 603), r2 = 30 + 50 * Math.sqrt(p.gp / 603), ov = 18 + 40 * Math.min(1, p.both / Math.min(p.sp, p.gp));
+  const x1 = 200, x2 = x1 + r1 + r2 - ov;
+  $("#venn").innerHTML = `<circle cx="${x1}" cy="85" r="${r1}" fill="var(--bar)" fill-opacity=".25" stroke="var(--bar)"/>`
+    + `<circle cx="${x2}" cy="85" r="${r2}" fill="var(--hit)" fill-opacity=".25" stroke="var(--hit)"/>`
+    + `<text x="${x1 - r1 / 2}" y="88" text-anchor="middle">${p.s}: ${p.sp}</text>`
+    + `<text x="${x2 + r2 / 2}" y="88" text-anchor="middle">topic: ${p.gp}</text>`
+    + `<text x="${(x1 + r1 + x2 - r2) / 2}" y="${85 - Math.min(r1, r2) - 6}" text-anchor="middle" font-weight="700">both: ${p.both}</text>`
+    + `<text x="10" y="18">all postings N = ${N}</text>`;
+  const exp = p.sp * p.gp / N;
+  $("#lift-out").innerHTML = `<span>expected by chance</span><b>${p.sp} × ${p.gp} ÷ ${N} = ${exp.toFixed(1)}</b>`
+    + `<span>observed</span><b>${p.both}</b><span>lift</span><b>${p.both} ÷ ${exp.toFixed(1)} = ${(p.both / exp).toFixed(2)}</b>`;
+}
+pairBtns($("#pairs"), venn);
+
+// ---------- 4. p ----------
+let curP = PAIRS[0];
+function drawPmf() {
+  const p = curP, obs = Math.max(0, +$("#obs").value || 0), hi = Math.max(obs + 3, Math.ceil(p.sp * p.gp / N * 3) + 2);
+  const ks = Array.from({ length: hi + 1 }, (_, k) => k), ys = ks.map((k) => pmf(k, N, p.gp, p.sp)), ymax = Math.max(...ys);
+  const W = 520, bw = W / ks.length;
+  $("#pmf").innerHTML = ks.map((k, i) => { const h = 150 * ys[i] / ymax;
+    return `<rect x="${30 + i * bw + 1}" y="${170 - h}" width="${Math.max(1, bw - 2)}" height="${Math.max(h, k === obs ? 2 : 0)}" rx="2" fill="${k === obs ? "var(--hit)" : "var(--bar)"}"><title>${k} shared: chance ${ys[i].toExponential(2)}</title></rect>`; }).join("")
+    + `<line x1="30" y1="170" x2="${30 + W}" y2="170" stroke="var(--line)"/>`
+    + ks.filter((k) => k % Math.ceil(ks.length / 12) === 0).map((k) => `<text x="${30 + k * bw + bw / 2}" y="186" text-anchor="middle">${k}</text>`).join("")
+    + `<text x="${30 + obs * bw + bw / 2}" y="${170 - (150 * pmf(obs, N, p.gp, p.sp) / ymax) - 6}" text-anchor="middle" font-weight="700">seen: ${obs}</text>`;
+  const pv = sf(obs, N, p.gp, p.sp);
+  $("#p-out").innerHTML = `<span>draw (skill postings)</span><b>${p.sp}</b><span>coloured (topic postings)</span><b>${p.gp} of ${N}</b>`
+    + `<span>expected</span><b>${(p.sp * p.gp / N).toFixed(1)}</b><span>p (≥ ${obs} by luck)</span><b>${fmtP(pv)}</b>`;
+}
+pairBtns($("#pairs-p"), (p) => { curP = p; $("#obs").value = p.both; drawPmf(); });
+$("#obs").addEventListener("input", drawPmf);
+
+// ---------- 5. BH ----------
+let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+function fdr() {
+  const m = 12, ps = Array.from({ length: m }, (_, i) => (i < 4 ? rnd() * 0.004 : rnd() < 0.3 ? rnd() * 0.06 : rnd())).sort((a, b) => a - b);
+  const q = ps.map((p, i) => p * m / (i + 1));
+  for (let i = m - 2; i >= 0; i--) q[i] = Math.min(q[i], q[i + 1]);
+  $("#fdr-rows").innerHTML = ps.map((p, i) => `<tr class="${q[i] < 0.05 ? "pass" : p < 0.05 ? "naive" : ""}"><td>${i + 1}</td><td>${p.toFixed(4)}</td><td>${Math.min(1, q[i]).toFixed(4)}</td>`
+    + `<td>${p < 0.05 ? "yes" : "no"}</td><td>${q[i] < 0.05 ? "<b>yes</b>" : "no"}</td></tr>`).join("");
+  const naive = ps.filter((p) => p < 0.05).length, bh = q.filter((x) => x < 0.05).length;
+  $("#fdr-note").textContent = `p < 0.05 keeps ${naive}; BH keeps ${bh}. Green rows survive BH; rows with an amber edge pass p but not q (likely luck).`;
+}
+$("#fdr-shuffle").addEventListener("click", fdr); fdr();
+
+// ---------- 6. strong ----------
+function verdict(n, l, q) {
+  const why = [n < 5 && "fewer than 5 shared", l < 1.5 && "lift below 1.5", q >= 0.05 && "q not below 0.05"].filter(Boolean);
+  return [why.length === 0, why.length ? why.join(", ") : "passes all three"];
+}
+$("#strong-rows").innerHTML = PAIRS.map((p) => { const lift = p.both * N / (p.sp * p.gp), [ok, why] = verdict(p.both, lift, p.q);
+  return `<tr><td>${p.s} → ${p.t}</td><td>${p.both}</td><td>${lift.toFixed(2)}</td><td>${fmtP(p.q)}</td><td>${ok ? '<span class="tag t-ok">strong</span>' : '<span class="tag t-mid">weak</span>'}</td><td class="muted">${why}</td></tr>`; }).join("");
+function tryStrong() { const [ok, why] = verdict(+$("#s-n").value, +$("#s-l").value, +$("#s-q").value);
+  $("#s-out").innerHTML = `${ok ? '<span class="tag t-ok">strong</span>' : '<span class="tag t-mid">weak</span>'} <span class="muted">${why}</span>`; }
+["#s-n", "#s-l", "#s-q"].forEach((id) => $(id).addEventListener("input", tryStrong)); tryStrong();
+
+// ---------- 7. quiz ----------
+const QUIZ = [
+  ["excel is in 191 postings, the AP topic in 41, N = 1,931. About how many shared postings would chance give?", ["about 4", "about 18", "about 41"], 0, "191 × 41 ÷ 1931 ≈ 4.1. We saw 18, so lift ≈ 4.4."],
+  ["communication → relationship building has q = 0.003 but is weak. Why?", ["Too few shared postings", "Lift 1.43 is below 1.5", "q is too high"], 1, "Lots of shared postings and a tiny q, but only 1.4× chance. Communication is in so many postings that it overlaps with everything a bit."],
+  ["Why not just use p < 0.05?", ["p is always wrong", "With 67,501 tests, about 3,375 would pass by luck", "BH makes links stronger"], 1, "BH (q) keeps the share of false links under control."],
+  ["A skill is in 80 postings, 7 sectors, but 62% are in IT. Library?", ["Yes, confirmed", "No: top sector over 50%", "Yes, candidate"], 1, "Rule 3: no single sector may own more than 50%."],
+];
+$("#quiz").innerHTML = QUIZ.map((q, i) => `<div class="box" data-i="${i}"><b>${i + 1}. ${q[0]}</b><div class="opts">${q[1].map((o, j) => `<button data-j="${j}">${o}</button>`).join("")}</div><div class="muted" hidden>${q[3]}</div></div>`).join("");
+document.querySelectorAll("#quiz .box").forEach((box) => box.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+  const q = QUIZ[+box.dataset.i], ok = +b.dataset.j === q[2];
+  box.querySelectorAll("button").forEach((x) => x.classList.remove("right", "wrong"));
+  b.classList.add(ok ? "right" : "wrong"); if (!ok) box.querySelectorAll("button")[q[2]].classList.add("right");
+  box.querySelector(".muted").hidden = false;
+})));
+
+show(location.hash.slice(1) || "why");
+</script>
+</body>
+</html>

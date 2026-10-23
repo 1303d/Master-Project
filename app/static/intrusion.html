@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topic Intrusion Test</title>
+<link rel="stylesheet" href="/static/app.css">
+<style>
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px; }
+  .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin: 12px 0; }
+  .opts button { font: inherit; text-align: left; padding: 12px 14px; border-radius: var(--radius); border: 1px solid var(--line);
+    background: var(--panel); color: var(--text); cursor: pointer; overflow-wrap: anywhere; }
+  .opts button:hover { border-color: var(--accent); }
+  .opts button.picked { border-color: var(--accent); background: var(--accent-soft); font-weight: 650; }
+  .nav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .nav button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+  .dots { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0; }
+  .dots span { width: 18px; height: 18px; border-radius: 4px; background: var(--line); font-size: 10px; display: grid; place-items: center; cursor: pointer; }
+  .dots span.done { background: var(--req); color: #fff; } .dots span.cur { outline: 2px solid var(--accent); }
+  input { font: inherit; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2>Topic intrusion test</h2>
+  <p class="muted">Each card shows 6 skills from one topic. Five belong together; <b>one was added from a different topic</b>.
+    Click the skill that does not fit. If all look random, make your best guess. Answers save as you click.
+    You can go back and change an answer. Do not look up which method made a topic.</p>
+  <p><label>Your name <input id="rater" placeholder="e.g. Dhanush"></label></p>
+  <div class="dots" id="dots"></div>
+  <div class="box-note" id="card"></div>
+  <div class="nav"><button id="prev">← Back</button><button id="next">Next →</button><span class="muted" id="msg"></span></div>
+  <p class="muted" id="end" hidden>All done. Tell Claude, or run <code>py src/intrusion_test.py score</code> to see the result.</p>
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+let items = [], answers = {}, i = 0;
+try { $("#rater").value = localStorage.getItem("reviewer") || ""; } catch { /* storage off */ }
+$("#rater").addEventListener("change", () => { try { localStorage.setItem("reviewer", $("#rater").value.trim()); } catch { /* ignore */ } });
+
+function render() {
+  const it = items[i];
+  $("#dots").innerHTML = items.map((x, j) => `<span class="${answers[x.item] ? "done" : ""} ${j === i ? "cur" : ""}" data-j="${j}">${x.item}</span>`).join("");
+  document.querySelectorAll("#dots span").forEach((d) => d.addEventListener("click", () => { i = +d.dataset.j; render(); }));
+  $("#card").innerHTML = `<b>Item ${it.item} of ${items.length}</b><div class="opts">${it.skills.map((s) =>
+    `<button class="${answers[it.item] === s ? "picked" : ""}" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>`;
+  document.querySelectorAll(".opts button").forEach((b) => b.addEventListener("click", () => pick(it.item, b.dataset.s)));
+  $("#end").hidden = Object.keys(answers).length < items.length;
+}
+
+async function pick(item, choice) {
+  const rater = $("#rater").value.trim();
+  if (!rater) { $("#msg").textContent = "Enter your name first."; $("#rater").focus(); return; }
+  const r = await fetch("/api/intrusion/answer", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ item, choice, rater }) });
+  const d = await r.json();
+  if (!r.ok) { $("#msg").textContent = `error: ${d.error}`; return; }
+  answers[item] = choice; $("#msg").textContent = "saved";
+  if (i < items.length - 1) i++;
+  render();
+}
+$("#prev").addEventListener("click", () => { if (i > 0) i--; render(); });
+$("#next").addEventListener("click", () => { if (i < items.length - 1) i++; render(); });
+
+fetch("/api/intrusion/items").then((r) => r.json()).then((d) => {
+  if (d.error) { $("#card").textContent = d.error; return; }
+  items = d.items; answers = d.answers;
+  i = Math.max(0, items.findIndex((x) => !answers[x.item]));
+  render();
+});
+</script>
+</body>
+</html>

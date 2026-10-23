@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clustering Method Review</title>
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#1d1d1f;--mute:#5d6470;--line:#e3e0d8;--acc:#1f6f8b;--acc2:#e9f3f6;--ok:#2f7d4f;--warn:#a5641b;--bad:#a83a3a;--code:#f3f1ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171a;--card:#1d2024;--ink:#e8e6e1;--mute:#a1a7b0;--line:#30343a;--acc:#6cc0dc;--acc2:#1f2e34;--ok:#6cc08b;--warn:#e0a35a;--bad:#e07a7a;--code:#24282d}}
+:root[data-theme="dark"]{--bg:#15171a;--card:#1d2024;--ink:#e8e6e1;--mute:#a1a7b0;--line:#30343a;--acc:#6cc0dc;--acc2:#1f2e34;--ok:#6cc08b;--warn:#e0a35a;--bad:#e07a7a;--code:#24282d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:1.6rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 18px}
+nav{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:2;border-bottom:1px solid var(--line)}
+nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 11px;border-radius:999px;cursor:pointer;font:inherit;font-size:.9rem}
+nav button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+section{display:none;margin-top:18px}
+section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+h2{font-size:1.25rem;margin:4px 0 10px}
+h3{font-size:1.05rem;margin:16px 0 6px}
+.tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:2px;font-weight:600}
+.obs{background:var(--acc2);color:var(--acc)}
+.hyp{background:#f6ecdc;color:var(--warn)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hyp{background:#3a2e1d}}
+:root[data-theme="dark"] .hyp{background:#3a2e1d}
+.rec{background:#e3f1e8;color:var(--ok)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rec{background:#1d3326}}
+:root[data-theme="dark"] .rec{background:#1d3326}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+.tw{overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600}
+pre{background:var(--code);padding:12px;border-radius:8px;overflow-x:auto;font-size:.82rem;line-height:1.45}
+code{font-family:ui-monospace,Consolas,monospace}
+li{margin:4px 0}
+.metric{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.metric div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.metric b{display:block;font-size:1.5rem;color:var(--acc)}
+.metric span{color:var(--mute);font-size:.85rem}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600}
+.q{margin:8px 0}.q button{margin:4px 6px 4px 0;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 10px;border-radius:8px;cursor:pointer;font:inherit}
+.q .fb{margin-top:6px;font-weight:600}
+svg text{fill:var(--ink);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Clustering method review</h1>
+<p class="sub">Skill taxonomy, Section B, Sprint 3. Based on the 11,449-skill run of 2026-10-22.
+<span class="tag obs">observed</span> = measured on our data.
+<span class="tag hyp">hypothesis</span> = needs a test.
+<span class="tag rec">recommend</span> = what to do.</p>
+
+<nav id="nav"></nav>
+
+<!-- ================= A ================= -->
+<section id="A">
+<h2>A. Executive recommendation</h2>
+
+<div class="card">
+<p><span class="tag obs">observed</span>Four new checks on the existing runs change the picture.</p>
+<div class="metric">
+<div><b>0.78</b><span>AMI between HDBSCAN (10, ms1) and Leiden (res 20), on the 78% of skills HDBSCAN clusters. The two methods mostly agree. The real choice is about the other 22%.</span></div>
+<div><b>48%</b><span>of Leiden res-20 communities have &lt;90% of their members inside one res-5 community. Leiden resolutions are <em>not</em> nested.</span></div>
+<div><b>29% vs 21%</b><span>HDBSCAN noise rate for strings of ≤4 characters vs longer strings. Short strings (6.6% of skills) are harder.</span></div>
+<div><b>22.5% vs 19.5%</b><span>Noise rate for skills seen once vs skills seen 5+ times. Noise is <em>not</em> mainly a rare-skill problem.</span></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Primary clustering method</h3>
+<p><span class="tag rec">recommend</span>Use Leiden on a kNN graph as the topic level, run with <b>CPM</b> instead of modularity. Each skill also gets a confidence score, and low-confidence skills are marked "weak" instead of being trusted. Keep HDBSCAN as a density check.</p>
+<p><span class="tag hyp">hypothesis</span>This is a starting choice, not a verified winner. Leiden has fewer moving parts (no UMAP step, and one main setting). CPM keeps its granularity steady as the skill set grows each week (Traag et al. 2011). The final pick should go to whichever method wins the stability test and the human intrusion test (section E). If they tie, choose Leiden for the reasons above.</p>
+
+<h3>Noise and ambiguous points</h3>
+<p><span class="tag rec">recommend</span>Use three states, never a silent forced assignment: <b>assigned</b> (high confidence), <b>weak</b> (has a best topic but low margin) and <b>unassigned</b>. Confidence combines the similarity to the topic centroid with the margin over the second-best topic. Search can use weak skills, but the report must count them separately.</p>
+
+<h3>Hierarchy</h3>
+<p><span class="tag rec">recommend</span>Run average-linkage agglomerative clustering over <em>topic centroids</em>, not over raw skills. Cut the tree into about 20–40 families, then have a human review the families. Do not use Leiden at several resolutions as parent and child levels, because they do not nest (48% above).</p>
+
+<h3>Embeddings and acronyms</h3>
+<p><span class="tag rec">recommend</span>First, merge verified aliases (excel = ms excel = microsoft excel). Then run one small probe experiment on 300 skills: raw string vs a context sentence vs a larger model. Adopt a change only if it raises neighbour precision@5 clearly (section B, Q4). Do not assume a bigger model fixes acronyms.</p>
+
+<h3>Incremental updates</h3>
+<p><span class="tag rec">recommend</span>Every day, assign new skills by a kNN vote with a confidence threshold. Every week, re-cluster in batch. Then map the new clusters onto persistent topic IDs with Jaccard overlap plus Hungarian matching, with explicit split and merge rules. Incremental community detection is not worth the extra work at our size.</p>
+
+<h3>Evaluation metrics</h3>
+<p><span class="tag rec">recommend</span>Report five groups and never one number:</p>
+<ul>
+<li>Coherence: mean intra-topic cosine and a human word-intrusion test.</li>
+<li>Stability: AMI on 80% subsamples, plus per-topic Jaccard.</li>
+<li>Coverage: the assigned share, counted per skill and per mention.</li>
+<li>External: ESCO/O*NET alignment, used as a diagnostic only.</li>
+<li>Downstream: a small initiative → skills retrieval check.</li>
+</ul>
+<p>Drop silhouette as a headline number.</p>
+</div>
+</section>
+
+<!-- ================= B ================= -->
+<section id="B">
+<h2>B. Critical assessment of our current results</h2>
+
+<div class="card">
+<ol>
+<li><b>Silhouette is not comparable across our runs.</b> For HDBSCAN it was computed only on clustered points, so the hard 22–36% was left out. That biases the score upward. It was also computed in 384-d space, while HDBSCAN clustered in UMAP space. Every other method was scored on 100% of points. A method can "win" silhouette just by refusing hard points.</li>
+<li><b>One seed, no stability.</b> Every run used seed 42. UMAP is stochastic, and so are Leiden's tie-breaks. We do not yet know whether 388 or 323 topics would reappear with another seed or another sample.</li>
+<li><b>Methods were compared by eyeballing the head.</b> We looked at the top clusters sorted by mentions, which are the easiest ones. Junk sits in the tail (for example the acronym community). A fair review needs a <em>random</em> sample of topics.</li>
+<li><b>Clustering is doing alias normalisation too.</b> Many clusters are alias sets (excel / ms excel / microsoft excel). With lowercase+trim keys, the algorithm spends its capacity merging spellings. That inflates "coherence" and hides the real topic structure. Normalise first, then cluster canonical skills.</li>
+<li><b>The unit of analysis is unweighted strings.</b> 77% of strings appear once, and some are extraction noise (F1 .66 strict). "communication" (1,000+ mentions) counts the same as "a1 finish". Report coverage both per skill and per mention (22% vs 17% noise already shows the gap).</li>
+<li><b>Ambiguity cannot be solved by context-free embeddings.</b> <span class="tag obs">observed</span> "networking" lands with TCP/IP and DHCP in HDBSCAN, but with prospecting and customer service in Leiden res 1. Both readings are real. One vector per string cannot hold both.</li>
+<li><b>Modularity resolution depends on graph size.</b> With RBConfiguration (modularity), the same resolution value gives different granularity as the inventory grows. That breaks weekly comparability. CPM does not have this problem (Traag et al. 2011).</li>
+<li><b>The noise diagnosis was wrong.</b> <span class="tag obs">observed</span> Singletons are noise at 22.5% and frequent skills at 19.5%. So "cluster only skills with ≥2 mentions" will not cut noise much. The noise is generic or polysemous phrases (attention to detail, judgment), not rare ones.</li>
+<li><b>The sample is small compared with the corpus.</b> We have 1,931 of about 124k postings. The topic set will grow and change, so stability <em>under growth</em> (a 50% → 100% subset) matters as much as stability under resampling.</li>
+</ol>
+</div>
+</section>
+
+<!-- ================= Q1-Q7 ================= -->
+<section id="Q">
+<h2>Answers to questions 1–7</h2>
+
+<details open><summary>Q1. Which method should be primary? Also graph construction</summary>
+<p><span class="tag obs">observed</span>HDBSCAN and Leiden res 20 agree strongly where HDBSCAN is confident (AMI 0.78). So "which is better" really means "what should happen to the 22% that are hard?"</p>
+<ul>
+<li><b>HDBSCAN:</b> honest about uncertainty, and good for spotting junk. But it depends on UMAP (stochastic, with extra settings), it collapses at min_cluster_size 30, and a noise label is not a usable state for search.</li>
+<li><b>Leiden:</b> full coverage, fast, one setting, and naturally graph-based (it fits kNN assignment of new skills). But it hides weak points inside communities.</li>
+<li><b>Agglomerative on raw skills:</b> very sensitive to the threshold (9 → 5,276 clusters), and average linkage chains on high-dimensional data. Do not use it as the flat method. It is good over centroids for the hierarchy.</li>
+<li><b>Hybrid (recommended):</b> Leiden partition + a per-skill confidence score + HDBSCAN noise as a second flag. The skills that both methods find uncertain form the review queue.</li>
+</ul>
+<p><b>Evidence needed to pick Leiden over HDBSCAN:</b></p>
+<ol>
+<li>Subsample AMI at least as high.</li>
+<li>Human intrusion accuracy on <em>random</em> topics no lower than 5 points below HDBSCAN.</li>
+<li>Weak-flagged skills judged wrong more often than assigned skills. This shows the flag works.</li>
+</ol>
+<h3>Graph construction</h3>
+<ul>
+<li><b>Union vs mutual kNN:</b> embedding spaces have <em>hubs</em>, points that are near everything (Radovanović et al. 2010). Generic skills like "communication" become hubs and glue topics together. A mutual kNN graph drops one-way edges into hubs, but it can isolate points. Test both.</li>
+<li><b>k = 15 vs 30:</b> a larger k connects more and gives smoother, larger communities, but it adds weak edges.</li>
+<li><b>Thresholds:</b> pick an edge cut-off from the empirical similarity distribution (for example the 10th percentile of kNN similarities). BGE cosine values are compressed toward the high end, so a fixed number like 0.5 means little.</li>
+<li><b>Weights:</b> cosine is fine to start. Shared-nearest-neighbour (Jaccard of neighbour lists) weighting dampens hubs and is common in single-cell graph clustering.</li>
+</ul>
+<p><span class="tag rec">recommend</span>Controlled sweep: k ∈ {15, 30} × {union, mutual} × CPM resolution at 4 values chosen to give about 150–500 communities. That is 16 runs of a few seconds each. Score each with stability and coverage, then take the top 2 to human review.</p>
+</details>
+
+<details><summary>Q2. Is silhouette meaningful?</summary>
+<p>Silhouette favours compact, well-separated, roughly convex groups (Rousseeuw 1987). Skill space is a continuum: "data analysis → financial analysis → variance analysis" has no gaps. Useful topics can therefore score near 0. Our values (0.02–0.14) say "no sharp gaps", not "bad topics". We also computed it on different subsets per method (see B1).</p>
+<table><tr><th>Metric</th><th>Use?</th><th>Note</th></tr>
+<tr><td>Silhouette</td><td>Appendix only</td><td>If kept, compute it on the same points for all methods.</td></tr>
+<tr><td>DBCV</td><td>Optional</td><td>Density-based and handles noise (Moulavi et al. 2014). It is slow and unstable on 11k points in high dimensions, so treat it as secondary.</td></tr>
+<tr><td>Mean intra-topic cosine</td><td>Yes</td><td>Cheap. Report it as a distribution, not only the mean.</td></tr>
+<tr><td>Margin (top-1 minus top-2 centroid similarity)</td><td>Yes</td><td>Per skill. It drives the "weak" flag.</td></tr>
+<tr><td>Subsample AMI / ARI</td><td>Yes, headline</td><td>Compute it on skills present in both subsamples (see below).</td></tr>
+<tr><td>Per-topic Jaccard stability</td><td>Yes</td><td>Hennig 2007. It shows <em>which</em> topics are fragile.</td></tr>
+<tr><td>Human word intrusion</td><td>Yes, headline</td><td>Chang et al. 2009. Directly measures interpretability.</td></tr>
+<tr><td>Coverage (skill and mention)</td><td>Yes</td><td>Always report both.</td></tr>
+<tr><td>ESCO/O*NET alignment</td><td>Diagnostic</td><td>Do not optimise for it, because ESCO misses US tools and procedures.</td></tr>
+<tr><td>Reviewer agreement (Cohen's κ)</td><td>Yes</td><td>Without it, human scores are not defensible.</td></tr>
+</table>
+<h3>Comparing partitions correctly</h3>
+<ul>
+<li><b>Relabelling:</b> AMI and ARI ignore label names, so no matching is needed (Vinh et al. 2010; Hubert &amp; Arabie 1985). Prefer AMI when cluster counts differ.</li>
+<li><b>Different subsets:</b> compare two 80% subsamples on their <em>intersection</em> (about 64% of skills).</li>
+<li><b>HDBSCAN noise:</b> report it two ways. (a) AMI on points clustered in both runs. (b) Agreement on noise status itself. Do not treat −1 as one big cluster, because that inflates AMI.</li>
+</ul>
+</details>
+
+<details><summary>Q3. How should the hierarchy be built?</summary>
+<p><span class="tag obs">observed</span>Leiden partitions are not nested: 48% of res-20 communities split across res-5 parents at the 90% purity level. Forcing them into a tree would create false parent links.</p>
+<p><span class="tag rec">recommend</span>Take the topic centroids (about 300), run average-linkage cosine agglomerative clustering, cut into about 20–40 families, and have a human review them. It is explainable (a dendrogram), cheap, and re-runnable each week. The HDBSCAN condensed tree is valid but tied to HDBSCAN and hard to explain.</p>
+<p><b>Representation:</b> use SKOS-style relations (<code>broader</code>/<code>narrower</code> inside our taxonomy). Use <code>exactMatch</code>/<code>closeMatch</code>/<code>broadMatch</code>/<code>narrowMatch</code> to ESCO/O*NET in a <em>separate</em> mapping table (W3C SKOS). A skill with no external match simply has no mapping row and still lives in our tree. Multiple membership stays in <code>skill_topic</code> with a role (primary/secondary), so the tree itself stays a clean tree.</p>
+</details>
+
+<details><summary>Q4. Short strings and acronyms</summary>
+<table><tr><th>Intervention</th><th>Expected value</th><th>Risk</th></tr>
+<tr><td>1. As written (baseline)</td><td>—</td><td>Acronym soup, ambiguity</td></tr>
+<tr><td>2. Prefix "skill: X"</td><td>Low</td><td>BGE's instruction is meant for retrieval queries; for symmetric similarity the model card suggests no instruction. Cheap to test, so include it.</td></tr>
+<tr><td>3. Context sentence from the posting</td><td><b>High</b> for acronyms and ambiguity</td><td>Topic of the posting leaks in. Average several contexts per skill.</td></tr>
+<tr><td>4. Larger model (bge-base/large, e5, gte)</td><td>Medium</td><td>Bigger models still see "GRC" without context. They help with paraphrase, not with acronyms.</td></tr>
+<tr><td>5. Expand acronyms</td><td>Medium</td><td>LLM expansion can invent meanings (GRC, SOP). It needs review.</td></tr>
+<tr><td>6. Alias normalisation</td><td><b>High</b>, do it first</td><td>Wrong merges. Keep an alias table with a reviewer field.</td></tr>
+<tr><td>7. Cluster ≥2 mentions, assign singletons</td><td>Low for noise</td><td>Our data shows singletons are only slightly noisier. Useful for speed only. Never drop rare skills.</td></tr>
+<tr><td>8. Several embeddings per skill</td><td>Medium-High for polysemy</td><td>More complex. Only for flagged ambiguous skills (networking, testing, diagnosis).</td></tr>
+</table>
+<p><span class="tag rec">recommend</span>Smallest experiment:</p>
+<ul>
+<li><b>Probe set:</b> 300 skills, stratified as 100 short/acronym strings (≤4 chars), 100 generic or ambiguous ones (sampled from HDBSCAN noise) and 100 random.</li>
+<li><b>Configs:</b> 4 (raw, prefix, context-average, bge-base).</li>
+<li><b>Labels:</b> for each, take the top-5 neighbours. Two raters judge each neighbour "same skill area: yes/no", blind to the config.</li>
+<li><b>Metric:</b> precision@5 per stratum, with a paired bootstrap 95% CI.</li>
+<li><b>Adoption rule:</b> adopt a config if precision@5 rises by ≥5 points with a CI above 0 on the acronym or ambiguous stratum, <em>and</em> drops by no more than 2 points on the random stratum.</li>
+</ul>
+</details>
+
+<details><summary>Q5. Generic soft skills</summary>
+<p><span class="tag rec">recommend</span>Give soft skills their own family (ESCO already has a "transversal skills and competences" pillar). Link them to domains through <em>context</em> (co-occurrence with occupations, industries and tasks), not by putting them inside domain topics. Semantic similarity answers "what is this skill like?". Co-occurrence answers "where is it needed?". Keep the two as separate tables and separate scores.</p>
+<pre><code>skill(skill_id PK, canonical_label, created_run)
+skill_alias(alias PK, skill_id FK, source, reviewer)
+topic(topic_id PK persistent, label, parent_topic_id, status active|retired, first_run, last_run)
+skill_topic(skill_id, topic_id, role primary|secondary, score, margin, state assigned|weak|unassigned, run_id)
+skill_context(skill_id, context_type occupation|industry|task, context_id, n_postings, lift)
+external_map(subject_type skill|topic, subject_id, scheme ESCO|ONET, concept_uri,
+             relation exact|close|broad|narrow|related, method, reviewer)</code></pre>
+<p><b>Search:</b> initiative → tasks (Section A) → skills, ranked by <code>skill_context</code> lift. Then expand through topics (semantic neighbours) with a separate, smaller weight. Show both scores in the demo, so a user can see why a skill was returned.</p>
+</details>
+
+<details><summary>Q6. Stable IDs across re-clusters</summary>
+<p>There are three kinds of ID:</p>
+<ul>
+<li><b>skill_id</b>: permanent and never reused.</li>
+<li><b>topic_id</b>: persistent across runs.</li>
+<li><b>cluster_id</b>: run-specific (it is what the algorithm outputs).</li>
+</ul>
+<p><span class="tag rec">recommend</span>After each weekly run:</p>
+<ol>
+<li>Build W[old, new] = Jaccard of member skill_ids, using only skills present in both runs.</li>
+<li>Run Hungarian matching on −W (Kuhn 1955).</li>
+<li><b>Continuation:</b> a matched pair with J ≥ 0.5 keeps its topic_id. <span class="tag hyp">hypothesis</span> Tune the threshold on a dry run.</li>
+<li><b>Split:</b> an old topic where ≥2 new clusters each have containment |o∩n|/|n| ≥ 0.7. The largest one keeps the ID, and the others get new IDs with a <code>split_from</code> link.</li>
+<li><b>Merge:</b> the same rule in reverse, with <code>merged_into</code> links.</li>
+<li><b>New topic:</b> no old topic with J ≥ 0.2. <b>Retired:</b> an old topic that matches nothing gets status=retired and is never deleted.</li>
+<li><b>Labels:</b> keep the old label unless more than 50% of members changed, then queue it for human relabel. Use centroid cosine as a tie-breaker.</li>
+</ol>
+<p>This follows the event model of Greene et al. (2010). Incremental Leiden is not worth it: a weekly batch over about 20–50k skills takes seconds to minutes.</p>
+</details>
+
+<details><summary>Q7. Missing methods, ranked by value / cost</summary>
+<table><tr><th>#</th><th>Method</th><th>Verdict</th></tr>
+<tr><td>1</td><td>Alias normalisation (not clustering, but highest value)</td><td>Do now</td></tr>
+<tr><td>2</td><td>Consensus clustering (a co-association matrix from the subsample runs; Monti et al. 2003)</td><td>Cheap, since we run the subsamples anyway. It gives per-skill stability.</td></tr>
+<tr><td>3</td><td>Weakly supervised mapping to ESCO (embedding nearest concept + human check)</td><td>Sprint 4 mapping, not clustering</td></tr>
+<tr><td>4</td><td>SNN-weighted graph</td><td>A cheap variant inside the Q1 sweep</td></tr>
+<tr><td>5</td><td>BERTopic</td><td>It is UMAP+HDBSCAN+c-TF-IDF built for documents. On 1–4 word phrases the c-TF-IDF labels add little. Skip it, but mention it in the related work.</td></tr>
+<tr><td>6</td><td>GMM on UMAP</td><td>Gives soft memberships, but needs k and inherits UMAP distortion. Low value.</td></tr>
+<tr><td>7</td><td>Spectral clustering</td><td>Needs k and an eigendecomposition. No gain over Leiden on the same graph. Skip.</td></tr>
+</table>
+</details>
+</section>
+
+<!-- ================= C ================= -->
+<section id="C">
+<h2>C. Method comparison</h2>
+<div class="card tw">
+<table>
+<tr><th></th><th>HDBSCAN (UMAP)</th><th>Leiden (kNN)</th><th>Agglomerative (raw)</th><th>Hybrid (recommended)</th></tr>
+<tr><td>Coherence</td><td>High on clustered points</td><td>Mostly high, with junk in the tail</td><td>Mixed at usable thresholds</td><td>Leiden coherence, with junk flagged as weak</td></tr>
+<tr><td>Coverage</td><td>78% of skills (ms1)</td><td>100%</td><td>100%</td><td>100% with an honest confidence state</td></tr>
+<tr><td>Stability</td><td>Unknown; UMAP adds variance</td><td>Unknown; usually good with a fixed seed</td><td>Unknown; very sensitive to the threshold</td><td>To be measured (E, day 2)</td></tr>
+<tr><td>Hierarchy</td><td>Condensed tree (hard to explain)</td><td>Resolutions not nested</td><td>A natural tree</td><td>Agglomerative over Leiden centroids</td></tr>
+<tr><td>Incremental</td><td><code>approximate_predict</code> (in the hdbscan package, not sklearn)</td><td>kNN vote</td><td>Nearest centroid</td><td>kNN vote + threshold</td></tr>
+<tr><td>Cost / complexity</td><td>Medium (UMAP minutes)</td><td>Low (seconds)</td><td>Medium (O(n²) memory)</td><td>Low-medium</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= D ================= -->
+<section id="D">
+<h2>D. Recommended architecture</h2>
+<div class="card">
+<svg viewBox="0 0 900 150" width="100%" role="img" aria-label="Pipeline stages from extraction to search">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="currentColor"/></marker></defs>
+<g id="stages"></g>
+</svg>
+<p id="stageinfo" style="color:var(--mute)">Click a stage to see its input, output and purpose.</p>
+</div>
+</section>
+
+<!-- ================= E ================= -->
+<section id="E">
+<h2>E. One-week evaluation plan</h2>
+<div class="card tw">
+<table>
+<tr><th>Day</th><th>Student A (Dhanush)</th><th>Student B (Lochan)</th><th>Student C</th><th>Deliverable</th></tr>
+<tr><td>1</td><td>Freeze the snapshot, build alias rules and re-embed canonical skills</td><td>Q1 graph sweep (16 Leiden configs) + HDBSCAN at 3 seeds</td><td>Build the probe set (300) and the intrusion review sheets</td><td>snapshot + sweep.csv</td></tr>
+<tr><td>2</td><td>Stability: 5 × 80% subsamples + 50%→100% growth test</td><td>Coherence metrics + margin distribution</td><td>Write the rater guidelines; pilot 10 items with A</td><td>stability.csv</td></tr>
+<tr><td>3</td><td>Rater 1: intrusion on 60 random topics × 2 finalists</td><td>Rater 2: the same</td><td>200-skill assignment check (good/partial/wrong), split by state</td><td>human scores + κ</td></tr>
+<tr><td>4</td><td>Embedding probe: raw / prefix / context / bge-base</td><td>Rate the neighbours (blind)</td><td>Rate the neighbours (blind)</td><td>P@5 per stratum + CI</td></tr>
+<tr><td>5</td><td colspan="3"><b>Decision meeting</b> using the criteria below. Then build the hierarchy over centroids and review the families together.</td><td>decision memo + tree</td></tr>
+<tr><td>6</td><td>kNN assignment: hold out 10%, then calibrate the threshold</td><td>ID matching dry run (subsample A vs B)</td><td>Initiative retrieval check (10 initiatives)</td><td>thresholds + event log</td></tr>
+<tr><td>7</td><td colspan="3">Report (template G). Each person writes up their own analyses.</td><td>experiment report</td></tr>
+</table>
+<h3>Decision criteria (fixed before looking)</h3>
+<ol>
+<li>Drop any config with subsample AMI below 0.6 or median topic Jaccard below 0.5. <span class="tag hyp">hypothesis</span> These thresholds follow Hennig's guidance that per-cluster Jaccard under 0.5 means a dissolved cluster.</li>
+<li>Among the rest, pick the higher human intrusion accuracy. A difference under 5 points is a tie.</li>
+<li>Break ties by mention coverage of the <em>assigned</em> state, then by simplicity (Leiden).</li>
+<li>The weak flag is valid only if weak skills are judged wrong at least twice as often as assigned skills.</li>
+</ol>
+</div>
+</section>
+
+<!-- ================= F ================= -->
+<section id="F">
+<h2>F. Python implementation guidance</h2>
+
+<details open><summary>Build the kNN graph (union or mutual)</summary>
+<pre><code>import numpy as np, igraph as ig
+from sklearn.neighbors import NearestNeighbors
+
+def knn_graph(X, k=15, mutual=False, min_sim=None):
+    dist, nbr = NearestNeighbors(n_neighbors=k + 1, metric="cosine").fit(X).kneighbors(X)
+    sim, nbr = 1 - dist[:, 1:], nbr[:, 1:]
+    pairs = {}
+    for i in range(len(X)):
+        for s, j in zip(sim[i], nbr[i]):
+            pairs.setdefault((min(i, j), max(i, j)), []).append(s)
+    edges, w = [], []
+    for (i, j), s in pairs.items():
+        if mutual and len(s) &lt; 2:          # one-way edge: drop in mutual mode
+            continue
+        if min_sim is not None and s[0] &lt; min_sim:
+            continue
+        edges.append((i, j)); w.append(float(np.mean(s)))
+    g = ig.Graph(n=len(X), edges=edges); g.es["weight"] = w
+    return g</code></pre>
+</details>
+
+<details><summary>Leiden with CPM</summary>
+<pre><code>import leidenalg
+part = leidenalg.find_partition(g, leidenalg.CPMVertexPartition, weights="weight",
+                                resolution_parameter=0.6, seed=42, n_iterations=-1)
+labels = np.array(part.membership)
+# CPM resolution ~ minimum edge density inside a community: sweep it near the
+# kNN similarity quantiles (e.g. 0.55-0.75 for BGE) and read off the community count.</code></pre>
+</details>
+
+<details><summary>Stability on 80% subsamples</summary>
+<pre><code>from sklearn.metrics import adjusted_mutual_info_score as ami
+rng = np.random.default_rng(0)
+runs = []
+for r in range(5):
+    idx = np.sort(rng.choice(len(X), int(.8 * len(X)), replace=False))
+    runs.append((idx, cluster_fn(X[idx])))          # same settings every run
+scores = []
+for a in range(5):
+    for b in range(a + 1, 5):
+        (ia, la), (ib, lb) = runs[a], runs[b]
+        common, pa, pb = np.intersect1d(ia, ib, return_indices=True)
+        A, B = la[pa], lb[pb]
+        keep = (A &gt;= 0) &amp; (B &gt;= 0)                  # HDBSCAN: clustered in both
+        scores.append(ami(A[keep], B[keep]))
+print(np.mean(scores), np.std(scores))
+
+# per-topic Jaccard (Hennig 2007): for each reference topic, best Jaccard in each rerun
+def best_jaccard(ref_members, other_labels, other_idx):
+    sets = {}
+    for i, l in zip(other_idx, other_labels):
+        sets.setdefault(l, set()).add(i)
+    return max(len(ref_members &amp; s) / len(ref_members | s) for s in sets.values())</code></pre>
+</details>
+
+<details><summary>Coherence and margin</summary>
+<pre><code>C = np.stack([X[labels == c].mean(0) for c in topics]); C /= np.linalg.norm(C, axis=1, keepdims=True)
+S = X @ C.T                                   # skill-to-centroid cosine
+top2 = np.sort(S, axis=1)[:, -2:]
+margin = top2[:, 1] - top2[:, 0]
+intra = {c: float((X[labels == c] @ C[k]).mean()) for k, c in enumerate(topics)}
+state = np.where((S.max(1) &gt;= t_sim) &amp; (margin &gt;= t_margin), "assigned", "weak")</code></pre>
+</details>
+
+<details><summary>Match old and new topic IDs</summary>
+<pre><code>from scipy.optimize import linear_sum_assignment
+def match(old: dict, new: dict, keep=0.5):
+    """old/new: {id: set(skill_ids)}; compare only skills present in both runs."""
+    shared = set().union(*old.values()) &amp; set().union(*new.values())
+    O = {k: v &amp; shared for k, v in old.items()}; N = {k: v &amp; shared for k, v in new.items()}
+    ok, nk = list(O), list(N)
+    W = np.array([[len(O[a] &amp; N[b]) / max(1, len(O[a] | N[b])) for b in nk] for a in ok])
+    r, c = linear_sum_assignment(-W)
+    cont = {nk[j]: ok[i] for i, j in zip(r, c) if W[i, j] &gt;= keep}
+    return cont, W   # use W containment rules for split / merge / new / retired</code></pre>
+</details>
+
+<details><summary>Assign a new skill with confidence</summary>
+<pre><code>def assign(v, X, labels, k=15, t_vote=0.6, t_sim=0.75):
+    sims = X @ v; nn = np.argsort(-sims)[:k]
+    votes = {}
+    for j in nn:
+        votes[labels[j]] = votes.get(labels[j], 0) + sims[j]
+    best, score = max(votes.items(), key=lambda kv: kv[1])
+    share = score / sum(votes.values())
+    if sims[nn[0]] &lt; t_sim:      return None, "unassigned", share
+    return best, ("assigned" if share &gt;= t_vote else "weak"), share
+# calibrate t_vote / t_sim: hide 10% of current skills, assign them, and
+# plot agreement with their batch topic against the threshold.</code></pre>
+</details>
+</section>
+
+<!-- ================= G ================= -->
+<section id="G">
+<h2>G. Evaluation report template</h2>
+<div class="card">
+<ol>
+<li><b>Data snapshot:</b> postings, mentions, unique and canonical skills, alias merges, extraction F1, and the share of skills by mention count.</li>
+<li><b>Setup:</b> embedding model + revision, graph settings, seeds, and the hardware.</li>
+<li><b>Table 1, sweep:</b> config → number of topics, coverage (skill and mention), mean intra cosine, AMI mean±sd.</li>
+<li><b>Table 2, human evaluation:</b> intrusion accuracy per finalist with a 95% CI, Cohen's κ, and assignment correctness by state.</li>
+<li><b>Table 3, embedding probe:</b> P@5 per stratum per config, with a CI.</li>
+<li><b>Plots:</b>
+  <ul>
+  <li>topic size distribution (log)</li>
+  <li>margin histogram, coloured by state</li>
+  <li>per-topic Jaccard stability vs size</li>
+  <li>dendrogram of families</li>
+  <li>a UMAP 2D map, for illustration only</li>
+  </ul></li>
+<li><b>Examples:</b> 5 strong topics, 5 weak topics (honestly chosen at random), and 3 split/merge events from the ID matching dry run.</li>
+<li><b>External alignment:</b> the share of topics with an ESCO/O*NET match, by relation type. State that it is diagnostic only.</li>
+<li><b>Downstream:</b> 10 initiatives → top-10 skills, judged relevant / not.</li>
+<li><b>Limitations:</b> context-free embeddings, the sample size compared with the corpus, LLM extraction errors, and the US vs EU gap in ESCO.</li>
+</ol>
+</div>
+</section>
+
+<!-- ================= H ================= -->
+<section id="H">
+<h2>H. Final decision table</h2>
+<div class="card tw">
+<table>
+<tr><th>Item</th><th>Choice</th><th>Why (one line)</th></tr>
+<tr><td>Method</td><td>Leiden on a kNN graph, CPM <span class="tag hyp">pending day 5</span></td><td>Full coverage, one setting, granularity steady as data grows.</td></tr>
+<tr><td>Settings</td><td>The best of k∈{15,30} × {union, mutual} × 4 CPM values</td><td>A small controlled sweep, chosen by stability then human coherence.</td></tr>
+<tr><td>Weak points</td><td>assigned / weak / unassigned from similarity + margin, with HDBSCAN noise as a 2nd flag</td><td>Coverage without hiding uncertainty.</td></tr>
+<tr><td>Hierarchy</td><td>Agglomerative (average, cosine) over topic centroids → 20–40 families, human reviewed</td><td>Explainable tree. Leiden levels do not nest.</td></tr>
+<tr><td>Embedding</td><td>Alias normalisation first; probe-test context and a larger model</td><td>Fix spelling duplicates before tuning models.</td></tr>
+<tr><td>Incremental</td><td>Daily kNN vote; weekly batch; Jaccard + Hungarian ID matching</td><td>Simple, auditable, fast enough at our size.</td></tr>
+<tr><td>Metrics</td><td>AMI + per-topic Jaccard, intrusion accuracy + κ, coverage (skill and mention), intra cosine, ESCO diagnostic, initiative check</td><td>Separates coherence, stability, coverage, external and downstream value.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Quick check</h3>
+<div class="q" data-a="1"><p>Why is HDBSCAN's silhouette (0.10–0.14) not proof it beats Leiden (0.06)?</p>
+<button>It uses a better distance</button><button>It was scored without its hardest 22–36% of points</button><button>Silhouette prefers big clusters</button><div class="fb"></div></div>
+<div class="q" data-a="0"><p>Can Leiden res 5 be used as the parent level of res 20?</p>
+<button>No, 48% of res-20 communities split across parents</button><button>Yes, Leiden is always nested</button><div class="fb"></div></div>
+</div>
+</section>
+
+<!-- ================= R ================= -->
+<section id="R">
+<h2>References</h2>
+<div class="card">
+<ul>
+<li>McInnes, Healy, Melville (2018). UMAP. arXiv:1802.03426.</li>
+<li>Campello, Moulavi, Sander (2013). Density-based clustering based on hierarchical density estimates (HDBSCAN). PAKDD. doi:10.1007/978-3-642-37456-2_14.</li>
+<li>Traag, Waltman, van Eck (2019). From Louvain to Leiden. Scientific Reports 9. doi:10.1038/s41598-019-41695-z.</li>
+<li>Traag, Van Dooren, Nesterov (2011). Narrow scope for resolution-limit-free community detection (CPM). Phys. Rev. E 84. doi:10.1103/PhysRevE.84.016114.</li>
+<li>Reichardt, Bornholdt (2006). Statistical mechanics of community detection. Phys. Rev. E 74. doi:10.1103/PhysRevE.74.016110.</li>
+<li>Fortunato, Barthélemy (2007). Resolution limit in community detection. PNAS 104. doi:10.1073/pnas.0605965104.</li>
+<li>Rousseeuw (1987). Silhouettes. J. Comput. Appl. Math. 20. doi:10.1016/0377-0427(87)90125-7.</li>
+<li>Moulavi et al. (2014). Density-based clustering validation (DBCV). SDM. doi:10.1137/1.9781611973440.96.</li>
+<li>Vinh, Epps, Bailey (2010). Information theoretic measures for clusterings comparison. JMLR 11.</li>
+<li>Hubert, Arabie (1985). Comparing partitions (ARI). J. Classification 2. doi:10.1007/BF01908075.</li>
+<li>Hennig (2007). Cluster-wise assessment of cluster stability. CSDA 52. doi:10.1016/j.csda.2006.11.025.</li>
+<li>Monti et al. (2003). Consensus clustering. Machine Learning 52. doi:10.1023/A:1023949509487.</li>
+<li>Radovanović, Nanopoulos, Ivanović (2010). Hubs in space. JMLR 11.</li>
+<li>Chang et al. (2009). Reading tea leaves: how humans interpret topic models. NeurIPS.</li>
+<li>Greene, Doyle, Cunningham (2010). Tracking the evolution of communities in dynamic social networks. ASONAM. doi:10.1109/ASONAM.2010.17.</li>
+<li>Kuhn (1955). The Hungarian method. Naval Research Logistics Quarterly 2. doi:10.1002/nav.3800020109.</li>
+<li>Grootendorst (2022). BERTopic. arXiv:2203.05794.</li>
+<li>Xiao et al. (2023). C-Pack: packaged resources for Chinese embeddings (BGE). arXiv:2309.07597.</li>
+<li>W3C (2009). SKOS Simple Knowledge Organization System Reference. https://www.w3.org/TR/skos-reference/</li>
+<li>leidenalg documentation: https://leidenalg.readthedocs.io/ · scikit-learn HDBSCAN: https://scikit-learn.org/stable/modules/clustering.html#hdbscan</li>
+</ul>
+<p style="color:var(--mute)">Check every DOI before it goes into the final report.</p>
+</div>
+</section>
+</div>
+
+<script>
+const secs=[["A","A. Summary"],["B","B. Risks"],["Q","Q1–Q7"],["C","C. Compare"],["D","D. Architecture"],["E","E. Week plan"],["F","F. Code"],["G","G. Report"],["H","H. Decision"],["R","Refs"]];
+const nav=document.getElementById("nav");
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));
+  nav.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.id===id));
+  try{localStorage.setItem("cr-tab",id)}catch(e){}}
+secs.forEach(([id,t])=>{const b=document.createElement("button");b.textContent=t;b.dataset.id=id;b.onclick=()=>show(id);nav.appendChild(b)});
+let start="A";try{start=localStorage.getItem("cr-tab")||"A"}catch(e){}
+show(document.getElementById(start)?start:"A");
+
+const stages=[
+ ["Extract","postings","skill mentions","Qwen daily; frozen prompt v3"],
+ ["Normalise","mentions","canonical skills + aliases","merge verified spellings before clustering"],
+ ["Embed","canonical skills","vectors (pinned model)","only new skills each day"],
+ ["Graph","vectors","kNN graph","union or mutual, k 15/30"],
+ ["Leiden","graph","topics (run-specific ids)","CPM, fixed seed, weekly"],
+ ["Confidence","vectors + topics","assigned / weak / unassigned","centroid sim + margin, HDBSCAN flag"],
+ ["Match IDs","old + new topics","persistent topic ids","Jaccard + Hungarian, split/merge"],
+ ["Hierarchy","topic centroids","families tree","agglomerative, human reviewed"],
+ ["Search","initiative","tasks + skills + postings","context lift + semantic expansion"]];
+const g=document.getElementById("stages");const W=900/stages.length;
+stages.forEach((s,i)=>{const x=i*W+4,w=W-14;
+ const r=document.createElementNS("http://www.w3.org/2000/svg","rect");
+ Object.entries({x,y:40,width:w,height:56,rx:8,fill:"var(--acc2)",stroke:"var(--acc)",style:"cursor:pointer"}).forEach(([k,v])=>r.setAttribute(k,v));
+ const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+ Object.entries({x:x+w/2,y:72,"text-anchor":"middle",style:"pointer-events:none"}).forEach(([k,v])=>t.setAttribute(k,v));t.textContent=s[0];
+ r.onclick=()=>{document.getElementById("stageinfo").innerHTML=`<b>${s[0]}</b>: input ${s[1]} → output ${s[2]}. Purpose: ${s[3]}.`;
+   g.querySelectorAll("rect").forEach(q=>q.setAttribute("fill","var(--acc2)"));r.setAttribute("fill","var(--card)")};
+ g.appendChild(r);g.appendChild(t);
+ if(i<stages.length-1){const l=document.createElementNS("http://www.w3.org/2000/svg","line");
+  Object.entries({x1:x+w,y1:68,x2:x+W+2,y2:68,stroke:"var(--mute)","marker-end":"url(#ar)",color:"var(--mute)"}).forEach(([k,v])=>l.setAttribute(k,v));g.appendChild(l)}});
+
+document.querySelectorAll(".q").forEach(q=>{const a=+q.dataset.a;q.querySelectorAll("button").forEach((b,i)=>b.onclick=()=>{
+ const f=q.querySelector(".fb");f.textContent=i===a?"Correct.":"Not quite, try again.";f.style.color=i===a?"var(--ok)":"var(--bad)"})});
+</script>
+</body>
+</html>

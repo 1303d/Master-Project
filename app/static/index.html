@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Skill Pipeline</title>
   <link rel="stylesheet" href="/static/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js" defer></script>
   <script src="/static/app.js" defer></script>
 </head>
 <body>
@@ -17,6 +18,8 @@
       <button role="tab" data-view="status" aria-selected="true">Pipeline status</button>
       <button role="tab" data-view="review" aria-selected="false">Review queue</button>
       <button role="tab" data-view="skills" aria-selected="false">Skills</button>
+      <button role="tab" data-view="map" aria-selected="false">Skill map</button>
+      <button role="tab" data-view="models" aria-selected="false">Models &amp; code</button>
     </nav>
     <div class="top-actions">
       <span class="muted"><span id="lf-dot" class="dot"></span>Langfuse</span>
@@ -27,8 +30,19 @@
   <main>
     <!-- 1. Pipeline status -->
     <section id="view-status" class="view">
+      <div id="offline" class="banner ai" hidden></div>
+      <h3>Pipeline at a glance</h3>
+      <div class="pipe" id="pipe"></div>
+      <div class="pipe-note" id="pipe-note"></div>
+      <h3>Now</h3>
+      <div class="now" id="now"></div>
       <div class="cards" id="status-cards"></div>
-      <h3>Latest run <span id="run-title" class="muted"></span></h3>
+      <div class="charts">
+        <figure class="chart"><figcaption>Extraction progress (postings done, Groq Qwen batch)</figcaption><div id="ch-progress"></div></figure>
+        <figure class="chart"><figcaption>Qwen skill statements in Supabase (running total)</figcaption><div id="ch-loads"></div></figure>
+        <figure class="chart"><figcaption>Top 15 skills (number of postings)</figcaption><div id="ch-top"></div></figure>
+      </div>
+      <h3>Last load to Supabase <span id="run-title" class="muted"></span></h3>
       <div class="flow" id="flow"></div>
       <div class="model-box">
         <span class="muted">Active model (LiteLLM router):</span> <span id="active-model" class="model-chip">—</span>
@@ -84,6 +98,50 @@
       <div class="table-wrap"><table>
         <thead><tr><th>Skill</th><th>Statements</th><th>Verdict</th><th>Matched entry</th><th>Source</th><th>Review</th></tr></thead>
         <tbody id="skills"></tbody></table></div>
+    </section>
+
+    <!-- 4. Skill map -->
+    <section id="view-map" class="view" hidden>
+      <div class="filters">
+        <label class="grow">Find skill <input id="m-q" type="search" placeholder="e.g. python, wound care"></label>
+        <label class="check"><input id="m-weak" type="checkbox" checked> show weak (unclustered) skills</label>
+        <span id="map-info" class="muted"></span>
+      </div>
+      <div class="map-grid">
+        <div id="map" class="pane"></div>
+        <aside class="pane lib">
+          <h3>Skill library <span id="lib-count" class="muted"></span></h3>
+          <p class="muted">Cross-sector skills and tools, kept as single entities. Click one to draw its links to
+            the topics where it appears: thick = strong, thin = weak.</p>
+          <input id="lib-q" type="search" placeholder="filter library">
+          <div id="lib-list" class="chips"></div>
+          <div id="lib-detail"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 5. Extractor scores + code map -->
+    <section id="view-models" class="view" hidden>
+      <div class="box-note">
+        <b>Pipeline extractor: Qwen3.8 27B on Groq (free), prompt v3.</b> Claude Haiku 5.5 was a research benchmark only
+        (class key, not for the pipeline). Scores are against the hand-labelled gold set: 50 dev postings (used to tune) and
+        50 test postings (scored once, at the end). <b>Strict</b> = same skill name after normalising; <b>lenient</b> = all words
+        of one name appear in the other.
+      </div>
+      <figure class="chart wide"><figcaption>F1 on the dev half, prompt v3, gold v1 (higher is better)</figcaption><div id="ch-f1"></div>
+        <div class="muted" id="f1-note"></div></figure>
+      <h3>All scored runs</h3>
+      <div class="filters">
+        <label>Split <select id="m-split"><option value="">all</option><option>dev</option><option>test</option><option>all 100 (Sprint 2)</option></select></label>
+        <label>Gold <select id="m-gold"><option value="">all</option><option>v1</option><option>v2 (traits dropped)</option></select></label>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Model</th><th>Prompt</th><th>Split</th><th>Gold</th><th>Postings</th>
+          <th>P strict</th><th>R strict</th><th>F1 strict</th><th>P lenient</th><th>R lenient</th><th>F1 lenient</th><th>Report</th></tr></thead>
+        <tbody id="m-rows"></tbody>
+      </table></div>
+      <h3>Code map (click a path to open it in VS Code)</h3>
+      <div class="code-map" id="code-map"></div>
     </section>
   </main>
 </body>

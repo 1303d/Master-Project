@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill Topics Explained</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --text: #1d1f23; --muted: #626872; --line: #dfe1e5;
+  --accent: #2f5bd3; --accent-soft: #e5ecfc; --ok: #1f7a4d; --ok-soft: #dff3e8;
+  --bad: #a4301d; --bad-soft: #fbe3de; --mid: #8a5a00; --mid-soft: #fbefd6;
+  --radius: 8px; --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15171a; --panel: #1d2024; --text: #e7e9ec; --muted: #9aa1ab; --line: #30343a;
+    --accent: #8aa8ff; --accent-soft: #233056; --ok: #6fd49b; --ok-soft: #173326;
+    --bad: #ff9a85; --bad-soft: #43221c; --mid: #f0c060; --mid-soft: #3a2e12;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15171a; --panel: #1d2024; --text: #e7e9ec; --muted: #9aa1ab; --line: #30343a;
+  --accent: #8aa8ff; --accent-soft: #233056; --ok: #6fd49b; --ok-soft: #173326;
+  --bad: #ff9a85; --bad-soft: #43221c; --mid: #f0c060; --mid-soft: #3a2e12;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 var(--font); }
+header { padding: 18px 16px 8px; max-width: 1000px; margin: 0 auto; }
+header h1 { margin: 0; font-size: 22px; } header p { margin: 4px 0 0; color: var(--muted); }
+header a { color: var(--accent); }
+nav { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px; max-width: 1000px; margin: 0 auto; }
+nav button { font: inherit; font-size: 13.5px; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+nav button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+main { max-width: 1000px; margin: 0 auto; padding: 8px 16px 40px; }
+section[hidden] { display: none; }
+h2 { font-size: 18px; margin: 14px 0 6px; } h3 { font-size: 15px; margin: 14px 0 4px; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin: 10px 0; }
+.muted { color: var(--muted); font-size: 13px; }
+.term { border-bottom: 1px dotted var(--muted); cursor: help; }
+code { font-size: 13px; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+/* flow diagram */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 10px 0; }
+.step { flex: 1 1 120px; min-width: 110px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 8px 10px; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+.step:hover, .step[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.step .n { font-size: 18px; font-weight: 700; } .step .k { font-size: 12.5px; font-weight: 650; } .step .m { font-size: 11.5px; color: var(--muted); }
+.arrow { align-self: center; color: var(--muted); padding: 0 4px; }
+@media (max-width: 700px) { .flow { flex-direction: column; } .arrow { transform: rotate(90deg); align-self: center; } }
+#step-detail { min-height: 90px; }
+/* toy cluster svg */
+svg text { fill: var(--text); font: 11px var(--font); }
+.dot { transition: fill .6s, cx .8s, cy .8s, opacity .6s; }
+.btns { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.btns button, .quiz button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+.btns button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+/* tables */
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; background: var(--panel); }
+th, td { border-bottom: 1px solid var(--line); padding: 7px 8px; text-align: left; vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+tr.click { cursor: pointer; } tr.click:hover { background: var(--accent-soft); }
+.tag { display: inline-block; font-size: 12px; font-weight: 650; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.t-ok { color: var(--ok); background: var(--ok-soft); } .t-bad { color: var(--bad); background: var(--bad-soft); }
+.t-mid { color: var(--mid); background: var(--mid-soft); }
+/* bars */
+.bar-row { display: grid; grid-template-columns: 170px 1fr 48px; gap: 8px; align-items: center; font-size: 13px; margin: 3px 0; }
+.bar-row .track { height: 12px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.bar-row .fill { height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; width: 0; transition: width .8s; }
+.bar-row.hl .fill { background: var(--ok); }
+@media (max-width: 560px) { .bar-row { grid-template-columns: 110px 1fr 42px; font-size: 12px; } }
+.chips span { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; margin: 2px; font-size: 12.5px; background: var(--bg); }
+.quiz .q { margin: 12px 0; } .quiz .opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.quiz button.right { border-color: var(--ok); background: var(--ok-soft); } .quiz button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.quiz .why { font-size: 13px; color: var(--muted); margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) { .dot, .bar-row .fill { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>How skills became topics</h1>
+  <p>The Sprint 3 clustering work in one place: what we did, what GPT suggested, what our tests showed, and what is still open.
+    <a href="/#status">← back to the dashboard</a></p>
+<p class="muted" style="border-left:3px solid var(--accent);padding-left:8px">Numbers on this page are from run v1 (before the alias clean-up). Current run v2 (2026-10-23): 11,093 skills, 374 topics, 22.1% noise, 2,447 weak, 196 library skills, 980 links (255 strong); "excel" + "microsoft excel" are now one skill (250 postings).</p>
+</header>
+<nav role="tablist">
+  <button role="tab" data-tab="big">1. Big picture</button>
+  <button role="tab" data-tab="idea">2. The idea</button>
+  <button role="tab" data-tab="methods">3. Methods we tried</button>
+  <button role="tab" data-tab="gpt">4. GPT vs our tests</button>
+  <button role="tab" data-tab="library">5. Skill library</button>
+  <button role="tab" data-tab="open">6. Open decisions</button>
+  <button role="tab" data-tab="quiz">7. Quiz</button>
+</nav>
+<main>
+
+<!-- 1 -->
+<section id="tab-big">
+  <h2>The pipeline, step by step</h2>
+  <p>Click a box to see what happens in that step.</p>
+  <div class="flow" id="flow"></div>
+  <div class="box" id="step-detail"></div>
+</section>
+
+<!-- 2 -->
+<section id="tab-idea" hidden>
+  <h2>The idea: similar skills sit close together</h2>
+  <p>Each skill becomes a list of 384 numbers (an <span class="term" title="A list of numbers that stands for the meaning of a text. Similar meaning → similar numbers.">embedding</span>).
+    Skills with similar meanings get similar numbers, so they sit close together in this "meaning space".
+    Clustering finds the crowded areas. Each crowded area is a <b>topic</b>.</p>
+  <div class="btns" id="toy-btns">
+    <button data-mode="raw" aria-pressed="true">1. Skills as points</button>
+    <button data-mode="clusters">2. HDBSCAN finds dense groups</button>
+    <button data-mode="weak">3. Noise → weak member of nearest topic</button>
+  </div>
+  <div class="box"><svg id="toy" viewBox="0 0 600 300" width="100%" role="img" aria-label="Toy picture of skills clustered into topics"></svg></div>
+  <p class="muted" id="toy-note"></p>
+  <p class="muted">This is a toy picture in 2D. The real points are in 384D. We squash them to 10D with
+    <span class="term" title="Uniform Manifold Approximation and Projection: squashes many dimensions into a few, keeping neighbours near each other.">UMAP</span> before HDBSCAN,
+    and to 3D only for the Skill map tab.</p>
+  <h3>Real examples (HDBSCAN run, top skills by mentions)</h3>
+  <div class="box" id="examples"></div>
+</section>
+
+<!-- 3 -->
+<section id="tab-methods" hidden>
+  <h2>Four methods, one fair test</h2>
+  <p>We ran a sweep (many settings) and then a <b>stability test</b>: cluster 5 random 80% subsets and use 3 random seeds.
+    A good method gives the same answer every time. Click a row for details.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Method</th><th>Topics</th><th>Coverage</th><th>Stability (AMI)</th><th>Per-topic Jaccard</th><th>Role now</th></tr></thead>
+    <tbody id="method-rows"></tbody>
+  </table></div>
+  <div class="box" id="method-detail"><span class="muted">Click a row.</span></div>
+  <h3>Stability (AMI across 80% subsets, higher = steadier)</h3>
+  <div id="ami-bars"></div>
+  <p class="muted"><b>AMI</b> = adjusted mutual information: 1 means two runs agree fully, 0 means they agree only by chance.
+    <b>Per-topic Jaccard</b> = for each topic, how much of it survives in the other run (median). <b>Coverage</b> = share of skills that get a topic.
+    HDBSCAN's AMI is measured only on the 78% of skills it clusters, so it looks better than it is.</p>
+</section>
+
+<!-- 4 -->
+<section id="tab-gpt" hidden>
+  <h2>What GPT suggested vs what our tests showed</h2>
+  <p>We pasted a long GPT review (it is in <code>learn/clustering-review.html</code>). We did not accept it blindly.
+    We tested each claim on our data. Click a row to see the evidence.</p>
+  <div class="tw"><table>
+    <thead><tr><th>GPT suggested</th><th>Result</th></tr></thead>
+    <tbody id="gpt-rows"></tbody>
+  </table></div>
+  <div class="box" id="gpt-detail"><span class="muted">Click a row.</span></div>
+</section>
+
+<!-- 5 -->
+<section id="tab-library" hidden>
+  <h2>The skill library: skills that are everywhere</h2>
+  <p>Some skills ("communication", "teamwork", "excel") appear in every sector. They do not belong to one topic.
+    Many of them end up as HDBSCAN noise. So we built a <b>library</b>: a label on a skill (not a new id) that says
+    "this skill is cross-sector".</p>
+  <div class="box">
+    <b>Rule library-v1</b> (a skill enters the library when all three are true):
+    <ol>
+      <li>It appears in at least <b>5 postings</b>.</li>
+      <li>It appears in at least <b>4 of the 8 sectors</b>.</li>
+      <li>Its top sector has at most <b>50%</b> of its postings (no single sector owns it).</li>
+    </ol>
+    Status <b>confirmed</b> = at least 10 postings, otherwise <b>candidate</b>.
+    Spread is also scored with <span class="term" title="A number from 0 to 1. 1 = spread evenly over all 8 sectors, 0 = all in one sector. Computed as entropy / ln 8.">entropy</span>.
+  </div>
+  <div class="box">
+    <b>Result:</b> 197 library skills (148 confirmed). Tools such as excel, word and power bi stay in the library (your decision).
+    45 topics are flagged <b>transversal</b> (soft-skill topics). The Skill map tab colours only the top-20 <i>domain</i> topics.
+  </div>
+  <h3>Links: which topics does a library skill go with?</h3>
+  <p>For each library skill and each topic, we count postings that have both. A
+    <span class="term" title="A test: is this overlap bigger than chance, given how common each one is?">hypergeometric test</span>
+    gives a p-value. We correct the p-values for the full family of 67,501 pairs with
+    <span class="term" title="Benjamini–Hochberg: controls the share of false discoveries when you run many tests (the false discovery rate, FDR).">BH (FDR)</span> → q-value.</p>
+  <div class="box"><b>Strong link</b> = at least 5 shared postings, lift ≥ 1.5, q &lt; 0.05. Others are weak.
+    Result: 985 links, 272 strong. On the Skill map, click a library skill: thick lines = strong, thin = weak.</div>
+  <p><a href="/learn/library-links.html">Learn the maths step by step (entropy, lift, p, q) →</a></p>
+  <h3>Try it: is this a library skill?</h3>
+  <div class="box" id="lib-try">
+    <label>Postings <input type="number" id="lt-n" value="40" min="0" style="width:70px"></label>
+    <label>Sectors (of 8) <input type="number" id="lt-s" value="6" min="0" max="8" style="width:60px"></label>
+    <label>Top sector share % <input type="number" id="lt-t" value="35" min="0" max="100" style="width:60px"></label>
+    <p id="lt-out" style="font-weight:650"></p>
+  </div>
+  <p class="muted">GPT's review of the library agreed with this design (library = label on a skill, FDR, entropy, status).
+    It also suggested later work: a skill_type field, job-title spread, a sector-bias test, held-out validation and a token benchmark.</p>
+</section>
+
+<!-- 6 -->
+<section id="tab-open" hidden>
+  <h2>Where we are, and what is still open</h2>
+  <div class="box"><b>Loaded in Supabase now:</b> HDBSCAN run <code>hdbscan_10_umap10_ms1_2026-10-22</code>:
+    388 topics, 11,366 skill memberships (2,474 of them weak), 34,098 related_to links, 197 library skills, 985 library links.
+    This is a <b>working choice</b> for the demo, not the final pick.</div>
+  <h3>Open decisions</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Question</th><th>How we will decide</th></tr></thead>
+    <tbody>
+      <tr><td>HDBSCAN or Leiden RB res 20?</td><td>Human intrusion test: 60 topics × 2 finalists. A reader spots the "odd one out" skill in each topic. Higher score = more coherent topics.</td></tr>
+      <tr><td>Topic names</td><td>Now = the skill nearest the centre (python topic shows "scala"). Next = top-3 member skills or a free LLM label, reviewed by a human.</td></tr>
+      <tr><td>New skills every day</td><td>Embed the new skill → kNN vote of its nearest skills → assigned or weak. Not built yet.</td></tr>
+      <tr><td>Hierarchy (topics → families)</td><td>Agglomerative clustering over topic centroids, cut into about 20–40 families, then human review.</td></tr>
+      <tr><td>Stable topic IDs across runs</td><td>Match old → new topics by Jaccard + Hungarian matching. Not written yet, so <code>load_taxonomy.py</code> refuses a second load.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Known weak spots (say these honestly in the demo)</h3>
+  <ul>
+    <li>About half of the topics are fragile (per-topic Jaccard about 0.5) for <b>every</b> method.</li>
+    <li>Weak memberships can be odd: "attention to detail" → topic "zoom", margin only 0.017.</li>
+    <li>Library IDs and links are tied to the HDBSCAN run. If Leiden wins, rebuild them.</li>
+    <li>The GPT review page still recommends CPM. Our test says that is wrong. Fix that page.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section id="tab-quiz" hidden>
+  <h2>Quick check</h2>
+  <div class="quiz" id="quiz-box"></div>
+</section>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+
+// ---------- tabs (hash = tab, so the dashboard can deep-link) ----------
+function show(tab) {
+  if (!document.getElementById("tab-" + tab)) tab = "big";
+  document.querySelectorAll("nav button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== "tab-" + tab));
+  if (tab === "methods") requestAnimationFrame(fillBars);
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => { history.replaceState(null, "", "#" + b.dataset.tab); show(b.dataset.tab); }));
+window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+
+// ---------- 1. flow ----------
+const STEPS = [
+  { k: "Extracted skills", n: "11,449", m: "unique skill names", d: "Qwen3.8 27B (on Groq) read each posting and listed its skills. After lower-casing we had 11,449 different skill names. Many are the same skill written differently." },
+  { k: "Merge aliases", n: "11,366", m: "canonical skills", d: "<code>src/normalize_aliases.py</code> applies 3 safe rules: R1 hyphens (\"problem-solving\" = \"problem solving\"), R2 \"ms\" → \"microsoft\" (except MS-DRG), R3 drop a trailing \"skills\" when the short form exists. 11,449 → 11,366. Output: <code>aliases.csv</code>." },
+  { k: "Embed", n: "384", m: "numbers per skill", d: "Lochan's <code>src/embed_skills.py</code> turns each skill name into 384 numbers with the model <b>BAAI/bge-small-en-v1.5</b> (pinned revision). Runs on the GPU in about 2 seconds." },
+  { k: "UMAP", n: "10D", m: "squash dimensions", d: "HDBSCAN works badly in 384 dimensions (everything looks equally far). UMAP squashes the points to 10 dimensions and keeps neighbours together. Leiden does not need this: it uses a kNN graph." },
+  { k: "Cluster", n: "388", m: "topics (HDBSCAN)", d: "<code>src/cluster_skills.py</code>. HDBSCAN, min cluster size 10, min samples 1. It finds 388 dense groups. 21.8% of skills do not fit any group: HDBSCAN calls them <b>noise</b>. We tried 3 other methods too (tab 3)." },
+  { k: "Weak members", n: "2,474", m: "noise skills placed", d: "<code>src/load_taxonomy.py</code>. We never throw a skill away. A noise skill becomes a <b>weak</b> member of its nearest topic centre. We save the score (cosine) and the margin (best minus second best) so you can see how sure it is. Every skill also gets its top-3 most similar skills (related_to)." },
+  { k: "Library", n: "197", m: "cross-sector skills", d: "<code>src/build_library.py</code>. Many noise skills are generic skills used in every sector. The library labels them and links them to topics by co-occurrence (tab 5)." },
+  { k: "Supabase + map", n: "3D", m: "Skill map tab", d: "Everything goes into the taxonomy tables (<code>sql/taxonomy_schema.sql</code>). <code>src/make_skill_map.py</code> makes a 3D UMAP picture for the Skill map tab. 3D is for display only, not for clustering." },
+];
+$("#flow").innerHTML = STEPS.map((s, i) => `${i ? '<span class="arrow" aria-hidden="true">→</span>' : ""}<button class="step" data-i="${i}" aria-pressed="false"><div class="k">${s.k}</div><div class="n">${s.n}</div><div class="m">${s.m}</div></button>`).join("");
+function pick(i) {
+  document.querySelectorAll(".step").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
+  $("#step-detail").innerHTML = `<b>Step ${i + 1}: ${STEPS[i].k}</b><p style="margin:6px 0 0">${STEPS[i].d}</p>`;
+}
+document.querySelectorAll(".step").forEach((b) => b.addEventListener("click", () => pick(+b.dataset.i)));
+pick(4);
+
+// ---------- 2. toy clusters (made-up 2D points, only to show the idea) ----------
+const GROUPS = [
+  { name: "programming", c: [120, 80], col: "#2a78d6", words: ["python", "java", "golang", "django", "scala", "maven"] },
+  { name: "spreadsheets", c: [450, 80], col: "#eb6834", words: ["excel", "google sheets", "vlookup", "macros", "smartsheet"] },
+  { name: "nursing", c: [120, 225], col: "#1baf7a", words: ["nursing care", "geriatric nursing", "charge nursing", "nursing process"] },
+  { name: "negotiation", c: [450, 225], col: "#6250d6", words: ["negotiation", "contract negotiation", "deal structuring", "pricing negotiation"] },
+];
+const NOISE = [{ w: "attention to detail", p: [250, 150], near: 1 }, { w: "zoom", p: [330, 110], near: 1 }, { w: "multitasking", p: [270, 200], near: 2 }];
+const pts = [];  // a small zig-zag column per group, so labels never overlap
+GROUPS.forEach((g, gi) => g.words.forEach((w, i) => pts.push({ w, g: gi, x: g.c[0] - 60 + (i % 2) * 18, y: g.c[1] - 45 + i * 18 })));
+NOISE.forEach((n) => pts.push({ w: n.w, g: -1, near: n.near, x: n.p[0], y: n.p[1] }));
+const svg = $("#toy"), NS = "http://www.w3.org/2000/svg";
+const grey = getComputedStyle(document.documentElement).getPropertyValue("--muted").trim() || "#888";
+pts.forEach((p) => {
+  const c = document.createElementNS(NS, "circle"); c.setAttribute("class", "dot"); c.setAttribute("r", 6);
+  c.setAttribute("cx", p.x); c.setAttribute("cy", p.y); const t = document.createElementNS(NS, "title"); t.textContent = p.w; c.appendChild(t);
+  const l = document.createElementNS(NS, "text"); l.setAttribute("x", p.x + 8); l.setAttribute("y", p.y + 4); l.textContent = p.w;
+  svg.append(c, l); p.el = c; p.lab = l;
+});
+const rings = GROUPS.map((g) => { const e = document.createElementNS(NS, "ellipse"); e.setAttribute("cx", g.c[0]); e.setAttribute("cy", g.c[1]);
+  e.setAttribute("rx", 95); e.setAttribute("ry", 62); e.setAttribute("fill", "none"); e.setAttribute("stroke", g.col); e.setAttribute("stroke-dasharray", "4 3");
+  e.style.opacity = 0; e.style.transition = "opacity .6s"; svg.prepend(e); return e; });
+const lines = NOISE.map((n) => { const l = document.createElementNS(NS, "line"); const g = GROUPS[n.near];
+  l.setAttribute("x1", n.p[0]); l.setAttribute("y1", n.p[1]); l.setAttribute("x2", g.c[0]); l.setAttribute("y2", g.c[1]);
+  l.setAttribute("stroke", g.col); l.setAttribute("stroke-dasharray", "2 4"); l.style.opacity = 0; l.style.transition = "opacity .6s"; svg.prepend(l); return l; });
+const NOTES = {
+  raw: "Each dot is a skill. Close dots have similar meaning. Nothing is grouped yet.",
+  clusters: "HDBSCAN marks dense areas as topics (coloured). Points in empty space between groups are noise (grey). In our run 21.8% of skills are noise.",
+  weak: "We keep every skill. A noise skill becomes a weak member of the nearest topic centre (dotted line). Low margin = not sure. This is why \"attention to detail\" landed in \"zoom\"'s topic with margin 0.017.",
+};
+function toy(mode) {
+  document.querySelectorAll("#toy-btns button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+  pts.forEach((p) => p.el.setAttribute("fill", mode === "raw" ? grey : p.g >= 0 ? GROUPS[p.g].col : grey));
+  rings.forEach((r) => (r.style.opacity = mode === "raw" ? 0 : 1));
+  lines.forEach((l) => (l.style.opacity = mode === "weak" ? 1 : 0));
+  $("#toy-note").textContent = NOTES[mode];
+}
+document.querySelectorAll("#toy-btns button").forEach((b) => b.addEventListener("click", () => toy(b.dataset.mode)));
+toy("raw");
+const EX = [
+  ["programming topic", ["python", "java", "confluence", "golang", "django", "scala", "maven", "lambda"], "A general coding topic, not a Python topic. Its label today is \"scala\" (the skill nearest the centre). That is why better labels are next on the list."],
+  ["names fool the model", [], "numpy → the math topic (with \"basic math\", \"matlab\"); tensorflow → with airflow, kubeflow (\"-flow\"); r → with rhel, redcap. The model embeds only the skill name, so it groups by how names look, not by which ecosystem they belong to."],
+  ["excel topic", ["excel", "microsoft excel", "spreadsheets", "google sheets", "smartsheet", "macros", "vlookup"], ""],
+  ["nursing topic", ["nursing care", "nursing process", "geriatric nursing", "nursing", "charge nursing"], ""],
+  ["accounts topic", ["accounts payable", "accounts receivable", "accounts payable (ap)", "aged receivables analysis"], "Payable and receivable share one topic: close in meaning, but different skills. A human check would catch this."],
+  ["attention to detail", [], "HDBSCAN noise → weak member of a topic, and also a library skill (it is in every sector)."],
+];
+$("#examples").innerHTML = EX.map(([t, w, n]) => `<div style="margin:6px 0"><b>${t}</b> <span class="chips">${w.map((x) => `<span>${x}</span>`).join("")}</span>${n ? `<div class="muted">${n}</div>` : ""}</div>`).join("");
+
+// ---------- 3. methods (numbers from canonical/stability.csv and sweep.csv) ----------
+const METHODS = [
+  { m: "HDBSCAN (min size 10, min samples 1)", topics: 388, cov: "78%", ami: .8465, jac: .5186, role: '<span class="tag t-ok">finalist · loaded</span>',
+    d: "Finds dense groups and leaves 21.8% of skills as noise. Highest AMI, but only on the skills it clusters. Noise is mostly generic cross-sector skills, not rare ones, so we handle it with weak membership + the library instead of forcing it." },
+  { m: "Leiden, RB modularity, res 20, k=15", topics: 321, cov: "100%", ami: .748, jac: .59, role: '<span class="tag t-ok">finalist</span>',
+    d: "Builds a graph (each skill linked to its 15 nearest skills) and finds communities. Every skill gets a topic. Best per-topic Jaccard of all (0.59). HDBSCAN and Leiden agree strongly (AMI 0.78) on the 78% HDBSCAN clusters, so the real choice is about the hard 22%." },
+  { m: "Leiden, CPM (8 settings)", topics: "148–441", cov: "100%", ami: .7832, jac: .5296, role: '<span class="tag t-bad">not chosen</span>',
+    d: "GPT recommended CPM. We tried 8 settings (k 15/30, union/mutual, 4 resolutions). Best CPM per-topic Jaccard was 0.53, worse than RB's 0.59. So CPM was NOT more stable. Numbers shown are the best CPM setting for each column." },
+  { m: "Agglomerative (cosine, cut 0.4)", topics: 357, cov: "100%", ami: .6102, jac: .4778, role: '<span class="tag t-mid">only for hierarchy</span>',
+    d: "Least stable on raw skills (AMI 0.61). We will use it only over topic centres (about 300–400 points) to build families." },
+  { m: "k-means", topics: "—", cov: "100%", ami: null, jac: null, role: '<span class="tag t-bad">not chosen</span>',
+    d: "Supported in the script for comparison, not in the final sweep. It needs the number of topics fixed in advance and assumes round clusters, and it cannot leave a skill out." },
+];
+$("#method-rows").innerHTML = METHODS.map((x, i) => `<tr class="click" data-i="${i}"><td>${x.m}</td><td>${x.topics}</td><td>${x.cov}</td><td>${x.ami ?? "—"}</td><td>${x.jac ?? "—"}</td><td>${x.role}</td></tr>`).join("");
+document.querySelectorAll("#method-rows tr").forEach((r) => r.addEventListener("click", () => { const x = METHODS[+r.dataset.i]; $("#method-detail").innerHTML = `<b>${x.m}</b><p style="margin:6px 0 0">${x.d}</p>`; }));
+const AMI = [["hdbscan 10 (default)", .9117], ["hdbscan 10 ms1", .8465, 1], ["leiden cpm 0.08 k30", .7832], ["leiden cpm 0.04 k30", .7794],
+  ["leiden rb 20 k15", .748, 1], ["leiden cpm 0.04 k15", .7477], ["leiden cpm 0.02 k15", .7276], ["leiden cpm 0.01 k30 mutual", .699], ["agglomerative 0.4", .6102]];
+$("#ami-bars").innerHTML = AMI.map(([n, v, hl]) => `<div class="bar-row ${hl ? "hl" : ""}"><span>${n}</span><div class="track"><div class="fill" data-w="${v * 100}%"></div></div><span>${v.toFixed(2)}</span></div>`).join("")
+  + '<p class="muted">Green = the two finalists. "hdbscan 10 (default)" scores highest but clusters only 64% of skills.</p>';
+function fillBars() { document.querySelectorAll("#ami-bars .fill").forEach((f) => (f.style.width = f.dataset.w)); }
+
+// ---------- 4. GPT vs tests ----------
+const GPT = [
+  ["Use Leiden with CPM instead of modularity (steadier as data grows).", "bad", "Rejected",
+   "We ran 8 CPM settings next to RB modularity. CPM was not more stable: best per-topic Jaccard 0.53 vs 0.59 for RB res 20. Leiden RB is the Leiden finalist. The review page still says CPM, so fix it."],
+  ["Merge verified aliases first (excel = ms excel = microsoft excel).", "ok", "Done",
+   "normalize_aliases.py rules R1–R3: 11,449 → 11,366. Only safe rules. Bigger merges (excel = microsoft excel) stay in the same topic instead of being merged by force."],
+  ["Three states, never a silent forced assignment: assigned / weak / unassigned.", "ok", "Done",
+   "skill_topics has state = assigned or weak, with score and margin. 2,474 weak memberships. No skill is lost, and you can see how sure each one is."],
+  ["Hybrid: Leiden partition + confidence score + HDBSCAN noise as a second flag.", "mid", "Tested, open",
+   "HDBSCAN and Leiden agree (AMI 0.78) on HDBSCAN's clustered 78%. Only 5% of noise has a near-duplicate (cosine ≥ 0.9), so merging noise does not work. Final method choice waits for the human intrusion test."],
+  ["Hierarchy: agglomerative over topic centroids, not raw skills, cut into 20–40 families.", "ok", "Agreed",
+   "Our stability test backs this: agglomerative on raw skills is the least stable (AMI 0.61). Leiden resolutions are not nested (48%), so they cannot give the hierarchy. Not built yet."],
+  ["Give soft skills their own family (like ESCO's transversal pillar).", "ok", "Done, differently",
+   "Instead of one family we built the skill library (197 cross-sector skills) and flagged 45 transversal topics. Domain topics and generic skills stay separate."],
+  ["Assign new skills every day by a kNN vote with a confidence threshold.", "mid", "Planned",
+   "After the demo: a daily step after LoadQwen. Embed the new skill → vote of its nearest skills → assigned or weak."],
+  ["Library review: label on a skill, FDR correction, entropy, status.", "ok", "Done",
+   "build_library.py rule library-v1: BH q-values over all 67,501 pairs, entropy / ln 8, confirmed vs candidate."],
+];
+$("#gpt-rows").innerHTML = GPT.map((g, i) => `<tr class="click" data-i="${i}"><td>${g[0]}</td><td><span class="tag t-${g[1]}">${g[2]}</span></td></tr>`).join("");
+document.querySelectorAll("#gpt-rows tr").forEach((r) => r.addEventListener("click", () => { const g = GPT[+r.dataset.i]; $("#gpt-detail").innerHTML = `<b>${g[0]}</b><p style="margin:6px 0 0">${g[3]}</p>`; }));
+
+// ---------- 5. library try-it ----------
+function libCheck() {
+  const n = +$("#lt-n").value, s = +$("#lt-s").value, t = +$("#lt-t").value;
+  const fails = [n < 5 && "fewer than 5 postings", s < 4 && "fewer than 4 sectors", t > 50 && "one sector has more than 50%"].filter(Boolean);
+  $("#lt-out").innerHTML = fails.length ? `<span class="tag t-bad">not library</span> ${fails.join(", ")}`
+    : `<span class="tag t-ok">library · ${n >= 10 ? "confirmed" : "candidate"}</span>`;
+}
+["#lt-n", "#lt-s", "#lt-t"].forEach((id) => $(id).addEventListener("input", libCheck)); libCheck();
+
+// ---------- 7. quiz ----------
+const QUIZ = [
+  ["HDBSCAN leaves 21.8% of skills as noise. What do we do with them?", ["Delete them", "Weak member of nearest topic", "Make each its own topic"], 1,
+   "We never drop a skill. Noise becomes a weak member, with score and margin saved."],
+  ["GPT said CPM is more stable than RB modularity. What did our test show?", ["CPM was more stable", "CPM was NOT more stable", "We did not test it"], 1,
+   "Best CPM per-topic Jaccard 0.53 vs RB 0.59."],
+  ["\"teamwork\" is in 8 sectors and 484 postings. What is it?", ["A domain topic", "A library skill (confirmed)", "Noise only"], 1,
+   "≥5 postings, ≥4 sectors, top sector ≤ 50%, ≥10 postings → confirmed library skill."],
+  ["Why do we squash 384 numbers to 10 with UMAP before HDBSCAN?", ["To make the map pretty", "HDBSCAN works badly in very high dimensions", "Supabase needs it"], 1,
+   "In 384D all points look almost equally far apart, so density is hard to find."],
+];
+$("#quiz-box").innerHTML = QUIZ.map((q, i) => `<div class="q box" data-i="${i}"><b>${i + 1}. ${q[0]}</b><div class="opts">${q[1].map((o, j) => `<button data-j="${j}">${o}</button>`).join("")}</div><div class="why" hidden>${q[3]}</div></div>`).join("");
+document.querySelectorAll(".quiz .q").forEach((box) => box.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+  const q = QUIZ[+box.dataset.i], ok = +b.dataset.j === q[2];
+  box.querySelectorAll("button").forEach((x) => x.classList.remove("right", "wrong"));
+  b.classList.add(ok ? "right" : "wrong"); if (!ok) box.querySelectorAll("button")[q[2]].classList.add("right");
+  box.querySelector(".why").hidden = false;
+})));
+
+show(location.hash.slice(1) || "big");
+</script>
+</body>
+</html>
