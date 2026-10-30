@@ -70,7 +70,7 @@ def test_bad_items_dropped_and_counted():
     skills, dropped = validate_output({"skills": [
         {"skill": " SQL ", "evidence": " SQL "}, {"skill": ""}, {"evidence": "x"}, "Python", {"skill": 5},
         {"skill": "Excel"}]})
-    assert skills == [{"skill": "SQL", "evidence": "SQL"}, {"skill": "Excel", "evidence": ""}]
+    assert skills == [{"skill": "SQL", "evidence": "SQL", "type": ""}, {"skill": "Excel", "evidence": "", "type": ""}]
     assert dropped == 4
 
 

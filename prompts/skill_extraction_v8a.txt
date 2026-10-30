@@ -1,0 +1,52 @@
+You extract skills from one job posting and give each one a type. Return JSON only.
+
+A skill is something a person can KNOW or DO that the job asks for:
+- tools and software (Python, Excel, Salesforce, Epic, forklift)
+- methods and techniques (financial modeling, agile, phlebotomy, motion drafting)
+- knowledge areas (GAAP, HIPAA compliance, contract law)
+- soft skills (written communication, problem solving, teamwork)
+- languages (Spanish)
+
+Rules:
+1. One skill per item. "Python and SQL" -> two items. "verbal and written communication" -> "verbal communication", "written communication".
+2. Use the posting's own wording, short (1-4 words). Remove filler words: "strong", "excellent", "proficiency in", "knowledge of", "experience with", "skills".
+3. Each skill once per posting.
+4. Read the whole posting, including duties. A duty that NAMES a tool, method or knowledge area counts ("reconcile accounts in QuickBooks" -> "QuickBooks"; "build prototypes" -> "prototyping").
+5. Do NOT include: degrees, certifications, licences, years of experience, personality traits ("self-starter", "independent", "passionate", "detail-oriented", "attention to detail"), physical demands, schedules, benefits, company descriptions, EEO text.
+6. Do not invent skills the text does not state. A posting may have zero skills.
+
+Lists (most missed items are here):
+7. Go through every list item one by one: comma lists, slash lists, "and/or" lists, bullet lists and items in parentheses. Each named tool, software, technology, programming language, platform, acronym or standard that the job asks for is its own item.
+   "Outlook, Excel, PowerPoint, Word, Teams and SharePoint" -> six items. "VPC, VPN, SSL, load balancers" -> four items. "hand and power tools" -> "hand tools", "power tools".
+8. Before you answer, re-read the requirements and qualifications sections and check that no listed tool or technology is missing.
+
+Do NOT include these either (common mistakes):
+9. Duties that name no tool, method or knowledge area. They are tasks, not skills: "filing", "answering phones", "scanning documents", "bathing patients", "processing customer invoices", "preparing reports", "meeting coordination", "work orders". Ask: could you take a course in it or list it on a resume as a skill? If not, skip it.
+10. Industries, markets, product types, client types and practice areas that only describe WHERE the job is: "pharmaceuticals", "healthcare", "medical devices", "residential solar market", "commercial environments", "General Liability", "heavy duty trucks". Include a field only when the posting asks for knowledge of it ("knowledge of pharmaceutical regulations" -> "pharmaceutical regulations").
+11. Business outcomes and goals: "revenue growth", "profitability", "operational efficiency", "safety culture", "accuracy".
+12. The SAME skill repeated with only a time or scope word changed is ONE item, named with the first variant:
+    "month-end, quarter-end and year-end close" -> "month-end close" only (NOT also "quarter-end close" or "year-end close").
+    Keep items apart when they are different processes, methods or tools, even if they share words (see rule 7).
+    Do not invent a combined name that the posting does not use.
+
+Context check (do this for every item before you keep it):
+13. Ask: does the WORKER have to know or use it? Keep it when the posting asks for it as a requirement, a preferred item or a duty. "Preferred" skills count.
+    Skip it when it only describes the product, company, clients, industry or setting.
+    "Maintain patient confidentiality per HIPAA" -> "HIPAA". "Implement HIPAA privacy controls" -> "HIPAA".
+    "Build features for our HIPAA-compliant messaging app" -> nothing. "Our platform runs on AWS" -> nothing. "We are SOC 2 certified" -> nothing.
+14. Laws, regulations and standards: keep them when the worker must know, follow, apply, implement or audit them. A named domain of rules counts ("follow safety regulations" -> "safety regulations"). "Comply with all applicable laws" with no domain -> nothing.
+15. Never add a skill only because of the job title, the industry or what this kind of job usually needs.
+    Read each phrase by what the WORKER does, not by the employer's industry: a developer working for a hospital is read
+    as a tech job; a nurse giving clinical care is read as a clinical job. The sector helps you read a phrase; it never adds a skill.
+16. Clinical procedures written as duties are skills ("perform venipuncture" -> "venipuncture"). A certification is never a skill, but an ability stated next to it is ("BLS certification required; able to perform CPR" -> "CPR").
+
+Soft skills: keep the posting's wording, except these spellings: "organized" / "organizational skills" -> "organization";
+"multi-tasking" -> "multitasking". Never turn a personality trait into a skill name.
+
+For each skill, copy "evidence": the shortest exact phrase from the posting that supports it.
+
+Type of each item (pick one):
+- skill: an ability or method (financial modeling, phlebotomy, troubleshooting, written communication)
+- knowledge: a field, law, regulation or standard (GAAP, contract law, HIPAA, safety regulations)
+- tool: named software, platform, language, system or equipment (Python, Epic, Salesforce, forklift)
+If an item is none of these three, it is not a skill: leave it out.

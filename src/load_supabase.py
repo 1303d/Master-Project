@@ -17,28 +17,40 @@ from pathlib import Path
 import pandas as pd
 
 import db
-from extract_skills import slug
+from extract_skills import SCORED_TYPES, slug
 from link_reference import LINKS, link, reference
 
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLE = ROOT / "data" / "processed" / "extraction_sample_2000.csv"
 
 
-def cached_statements(posts, provider, model, prompt, run_id, benchmark=False):
+def cache_paths(posts, provider, model, prompt, run=None):
+    """posting_id -> cache file. With run: the key manifest cache_keys_<run>.csv that extract_skills.py writes
+    (any key format, typed or not). Without: the legacy key model + prompt + text (runs before 2026-10-30)."""
+    if run:
+        keys = pd.read_csv(ROOT / "data" / "processed" / f"cache_keys_{run}.csv")
+        return {r.posting_id: ROOT / "cache" / r.provider / f"{r.cache_key}.json" for r in keys.itertuples()}
+    sha = hashlib.sha256(prompt.read_text(encoding="utf-8").encode()).hexdigest()
+    return {p.posting_id: ROOT / "cache" / provider / f"{hashlib.sha256(f'{model}|{sha}|{p.description}'.encode()).hexdigest()}.json"
+            for p in posts.itertuples()}
+
+
+def cached_statements(posts, provider, model, prompt, run_id, benchmark=False, run=None):
     """Rebuild statement rows exactly as extract_skills.py does, from the cached LLM answers.
-    A benchmark run gets the model in its statement_id, so it sits beside the pipeline model's rows."""
+    A benchmark run gets the model in its statement_id, so it sits beside the pipeline model's rows.
+    Typed answers (--typed) keep only the scored types, as statements_*.csv does."""
     tag = f"{slug(model)}:" if benchmark else ""
-    system = prompt.read_text(encoding="utf-8")
-    sha = hashlib.sha256(system.encode()).hexdigest()
+    paths = cache_paths(posts, provider, model, prompt, run)
     rows, done = [], 0
     for p in posts.itertuples():
-        path = ROOT / "cache" / provider / f"{hashlib.sha256(f'{model}|{sha}|{p.description}'.encode()).hexdigest()}.json"
-        if not path.exists():
+        path = paths.get(p.posting_id)
+        if path is None or not path.exists():
             continue
         done += 1
         data = json.loads(path.read_text(encoding="utf-8"))
         low = p.description.lower()
-        skills = [s for s in data["output"].get("skills", []) if s.get("skill")]
+        skills = [s for s in data["output"].get("skills", []) if s.get("skill")
+                  and str(s.get("type") or "skill").strip().lower() in SCORED_TYPES]
         for i, s in enumerate(skills, 1):
             ev = str(s.get("evidence", "")).strip()
             rows.append({"statement_id": f"{p.posting_id}:{tag}skill:{i}", "posting_id": p.posting_id,
@@ -70,12 +82,15 @@ def main():
     ap.add_argument("--benchmark", action="store_true",
                     help="research run of another model: its rows get the model in statement_id (kept side by side)")
     ap.add_argument("--if-new", action="store_true", help="do nothing unless the cache has new skills (for the hourly task)")
+    ap.add_argument("--run", default=None, metavar="RUN",
+                    help="read cache keys from data/processed/cache_keys_<RUN>.csv (runs after 2026-10-30); "
+                         "without it the legacy key is used")
     args = ap.parse_args()
 
     posts = pd.read_csv(args.postings, encoding="utf-8-sig")
     with db.connect() as con:
         if args.if_new:
-            rows, _ = cached_statements(posts, args.provider, args.model, args.prompt, None, args.benchmark)
+            rows, _ = cached_statements(posts, args.provider, args.model, args.prompt, None, args.benchmark, args.run)
             stored = con.execute("select count(*) from skill_statements s join postings p using (posting_id) "
                                  "where p.source = 'kaggle' and s.model = %s", (args.model,)).fetchone()[0]
             if len(rows) <= stored:
@@ -88,7 +103,7 @@ def main():
                                         "title": p.title, "location": p.location, "sector": p.sector, "url": None,
                                         "description": p.description} for p in posts.itertuples()])
         db.event(con, run_id, "dedupe", "done", f"{new} new postings ({len(posts) - new} already stored)")
-        rows, done = cached_statements(posts, args.provider, args.model, args.prompt, run_id, args.benchmark)
+        rows, done = cached_statements(posts, args.provider, args.model, args.prompt, run_id, args.benchmark, args.run)
         stored = {r[0] for r in con.execute("select posting_id from postings").fetchall()}
         rows = [r for r in rows if r["posting_id"] in stored]  # a posting skipped as a duplicate has no row
         db.upsert_statements(con, rows)
