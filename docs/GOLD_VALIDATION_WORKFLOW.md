@@ -1,6 +1,8 @@
 # Gold validation — three-part review (Section B)
 
-Dashboard page **Gold Validation** (`http://127.0.0.1:8765/validation`, also linked from the pipeline UI).
+**Page not served at the moment (2026-11-02):** `/validation` now shows the Intrusion v2 review
+(`docs/INTRUSION_TEST_V2.md`). The Gold Validation API (`/api/validation/*`), its page files
+(`app/static/validation.*`), CLI, tests and data are unchanged; re-mount the page in `app/server.py` to use it.
 Code: `src/validation/` (backend), `app/validation_api.py` + `app/static/validation.*` (page),
 `tests/validation/` (synthetic tests). Config: `data/validation/config/validation_config.yaml`.
 

@@ -196,3 +196,143 @@ def test_wilson_and_kappa():
     lo, hi = iv.wilson(12, 24)
     assert lo < 0.5 < hi and iv.wilson(0, 0) == (0.0, 0.0)
     assert iv.fleiss_kappa([[3, 0, 0, 0, 0], [0, 3, 0, 0, 0]]) == pytest.approx(1.0)
+
+
+# ---------- single-reviewer protocol (2026-11-02) ----------
+import re  # noqa: E402
+import subprocess  # noqa: E402
+
+
+def submit_all_correct_but(root, reviewer, n_wrong):
+    key = key_of(root)
+    qids = sorted(key)
+    wrong = lambda a: "B" if a == "A" else "A"
+    fill(root, reviewer, {q: wrong(key[q]["answer"]) if i < n_wrong else key[q]["answer"] for i, q in enumerate(qids)})
+    iv.submit(root, RUN, reviewer)
+
+
+def test_default_mode_is_three_reviewer_and_unchanged(made):
+    root, _, _ = made
+    assert iv.evaluation(root, RUN)["mode"] == "three_reviewer"
+    submit_all_correct_but(root, "lochan", 3)
+    with pytest.raises(ValueError, match="waiting for"):
+        iv.evaluate(root, RUN)                                   # original protocol still needs all three
+    assert iv.score(root, RUN, allow_partial=True) == iv.score(root, RUN, allow_partial=True, reviewers=iv.REVIEWERS)
+    submit_all_correct_but(root, "priyanka", 0)
+    submit_all_correct_but(root, "dhanush", 6)
+    res = iv.evaluate(root, RUN)
+    assert res["evaluation"]["status"] == "completed" and res["evaluation"]["completed_submissions"] == 3
+    assert res["agreement"]["fleiss_kappa"] is not None and res["correctness"]["overall"]["correct"] == 72 - 9
+
+
+def test_declare_single_needs_a_locked_submission(made):
+    root, out, _ = made
+    with pytest.raises(ValueError, match="has not submitted"):
+        iv.declare_single(root, RUN, "lochan", "only one reviewer")
+    submit_all_correct_but(root, "lochan", 9)
+    with pytest.raises(ValueError, match="reason"):
+        iv.declare_single(root, RUN, "lochan", " ")
+    with pytest.raises(ValueError, match="unknown reviewer"):
+        iv.declare_single(root, RUN, "mallory", "x")
+    responses_before = (out / "responses" / "lochan.csv").read_bytes()
+    rec = iv.declare_single(root, RUN, "lochan", "only one genuine reviewer")
+    assert rec["expected_reviewers"] == 1 and rec["original_protocol"]["reviewers"] == list(iv.REVIEWERS)
+    with pytest.raises(FileExistsError):
+        iv.declare_single(root, RUN, "lochan", "again")         # create-only decision record
+    assert (out / "responses" / "lochan.csv").read_bytes() == responses_before
+    assert not (out / "submitted" / "priyanka.json").exists() and not (out / "submitted" / "dhanush.json").exists()
+
+
+def test_single_reviewer_completion_is_explicit(made):
+    root, out, _ = made
+    submit_all_correct_but(root, "lochan", 9)
+    iv.declare_single(root, RUN, "lochan", "only one genuine reviewer")
+    res = iv.evaluate(root, RUN)
+    assert res["evaluation"] == {"mode": "single_reviewer", "reviewers": ["lochan"], "expected_reviewers": 1,
+                                 "completed_submissions": 1, "questions": 24, "status": "completed",
+                                 "inter_reviewer_agreement": "not available", "exploratory": True, "declared": True}
+    assert res["final"] is True and res["agreement"]["available"] is False
+    assert all("agreement" not in q for q in res["questions"])
+    c = res["correctness"]["overall"]
+    assert (c["correct"], c["n"], c["accuracy"]) == (15, 24, 0.625)       # same numbers as the plain scorer
+    assert res["correctness"]["per_reviewer"] == iv.score(root, RUN, allow_partial=True)["correctness"]["per_reviewer"]
+    assert c["p_value_vs_chance"] == pytest.approx(iv.binom_tail(15, 24, 0.2)) and c["p_value_vs_chance"] < 1e-4
+    # a later submission by someone else never enters a single-reviewer evaluation
+    submit_all_correct_but(root, "priyanka", 0)
+    assert iv.evaluate(root, RUN)["reviewers"] == ["lochan"]
+
+
+def test_single_reviewer_refuses_a_changed_submission(made):
+    root, out, _ = made
+    submit_all_correct_but(root, "lochan", 2)
+    iv.declare_single(root, RUN, "lochan", "x")
+    with (out / "responses" / "lochan.csv").open("a", encoding="utf-8") as f:
+        f.write("\n")
+    with pytest.raises(ValueError, match="changed after submission"):
+        iv.evaluate(root, RUN)
+
+
+def test_shareable_summary_has_no_answer_key_details(made):
+    root, out, _ = made
+    submit_all_correct_but(root, "lochan", 9)
+    iv.declare_single(root, RUN, "lochan", "x")
+    private, summary = iv.write_evaluation(root, RUN, iv.evaluate(root, RUN))
+    text = summary.read_text(encoding="utf-8")
+    key = key_of(root)
+    options = {o for q in iv.load_questions(root, RUN) for o in q["options"].values()}
+    secrets = options | {k["topic_id"] for k in key.values()} | {k["topic_label"] for k in key.values()} | \
+        {k["intruder"]["skill_key"] for k in key.values()} | {g["skill_key"] for k in key.values() for g in k["genuine"]}
+    assert sum(s in text for s in secrets) == 0                           # count only: never echo a secret
+    assert not re.search(r"\bQ\d\d\b", text) and not re.search(r"\b[A-E]\s*[:=]", text)
+    assert "15 / 24" in text and "single-reviewer" in text and "not available" in text
+    assert private.parent.name == "private" and summary.parent == out
+    with pytest.raises(FileExistsError):
+        iv.write_evaluation(root, RUN, iv.evaluate(root, RUN))            # never overwritten (same second)
+
+
+def test_private_reports_are_gitignored_and_summary_is_not():
+    ignored = ["reports/intrusion_v2/run/private/score_single_reviewer_x.json",
+               "reports/intrusion_v2/run/private/diagnostics_x.md",
+               "reports/intrusion_v2/run/scores/score_x_PARTIAL.json",
+               "reports/intrusion_v2/run/responses/lochan.csv", "reports/intrusion_v2/run/submitted/lochan.json",
+               "data/interim/intrusion_v2/run/answer_key.json"]
+    shared = ["reports/intrusion_v2/run/summary_single_reviewer.md", "reports/intrusion_v2/run/evaluation.json",
+              "reports/intrusion_v2/run/questions.json", "reports/intrusion_v2/run/manifest.json"]
+    r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "--no-index", *ignored], capture_output=True, text=True)
+    assert sorted(r.stdout.split()) == sorted(ignored)
+    r = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "--no-index", *shared], capture_output=True, text=True)
+    assert r.stdout.strip() == ""
+
+
+def test_validate_rejects_multi_letter_answers(made):
+    root, out, _ = made
+    fill(root, "lochan", {"Q01": "AB"})
+    _, problems, missing = iv.validate(root, RUN, "lochan")
+    assert any("'AB' is not one of A-E" in p for p in problems) and "Q01" in missing
+
+
+def test_evaluate_needs_no_database(made, monkeypatch):
+    root, _, _ = made
+    monkeypatch.setitem(sys.modules, "psycopg", None)                      # any import would now fail
+    submit_all_correct_but(root, "lochan", 1)
+    iv.declare_single(root, RUN, "lochan", "x")
+    assert iv.evaluate(root, RUN)["evaluation"]["status"] == "completed"
+
+
+def test_real_frozen_hashes_and_locked_submission():
+    """Read-only on the real repository: frozen questions + key unchanged, a declared submission still locked."""
+    out = iv.out_dir(ROOT, iv.RUN_ID)
+    if not (out / "manifest.json").exists():
+        pytest.skip("intrusion v2 run not in this checkout")
+    m = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    assert iv.sha256_bytes((out / "questions.json").read_bytes()) == m["questions_sha256"]
+    kp = ROOT / m["answer_key"]["path"]
+    if kp.exists():  # gitignored: only on the machine that holds the key; compared by hash, never read as JSON
+        assert iv.sha256_bytes(kp.read_bytes()) == m["answer_key"]["sha256"]
+    ev = iv.evaluation(ROOT, iv.RUN_ID)
+    if ev["declared"]:
+        r = ev["reviewers"][0]
+        sub = json.loads((out / "submitted" / f"{r}.json").read_text(encoding="utf-8"))
+        assert sub["responses_sha256"] == ev["submission"]["responses_sha256"]
+        assert iv.sha256_bytes((out / "responses" / f"{r}.csv").read_bytes()) == sub["responses_sha256"]
+        assert iv.status(ROOT, iv.RUN_ID)[r] is True  # submitted/<r>.json present = locked (submit is create-only)

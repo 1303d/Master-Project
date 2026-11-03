@@ -52,3 +52,7 @@ data/validation/reviews/*/*
 !data/validation/reviews/*/.gitkeep
 reports/intrusion_v2/*/responses/
 reports/intrusion_v2/*/submitted/
+# score files and per-question reports / diagnostics contain answer-key content (letters, intruders, labels);
+# only summary_<mode>.md (aggregates) and evaluation.json (protocol decision) are shared
+reports/intrusion_v2/*/scores/
+reports/intrusion_v2/*/private/

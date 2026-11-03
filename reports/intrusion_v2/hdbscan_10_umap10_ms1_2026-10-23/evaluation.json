@@ -1,0 +1,27 @@
+{
+ "test": "intrusion_v2",
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "mode": "single_reviewer",
+ "reviewers": [
+  "lochan"
+ ],
+ "expected_reviewers": 1,
+ "declared_utc": "2026-11-03T04:15:43+00:00",
+ "reason": "Team decision 2026-11-02: one genuine reviewer (Lochan) completed the test; Dhanush and Priyanka did not take it. Evaluated as an exploratory single-reviewer study; no responses were created for the others.",
+ "original_protocol": {
+  "mode": "three_reviewer",
+  "reviewers": [
+   "lochan",
+   "priyanka",
+   "dhanush"
+  ]
+ },
+ "protocol_deviation": "one genuine reviewer instead of three independent reviewers; inter-reviewer agreement cannot be measured and the result is exploratory",
+ "submission": {
+  "reviewer": "lochan",
+  "submitted_utc": "2026-11-03T04:03:06+00:00",
+  "responses_sha256": "c0789a46ac15d85edaf524e20a525d79ef2719cab35dec508cdc130edd7a3f5d"
+ },
+ "questions_sha256": "0ef8bedfb624576755a1e7be41d59456bf8160e91a23296b58a703581a74a291",
+ "answer_key_sha256": "1e4435c7dc74c4324230fefbcc60ecfa79ea784e7b7a5c2576390a1b2e9b7d86"
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intrusion v2 Review</title>
+<link rel="stylesheet" href="/static/intrusion_v2.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Skill Pipeline — Intrusion v2</h1>
+    <p class="muted">Blind review: four skills belong together, one does not. Pick the one that does not belong.</p>
+  </div>
+  <div class="who">
+    <label for="reviewer">Reviewer</label>
+    <select id="reviewer" aria-describedby="who-note">
+      <option value="">Choose your name…</option>
+      <option value="lochan">Lochan</option>
+      <option value="dhanush">Dhanush</option>
+      <option value="priyanka">Priyanka</option>
+    </select>
+    <small id="who-note" class="muted">Not a login — choose only your own name.</small>
+  </div>
+</header>
+
+<main>
+  <section id="start" class="card">
+    <h2>Before you start</h2>
+    <ul>
+      <li>Answer on your own. Do not discuss questions until everyone has submitted.</li>
+      <li>Every choice is saved to your own response file as soon as you pick it. You can close the page and resume.</li>
+      <li>You can change answers until you press <strong>Submit final answers</strong>. After that they are locked.</li>
+      <li>No scores are shown here. Scoring happens separately once all three reviewers have submitted.</li>
+    </ul>
+    <p class="muted">Choose your name (top right) to begin.</p>
+  </section>
+
+  <section id="review" class="card" hidden>
+    <div class="bar">
+      <div class="progress" aria-live="polite"><span id="answered">0</span> / <span id="total">24</span> answered</div>
+      <div class="meter" aria-hidden="true"><div id="meter-fill"></div></div>
+      <div id="save" class="save" role="status" aria-live="polite"></div>
+    </div>
+
+    <div id="locked" class="lockbox" hidden>Your answers were submitted and are locked. Thank you.</div>
+
+    <h2 id="qtitle">Question</h2>
+    <fieldset id="options" class="options">
+      <legend class="sr">Which skill does not belong?</legend>
+    </fieldset>
+
+    <label class="note">Note (optional, saved with your answer)
+      <input id="note" maxlength="500" placeholder="e.g. two could be the odd one out">
+    </label>
+
+    <div class="nav">
+      <button id="prev" class="ghost">← Previous</button>
+      <button id="saveBtn">Save answer</button>
+      <button id="next" class="ghost">Next →</button>
+    </div>
+    <p class="muted keys">Keys: A–E choose · ← → move</p>
+  </section>
+
+  <section id="summary" class="card" hidden>
+    <h2>Review summary</h2>
+    <p><strong id="sum-answered">0</strong> answered · <strong id="sum-unanswered">24</strong> unanswered</p>
+    <div id="grid" class="grid" aria-label="Questions (click to open)"></div>
+    <div class="submit">
+      <button id="submitBtn" disabled>Submit final answers</button>
+      <span id="submit-hint" class="muted">Answer all questions to submit.</span>
+    </div>
+    <p id="team" class="muted"></p>
+  </section>
+</main>
+<script src="/static/intrusion_v2.js"></script>
+</body>
+</html>

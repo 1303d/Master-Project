@@ -4,7 +4,15 @@
     python src/intrusion_v2.py validate --reviewer lochan # check your response file (no answers are revealed)
     python src/intrusion_v2.py submit   --reviewer lochan # lock your responses (cannot be overwritten)
     python src/intrusion_v2.py status                     # who has submitted (no answers shown)
-    python src/intrusion_v2.py score                      # only when all three have submitted
+    python src/intrusion_v2.py score                      # under the declared protocol (default: all three submitted)
+    python src/intrusion_v2.py declare-single --reviewer lochan --reason "..."   # protocol deviation: one reviewer
+
+Evaluation protocol (evaluation.json next to questions.json; absent = the original three-reviewer protocol):
+  three_reviewer   all of REVIEWERS must submit; agreement (pairwise, Fleiss' kappa) is reported
+  single_reviewer  one declared reviewer; complete when that reviewer submitted; no agreement (cannot exist);
+                   results are exploratory. Declared once, create-only, and never changes anyone's answers.
+Anything containing answer-key content (scores, per-question reports, diagnostics) goes to private/ or scores/,
+both gitignored. The shareable summary_<mode>.md holds aggregate numbers only.
 
 Design (v1 = src/intrusion_test.py on origin/main: one anonymous rater, 5+1 options, far intruders, key next to items):
   - each question = 4 genuine members of one topic + 1 intruder from another topic, positions balanced A-E
@@ -37,6 +45,7 @@ RUN_ID = "hdbscan_10_umap10_ms1_2026-10-23"
 EXPECTED = {"topics": 374, "members": 11093}
 REVIEWERS = ("lochan", "priyanka", "dhanush")
 LETTERS = "ABCDE"
+LETTER_SET = frozenset(LETTERS)
 SEED = 20261103
 STRATA = (("transversal", 4), ("low_confidence", 4), ("long_tail", 4), ("large", 4), ("medium", 4), ("small", 4))
 GENUINE_MAX_COS = 0.95
@@ -305,9 +314,9 @@ def validate(root, run_id, reviewer):
                 continue
             if any((r.get(x) or "").strip() != qs[qid]["options"][x] for x in LETTERS):
                 problems.append(f"line {i}: options of {qid} were edited")
-            if a and a not in LETTERS:
+            if a and a not in LETTER_SET:  # a set: "AB" is a substring of "ABCDE" but not an answer
                 problems.append(f"line {i}: answer {a!r} is not one of A-E")
-            answers[qid] = a if a in LETTERS else ""
+            answers[qid] = a if a in LETTER_SET else ""
     missing = sorted(q for q in qs if not answers.get(q))
     return {q: a for q, a in answers.items() if a}, problems, missing
 
@@ -352,7 +361,11 @@ def fleiss_kappa(table):
     return None if P_e == 1 else (P_bar - P_e) / (1 - P_e)
 
 
-def score(root, run_id, key_file=None, allow_partial=False):
+def score(root, run_id, key_file=None, allow_partial=False, reviewers=None):
+    """reviewers = who is expected (default: all REVIEWERS, the original protocol; unchanged behaviour)."""
+    expected = tuple(reviewers) if reviewers else REVIEWERS
+    if not expected or any(r not in REVIEWERS for r in expected) or len(set(expected)) != len(expected):
+        raise ValueError(f"reviewers must be distinct names from {', '.join(REVIEWERS)}")
     out = out_dir(root, run_id)
     manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
     kp = Path(key_file) if key_file else Path(root) / manifest["answer_key"]["path"]
@@ -361,9 +374,10 @@ def score(root, run_id, key_file=None, allow_partial=False):
         raise ValueError("answer key does not match the hash in manifest.json (changed or wrong file)")
     key = json.loads(key_bytes)["key"]
     done = {r: json.loads((out / "submitted" / f"{r}.json").read_text(encoding="utf-8"))
-            for r, ok in status(root, run_id).items() if ok}
-    if len(done) < len(REVIEWERS) and not allow_partial:
-        raise ValueError(f"waiting for {', '.join(r for r in REVIEWERS if r not in done)}; scores are only final with all three")
+            for r, ok in status(root, run_id).items() if ok and r in expected}
+    if len(done) < len(expected) and not allow_partial:
+        raise ValueError(f"waiting for {', '.join(r for r in expected if r not in done)}; scores are only final when "
+                         f"all {len(expected)} expected reviewer(s) submitted")
     for r, rec in done.items():  # the response file must still be the one that was submitted
         if sha256_bytes((out / "responses" / f"{r}.csv").read_bytes()) != rec["responses_sha256"]:
             raise ValueError(f"{r}'s response file changed after submission")
@@ -393,7 +407,7 @@ def score(root, run_id, key_file=None, allow_partial=False):
     revs = list(done)
     pairwise = {f"{a}-{b}": round(sum(done[a]["answers"].get(q) == done[b]["answers"].get(q) for q in qids) / len(qids), 3)
                 for i, a in enumerate(revs) for b in revs[i + 1:]}
-    return {"run_id": run_id, "final": len(done) == len(REVIEWERS), "reviewers": revs, "chance": 0.2,
+    return {"run_id": run_id, "final": len(done) == len(expected), "reviewers": revs, "chance": 0.2,
             "correctness": {"per_reviewer": per_rev,
                             "overall": {"correct": total, "n": n_all, "accuracy": round(total / n_all, 3) if n_all else None,
                                         "ci95": [round(x, 3) for x in wilson(total, n_all)],
@@ -413,6 +427,144 @@ def write_score(root, run_id, result):
     return path
 
 
+# ---------- evaluation protocol: three-reviewer (original) or declared single-reviewer ----------
+EVALUATION_FILE = "evaluation.json"  # tracked decision record; absent = original three-reviewer protocol
+STRATUM_ORDER = [name for name, _ in STRATA]
+
+
+def private_dir(root, run_id):
+    """Gitignored home of everything that contains answer-key content."""
+    return out_dir(root, run_id) / "private"
+
+
+def binom_tail(k, n, p):
+    """P(X >= k) for X ~ Binomial(n, p): one-sided exact test against chance."""
+    return sum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k, n + 1))
+
+
+def evaluation(root, run_id):
+    path = out_dir(root, run_id) / EVALUATION_FILE
+    if not path.exists():
+        return {"mode": "three_reviewer", "reviewers": list(REVIEWERS), "expected_reviewers": len(REVIEWERS),
+                "declared": False}
+    ev = json.loads(path.read_text(encoding="utf-8"))
+    if ev.get("mode") != "single_reviewer" or len(ev.get("reviewers", [])) != 1 or ev.get("expected_reviewers") != 1:
+        raise ValueError(f"{EVALUATION_FILE} is not a valid single-reviewer declaration")
+    return {**ev, "declared": True}
+
+
+def declare_single(root, run_id, reviewer, reason):
+    """Record (create-only) that this run is evaluated with one genuine reviewer. Changes no answers; refuses if the
+    reviewer has not submitted, so the declaration is tied to a locked, hashed submission."""
+    if reviewer not in REVIEWERS:
+        raise ValueError(f"unknown reviewer {reviewer!r}")
+    if not str(reason or "").strip():
+        raise ValueError("a reason for the protocol deviation is required")
+    out = out_dir(root, run_id)
+    sub_path = out / "submitted" / f"{reviewer}.json"
+    if not sub_path.is_file():
+        raise ValueError(f"{reviewer} has not submitted; declare single-reviewer mode only for a locked submission")
+    sub = json.loads(sub_path.read_text(encoding="utf-8"))
+    manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    rec = {"test": "intrusion_v2", "run_id": run_id, "mode": "single_reviewer", "reviewers": [reviewer],
+           "expected_reviewers": 1, "declared_utc": now(), "reason": str(reason).strip(),
+           "original_protocol": {"mode": "three_reviewer", "reviewers": list(REVIEWERS)},
+           "protocol_deviation": "one genuine reviewer instead of three independent reviewers; inter-reviewer "
+                                 "agreement cannot be measured and the result is exploratory",
+           "submission": {"reviewer": reviewer, "submitted_utc": sub["submitted_utc"],
+                          "responses_sha256": sub["responses_sha256"]},
+           "questions_sha256": manifest["questions_sha256"], "answer_key_sha256": manifest["answer_key"]["sha256"]}
+    write_new(out / EVALUATION_FILE, json.dumps(rec, indent=1) + "\n")  # never replaced
+    return rec
+
+
+def evaluate(root, run_id, key_file=None):
+    """Score under the declared protocol. three_reviewer = score() exactly as before (all three must submit)."""
+    ev = evaluation(root, run_id)
+    if ev["mode"] == "three_reviewer":
+        res = score(root, run_id, key_file)
+    else:
+        r = ev["reviewers"][0]
+        sub = json.loads((out_dir(root, run_id) / "submitted" / f"{r}.json").read_text(encoding="utf-8"))
+        if sub["responses_sha256"] != ev["submission"]["responses_sha256"]:
+            raise ValueError(f"{r}'s submission differs from the one the single-reviewer declaration is tied to")
+        res = score(root, run_id, key_file, reviewers=[r])
+        res["agreement"] = {"available": False,
+                            "reason": "one reviewer: agreement between reviewers cannot be measured"}
+        for row in res["questions"]:  # "unanimous" is meaningless with one rater
+            row.pop("agreement", None)
+    o = res["correctness"]["overall"]
+    o["p_value_vs_chance"] = binom_tail(o["correct"], o["n"], res["chance"])
+    for b in res["correctness"]["by_stratum"].values():
+        b["ci95"] = [round(x, 3) for x in wilson(b["correct"], b["n"])]
+    res["evaluation"] = {"mode": ev["mode"], "reviewers": res["reviewers"], "expected_reviewers": ev["expected_reviewers"],
+                         "completed_submissions": len(res["reviewers"]), "questions": len(res["questions"]),
+                         "status": "completed" if res["final"] else "incomplete",
+                         "inter_reviewer_agreement": "available" if ev["mode"] == "three_reviewer" else "not available",
+                         "exploratory": ev["mode"] == "single_reviewer", "declared": ev["declared"]}
+    return res
+
+
+def public_summary(res):
+    """Shareable Markdown: aggregate numbers only. No question ids, letters, options, labels, topics or intruders."""
+    e, c = res["evaluation"], res["correctness"]
+    o = c["overall"]
+    single = e["mode"] == "single_reviewer"
+    L = [f"# Intrusion v2 — {'single-reviewer (exploratory)' if single else 'three-reviewer'} evaluation summary", "",
+         f"Run `{res['run_id']}` · status **{e['status']}** · {e['completed_submissions']} of {e['expected_reviewers']} "
+         f"expected reviewer(s) submitted · {e['questions']} questions.", "",
+         "This file is safe to share: it contains aggregate numbers only (no question-level results, answer letters,",
+         "options, topic labels or intruders). Question-level results are kept in the gitignored `private/` folder.", "",
+         "## Method", "",
+         "Word-intrusion test (Chang et al. 2009): each question shows 4 assigned members of one clustering topic plus 1",
+         "intruder from a nearby, different topic; the reviewer picks the one that does not belong (5 options, chance",
+         "= 20 %). 24 topics were drawn, 4 from each of 6 strata, seed fixed; questions and the answer key are frozen and",
+         "hash-checked (`manifest.json`).", "",
+         "## Result", "",
+         "| Measure | Value |", "|---|---|",
+         f"| Reviewers | {e['completed_submissions']} ({'single-reviewer mode' if single else 'three-reviewer protocol'}) |",
+         f"| Correct | **{o['correct']} / {o['n']}** ({o['n'] - o['correct']} incorrect) |",
+         f"| Accuracy | **{o['accuracy']:.3f}** |",
+         f"| 95 % Wilson interval | {o['ci95'][0]:.3f} – {o['ci95'][1]:.3f} |",
+         f"| Chance | {res['chance']:.2f} |",
+         f"| Exact one-sided binomial p vs chance | {o['p_value_vs_chance']:.2g} |", "",
+         "## By stratum", "", "| Stratum | Correct | Accuracy | 95 % Wilson interval |", "|---|---|---|---|"]
+    for s in STRATUM_ORDER:
+        b = c["by_stratum"].get(s)
+        if b:
+            L.append(f"| {s} | {b['correct']} / {b['n']} | {b['accuracy']:.2f} | {b['ci95'][0]:.2f} – {b['ci95'][1]:.2f} |")
+    L += ["", "## Limitations", ""]
+    if single:
+        L += ["- **Protocol deviation:** the planned protocol was three independent reviewers; one genuine reviewer took",
+              "  the test. **Inter-reviewer agreement is not available** (it needs at least two raters), so we cannot",
+              "  separate topic incoherence from one person's judgement. Treat the result as **exploratory**.",
+              "- The reviewer's machine held the (unopened) answer key file; blindness relied on not opening it."]
+    else:
+        L.append(f"- Agreement: Fleiss' kappa {res['agreement'].get('fleiss_kappa')}, "
+                 f"{res['agreement'].get('unanimous')} unanimous / {res['agreement'].get('disputed')} disputed questions.")
+    L += ["- 24 questions give wide intervals; each stratum has only 4 questions, so stratum differences are not",
+          "  statistically meaningful (all stratum intervals overlap).",
+          "- Topic labels used in the study were provisional (centroid skill); topics come from one clustering run.",
+          "", "## Recommended follow-up", "",
+          "1. Run the full three-reviewer protocol on a fresh, independently generated question set (new seed, new key",
+          "   held by a non-reviewer) to measure agreement and confirm the accuracy.",
+          "2. Inspect the low-confidence stratum and the missed topics by hand in Sprint 4 Step 6 (topic review).",
+          "3. Use the diagnostics (private) to decide which topics to split, merge or flag before building the hierarchy.",
+          ""]
+    return "\n".join(L)
+
+
+def write_evaluation(root, run_id, res):
+    """Private full result (gitignored) + shareable summary (aggregates only). Both create-only."""
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    mode = res["evaluation"]["mode"]
+    private = private_dir(root, run_id) / f"score_{mode}_{stamp}.json"
+    write_new(private, json.dumps(res, indent=1) + "\n")
+    summary = out_dir(root, run_id) / f"summary_{mode}.md"
+    write_new(summary, public_summary(res))
+    return private, summary
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -420,6 +572,9 @@ def main():
     for c in ("validate", "submit"):
         sub.add_parser(c).add_argument("--reviewer", required=True, choices=REVIEWERS)
     sub.add_parser("status")
+    d = sub.add_parser("declare-single", help="record the single-reviewer protocol deviation (create-only)")
+    d.add_argument("--reviewer", required=True, choices=REVIEWERS)
+    d.add_argument("--reason", required=True)
     s = sub.add_parser("score")
     s.add_argument("--key", help="answer_key.json (default: path in manifest.json)")
     s.add_argument("--allow-partial", action="store_true", help="score before all three submitted (marked PARTIAL)")
@@ -440,9 +595,25 @@ def main():
             rec = submit(ROOT, RUN_ID, args.reviewer)
             print(f"submitted {len(rec['answers'])} answers for {args.reviewer} at {rec['submitted_utc']} (locked)")
         elif args.cmd == "status":
-            for r, ok in status(ROOT, RUN_ID).items():
-                print(f"{r:10} {'submitted' if ok else 'not yet'}")
-        else:
+            ev = evaluation(ROOT, RUN_ID)
+            st = status(ROOT, RUN_ID)
+            done = sum(st[r] for r in ev["reviewers"])
+            print(f"mode {ev['mode']}: {done} of {ev['expected_reviewers']} expected submitted"
+                  f" -> {'completed' if done == ev['expected_reviewers'] else 'incomplete'}")
+            for r, ok in st.items():
+                print(f"{r:10} {'submitted' if ok else 'not yet'}{'' if r in ev['reviewers'] else '  (not part of this evaluation)'}")
+        elif args.cmd == "declare-single":
+            rec = declare_single(ROOT, RUN_ID, args.reviewer, args.reason)
+            print(f"declared single-reviewer evaluation ({rec['reviewers'][0]}) -> {EVALUATION_FILE}")
+        elif not args.allow_partial:  # score under the declared protocol: private full result + shareable summary
+            res = evaluate(ROOT, RUN_ID, args.key)
+            private, summary = write_evaluation(ROOT, RUN_ID, res)
+            e, o = res["evaluation"], res["correctness"]["overall"]
+            print(f"{e['mode']} {e['status']}: {o['correct']}/{o['n']} = {o['accuracy']:.3f}  95% CI "
+                  f"{o['ci95'][0]:.3f}-{o['ci95'][1]:.3f}  (chance 0.20, p = {o['p_value_vs_chance']:.2g})")
+            print(f"  private (answer-key content, gitignored): {private.relative_to(ROOT)}")
+            print(f"  shareable summary (aggregates only):      {summary.relative_to(ROOT)}")
+        else:  # legacy partial three-reviewer score, unchanged
             res = score(ROOT, RUN_ID, args.key, args.allow_partial)
             path = write_score(ROOT, RUN_ID, res)
             c, a = res["correctness"], res["agreement"]
