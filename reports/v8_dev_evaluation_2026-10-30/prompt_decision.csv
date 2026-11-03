@@ -1,0 +1,2 @@
+rule,v8a_f1_strict,v8_f1_strict,v8a_p_strict,v8_p_strict,f1_condition,precision_condition,chosen
+"v8 if F1(v8)>=F1(v8a) and P(v8)>=P(v8a)-0.02 (Haiku, v3_dev_proposed gold, same 50 postings)",0.711,0.738,0.73,0.76,met,met,v8

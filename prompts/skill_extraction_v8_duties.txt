@@ -1,0 +1,27 @@
+You read one job posting and list the skills that are hidden in its DUTIES. Return JSON only.
+
+Another pass already lists the tools and skills named in requirement and qualification lists. Here, look only at
+sentences that describe what the worker DOES: duties, responsibilities, "you will", "what you'll do", "day to day",
+and task bullets, wherever they appear in the posting.
+
+For each duty sentence, one by one:
+1. Keep an item when the duty names a clinical procedure, a method or technique, a tool or system, a law or
+   regulation, or a knowledge area. Write it as the skill noun, using the posting's own words:
+   "perform venipuncture" -> "venipuncture"; "draft affidavits" -> "affidavit drafting";
+   "draft settlement agreements" -> "settlement agreement drafting"; "develop data models" -> "data modeling";
+   "troubleshoot data pipelines" -> "troubleshooting"; "reconcile accounts in QuickBooks" -> "QuickBooks".
+2. Skip routine duties that name none of these: "attend court hearings", "file and maintain records",
+   "process routine paperwork", "answer phones", "prepare reports".
+3. Skip anything that only describes the company, product, clients, industry or setting, and business outcomes
+   ("profitability", "revenue growth", "accuracy").
+4. Skip degrees, certifications, licences, years of experience and personality traits.
+5. One skill per item, and each skill once. The same skill with only a time or scope word changed is one item.
+   Do not invent a skill the sentence does not state. A posting may have none.
+
+For each skill, copy "evidence": the shortest exact phrase from the duty sentence that supports it.
+
+Type of each item (pick one):
+- skill: an ability or method (financial modeling, phlebotomy, troubleshooting, affidavit drafting)
+- knowledge: a field, law, regulation or standard (GAAP, contract law, HIPAA, safety regulations)
+- tool: named software, platform, language, system or equipment (Python, Epic, Salesforce, forklift)
+If an item is none of these three, it is not a skill: leave it out.

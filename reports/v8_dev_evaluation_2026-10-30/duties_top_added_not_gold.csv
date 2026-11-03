@@ -1,0 +1,21 @@
+model,added_item_not_in_gold,count
+qwen,equipment maintenance,1
+qwen,diagnostics,1
+qwen,cng equipment repair,1
+qwen,electric equipment repair,1
+qwen,hydraulic equipment maintenance,1
+qwen,virtual electronic control units (vecus),1
+qwen,software defined vehicle (sdv) 2.0-based architecture,1
+qwen,urine specimen collection,1
+qwen,forklift operation,1
+qwen,osha standards,1
+haiku,troubleshooting,2
+haiku,vital signs measurement,2
+haiku,regulatory compliance,2
+haiku,marketing campaign management,1
+haiku,sales planning,1
+haiku,cng equipment maintenance,1
+haiku,safety regulation compliance,1
+haiku,contract compliance,1
+haiku,business development,1
+haiku,project scoping,1

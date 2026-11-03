@@ -1,0 +1,5 @@
+model,assumption,total_tokens_2000,days_by_tokens,days_by_requests,cost_usd
+qwen/qwen3.8-27b,"TPD 200,000 (Dhanush's figure, unmeasured)",5037240,25.2,2.0,0.0
+qwen/qwen3.8-27b,"TPD 258,123 (Groq tokens logged in the 24 h before the long 429s began: an estimate of the real TPD)",5037240,19.5,2.0,0.0
+claude-haiku-5-5,"standard price, https://platform.claude.com/docs/en/about-claude/pricing (read 2026-10-30)",10009200,,,2.292776
+claude-haiku-5-5,Message Batches API (50% off; not yet checked for this key),10009200,,,1.146388

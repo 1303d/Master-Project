@@ -1,0 +1,26 @@
+run,error,class,count
+claude-haiku-5-5_v8,miss,audit_added_or_revised,22
+claude-haiku-5-5_v8,miss,original,97
+claude-haiku-5-5_v8,miss,review,26
+claude-haiku-5-5_v8,extra,REVIEW candidate,24
+claude-haiku-5-5_v8,extra,near-miss wording,15
+claude-haiku-5-5_v8,extra,other,43
+claude-haiku-5-5_v8,extra,single word,24
+claude-haiku-5-5_v8,extra,trait,1
+qwen_qwen3.8-27b_v8,miss,audit_added_or_revised,26
+qwen_qwen3.8-27b_v8,miss,original,144
+qwen_qwen3.8-27b_v8,miss,review,23
+qwen_qwen3.8-27b_v8,extra,REVIEW candidate,13
+qwen_qwen3.8-27b_v8,extra,near-miss wording,19
+qwen_qwen3.8-27b_v8,extra,other,51
+qwen_qwen3.8-27b_v8,extra,rule-list violation,3
+qwen_qwen3.8-27b_v8,extra,single word,28
+qwen_qwen3.8-27b_v5,miss,audit_added_or_revised,22
+qwen_qwen3.8-27b_v5,miss,original,123
+qwen_qwen3.8-27b_v5,miss,review,25
+qwen_qwen3.8-27b_v5,extra,REVIEW candidate,18
+qwen_qwen3.8-27b_v5,extra,near-miss wording,16
+qwen_qwen3.8-27b_v5,extra,other,59
+qwen_qwen3.8-27b_v5,extra,rule-list violation,5
+qwen_qwen3.8-27b_v5,extra,single word,44
+qwen_qwen3.8-27b_v5,extra,trait,11

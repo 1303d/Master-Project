@@ -1,0 +1,31 @@
+run,check,item
+claude-haiku-5-5_v3,trait,li_3891266921: attention to detail
+claude-haiku-5-5_v3,trait,li_3901945232: attention to detail
+claude-haiku-5-5_v3,trait,li_3887719486: attention to detail
+claude-haiku-5-5_v3,trait,li_3899527449: attention to detail
+claude-haiku-5-5_v3,trait,li_3886826327: attention to detail
+qwen_qwen3.8-27b_v3,trait,li_3891266921: attention to detail
+qwen_qwen3.8-27b_v3,trait,li_3901945232: attention to detail
+qwen_qwen3.8-27b_v3,trait,li_3887719486: attention to detail
+qwen_qwen3.8-27b_v3,trait,li_3886826327: attention to detail
+qwen_qwen3.8-27b_v3,trait,li_3894890877: attention to detail
+qwen_qwen3.8-27b_v3,rule list,li_3891854133: residential solar market
+qwen_qwen3.8-27b_v3,rule list,li_3889760266: General Liability
+qwen_qwen3.8-27b_v3,rule list,li_3889760266: Healthcare
+qwen_qwen3.8-27b_v3,rule list,li_3901680075: filing
+qwen_qwen3.8-27b_v5,trait,li_3891266921: attention to detail
+qwen_qwen3.8-27b_v5,trait,li_3901945232: attention to detail
+qwen_qwen3.8-27b_v5,trait,li_3887719486: attention to detail
+qwen_qwen3.8-27b_v5,trait,li_3886826327: attention to detail
+qwen_qwen3.8-27b_v5,trait,li_3894890877: attention to detail
+qwen_qwen3.8-27b_v5,rule list,li_3891854133: residential solar market
+qwen_qwen3.8-27b_v5,rule list,li_3889760266: General Liability
+qwen_qwen3.8-27b_v5,rule list,li_3889760266: Healthcare
+qwen_qwen3.8-27b_v5,rule list,li_3904949322: profitability
+qwen_qwen3.8-27b_v5,rule list,li_3904949322: accuracy
+qwen_qwen3.8-27b_v5,scope duplicate,li_3903813809: quarter-end close
+qwen_qwen3.8-27b_v5,scope duplicate,li_3903813809: month-end close
+qwen_qwen3.8-27b_v5,scope duplicate,li_3903813809: year-end close
+qwen_qwen3.8-27b_v8,rule list,li_3889760266: General Liability
+qwen_qwen3.8-27b_v8,rule list,li_3889760266: Healthcare
+qwen_qwen3.8-27b_v8,rule list,li_3904949322: profitability

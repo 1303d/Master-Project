@@ -1,0 +1,5 @@
+model,gold_part,items,recall_strict,recall_lenient
+claude-haiku-5-5,accepted LLM suggestion,384,0.7421875,0.8151041666666666
+claude-haiku-5-5,human-added / rewritten,325,0.6892307692307692,0.7753846153846153
+qwen/qwen3.8-27b,accepted LLM suggestion,384,0.6354166666666666,0.71875
+qwen/qwen3.8-27b,human-added / rewritten,325,0.6430769230769231,0.7476923076923077

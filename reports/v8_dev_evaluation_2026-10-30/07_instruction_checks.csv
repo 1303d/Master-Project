@@ -1,0 +1,7 @@
+run,attention_to_detail_or_detail_oriented,scope_duplicate_items,rule_9_10_11_literal_matches,teamwork,team_player,evidence_verbatim_rate,json_failures
+claude-haiku-5-5_v3,12,0,0,13,0,0.9948253557567918,"0 (earlier run, all done)"
+claude-haiku-5-5_v8a,0,0,0,5,0,0.9985074626865672,0
+claude-haiku-5-5_v8,0,0,0,5,0,0.9910581222056631,0
+qwen_qwen3.8-27b_v3,11,0,4,10,0,0.9871794871794872,"0 (earlier run, all done)"
+qwen_qwen3.8-27b_v5,11,3,5,12,0,0.9812138728323699,"0 (earlier run, all done)"
+qwen_qwen3.8-27b_v8,0,0,3,8,0,0.973015873015873,0

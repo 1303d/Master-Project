@@ -1,0 +1,31 @@
+run,n,misses_on_original_gold,missed
+claude-haiku-5-5_v8,44,11,key performance indicators; cross portfolio reporting; product launches; Commercial sales; Marketing planning; creative development; tactical communications; Microsoft Suite of Office; PPT; verbal communication; written communication
+claude-haiku-5-5_v8,47,6,discovery investigations; legal memorandum drafting; case evaluation; client counseling; client communication; state rules of civil procedure
+claude-haiku-5-5_v8,64,6,operational leadership; process optimization; performance monitoring; data driven decision making; resource allocation; contingency plans
+claude-haiku-5-5_v8,80,6,financial reporting; cost accounting; procedure documentation; collaboration; meet deadlines; analytical skills
+claude-haiku-5-5_v8,11,4,equipment maintenance; administering injections; obtaining vitals; computer software
+claude-haiku-5-5_v8,29,4,regulatory analysis; statistical software; legislative frameworks; analytical
+claude-haiku-5-5_v8,31,4,automated testing; test plans; API testing; software quality assurance
+claude-haiku-5-5_v8,76,4,retail sales; financial sales; complaint resolution; confidentiality
+claude-haiku-5-5_v8,2,3,sales plans; sales strategies; client relationships
+claude-haiku-5-5_v8,33,3,administrative support; supervisory skills; software implementation
+qwen_qwen3.8-27b_v8,80,11,financial management; financial reporting; cost accounting; process optimization; continuous improvement; internal controls; procedure documentation; collaboration; meet deadlines; Excel modeling; analytical skills
+qwen_qwen3.8-27b_v8,44,10,project controls; change controls; key performance indicators; cross portfolio reporting; product launches; Commercial sales; Marketing planning; creative development; tactical communications; Microsoft Suite of Office
+qwen_qwen3.8-27b_v8,13,6,material handling equipment; physical inventories; cycle counts; stock rotation; shrink-wrap machine; counting
+qwen_qwen3.8-27b_v8,47,6,discovery drafting; legal analysis; client counseling; client communication; writing; state rules of civil procedure
+qwen_qwen3.8-27b_v8,64,6,operational leadership; key performance indicators; data driven decision making; resource allocation; internal controls; contingency plans
+qwen_qwen3.8-27b_v8,72,6,back-end development; DevOps; containerization; container orchestration; observability; telemetry collection
+qwen_qwen3.8-27b_v8,76,6,retail sales; financial sales; problem resolution; complaint resolution; personal computer; security procedures
+qwen_qwen3.8-27b_v8,2,5,sales plans; sales strategies; market dynamics; brand localization; client relationships
+qwen_qwen3.8-27b_v8,19,5,data warehouse; macros; testing; UAT; data pipelines
+qwen_qwen3.8-27b_v8,24,5,selling techniques; suggestive selling; multiple selling; closing; proper lifting procedures
+qwen_qwen3.8-27b_v5,44,10,project controls; change controls; key performance indicators; cross portfolio reporting; product launches; Commercial sales; Marketing planning; creative development; tactical communications; Microsoft Suite of Office
+qwen_qwen3.8-27b_v5,80,8,financial management; cost accounting; process optimization; continuous improvement; procedure documentation; collaboration; meet deadlines; Excel modeling
+qwen_qwen3.8-27b_v5,13,6,material handling equipment; physical inventories; cycle counts; stock rotation; shrink-wrap machine; counting
+qwen_qwen3.8-27b_v5,31,6,automated testing; software testing principles; test strategies; test plans; test cases; software quality assurance
+qwen_qwen3.8-27b_v5,64,6,operational leadership; key performance indicators; data driven decision making; resource allocation; internal controls; contingency plans
+qwen_qwen3.8-27b_v5,72,6,back-end development; DevOps; containerization; container orchestration; observability; telemetry collection
+qwen_qwen3.8-27b_v5,76,6,retail sales; financial sales; problem resolution; complaint resolution; personal computer; security procedures
+qwen_qwen3.8-27b_v5,47,5,legal memorandum drafting; legal analysis; client counseling; client communication; writing
+qwen_qwen3.8-27b_v5,6,4,construction contract administration; construction plans and specifications; resource management; conflict resolution
+qwen_qwen3.8-27b_v5,11,4,infection control; equipment maintenance; triaging patients; obtaining vitals

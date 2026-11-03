@@ -1,0 +1,3 @@
+model,run,in_mean,in_median,in_max,out_mean,out_median,out_max,total_mean,calls
+claude-haiku-5-5,claude-haiku-5-5_v8,3389.78,3408.0,4182,1614.82,1677.0,3212,5004.6,50
+qwen/qwen3.8-27b,qwen_qwen3.8-27b_v8,2037.9,2040.0,2537,480.72,427.0,1229,2518.62,50

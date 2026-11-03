@@ -1,0 +1,22 @@
+group,zone,form,count,share
+Qwen v8 misses,duty,list,24,0.16666666666666666
+Qwen v8 misses,duty,sentence,26,0.18055555555555555
+Qwen v8 misses,elsewhere,list,21,0.14583333333333334
+Qwen v8 misses,elsewhere,sentence,11,0.0763888888888889
+Qwen v8 misses,not in text,,1,0.006944444444444444
+Qwen v8 misses,requirement,list,46,0.3194444444444444
+Qwen v8 misses,requirement,sentence,15,0.10416666666666667
+Haiku v8 misses,duty,list,13,0.13402061855670103
+Haiku v8 misses,duty,sentence,16,0.16494845360824742
+Haiku v8 misses,elsewhere,list,17,0.17525773195876287
+Haiku v8 misses,elsewhere,sentence,10,0.10309278350515463
+Haiku v8 misses,not in text,,2,0.020618556701030927
+Haiku v8 misses,requirement,list,33,0.3402061855670103
+Haiku v8 misses,requirement,sentence,6,0.061855670103092786
+Qwen-only (Haiku found it),duty,list,15,0.19480519480519481
+Qwen-only (Haiku found it),duty,sentence,14,0.18181818181818182
+Qwen-only (Haiku found it),elsewhere,list,9,0.11688311688311688
+Qwen-only (Haiku found it),elsewhere,sentence,4,0.05194805194805195
+Qwen-only (Haiku found it),not in text,,1,0.012987012987012988
+Qwen-only (Haiku found it),requirement,list,24,0.3116883116883117
+Qwen-only (Haiku found it),requirement,sentence,10,0.12987012987012986

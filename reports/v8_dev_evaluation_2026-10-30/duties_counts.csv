@@ -1,0 +1,3 @@
+model,items_added_after_merge,added_matched_gold_strict,added_matched_gold_lenient,original_misses_v8,original_misses_recovered,added_not_matching_gold,near_duplicate_pairs_after_merge,P_strict_collapsed (diagnostic),F1_strict_collapsed (diagnostic)
+qwen,114,25,34,144,27,80,5,0.6441136671177267,0.6574585635359116
+haiku,196,18,24,97,18,172,4,0.6095017381228274,0.6692111959287532

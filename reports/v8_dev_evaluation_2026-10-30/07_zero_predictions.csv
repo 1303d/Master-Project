@@ -1,0 +1,10 @@
+run,n,posting_id,gold_items,raw_answer
+claude-haiku-5-5_v3,45,li_3904944359,4,"{""skills"": []}"
+claude-haiku-5-5_v8a,45,li_3904944359,4,"{""skills"": []}"
+claude-haiku-5-5_v8,45,li_3904944359,4,"{""skills"": []}"
+qwen_qwen3.8-27b_v3,45,li_3904944359,4,"{""skills"": []}"
+qwen_qwen3.8-27b_v3,97,li_3887717230,3,"{""skills"": []}"
+qwen_qwen3.8-27b_v5,45,li_3904944359,4,"{""skills"": []}"
+qwen_qwen3.8-27b_v5,97,li_3887717230,3,"{""skills"": []}"
+qwen_qwen3.8-27b_v8,45,li_3904944359,4,"{""skills"": []}"
+qwen_qwen3.8-27b_v8,97,li_3887717230,3,"{""skills"": []}"

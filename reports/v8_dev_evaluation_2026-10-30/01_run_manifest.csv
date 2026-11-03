@@ -1,0 +1,7 @@
+run,model_id,provider,prompt,prompt_sha256,typed,types,temperature,reasoning_format,delay_s,started_utc,ended_utc,postings_scored,failed
+claude-haiku-5-5_v3,claude-haiku-5-5,anthropic,skill_extraction_v3.txt,773380cfe087e9dc31538e1442158d2e04fc45166216f8e0b775abba44b9b868,False,-,,-,"4 (default, earlier run)",earlier run (cache reused),,50,0
+claude-haiku-5-5_v8a,claude-haiku-5-5,anthropic,skill_extraction_v8a.txt,26ac628dd785f7363fd3a1f65b639cc1c92531e6054181cc32e63d212e0dbb87,True,"skill,knowledge,tool",,-,1,2026-10-30T05:22:36Z,2026-10-30T05:29:33Z,50,0
+claude-haiku-5-5_v8,claude-haiku-5-5,anthropic,skill_extraction_v8.txt,5f0302cd8a9de5158d49670f052cc69eaeac1ff68fe248d500cb028ed83ee03a,True,"skill,knowledge,tool",,-,1,2026-10-30T05:22:36Z,2026-10-30T05:29:23Z,50,0
+qwen_qwen3.8-27b_v3,qwen/qwen3.8-27b,groq,skill_extraction_v3.txt,773380cfe087e9dc31538e1442158d2e04fc45166216f8e0b775abba44b9b868,False,-,0.0,hidden,"4 (default, earlier run)",earlier run (cache reused),,50,0
+qwen_qwen3.8-27b_v5,qwen/qwen3.8-27b,groq,skill_extraction_v5.txt,b6166d6ecf5f7f5047e3a2da368b211c451b5b5ee0cd910ca9dd0aed29cd691e,False,-,0.0,-,"4 (default, earlier run)",earlier run (cache reused),,50,0
+qwen_qwen3.8-27b_v8,qwen/qwen3.8-27b,groq,skill_extraction_v8.txt,5f0302cd8a9de5158d49670f052cc69eaeac1ff68fe248d500cb028ed83ee03a,True,"skill,knowledge,tool",0.0,hidden,40,2026-10-30T05:29:56Z,2026-10-30T18:17:57Z,50,0

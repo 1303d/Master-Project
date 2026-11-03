@@ -1,0 +1,59 @@
+#2 li_3891854133: 3 skills
+#3 li_3902780709: 9 skills
+#5 li_3905336446: 1 skills
+#6 li_3890891917: 2 skills
+#8 li_3899539127: 4 skills
+#10 li_3904952109: 18 skills
+#11 li_3891266921: 8 skills
+#12 li_3901945232: 6 skills
+#13 li_3887719486: 4 skills
+#14 li_3891039132: 9 skills
+#15 li_3903456306: 0 skills
+#19 li_3900963551: 14 skills
+#21 li_3906221602: 12 skills
+#24 li_3889122912: 8 skills
+#26 li_3904585174: 2 skills
+#29 li_3899527449: 10 skills
+#30 li_3905331187: 6 skills
+#31 li_3886826327: 19 skills
+  429 from API, retrying in 7s
+#33 li_3894890877: 3 skills
+#34 li_3905336264: 1 skills
+  429 from API, retrying in 5s
+#35 li_3904991921: 17 skills
+  429 from API, retrying in 5s
+#40 li_3905368965: 0 skills
+#41 li_3902325209: 6 skills
+#42 li_3899523375: 6 skills
+#44 li_3906080933: 7 skills
+#45 li_3904944359: 0 skills
+#46 li_3904409652: 10 skills
+#47 li_3889760266: 17 skills
+#49 li_3903813809: 9 skills
+#55 li_3902868050: 10 skills
+#62 li_3899523363: 32 skills
+  429 from API, retrying in 21s
+  429 from API, retrying in 2s
+#64 li_3886210955: 6 skills
+#65 li_3905280056: 4 skills
+#69 li_3901942416: 14 skills
+#71 li_3900943350: 0 skills
+#72 li_3901614633: 10 skills
+#74 li_3901680075: 1 skills
+  429 from API, retrying in 5s
+#75 li_3903493569: 5 skills
+#76 li_3895544405: 3 skills
+#79 li_3901341717: 8 skills
+#80 li_3902352352: 4 skills
+#82 li_3886890185: 8 skills
+  429 from API, retrying in 5s
+#83 li_3901699515: 1 skills
+#89 li_3904568715: 1 skills
+#90 li_3889702808: 0 skills
+#94 li_3884437728: 9 skills
+#95 li_3905346852: 0 skills
+#96 li_3891263924: 7 skills
+#97 li_3887717230: 2 skills
+#100 li_3904949322: 6 skills
+
+342 statements -> data\processed\statements_qwen_qwen3.8-27b_v8_duties.csv | new API calls 50 | tokens in 52,945 out 13,060

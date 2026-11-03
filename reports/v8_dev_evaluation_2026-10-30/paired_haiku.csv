@@ -1,0 +1,10 @@
+model,this,baseline,gold,metric,baseline_f1,this_f1,diff,ci_low,ci_high,ci_contains_0
+claude-haiku-5-5,v8a,v3,v3_dev_proposed,strict,0.696,0.711,0.014,-0.019,0.050,yes
+claude-haiku-5-5,v8a,v3,v3_dev_proposed,lenient,0.780,0.799,0.019,-0.009,0.047,yes
+claude-haiku-5-5,v8a,v3,v3_dev_proposed,strict+alias,0.696,0.716,0.020,-0.015,0.056,yes
+claude-haiku-5-5,v8,v8a,v3_dev_proposed,strict,0.711,0.738,0.027,-0.007,0.061,yes
+claude-haiku-5-5,v8,v8a,v3_dev_proposed,lenient,0.799,0.817,0.018,-0.009,0.044,yes
+claude-haiku-5-5,v8,v8a,v3_dev_proposed,strict+alias,0.716,0.743,0.027,-0.007,0.061,yes
+claude-haiku-5-5,v8,v3,v3_dev_proposed,strict,0.696,0.738,0.041,0.007,0.077,no
+claude-haiku-5-5,v8,v3,v3_dev_proposed,lenient,0.780,0.817,0.037,0.010,0.066,no
+claude-haiku-5-5,v8,v3,v3_dev_proposed,strict+alias,0.696,0.743,0.047,0.010,0.085,no

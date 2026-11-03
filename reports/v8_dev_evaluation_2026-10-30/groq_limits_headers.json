@@ -1,0 +1,10 @@
+{
+ "read_at": "2026-10-30T05:22:19+00:00",
+ "status": 200,
+ "x-ratelimit-limit-requests": "1000",
+ "x-ratelimit-limit-tokens": "8000",
+ "x-ratelimit-remaining-requests": "999",
+ "x-ratelimit-remaining-tokens": "7986",
+ "x-ratelimit-reset-requests": "1m26.4s",
+ "x-ratelimit-reset-tokens": "105ms"
+}
