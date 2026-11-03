@@ -1,0 +1,310 @@
+error,n,skill
+missed,2,sales plans
+missed,2,sales strategies
+missed,2,brand localization
+missed,2,client relationships
+missed,3,Diesel mechanics
+missed,3,heavy-duty truck repair
+missed,3,repair scheduling
+missed,6,highway construction
+missed,6,construction contract administration
+missed,6,construction documents
+missed,6,resource management
+missed,8,prosecuting patent applications
+missed,8,litigation
+missed,10,embedded Electronic Control Unit
+missed,11,equipment maintenance
+missed,11,obtaining vitals
+missed,12,API testing
+missed,12,collaboration
+missed,13,distribution
+missed,13,warehousing
+missed,13,physical inventories
+missed,13,reading
+missed,13,counting
+missed,19,data warehouse
+missed,19,data transformations
+missed,19,data pipelines
+missed,21,Regulatory Compliance
+missed,21,oral presentations
+missed,21,IT consulting
+missed,29,statistical software
+missed,29,legislative frameworks
+missed,29,statistical modeling
+missed,30,palletizing
+missed,30,safety inspections
+missed,31,automated testing
+missed,31,test plans
+missed,31,test cases
+missed,31,software quality assurance
+missed,33,administrative support
+missed,33,software implementation
+missed,41,sanitation
+missed,42,Mule flows
+missed,42,AWS SQS
+missed,44,project management
+missed,44,project controls
+missed,44,key performance indicators
+missed,44,cross portfolio reporting
+missed,44,product launches
+missed,44,global marketing
+missed,44,Commercial sales
+missed,44,Marketing planning
+missed,44,creative development
+missed,44,tactical communications
+missed,44,Microsoft Suite of Office
+missed,45,scheduling
+missed,45,medical records management
+missed,45,patient education
+missed,45,policy and procedure improvement
+missed,46,isolation policies
+missed,46,respiratory care therapies
+missed,47,litigation
+missed,47,discovery drafting
+missed,47,pleading drafting
+missed,47,legal memorandum drafting
+missed,47,case evaluation
+missed,47,client counseling
+missed,47,writing
+missed,47,state rules of civil procedure
+missed,47,settlement agreement drafting
+missed,47,affidavit drafting
+missed,49,accounting
+missed,49,A/P
+missed,49,A/R
+missed,49,Expense Reimbursement Management
+missed,49,month-end closing
+missed,55,systems administration
+missed,55,collaboration
+missed,55,technical support
+missed,62,ingestion patterns
+missed,62,Matillion
+missed,64,operational leadership
+missed,64,process optimization
+missed,64,performance monitoring
+missed,64,data driven decision making
+missed,64,resource allocation
+missed,64,contingency plans
+missed,65,business relationships
+missed,65,customer relationships
+missed,65,territory analysis
+missed,65,prioritization
+missed,69,work-in-progress reporting
+missed,69,archiving procedures
+missed,69,Lien Release Preparation
+missed,69,Project Close-out Documentation
+missed,71,litigation
+missed,71,trial practice
+missed,72,back-end development
+missed,72,DevOps
+missed,72,telemetry collection
+missed,72,collaboration
+missed,74,customer relationships
+missed,74,vendor relationships
+missed,74,Korean
+missed,74,English
+missed,75,pre-construction
+missed,75,competitive bids
+missed,75,plan reading
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
+missed,76,transaction reconciliation
+missed,76,confidentiality
+missed,76,computer systems
+missed,76,collaboration
+missed,79,data analysis
+missed,79,regulatory documents
+missed,79,technical documents
+missed,79,collaboration
+missed,80,financial reporting
+missed,80,cost accounting
+missed,80,process optimization
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,change management
+missed,80,collaboration
+missed,80,meet deadlines
+missed,82,Human Resource management
+missed,82,supervisory skills
+missed,82,collaboration
+missed,83,Microsoft Windows
+missed,83,business processes
+missed,89,scheduling oversight
+missed,89,physician order auditing
+missed,89,laboratory report review
+missed,89,in-home supervisory visits
+missed,90,travel arrangements
+missed,90,event planning
+missed,94,motion drafting
+missed,94,brief drafting
+missed,95,Administrative management
+missed,95,supervision
+missed,95,management
+missed,96,month-end close
+missed,97,computerized ordering system
+missed,100,operations management
+extra,2,energy industry
+extra,2,teamwork
+extra,3,equipment repair
+extra,3,repair planning
+extra,3,diagnostic software
+extra,3,following instructions
+extra,3,equipment operation
+extra,5,relationship building
+extra,6,engineering practices
+extra,6,procurement rules
+extra,6,quality standards
+extra,6,safety processes
+extra,6,supervision
+extra,6,coaching
+extra,6,problem solving
+extra,6,communication
+extra,6,contract compliance
+extra,8,patent prosecution
+extra,8,client service
+extra,10,requirements gathering
+extra,10,simulation
+extra,10,Adaptive AUTOSAR
+extra,10,wiring harnesses
+extra,10,connectors
+extra,10,validation
+extra,11,vital signs
+extra,11,urine specimen collection
+extra,11,OSHA
+extra,11,MOSHA
+extra,11,biohazardous waste policy
+extra,11,attention to detail
+extra,12,attention to detail
+extra,12,error handling
+extra,12,teamwork
+extra,13,attention to detail
+extra,13,contingency plans
+extra,14,down converters
+extra,14,X-Band
+extra,19,data warehousing
+extra,19,code review
+extra,19,data lineage
+extra,19,adaptability
+extra,21,working papers
+extra,21,external audit coordination
+extra,21,criteria development
+extra,21,process documentation
+extra,21,interviewing
+extra,21,issue identification
+extra,21,written communication
+extra,21,oral communication
+extra,21,third-party risk
+extra,21,internal controls
+extra,21,IT governance
+extra,24,product knowledge
+extra,24,GUEST service model
+extra,24,customer fitting
+extra,24,security tags
+extra,24,teamwork
+extra,26,empathy
+extra,26,height and weight measurement
+extra,26,intake and output
+extra,29,statistical models
+extra,29,attention to detail
+extra,31,code review
+extra,31,mentoring
+extra,31,attention to detail
+extra,33,analytical skills
+extra,33,attention to detail
+extra,34,teamwork
+extra,35,toe trimming
+extra,35,water hose
+extra,35,risk mitigation
+extra,40,team development
+extra,40,relationship building
+extra,41,food preparation
+extra,41,average cost inventory system
+extra,41,ACIS
+extra,41,CAO
+extra,41,computers
+extra,42,API development
+extra,42,flow development
+extra,42,MuleSoft CloudHub
+extra,42,system integration
+extra,42,development best practices
+extra,42,Amazon SQS
+extra,44,Launch Excellence processes
+extra,44,project planning
+extra,44,dependency management
+extra,44,stakeholder management
+extra,44,product launch planning
+extra,44,team management
+extra,44,conflict resolution
+extra,44,teamwork
+extra,44,multitasking
+extra,44,attention to detail
+extra,44,organization
+extra,47,written communication
+extra,49,accounts payable
+extra,49,accounts receivable
+extra,49,sales tax
+extra,49,federal tax
+extra,49,state tax
+extra,49,month-end close
+extra,49,attention to detail
+extra,49,adaptability
+extra,55,attention to detail
+extra,55,domain controllers
+extra,55,documentation
+extra,62,full load
+extra,62,incremental load
+extra,62,Matilion
+extra,62,big data technologies
+extra,64,process improvement
+extra,64,contingency planning
+extra,64,team leadership
+extra,65,relationship building
+extra,65,prioritizing
+extra,69,WIP reports
+extra,72,large data handling
+extra,72,requirements gathering
+extra,72,architectural design
+extra,74,inventory management
+extra,74,complaint resolution
+extra,74,teamwork
+extra,75,bidding
+extra,75,budgeting
+extra,75,communication
+extra,79,data interpretation
+extra,79,regulatory liaison
+extra,79,regulatory writing
+extra,79,technical writing
+extra,79,teamwork
+extra,80,financial regulations
+extra,80,presentation
+extra,82,talent acquisition
+extra,82,workplace investigations
+extra,82,employee engagement
+extra,82,attention to detail
+extra,82,supervision
+extra,82,employment-related laws
+extra,82,Mac
+extra,82,PC
+extra,83,solution design
+extra,83,.NET Framework
+extra,83,mentoring
+extra,83,project management
+extra,94,appellate briefing
+extra,94,dispositive motions
+extra,94,pre-trial motions
+extra,94,post-judgment motions
+extra,95,attention to detail
+extra,95,policies
+extra,95,governmental regulations
+extra,95,training
+extra,96,SEC rule
+extra,96,professionalism
+extra,96,attention to detail
+extra,97,teamwork
+extra,97,customer focus
+extra,97,adaptability
+extra,100,continuous improvement
+extra,100,financial planning
+extra,100,personnel management
+extra,100,decision making

@@ -1,0 +1,817 @@
+n,skill,claude_decision,claude_alias_of,claude_note
+1,written communication,skill,,O*NET Basic Skill: Writing; ESCO communication
+2,customer service,skill,,ESCO knowledge: customer service
+3,analytical,skill,,ESCO skill: work analytically
+4,microsoft outlook,skill,,O*NET software: Microsoft Outlook
+5,interpersonal communication,skill,,ESCO skill: interact with others
+6,root cause analysis,alias,root cause investigation,
+7,journal entries,skill,,ESCO knowledge: accounting entries
+8,internal controls,skill,,accounting knowledge (internal control systems); ESCO internal auditing is close
+9,linux,skill,,O*NET software: Linux
+10,gaap,alias,us accounting standards,
+11,kubernetes,skill,,O*NET software: Kubernetes
+12,visual merchandising,skill,,ESCO knowledge: merchandising techniques
+13,hipaa,skill,,health privacy law; ESCO health care legislation
+14,ansible,skill,,ESCO knowledge: Ansible
+15,influencing,skill,,ESCO skill: persuade others
+16,access control,skill,,ESCO skill: use access control software
+17,grammar,skill,,ESCO knowledge: grammar
+18,programming,skill,,O*NET Transferable Skills: Programming
+19,collections,skill,,debt collection; ESCO collect debts (top match 'art collections' is wrong)
+20,facilitation,skill,,meeting facilitation
+21,legal research,skill,,ESCO knowledge: legal research
+22,terraform,skill,,O*NET software: Terraform (HashiCorp)
+23,netsuite,alias,netsuite erp,
+24,staff development,alias,employee development,
+25,accruals,alias,accrual accounting,
+26,design patterns,skill,,ESCO skill: use software design patterns
+27,etl,skill,,"ESCO knowledge: data extraction, transformation and loading tools"
+28,j2ee,skill,,O*NET software: Oracle Java 2 Platform Enterprise Edition J2EE
+29,software design,skill,,ESCO skill: create software design
+30,care coordination,skill,,ESCO skill: coordinate care
+31,digital marketing,skill,,ESCO knowledge: digital marketing techniques
+32,itil,skill,,ESCO skill: apply operations for an ITIL-based environment
+33,retail sales,skill,,O*NET Knowledge: Sales and Marketing
+34,technical skills,not_a_skill,,too vague ('technical savvy'); no checkable ability
+35,carpentry,skill,,ESCO knowledge: carpentry
+36,diplomacy,skill,,ESCO skill: show diplomacy
+37,hris,skill,,O*NET software: Oracle HRIS
+38,photography,skill,,ESCO knowledge: cinematography
+39,talent acquisition,skill,,recruitment; ESCO recruit employees
+40,business strategy,skill,,ESCO knowledge: business strategy concepts
+41,computer systems,skill,,ESCO skill: use ICT systems
+42,delivery board system,skill,,employer-specific delivery software (tool); O*NET Delivery Routing System close
+43,financial acumen,skill,,ESCO knowledge: financial capability
+44,google sheets,skill,,O*NET software: Google Sheets
+45,haccp,skill,,ESCO skill: apply HACCP
+46,mentorship,skill,,ESCO skill: provide mentorship
+47,patient registration,skill,,healthcare front-desk skill; no exact ESCO match
+48,revit,skill,,O*NET software: Autodesk Revit
+49,siem,skill,,O*NET software: IBM QRadar SIEM
+50,tact,trait,,personal quality (O*NET Work Style: Social Orientation); evidence 'patience and tact'
+51,vlookup,alias,excel formulas,
+52,ariba,alias,sap ariba,
+53,cash flow management,skill,,ESCO skill: handle cash flow
+54,computer programming,alias,programming,
+55,discovery,skill,,US legal procedure (pre-trial discovery); ESCO misses it; top match software is wrong
+56,experimentation,skill,,experimental design / testing; weak ESCO match
+57,go to market strategy,skill,,ESCO skill: plan marketing strategy
+58,itsm,skill,,IT service management; ESCO ITIL-based operations
+59,legal analysis,skill,,ESCO knowledge: legal research
+60,oral cancer screening,skill,,ESCO skill: conduct cancer screening tests
+61,powerapps,alias,azure power apps,
+62,qa,skill,,ESCO knowledge: quality assurance procedures
+63,sales leadership,skill,,ESCO skill: manage sales teams
+64,splunk,skill,,O*NET software: Splunk Enterprise
+65,system administration,skill,,ESCO skill: administer ICT system
+66,tax research,skill,,ESCO skill: research taxation procedures
+67,access points,skill,,network hardware (wireless access points); top ESCO match 'Microsoft Access' is wrong
+68,american healthtech,skill,,O*NET software: American HealthTech Financial
+69,balance sheet,skill,,ESCO skill: perform balance sheet operations
+70,building systems,skill,,ESCO skill: inspect building systems
+71,classroom management,skill,,ESCO skill: perform classroom management
+72,community relations,skill,,ESCO skill: build community relations
+73,containerization,skill,,software containers (Docker/Kubernetes); ESCO matches are about shipping containers
+74,equipment knowledge,not_a_skill,,vague ('equipment knowledge'); no specific ability
+75,expense management,skill,,ESCO skill: control of expenses
+76,financial consolidation,skill,,ESCO skill: synthesise financial information
+77,google,skill,,ESCO knowledge: search engines
+78,grading,skill,,civil engineering site grading; ESCO grading systems is a different meaning
+79,handheld computers,skill,,ESCO skill: operate handheld devices
+80,hoist operation,skill,,ESCO skill: operate hoists
+81,income statement,skill,,ESCO financial statements
+82,insurance verification,skill,,healthcare insurance eligibility verification; no exact ESCO match
+83,irs,not_a_skill,,"an agency name (IRS), not an ability"
+84,key risk indicators,skill,,risk-management metrics; ESCO track key performance indicators is close
+85,marketing principles,skill,,ESCO knowledge: marketing principles
+86,mechanical equipment,skill,,ESCO knowledge: machine tools
+87,mulesoft,skill,,O*NET software: MuleSoft software
+88,nutrition assessment,skill,,ESCO skill: perform nutrition analysis
+89,patch management,skill,,O*NET software: Patch management software
+90,problem analysis,skill,,ESCO skill: troubleshoot
+91,psychiatric nursing,skill,,ESCO knowledge: psychiatry / psychiatric disorders
+92,reputation management,skill,,marketing / PR skill; no exact ESCO match
+93,scenario analysis,skill,,financial modelling technique; no exact ESCO match
+94,spelling,skill,,ESCO knowledge: spelling
+95,talent management,skill,,ESCO knowledge: personnel management
+96,workshop facilitation,skill,,ESCO skill: plan workshop activity
+97,ach,unsure,,payment method (ACH); a skill only as 'ACH payment processing'
+98,advertising sales,skill,,ESCO sell advertising space is close
+99,analytical chemistry,skill,,ESCO knowledge: analytical chemistry
+100,as builts,alias,as built drawings,
+101,automotive systems,skill,,ESCO knowledge: vehicle electrical systems
+102,background checks,skill,,ESCO skill: undertake employee screening
+103,basic life support,not_a_skill,,"certification (BLS card), not a skill under the labelling rules"
+104,bridge,skill,,Adobe Bridge (software); ESCO matches are about bridge engineering
+105,cable installation,skill,,ESCO skill: install low voltage wiring
+106,cao,alias,cao ordering,
+107,central line care,alias,central line management,
+108,cleaning validation,skill,,pharma GMP cleaning validation; no exact ESCO match
+109,color theory,skill,,ESCO design principles (colour)
+110,communications strategy,skill,,ESCO skill: develop communication strategies
+111,compliance regulations,alias,regulatory compliance,
+112,construction documents,alias,construction documentation,
+113,copado,skill,,Salesforce DevOps tool (Copado)
+114,credit assessment,alias,credit analysis,
+115,curiosity,trait,,ESCO attitude: demonstrate curiosity
+116,dataproc,skill,,Google Cloud Dataproc (software)
+117,dental impressions,skill,,ESCO skill: examine dental models and impressions
+118,detection engineering,skill,,cybersecurity detection engineering; no exact ESCO match
+119,digital campaigns,skill,,ESCO skill: develop campaigns
+120,dlp,skill,,data loss prevention (security tools)
+121,electronics,skill,,ESCO knowledge: electronics
+122,etl development,alias,etl,
+123,evidence based treatment,skill,,ESCO knowledge: cognitive behavioural therapy
+124,expediting,skill,,kitchen expediting (restaurant line)
+125,fifo,alias,fifo inventory,
+126,finite element analysis,alias,finite element modeling,
+127,general ledger close,alias,financial close,
+128,gpos,skill,,healthcare market knowledge (group purchasing organisations)
+129,hcpcs coding,alias,hcpcs,
+130,hplc,skill,,ESCO knowledge: high-performance liquid chromatography
+131,human relations,alias,interpersonal relationships,
+132,ignition,skill,,Inductive Automation Ignition (SCADA software); evidence is the job title only
+133,infoblox,skill,,O*NET software: Infoblox NetMRI
+134,injection molding,skill,,ESCO knowledge: injection moulding machine parts
+135,interpreting diagnostic data,skill,,ESCO skill: interpret findings from medical examinations
+136,isp,skill,,telecom inside-plant (ISP) design
+137,jcaho,alias,jcaho standards,
+138,kajabi,skill,,Kajabi (marketing platform); ESCO matches (Punjabi) are wrong
+139,lc/ms/ms,skill,,lab technique LC-MS/MS; ESCO mass spectrometry
+140,linux systems engineering,skill,,O*NET software: Linux
+141,m&a,alias,mergers and acquisitions,
+142,management of dysrhythmias,skill,,cardiac nursing; ESCO defibrillation is close
+143,materials characterization,skill,,ESCO test materials
+144,metadata,alias,metadata management,
+145,mills,skill,,milling machine operation; ESCO mill operations
+146,nas,skill,,O*NET software: Network addressable storage NAS software
+147,network hardware,skill,,ESCO knowledge: ICT networking hardware
+148,office machines,skill,,ESCO knowledge: office equipment
+149,openpath,skill,,access-control system (software/hardware tool)
+150,oxygen,not_a_skill,,"a material (gas), not an ability"
+151,partner relations,skill,,ESCO skill: establish collaborative relations
+152,peoplesoft,skill,,O*NET software: Oracle PeopleSoft
+153,pop culture,skill,,ESCO knowledge: entertainment industry
+154,process analysis,skill,,ESCO skill: analyse business processes
+155,progressive placement,skill,,optician lens fitting (progressive lens placement)
+156,pspice,skill,,O*NET software: Cadence PSpice
+157,rally,skill,,Rally (agile project tool); ESCO matches are wrong
+158,reference checks,skill,,recruitment screening; ESCO undertake employee screening
+159,resolution planning,not_a_skill,,"task (plan loan resolution), Section A"
+160,sales operations,skill,,ESCO knowledge: sales activities
+161,security awareness,skill,,information-security awareness
+162,server administration,skill,,server administration; ESCO administer ICT system
+163,sftp,skill,,secure file transfer protocol (SFTP)
+164,software development tools,skill,,O*NET software: Software development tools
+165,spreadsheet software,skill,,ESCO skill: use spreadsheets software
+166,sso integration,skill,,single sign-on integration
+167,study design,skill,,research / study design
+168,surgical retractors,skill,,ESCO surgical instruments
+169,tax reviews,alias,tax return review,
+170,technical aptitude,not_a_skill,,vague ('technical aptitude'); not a checkable ability
+171,traceability,skill,,ESCO skill: implement traceability systems
+172,uart,skill,,serial communication interface (UART)
+173,variance reports,skill,,variance analysis reporting
+174,veeva,skill,,Veeva (life-sciences software)
+175,vtam,skill,,IBM mainframe VTAM
+176,wsdl,skill,,O*NET software: Web service definition language WDSL
+177,278,skill,,"EDI X12 transaction 278 (like the clustered skills 834 enrollment, 837 claims)"
+178,835 remittance,skill,,"EDI X12 transaction 835 (like 834 enrollment, 837 claims)"
+179,a1 finish,skill,,mold polish standard (SPI A1 finish)
+180,accepted abbreviations,alias,medical abbreviations,
+181,accounting treatment research,alias,accounting treatment,
+182,act,skill,,Acceptance and Commitment Therapy (ACT); ESCO 'create an act' is wrong
+183,acv recognition,unsure,,SaaS sales metric (annual contract value); skill only as revenue recognition
+184,adding machine,skill,,office equipment (adding machine); ESCO office equipment
+185,advanced filtering,skill,,Excel advanced filtering
+186,adx,unsure,,unclear acronym (Azure Data Explorer?)
+187,age specific considerations,alias,age specific patient care,
+188,agtek,skill,,AgTek (earthwork estimating software)
+189,air export,skill,,ESCO skill: coordinate export transportation activities
+190,alcohol sales policies,skill,,ESCO knowledge: laws regulating serving alcoholic drinks
+191,alliance management,alias,partnership management,
+192,ambulation,skill,,patient ambulation assistance (nursing)
+193,anger management,skill,,ESCO knowledge: anger management
+194,ansi x12,skill,,EDI ANSI X12 standard
+195,ansible tower,alias,ansible,
+196,apache spark,skill,,O*NET software: Apache Spark
+197,application design,skill,,ESCO skill: create software design
+198,ar aging,skill,,accounts receivable aging
+199,arinc,skill,,avionics data protocol (ARINC)
+200,asee,not_a_skill,,an organisation name (ASEE); the skill is 'engineering standards'
+201,aspect dynamics,unsure,,unclear animation term; check the JD
+202,assa abloy,skill,,door-lock hardware brand; product knowledge for installers
+203,assembly processes,skill,,ESCO skill: apply assembly techniques
+204,atlan,skill,,data governance tool (Atlan)
+205,audi master technician certification,not_a_skill,,"certification, not a skill under the labelling rules"
+206,auto assembly strategies,skill,,ESCO skill: apply assembly techniques
+207,averaging,skill,,basic statistics (averages)
+208,awards programs,not_a_skill,,"task (organise awards programs), Section A"
+209,azure ai,skill,,Azure AI services
+210,azure synapse,skill,,Azure Synapse Analytics (software)
+211,backhauls,skill,,logistics backhaul planning
+212,bamboo,skill,,O*NET software: Atlassian Bamboo
+213,banking policies and procedures,skill,,ESCO knowledge: banking activities
+214,batch reactor processes,skill,,chemical process engineering (batch reactors)
+215,bell signal procedures,skill,,ESCO skill: apply signalling control procedures
+216,best practices development,not_a_skill,,vague task ('develop best practices')
+217,bifocal placement,alias,progressive placement,
+218,binding,skill,,ESCO knowledge: binding technologies
+219,biology,skill,,ESCO knowledge: biology
+220,blackbaud grantmaking,skill,,Blackbaud (nonprofit software)
+221,bloodborne pathogen safety,skill,,infection-control safety (OSHA bloodborne pathogens); ESCO biosafety is close
+222,bo,alias,sap bo,
+223,boat accessories,alias,boat parts,
+224,bodywork,alias,body repairs,
+225,bopis,skill,,"retail order fulfilment (buy online, pick up in store)"
+226,bpel,skill,,BPEL (business process execution language)
+227,bpsk,skill,,"signal modulation scheme (BPSK), DSP knowledge"
+228,brand voice,skill,,marketing / brand voice writing; ESCO define brand identity is close
+229,briefing document preparation,skill,,ESCO provide documentation
+230,budget variance narratives,skill,,budget variance reporting; ESCO evaluate budgets
+231,build processes,skill,,software build processes; ESCO matches are about construction
+232,building displays,skill,,ESCO skill: assemble visual displays
+233,business continuity,skill,,business continuity planning; ESCO maintain plan for continuity of operations
+234,business management system,not_a_skill,,"employer's internal system name (BMS), not a general skill"
+235,business system implementation,alias,systems implementation,
+236,bw,skill,,SAP BW (business warehouse)
+237,cabinets,skill,,cabinet and rack installation (telecom)
+238,campaign based operations,unsure,,unclear term (chemical plant 'campaign based operations'); check the JD
+239,cancer genetics,skill,,ESCO medical genetics
+240,capital budgets,skill,,capital budgeting; ESCO manage budgets
+241,carbo qc,skill,,lab instrument (Carbo QC beverage CO2 tester)
+242,cash flow analysis,skill,,financial analysis (cash flow); ESCO handle cash flow
+243,cash flow systems,not_a_skill,,"task ('balance cash flow systems'), Section A"
+244,cb radio,skill,,radio equipment operation; ESCO operate radio equipment
+245,cdk,alias,aws cdk,
+246,certificates,skill,,SSL/TLS certificate management (IT); ESCO matches are wrong
+247,change impact analysis,alias,business impact analysis,
+248,chap,not_a_skill,,"an accreditation body (CHAP), not an ability"
+249,chat support,skill,,customer support by chat; ESCO use internet chat
+250,chemcad,skill,,O*NET software: Chemstations CHEMCAD
+251,chemical management,skill,,ESCO skill: manage chemical reagents
+252,childcare,skill,,ESCO knowledge: babysitting
+253,circuit breakers,skill,,ESCO knowledge: electrical equipment components
+254,civil design,alias,civil engineering,
+255,cjcsi 3122.06,not_a_skill,,"a document number (military standard), not an ability"
+256,cjcsi 3370.01,not_a_skill,,"a document number (military standard), not an ability"
+257,clean code,skill,,clean code practices (software)
+258,cleft,not_a_skill,,"a medical condition (cleft), not an ability"
+259,clickup,skill,,ClickUp (project management software)
+260,client management tools,alias,client management,
+261,clinical applications,skill,,clinical application support (healthcare IT)
+262,clinical informatics,skill,,ESCO knowledge: medical informatics
+263,clinical psychology,skill,,ESCO knowledge: conditions for professional practice of clinical psychology
+264,clio,skill,,Clio (legal practice software)
+265,cloud application architecture,alias,application architecture,
+266,cmi,unsure,,unclear acronym (CMI contact server)
+267,cnc machines,skill,,ESCO skill: tend computer numerical control lathe machine
+268,co op program management,not_a_skill,,"task (manage co-op program), Section A"
+269,coaxial,skill,,coaxial cabling (telecom installation)
+270,code review tools,skill,,code review tools; O*NET software development tools
+271,cola,not_a_skill,,"an accreditation body (COLA), not an ability"
+272,collection requirements,skill,,ESCO knowledge: collection management
+273,color matching,skill,,ESCO skill: use color matching techniques
+274,commercial payors,skill,,healthcare billing knowledge (commercial payers)
+275,communication circuitry,skill,,communication circuits (electronics); ESCO test circuitry
+276,communication tools,skill,,ESCO skill: interact through digital technologies
+277,community building,skill,,ESCO skill: build community relations
+278,community partnerships,alias,strategic partnerships,
+279,complex sprinkler systems,skill,,ESCO skill: design sprinkler systems
+280,component selection,skill,,component selection (design engineering)
+281,composure,skill,,ESCO skill: handle stressful situations
+282,computational methods,alias,scientific methods,
+283,computer operation,skill,,basic computer use; ESCO use ICT systems
+284,computing,skill,,ESCO knowledge: computer technology
+285,conceps,not_a_skill,,"employer-specific system name (CONCEPS), unclear"
+286,construction cost,skill,,construction cost estimating; ESCO estimate cost of building materials
+287,construction pricing,alias,pricing,
+288,consumer marketing,skill,,consumer marketing; ESCO marketing knowledge
+289,content tagging,skill,,content tagging (metadata / taxonomy)
+290,contractual relationships,skill,,contract management; ESCO contract law
+291,conveying systems,skill,,conveyor systems (packaging); O*NET conveyor control software
+292,cooperation,trait,,O*NET Work Style: Cooperation
+293,copperleaf,skill,,Copperleaf (asset planning software)
+294,corporate giving programs,skill,,ESCO corporate social responsibility
+295,county medical services program,not_a_skill,,"a public program name (CMSP), not an ability"
+296,covid 19,not_a_skill,,"a disease name (COVID-19 test code), not an ability"
+297,cpg business strategies,skill,,retail business strategy (CPG)
+298,cpt codes,alias,cpt,
+299,credentialing system,skill,,credentialing software (healthcare)
+300,credit policy,skill,,ESCO skill: create credit policy
+301,critical path method,skill,,project scheduling method (CPM); ESCO misses it
+302,cross functional partnering,alias,cross functional collaboration,
+303,crypto technologies,skill,,blockchain / crypto technology knowledge
+304,css preprocessors,alias,css,
+305,cti,skill,,ESCO skill: use computer telephony integration
+306,current awareness,skill,,legal research (current awareness services)
+307,customs classification,skill,,ESCO skill: arrange customs documents
+308,dac design,alias,dac,
+309,data based decision making,skill,,data-driven decision making; ESCO decision support systems
+310,data loaders,skill,,data loader tools (ETL)
+311,data networks,skill,,data networking; ESCO matches are weak
+312,data synthesis,skill,,data synthesis; ESCO synthesise financial information
+313,ddd,skill,,software design approach (domain-driven design)
+314,debt accounting,skill,,debt accounting; ESCO accounting
+315,decapping,skill,,lab specimen handling (decapping tubes)
+316,decisiveness,trait,,personal quality (decisive); O*NET Work Style
+317,defect management,alias,defect tracking,
+318,dell boomi,skill,,Dell Boomi (integration platform)
+319,demand management,skill,,product demand management
+320,dental assisting,skill,,ESCO skill: assist the dentist during the dental treatment procedure
+321,dental skills,skill,,ESCO knowledge: dentistry science
+322,design capability studies,skill,,process capability studies (quality)
+323,design software,skill,,ESCO knowledge: industrial software
+324,desk research,skill,,desk research (secondary research)
+325,detection and response,alias,threat detection,
+326,development tools,skill,,O*NET software: Software development tools
+327,device physics,skill,,semiconductor device physics
+328,diagnosis and treatment,skill,,clinical diagnosis and treatment; ESCO medical knowledge
+329,diagnostic evaluation,alias,diagnostic testing,
+330,diee,not_a_skill,,"a military system name (DIEE), unclear"
+331,digital landscape knowledge,not_a_skill,,vague ('digital landscape knowledge')
+332,dimensional verification,skill,,ESCO skill: interpret geometric dimensions and tolerances
+333,directing,not_a_skill,,vague verb ('directing'); ESCO match is about theatre
+334,disadvantaged business certification programs,skill,,supplier diversity programs knowledge
+335,discovery responses,skill,,legal discovery responses (litigation)
+336,disease process,skill,,ESCO identify progression of disease
+337,display,skill,,visual merchandising display; ESCO supervise merchandise displays
+338,displaying promotional material,skill,,ESCO skill: manage development of promotional material
+339,distribution engineering,skill,,power distribution engineering; ESCO power engineering
+340,distribution systems,skill,,electrical distribution systems
+341,dmt,skill,,Epicor Data Management Tool (software)
+342,docketing,skill,,legal docketing (court dates); ESCO 'Docker' match is wrong
+343,dod program management,alias,program coordination,
+344,drill machines,alias,drill presses,
+345,dropbox,skill,,O*NET software: Dropbox
+346,duck creek,skill,,Duck Creek (insurance software)
+347,dynamics ax,skill,,O*NET software: Microsoft Dynamics AX
+348,e1 ifm,unsure,,unclear acronyms (E1 IFM); check the JD
+349,easypower,skill,,EasyPower (power-system software)
+350,ecf,skill,,federal court e-filing (PACER/ECF)
+351,ecr,skill,,AWS container registry (ECR)
+352,editorial standards,skill,,ESCO knowledge: editorial standards
+353,eeoc,not_a_skill,,an agency name (EEOC); the skill is EEO compliance
+354,electrical cabinet build,skill,,electrical panel assembly and wiring; ESCO assemble electrical components
+355,electrical safety regulations,skill,,ESCO knowledge: electrical power safety regulations
+356,electromechanical actuator design,skill,,ESCO skill: design electromechanical systems
+357,electromechanical systems,skill,,ESCO skill: design electromechanical systems
+358,electronic assembly,skill,,ESCO skill: assemble electronic units
+359,electronic systems,skill,,ESCO knowledge: electronics
+360,electronics technology,alias,electrical technology,
+361,elk,skill,,ELK stack (logging tool)
+362,emass,skill,,O*NET software: eMASS
+363,emergency plans,alias,emergency action plans,
+364,employee classification,skill,,employment law (worker classification); ESCO occupational classification is close
+365,encapsulating,unsure,,unclear term ('encapsulating packing'); check the JD
+366,end user education,alias,end user training,
+367,engagement,not_a_skill,,vague ('engagement')
+368,engineering software,skill,,ESCO skill: use CAE software
+369,enterprise it governance,skill,,IT governance; ESCO information governance compliance
+370,environmental program management,alias,environmental management,
+371,eos,skill,,Entrepreneurial Operating System (management framework)
+372,equipment analysis,alias,equipment evaluation,
+373,equipment validation,alias,equipment testing,
+374,error correcting,skill,,error-correcting codes (DSP)
+375,esg analysis,skill,,ESG investment analysis; ESCO matches are wrong
+376,essentus,skill,,Essentus (routing software)
+377,evidence based counseling techniques,skill,,ESCO knowledge: counselling methods
+378,ew systems,skill,,electronic warfare systems (avionics)
+379,excavator,skill,,ESCO skill: operate excavator
+380,exchange 2016,skill,,Microsoft Exchange server; O*NET Microsoft Exchange
+381,executive engagement,alias,executive communication,
+382,exercise tolerance procedures,skill,,cardiac stress testing procedures
+383,experimental design,skill,,O*NET software: Design of experiments DOE software
+384,export declarations,skill,,ESCO skill: create import-export commercial documentation
+385,extended detection and response (xdr),alias,xdr,
+386,eztrac,skill,,EZTrac (project tracking software)
+387,family engagement,skill,,family engagement (social services); ESCO involve service users and families
+388,far part 25.1309,skill,,aviation regulation knowledge (FAR 25.1309 system safety)
+389,fda compliance,alias,fda regulations,
+390,federal tax law,alias,federal tax,
+391,ferc,alias,ferc regulatory reporting,
+392,filenet,skill,,O*NET software: FileNet P8
+393,filtering,skill,,signal filtering (DSP)
+394,financial clearance,skill,,patient financial clearance (healthcare billing)
+395,financial performance,skill,,ESCO skill: analyse financial performance of a company
+396,financial reporting tools,alias,financial reporting software,
+397,fiori elements,skill,,SAP Fiori Elements (UI framework)
+398,fiscal management,alias,budget management,
+399,fixture development,skill,,retail fixture design
+400,fleetio,skill,,Fleetio (fleet software)
+401,flow through entity returns,skill,,tax return preparation (partnerships / pass-through entities)
+402,foley catheter care,skill,,nursing catheter care; no exact ESCO match
+403,frame equipment,skill,,auto-body frame straightening equipment
+404,framing,skill,,ESCO build picture frames
+405,frequency analysis,skill,,statistical frequency analysis
+406,frs,skill,,validation documents (functional requirement specification)
+407,fuel cell systems,skill,,fuel cell engineering
+408,functional design,alias,functional design specifications,
+409,gaap reporting,skill,,GAAP financial reporting; ESCO create a financial report
+410,garant machines,skill,,printing / converting machine operation (brand names)
+411,general ledger analysis,skill,,ESCO skill: manage the general ledger
+412,generators,skill,,ESCO knowledge: electrical machines
+413,genome engineering,skill,,ESCO knowledge: genetic engineering
+414,ggastro,skill,,gGastro (clinical software)
+415,gnu radio,skill,,GNU Radio (software-defined radio)
+416,go to market,alias,go to market strategy,
+417,goal driven,trait,,personal quality (goal driven); ESCO attitude meet commitments
+418,google contacts,skill,,Google Contacts (office tool)
+419,google platforms,alias,google cloud platform,
+420,governance frameworks,skill,,governance frameworks (ethics / compliance)
+421,graduated cylinders,skill,,basic lab equipment (graduated cylinders)
+422,grant research,skill,,grant research; ESCO report on grants
+423,graphs,skill,,O*NET software: Graphing software
+424,greenfield development,skill,,greenfield software development
+425,groundskeeping,skill,,ESCO skill: manage ground maintenance
+426,gwlb,skill,,AWS Gateway Load Balancer (cloud networking)
+427,h&mbs,skill,,chemical engineering heat and material balances (H&MB)
+428,hardness testing,skill,,hardness testing (materials); ESCO test materials
+429,harmonic analysis,skill,,power quality harmonic analysis
+430,hazard analysis,skill,,ESCO knowledge: safety engineering
+431,hazardous waste management,skill,,ESCO skill: develop hazardous waste management strategies
+432,hcfa 1500,skill,,medical billing form (CMS-1500)
+433,hcss heavybid,skill,,O*NET software: HCSS HeavyBid
+434,health coaching,skill,,ESCO skill: provide health counselling
+435,health promotion,skill,,ESCO skill: advocate health
+436,healthcare technologies,skill,,ESCO knowledge: health informatics
+437,healthy living,skill,,ESCO skill: provide health education
+438,herness,not_a_skill,,"typo / junk ('herness'), not an ability"
+439,high pressure liquid handling,skill,,handling high-pressure fluids (safety)
+440,hipaa best practices,skill,,HIPAA compliance; ESCO health records management
+441,holding fixtures,skill,,welding jigs and fixtures
+442,honeywell,skill,,Honeywell building/security systems
+443,hospital hierarchy,not_a_skill,,vague ('hospital hierarchy')
+444,hot air pencil,skill,,electronics rework tool (hot air pencil)
+445,hris architecture,skill,,HRIS architecture; O*NET HRIS
+446,hstus,skill,,customs tariff codes (HTSUS)
+447,human capital management systems,skill,,O*NET software: Human resources management system HRMS
+448,hyper v,alias,microsoft hyper v,
+449,hypothesis development,alias,hypothesis testing,
+450,iata,skill,,air cargo dangerous goods rules (IATA)
+451,ibm mainframe systems,skill,,IBM mainframe systems
+452,ic assembly products,skill,,semiconductor IC assembly products
+453,icd cm,skill,,medical coding (ICD-CM)
+454,icertis platform,skill,,Icertis (contract management software)
+455,identifying intergovernmental opportunities,not_a_skill,,"task (identify opportunities), Section A"
+456,igel,skill,,IGEL thin client OS
+457,imac,skill,,desktop support IMAC (install / move / add / change)
+458,imagic system,skill,,document imaging system (employer tool)
+459,in service education,skill,,in-service education (clinical training)
+460,income statement review,skill,,ESCO skill: interpret financial statements
+461,indirect tax law,skill,,ESCO knowledge: value-added tax law
+462,industry best practices,not_a_skill,,vague ('industry best practices')
+463,infinium,skill,,Infinium (billing / ERP software)
+464,influencer relations,skill,,public relations (influencer relations)
+465,informatica data director,skill,,O*NET software: Informatica software
+466,informatica mappings,skill,,O*NET software: Informatica software
+467,information assurance,skill,,ESCO skill: ensure information security
+468,information synthesis,skill,,information synthesis
+469,inmon methodology,skill,,data warehouse design methodology (Inmon)
+470,insulins,skill,,product knowledge (insulin therapies)
+471,insurance software,skill,,O*NET software: Insurance analysis software
+472,interactive elements,skill,,ESCO skill: develop visual elements
+473,interconnection studies,skill,,power grid interconnection studies
+474,internal control framework,skill,,internal control framework (COSO)
+475,internet software,skill,,O*NET software category: Internet browser software
+476,interpreting,skill,,ESCO knowledge: interpreting modes
+477,investment accounting,skill,,ESCO knowledge: accounting
+478,io link,skill,,industrial communication protocol (IO-Link)
+479,iscsi,skill,,storage networking protocol (iSCSI)
+480,isopropyl alcohol,skill,,ESCO skill: apply isopropyl alcohol safely
+481,it support best practices,alias,it support,
+482,iterative development,skill,,ESCO knowledge: Iterative development
+483,itil framework,alias,itil,
+484,jacoco,skill,,JaCoCo (Java code-coverage tool)
+485,java build tools,skill,,Java build tools (Maven / Gradle)
+486,jes2,skill,,IBM mainframe JES2
+487,jmp,skill,,O*NET software: SAS JMP
+488,job task analysis,skill,,ESCO skill: carry out job analysis
+489,jungle,not_a_skill,,"employer's POS system name (Jungle), not a general skill"
+490,kaiser permanente child health program,not_a_skill,,"a health program name, not an ability"
+491,kimball methodology,skill,,data warehouse design methodology (Kimball)
+492,knowledge of bag machines,skill,,ESCO skill: operate paper bag machine
+493,l/v separator design,skill,,chemical engineering separator design
+494,l7 filtering,skill,,network layer-7 filtering policies
+495,labor relations,skill,,labour relations; ESCO labour law
+496,laptop administration,skill,,laptop / endpoint administration
+497,large molecule analysis,skill,,biologics lab analysis (large molecules)
+498,leak checking,skill,,mobile app memory-leak checking
+499,leaks,not_a_skill,,"fragment ('leaks'), unclear meaning"
+500,lean processes,skill,,ESCO knowledge: Lean project management
+501,learning management system,skill,,ESCO knowledge: learning management systems
+502,legal research databases,skill,,O*NET software: Court records databases
+503,letter of instruction,skill,,export shipping document (shipper's letter of instruction)
+504,life cycle management,skill,,asset life-cycle management
+505,lifecycle campaign management,skill,,lifecycle marketing campaigns
+506,line splicing,skill,,ESCO skill: splice cable
+507,linux hardening,skill,,Linux security hardening
+508,litmus,skill,,Litmus (email testing tool)
+509,lldp,skill,,network protocol (LLDP)
+510,local tax law,skill,,ESCO tax legislation
+511,logs,skill,,ESCO skill: observe logs
+512,loss control,skill,,insurance loss control (risk management)
+513,low latency,skill,,low-latency systems engineering
+514,lpn,skill,,warehouse license plate numbers (LPN) in WMS
+515,m2extra,not_a_skill,,unclear tool name (M2Extra)
+516,machine setup adjustment,skill,,ESCO skill: maintain machinery
+517,mainframe utility products,skill,,IBM mainframe utility software
+518,makeup application,skill,,makeup application (cosmetics)
+519,managed care contracts,skill,,managed care contract review
+520,managed care terminology,skill,,managed care terminology; ESCO medical terminology
+521,managing agencies,alias,marketing agency management,
+522,manychat,skill,,ManyChat (chat marketing tool)
+523,market conditions,skill,,market knowledge (sales); ESCO market pricing
+524,marketing communications,skill,,ESCO marketing management
+525,marketing technologies,skill,,marketing technology (martech)
+526,marketo,skill,,O*NET software: Marketo Marketing Automation
+527,mass spectrometry,skill,,ESCO knowledge: mass spectrometry
+528,material flow,skill,,manufacturing material flow
+529,mcs,skill,,Citrix Machine Creation Services (MCS)
+530,mdm models,alias,sap mdm,
+531,mechanics of materials,skill,,ESCO knowledge: material mechanics
+532,medical dragon one,skill,,Dragon Medical One (speech-recognition software)
+533,medical malpractice,skill,,medical malpractice law (litigation)
+534,meditech,skill,,O*NET software: MEDITECH software
+535,mental health education,skill,,ESCO skill: use psychoeducation
+536,meraki,alias,cisco meraki,
+537,message development,skill,,message development (communications); ESCO develop communication strategies
+538,metric based decision making,skill,,metric-based decision making
+539,micro copy,skill,,UX microcopy writing
+540,microbiological testing,skill,,ESCO skill: carry out quality control in microbiology laboratories
+541,microelectronics,skill,,ESCO knowledge: microelectronics
+542,microsegmentation,skill,,network micro-segmentation (security)
+543,microsoft exchange,skill,,O*NET software: Microsoft Exchange
+544,microstrategy,skill,,O*NET software: MicroStrategy
+545,mike,skill,,MIKE (estimating software)
+546,mistake identification,skill,,error detection; ESCO detect flaws in record
+547,modbus tcp,skill,,industrial protocol (Modbus TCP)
+548,mold changeover,skill,,mold changeover; ESCO maintain moulds
+549,mold testing,skill,,mold testing (tooling)
+550,money management,skill,,ESCO knowledge: financial management
+551,mortgage records,skill,,ESCO examine mortgage loan documents
+552,motor evaluation,skill,,occupational-therapy motor assessment
+553,mr experience,not_a_skill,,vague ('MR experience' = years of MRI work)
+554,mt,skill,,NDT method (magnetic particle testing)
+555,nail gun,skill,,ESCO skill: operate nail gun
+556,native ios frameworks,skill,,ESCO knowledge: mobile device software frameworks
+557,nav,skill,,"fund accounting (net asset value, NAV)"
+558,ncc animal welfare guidelines,skill,,ESCO animal welfare
+559,netscaler,skill,,Citrix NetScaler (load balancer)
+560,network drives,skill,,network drives / file shares
+561,network software,skill,,O*NET software: Network management software
+562,networking software,skill,,O*NET software: Network management software
+563,neuroscience,skill,,ESCO knowledge: behavioural neurology
+564,nexus os,skill,,Cisco NX-OS (network OS)
+565,nginx,skill,,Nginx (web server)
+566,nielseniq,skill,,NielsenIQ (retail data source)
+567,nist framework,skill,,NIST cybersecurity framework
+568,nmr,skill,,lab technique (NMR spectroscopy)
+569,noise management,skill,,electrical noise mitigation; ESCO match is about sound
+570,non conforming product,skill,,quality: non-conforming product handling
+571,nonprofit board governance,skill,,nonprofit board governance
+572,nursing diagnosis,skill,,ESCO knowledge: specialist nursing care
+573,nursing practice,alias,nursing care,
+574,nyc dep,not_a_skill,,"an agency name (NYC DEP), not an ability"
+575,obstetrics,skill,,ESCO knowledge: obstetrics and gynaecology
+576,ofdm,skill,,signal modulation (OFDM)
+577,office practices,alias,office procedures,
+578,oltp concepts,alias,oltp databases,
+579,omniscript,skill,,Salesforce OmniScript (Vlocity)
+580,oncology nursing,skill,,ESCO knowledge: medical oncology
+581,onenote,skill,,O*NET software: Microsoft OneNote
+582,online reputation software,skill,,online reputation software
+583,opal rt,skill,,OPAL-RT (hardware-in-the-loop simulator)
+584,opentext,skill,,O*NET software: Open Text Web Solutions
+585,opera,skill,,Opera (hotel property-management software)
+586,operating expense analytics,skill,,operating expense analysis; ESCO assess operating cost
+587,opportunity funnel,alias,sales funnel management,
+588,oracle transactional business intelligence (otbi),skill,,O*NET software: Oracle Business Intelligence Suite
+589,organizational planning,skill,,ESCO knowledge: organisational structure
+590,outcome tracking,skill,,outcome tracking; ESCO track KPIs
+591,oxygen equipment,skill,,ESCO skill: use oxygenation equipment
+592,oxygen therapy,skill,,respiratory care; ESCO respiratory therapy
+593,p&c insurance software,skill,,P&C insurance software
+594,packaging development,skill,,ESCO knowledge: packaging processes
+595,packaging process technologies,skill,,ESCO knowledge: packaging processes
+596,paga,skill,,California labour law (PAGA)
+597,parasomnia studies,alias,polysomnography,
+598,partner integration,skill,,third-party system integration
+599,path tracing,skill,,computer graphics path tracing
+600,patient monitoring equipment,skill,,O*NET software: Patient monitoring systems
+601,patran,skill,,O*NET software: MSC Software Patran
+602,paycor,skill,,O*NET software: Paycor payroll management
+603,pc applications,alias,computer applications,
+604,pcr,skill,,lab technique (PCR)
+605,perimeter assessment,skill,,network perimeter security assessment
+606,person centered planning,skill,,ESCO skill: use person-centred planning
+607,personal lines insurance products,skill,,ESCO knowledge: types of insurance
+608,pfw,not_a_skill,,employer's internal tool (PFW)
+609,pharmacy skills,skill,,pharmacy skills (veterinary); vague but domain-specific
+610,physical therapy,skill,,ESCO knowledge: physiotherapy
+611,physical therapy modalities,alias,therapeutic modalities,
+612,pipe installation,alias,plumbing installation,
+613,pki,skill,,public key infrastructure (PKI)
+614,plant dynamic behavior,skill,,chemical process dynamics
+615,planting,skill,,ESCO skill: plant green plants
+616,pleadings preparation,skill,,legal pleadings drafting; ESCO compile legal documents
+617,pmbok,skill,,project management standard (PMBOK)
+618,political systems,skill,,ESCO knowledge: political ideologies
+619,polymerization,skill,,ESCO knowledge: polymerisation
+620,positioning,alias,strategic positioning,
+621,post market quality,skill,,medical-device post-market quality (complaints / vigilance)
+622,power closure,skill,,chip design power closure (EDA)
+623,power flow simulations,skill,,power-flow simulation; ESCO model electrical system
+624,power meters,skill,,electrical test instruments (power meters)
+625,power signoff,skill,,chip design power signoff (EDA)
+626,pr strategy,skill,,ESCO skill: develop public relations strategies
+627,pressure sprayers,skill,,spray equipment (pressure sprayers)
+628,pricing verification,skill,,pricing verification
+629,prior art searching,skill,,patent prior-art search
+630,process capability studies,skill,,quality: process capability (Cp/Cpk) studies
+631,produce identification,skill,,produce identification (grocery)
+632,product demos,skill,,ESCO skill: demonstrate products' features
+633,product merchandising,skill,,ESCO knowledge: merchandising techniques
+634,professional development facilitation,skill,,professional development facilitation; ESCO conduct CPD workshops
+635,profit plans,skill,,profit planning; ESCO manage profitability
+636,program strategy,skill,,program strategy
+637,project administrative support,alias,administrative support,
+638,project labor agreements,skill,,construction labour agreements; ESCO negotiate employment agreements
+639,project walkout,skill,,telecom field survey (project walkout)
+640,protein concentration measurement,skill,,lab technique (protein quantification)
+641,prototypes,skill,,ESCO skill: design prototypes
+642,psi,skill,,healthcare quality indicators (Patient Safety Indicators)
+643,psychological testing,skill,,ESCO skill: interpret psychological tests
+644,public records research,skill,,public records research; O*NET public records search software
+645,pulp paste,skill,,dental materials preparation
+646,pyspark,skill,,O*NET software: PySpark
+647,quality attributes,skill,,product quality attributes (bioprocess)
+648,quality reviews,skill,,quality reviews; ESCO quality assurance procedures
+649,quantum computing,skill,,ESCO quantum mechanics (domain knowledge)
+650,quoting,alias,price quoting,
+651,rancher,skill,,Rancher (Kubernetes management tool)
+652,rbac,skill,,role-based access control (RBAC)
+653,reading construction plans,alias,construction drawings,
+654,reasonable accommodations,skill,,HR disability accommodations (ADA)
+655,recreational fishing,skill,,fishing knowledge (retail); ESCO fishing gear
+656,regular expressions,skill,,ESCO skill: utilise regular expressions
+657,reimbursement guidelines,skill,,healthcare reimbursement rules; ESCO social security reimbursement requirements
+658,reimbursement verification,skill,,ESCO skill: meet the requirements of social security reimbursement bodies
+659,remediation strategy,skill,,security remediation strategy; ESCO matches are environmental
+660,remote work,alias,remote collaboration,
+661,replication,alias,database replication,
+662,research protocols,skill,,ESCO skill: develop scientific research protocols
+663,resident transfers,alias,patient transfers,
+664,respirator physicals,skill,,occupational health respirator exams
+665,resume building,skill,,career coaching (resume writing)
+666,retail standards,skill,,retail operating standards
+667,revenue cycle management,alias,revenue cycle,
+668,reverse engineering,skill,,ESCO knowledge: reverse engineering
+669,rex,skill,,access-control hardware (request-to-exit devices)
+670,ricefw,skill,,SAP RICEFW development objects
+671,risk estimation,skill,,actuarial risk estimation
+672,roadside traffic control,skill,,ESCO skill: regulate traffic
+673,robotic backpacks,not_a_skill,,employer-specific device (Treeswift backpack)
+674,rotation,alias,inventory rotation,
+675,route planning,skill,,O*NET software: Route planning software
+676,rsmeans,skill,,RSMeans (construction cost data)
+677,safelite way of fitting,not_a_skill,,employer-specific procedure (Safelite Way)
+678,sage 100,skill,,O*NET software: Sage 100 ERP
+679,sales mentorship,skill,,sales coaching; ESCO provide mentorship
+680,sales team leadership,skill,,ESCO skill: manage sales teams
+681,sar,skill,,suspicious activity reporting (AML)
+682,sass,skill,,ESCO knowledge: Sass
+683,scientific interpretation,alias,scientific analysis,
+684,scom,skill,,Microsoft SCOM (monitoring tool)
+685,sections,skill,,architectural drawings (sections)
+686,seed analysis,skill,,seed testing (lab)
+687,sell through reporting,alias,sales reporting,
+688,semiconductor reference design,skill,,ESCO skill: design integrated circuits
+689,sensory perceptual cognitive evaluation,skill,,OT sensory / cognitive evaluation; ESCO perform sensory evaluation
+690,server fundamentals,skill,,server fundamentals
+691,server side templating,skill,,server-side templating languages
+692,service excellence,skill,,ESCO skill: manage guest support services
+693,service level objectives,alias,service level metrics,
+694,service minded,trait,,personal quality (service minded); O*NET Service Orientation
+695,service techniques,skill,,restaurant service techniques
+696,setting up displays,skill,,ESCO skill: organise product display
+697,shared governance,skill,,nursing shared governance (participation)
+698,shrink control,alias,inventory shrinkage improvement,
+699,siemens call bridge,skill,,Siemens call-bridge system (telephony)
+700,signal generators,skill,,ESCO skill: operate signal generator
+701,silicon labs efm,skill,,microcontroller platform (Silicon Labs EFM)
+702,single cell transcriptomics,alias,transcriptomic analysis,
+703,skip tracing,skill,,skip tracing (locating debtors); ESCO trace people
+704,small molecule analysis,skill,,lab analysis (small molecules)
+705,sns,skill,,AWS SNS (messaging service)
+706,soc content,skill,,security operations content development
+707,social interaction,skill,,ESCO skill: interact with others
+708,social work,skill,,ESCO knowledge: social work theory
+709,software as a service,skill,,ESCO knowledge: service-oriented modelling
+710,software engineering,skill,,ESCO computer-aided software engineering
+711,solarwinds implementation,skill,,O*NET software: SolarWinds
+712,spatial data,skill,,ESCO skill: manage mine site data
+713,special needs knowledge,skill,,ESCO knowledge: special needs education
+714,spellcheck,skill,,O*NET software category: Spell checkers
+715,spine,skill,,surgical specialty (spine)
+716,splint fabrication,alias,splinting,
+717,sponsor guidelines,skill,,clinical research sponsor protocols (GCP)
+718,sprint,skill,,agile sprint practice
+719,ssl/tls,skill,,ESCO knowledge: ICT encryption
+720,stability studies,alias,stability testing,
+721,staff orientation,skill,,staff onboarding / orientation; ESCO give instructions to staff
+722,standards interpretation,skill,,standards interpretation; ESCO define quality standards
+723,state compliance,not_a_skill,,vague task ('assist with other state compliance')
+724,statutory financial reporting,alias,statutory reporting,
+725,sterling connect:direct,skill,,IBM Sterling Connect:Direct (file transfer)
+726,sterling integrator,skill,,IBM Sterling B2B Integrator (EDI mapping)
+727,stimulus generators,skill,,chip design verification (stimulus generators)
+728,stocking shelves,skill,,ESCO skill: stock shelves
+729,stp,skill,,straight-through processing (finance operations)
+730,stress reactions,skill,,mental-health knowledge of stress reactions
+731,structure spotting,skill,,transmission line structure spotting (engineering)
+732,study close out,skill,,clinical study close-out
+733,submittal review,skill,,construction submittal review
+734,success factors,skill,,SAP SuccessFactors (HR / LMS software)
+735,sun test,skill,,packaging test (sun / UV exposure)
+736,surface functionalization,skill,,surface chemistry (functionalisation)
+737,susceptibility testing,skill,,microbiology susceptibility testing
+738,symptom management,skill,,palliative symptom management (nursing)
+739,syncade,skill,,Emerson Syncade (MES software)
+740,synon 2e,skill,,Synon 2E (AS400 code generator)
+741,synthesizing complex issues,skill,,synthesis of complex issues; ESCO apply conceptual thinking
+742,system safety analysis,skill,,ESCO knowledge: safety engineering
+743,systems analysis and design methodology,skill,,O*NET Transferable Skills: Systems Analysis
+744,ta1,skill,,EDI X12 acknowledgment (TA1)
+745,talent management principles,skill,,talent management; ESCO personnel management
+746,talent strategy,skill,,HR talent strategy
+747,tara,skill,,TARA (power-system analysis software)
+748,tax credit programs,skill,,affordable housing programs (tax credits)
+749,tax legislation,skill,,ESCO knowledge: tax legislation
+750,tax provisions,skill,,income tax provision (ASC 740)
+751,tcad,skill,,semiconductor TCAD simulation
+752,tealium,skill,,Tealium (tag management software)
+753,technical competence,not_a_skill,,vague ('technical competence')
+754,technical direction,not_a_skill,,vague task ('provide technical direction')
+755,technical guidance,skill,,ESCO skill: consult technical resources
+756,technical mentoring,skill,,ESCO skill: provide mentorship
+757,technical training,skill,,ESCO skill: provide technical training
+758,tee,skill,,"cardiac imaging (transesophageal echo, TEE)"
+759,temporary restorations,alias,temporary crowns,
+760,test analysis,skill,,ESCO skill: analyse test data
+761,test remediation,skill,,test defect remediation (software QA)
+762,thermocouple,skill,,temperature sensors (thermocouples)
+763,three lines,skill,,electrical three-line diagrams
+764,timber cruising,skill,,forestry timber cruising
+765,tire and wheel service,skill,,tire and wheel service; ESCO maintain vehicle service
+766,tmf,skill,,clinical trial master file (TMF) management
+767,tool capability studies,skill,,tool capability studies (quality)
+768,tools,not_a_skill,,vague ('tools')
+769,trade partner relationships,skill,,ESCO maintain relationship with suppliers
+770,traffic control plans,skill,,traffic control plans; ESCO regulate traffic
+771,transformation initiatives,not_a_skill,,vague task ('transformation initiatives')
+772,transient suppression,skill,,electrical transient suppression
+773,transmission lines,skill,,RF transmission lines (electronics)
+774,transport equipment,skill,,ESCO knowledge: operation of transport equipment
+775,travel itinerary planning,skill,,ESCO skill: develop travel charter programme
+776,treasury operations,skill,,treasury / cash management operations
+777,trifocal placement,alias,progressive placement,
+778,tsa,skill,,microbiology culture media (tryptic soy agar)
+779,tss/vss,skill,,water lab test (TSS / VSS)
+780,tv ratings,skill,,media research (TV ratings)
+781,two way radio,skill,,ESCO skill: operate two-way radio systems
+782,ubuntu,skill,,O*NET software: Ubuntu
+783,uipath libraries,skill,,UiPath (RPA software)
+784,ultipro,skill,,O*NET software: Ultimate Software UltiPro
+785,unifier,skill,,Oracle Primavera Unifier (software)
+786,urs,skill,,validation documents (user requirement specification)
+787,user flows,alias,user journeys,
+788,ut,skill,,NDT method (ultrasonic testing)
+789,value stream operations,skill,,value stream management (lean)
+790,vector mechanics,skill,,engineering mechanics (vectors)
+791,verodin,skill,,Mandiant Security Validation (Verodin)
+792,victor,skill,,Victor video-surveillance software
+793,vip marketing,skill,,VIP / influencer marketing
+794,visual effects pipelines,skill,,visual effects pipelines; O*NET graphics pipelines
+795,vlocity,alias,salesforce vlocity,
+796,vmses/e,skill,,IBM z/VM service tool (VMSES/E)
+797,voice of the customer,skill,,voice of the customer (market research)
+798,vtscada,skill,,VTScada (SCADA software)
+799,vxlan,skill,,network virtualisation (VXLAN)
+800,wage and hour compliance,skill,,wage and hour law compliance
+801,walkie,skill,,warehouse equipment (walkie pallet jack)
+802,warranty administration,skill,,warranty administration; ESCO ensure compliance with warranty contracts
+803,warranty process,alias,warranty administration,
+804,water transmission,skill,,water transmission engineering
+805,web ui,skill,,web UI development
+806,weldment fabrication,alias,weldments,
+807,wex card administration,skill,,fleet fuel-card administration (WEX)
+808,windows devices,alias,windows operating systems,
+809,wireless access points,alias,aruba wireless access points,
+810,wireless security standards,skill,,wireless security standards; ESCO ICT security standards
+811,wlan,skill,,wireless LAN (WLAN) networking
+812,wonderware,skill,,O*NET software: Wonderware software
+813,work shadowing,skill,,UX research method (work shadowing)
+814,workspaceone,skill,,VMware Workspace ONE (device management)
+815,wysiwyg tool,alias,wysiwyg email builders,
+816,zephyr,skill,,Zephyr (test management tool)

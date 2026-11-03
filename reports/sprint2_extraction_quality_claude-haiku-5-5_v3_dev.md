@@ -51,6 +51,10 @@ Total for the 100 scored postings (each paid once, cached after): **238,987 inpu
 | 2026-10-20T22:07:31+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v3 | 50 | 49 | 116836 | 64950 |
 | 2026-10-20T23:49:20+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v3 | 100 | 50 | 120198 | 60146 |
 | 2026-10-21T01:34:57+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v3 | 2000 | 2000 | 4738461 | 2531623 |
+| 2026-10-30T00:44:52+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v6 | 2 | 2 | 5558 | 5642 |
+| 2026-10-30T00:54:01+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v6 | 50 | 48 | 138381 | 133085 |
+| 2026-10-30T01:00:35+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v5 | 50 | 50 | 139589 | 70668 |
+| 2026-10-30T01:07:20+00:00 | anthropic | claude-haiku-5-5 | skill_extraction_v7 | 50 | 50 | 155639 | 87360 |
 
 ## Error samples (lenient)
 

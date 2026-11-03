@@ -1,6 +1,40 @@
 # HANDOFF — Section B Skill Taxonomy (Sprint 2)
 
-## ⏸ RESUME HERE (frozen 2026-10-22 ~17:00, Thursday) — Sprint 3, demo Fri 2026-10-23 15:00
+## ⏸ RESUME HERE (frozen 2026-10-27) — Sprint 3 done + demoed; now the noise review
+**Git:** last commit `e9945ee` "tunnel server UI update" (not pushed). UNCOMMITTED: app/server.py, app.css, app.js
+(traffic-light pipeline: green running / yellow Groq 429 wait / red stopped; Kaggle link on Postings; notepad on
+Statements; resizable library panel), reports/token_calls.csv, reports/sprint3_noise.xlsx, reports/noise_review/,
+src/make_noise_xlsx.py, src/make_noise_review.py, reports/deck_src/ (pptxgenjs build.js of sprint3_deck.pptx;
+needs `npm i` + NODE_PATH for apply_theme). Commit only when the user asks.
+
+**Active state (unchanged since v2):** run `hdbscan_10_umap10_ms1_2026-10-23` in Supabase, 11,093 skills, 374 topics,
+noise 2,447 skills = 22.1% (23.5% of mentions), AMI 0.842, Jaccard 0.535. Library-v2 196 skills / 980 links / 249
+strong. pgvector `skill_embeddings` 11,093 rows. verify_db 11 PASS.
+Deliverables: reports/sprint3_report.html/.pdf, reports/sprint3_deck.pptx (16 slides), docs/sprint3_demo_slides.md.
+
+**UI:** `app/server.py` (port 8765 local). Login = cookie page, password `UI_PASSWORD` in .env (never print it).
+Share with team: run `scripts\share_ui.cmd` (port 8770 + cloudflared quick tunnel; URL changes each run; it dies
+when the window closes). New endpoints: /api/logs (qwen/load/greenhouse tails), /api/statements/sample, /api/models,
+/learn/*. Langfuse traces work (v2 API, count = GENERATION observations).
+
+**Noise review (in progress, 2026-10-27):** `src/make_noise_review.py` → `reports/noise_review/noise_review_{Dhanush,
+Lochan,Priyanka}.xlsx` (816/816/815, round-robin by postings, all 2,447 once). Sheet "Review": skill, postings,
+nearest topic, library, type, 2 example postings (title, company, evidence, LinkedIn link), yellow DECISION dropdown
+(skill / trait / not_a_skill / alias / unsure), "alias of", note. `src/make_noise_xlsx.py` → reports/sprint3_noise.xlsx
+(Summary formulas, Skills, Noise names, Noise skills, Sweep noise). Noise facts: 78% of noise skills are in 1 posting;
+top 100 = 54% of noise mentions.
+
+**Agreed noise plan (user diagram):** 1) manual review (the 3 sheets) → 2) re-cluster the noise (try HDBSCAN 2nd pass
+vs k-means) → 3) hard leftovers go to a separate pool for LLM retrieval (Sprint 5–6). Advice given: keep ONE pgvector
+table with a `pool` label, not separate vector DBs.
+
+**Next, in order:**
+1. When the 3 files come back: write an import script → Supabase review_decisions (aliases also → config/skill_aliases_manual.csv), then rebuild (normalize → embed → cluster → library → load).
+2. Noise experiment: HDBSCAN 2nd pass vs k-means on the noise; report noise drop.
+3. Sprint 4: topic labels (better than centroid skill), hierarchy, ESCO evaluation, topic-ID matching across runs.
+4. Optional (user's call): delete clean-up Group B (taxonomy-skill-project/, dashboard_kaggle/, exports/, old docs) and .venv.
+
+## (previous) RESUME HERE (frozen 2026-10-22 ~17:00, Thursday) — Sprint 3, demo Fri 2026-10-23 15:00
 **State:** all work below is **UNCOMMITTED** on `main` (ask before commit/push). Supabase is live with the new
 taxonomy tables loaded (HDBSCAN run active). UI has a working **Skill map** tab. QwenBatch is running headless.
 
@@ -74,6 +108,10 @@ skill_key, model_id, revision, embedding vector(384), HNSW cosine index), loaded
 rows for canonical_v2, cosine check vs numpy). verify_db has a check that the active run finds all its vectors.
 DB 99 MB / 500 MB. Committed a35f805 "sprint - 3 skill library updates" (not pushed); embeddings work is after it.
 Sprint 3 left: stability report (+ chosen parameters) in reports/.
+
+**Clean-up 2026-10-27 (user approved Group A only):** deleted the pre-alias run (`sprint3_full…/embeddings/`, `clusters/<run>/`
+folders; `clusters/sweep.csv` kept), empty/failed Gemini v3 outputs, old `data/processed/statements.csv`, old dev/test logs,
+caches (30 MB). NOT touched: taxonomy-skill-project/, dashboard_kaggle/, exports/, old sprint2 docs, .venv (user's call).
 
 **Known weak spots:** topic labels = centroid skill (python topic shows "scala"); weak memberships can be odd
 (attention to detail → "zoom", margin 0.017); library ids/links tied to the HDBSCAN run (rebuild if Leiden wins).

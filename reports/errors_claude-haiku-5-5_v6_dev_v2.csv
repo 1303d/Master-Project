@@ -1,0 +1,518 @@
+error,n,skill
+missed,2,sales plans
+missed,2,client relationships
+missed,3,Diesel mechanics
+missed,3,CNG vehicle maintenance
+missed,3,electric vehicle maintenance
+missed,3,heavy-duty truck repair
+missed,3,maintenance scheduling
+missed,5,organization
+missed,6,highway construction
+missed,6,construction contract administration
+missed,6,construction documents
+missed,8,litigation
+missed,8,organizational
+missed,10,embedded Electronic Control Unit
+missed,11,equipment maintenance
+missed,11,triaging patients
+missed,11,Urology
+missed,13,distribution
+missed,13,warehousing
+missed,13,physical inventories
+missed,13,cycle counts
+missed,13,stock rotation
+missed,19,data warehouse
+missed,19,data models
+missed,21,IT Audit
+missed,21,Risk-Based Audit Planning
+missed,21,System Conversion Auditing
+missed,21,Third-Party IT Risk Assessment
+missed,21,Audit Reporting
+missed,21,Stakeholder Presentation
+missed,26,communication
+missed,26,teamwork
+missed,26,taking vital signs
+missed,26,skin care
+missed,29,regulatory analysis
+missed,30,palletizing
+missed,30,cycle counts
+missed,30,safety inspections
+missed,31,automated testing
+missed,31,test plans
+missed,31,API testing
+missed,31,software quality assurance
+missed,33,administrative support
+missed,34,patient rights
+missed,35,safety policies and procedures
+missed,41,sanitation
+missed,44,project controls
+missed,44,key performance indicators
+missed,44,product launches
+missed,44,Commercial sales
+missed,44,creative development
+missed,44,tactical communications
+missed,44,Microsoft Suite of Office
+missed,44,PPT
+missed,45,scheduling
+missed,45,medical records management
+missed,45,patient education
+missed,45,policy and procedure improvement
+missed,46,computers
+missed,47,litigation
+missed,47,legal drafting
+missed,47,discovery drafting
+missed,47,motion drafting
+missed,47,pleading drafting
+missed,47,legal memorandum drafting
+missed,47,client counseling
+missed,47,writing
+missed,47,organizational
+missed,47,state rules of civil procedure
+missed,49,accounting
+missed,49,A/P
+missed,49,A/R
+missed,49,payroll
+missed,49,financial closing
+missed,49,collaboration
+missed,49,Expense Reimbursement Management
+missed,55,systems administration
+missed,55,network infrastructure
+missed,62,DW
+missed,62,DW modeling
+missed,62,ETL design
+missed,62,ingestion patterns
+missed,62,CDC
+missed,62,Matillion
+missed,64,operational leadership
+missed,64,process optimization
+missed,64,performance monitoring
+missed,64,key performance indicators
+missed,64,contingency plans
+missed,65,business relationships
+missed,65,customer relationships
+missed,69,accounts receivable
+missed,69,work-in-progress reporting
+missed,69,archiving procedures
+missed,69,organizational skills
+missed,69,Lien Release Preparation
+missed,69,Project Close-out Documentation
+missed,71,litigation
+missed,71,trial practice
+missed,72,DevOps
+missed,72,Scaled Agile Framework
+missed,74,account management
+missed,74,customer relationships
+missed,74,vendor relationships
+missed,74,Korean
+missed,74,English
+missed,75,competitive bids
+missed,75,plan reading
+missed,76,retail sales
+missed,76,financial sales
+missed,76,complaint resolution
+missed,76,confidentiality
+missed,76,collaboration
+missed,79,Quality System Regulation
+missed,79,regulatory documents
+missed,79,technical documents
+missed,80,financial statement analysis
+missed,80,cost accounting
+missed,80,procedure documentation
+missed,80,auditing
+missed,80,meet deadlines
+missed,80,Excel modeling
+missed,82,Human Resource management
+missed,82,employee benefits
+missed,82,compensation
+missed,83,business processes
+missed,89,Service request approval
+missed,89,scheduling oversight
+missed,89,patient recertification and discharge management
+missed,89,physician order auditing
+missed,89,laboratory report review
+missed,89,clinical communication
+missed,89,in-home supervisory visits
+missed,90,travel arrangements
+missed,94,brief drafting
+missed,95,Administrative management
+missed,95,program oversight
+missed,95,departmental operations assistance
+missed,95,leadership
+missed,95,supervision
+missed,95,organization
+missed,97,teamwork
+missed,100,operations management
+extra,2,sales planning
+extra,2,business opportunity identification
+extra,2,relationship building
+extra,2,energy industry
+extra,2,marketing campaigns
+extra,2,customer feedback analysis
+extra,2,collaboration
+extra,2,residential solar
+extra,2,inverters
+extra,2,consumer electronics
+extra,2,mobile energy storage
+extra,2,business expansion
+extra,2,logical thinking
+extra,2,teamwork
+extra,3,diagnose operational difficulties
+extra,3,heavy duty diesel trucks
+extra,3,rolling stock
+extra,3,CNG equipment
+extra,3,repair scheduling
+extra,3,review mechanical write-ups
+extra,3,coordinate repair schedule
+extra,3,applicable laws
+extra,3,applicable regulations
+extra,3,company policies
+extra,3,follow instructions
+extra,3,work independently
+extra,5,organizational skills
+extra,5,task prioritization
+extra,5,articulate business narrative
+extra,5,relationship building
+extra,6,engineering practices
+extra,6,procurement rules
+extra,6,coaching
+extra,6,supervision
+extra,6,consultant oversight
+extra,6,stakeholder communication
+extra,8,organization
+extra,8,client service
+extra,10,requirements definition
+extra,10,VECU simulation
+extra,10,Software Defined Vehicle 2.0
+extra,10,Vehicle Intelligent Platform
+extra,10,Adaptive AUTOSAR
+extra,10,packaging specification
+extra,10,brackets
+extra,10,fasteners
+extra,10,connectors
+extra,10,headers
+extra,10,wiring harnesses
+extra,10,interface specification
+extra,10,serviceability
+extra,10,signal data validation
+extra,11,obtaining urine specimens
+extra,11,automated urinalysis
+extra,11,microscopic review
+extra,11,patient triage
+extra,11,OSHA
+extra,11,MOSHA
+extra,11,biohazardous waste policy
+extra,11,red bag waste policy
+extra,11,verbal communication
+extra,11,phone communication
+extra,11,asking probing questions
+extra,12,cross-functional collaboration
+extra,12,requirements gathering
+extra,12,scalable solution development
+extra,12,secure communication
+extra,12,error handling
+extra,12,technical documentation
+extra,12,AWS IAM
+extra,12,AWS developer tools
+extra,13,contingency plan
+extra,13,equipment operation
+extra,13,standing and walking
+extra,13,lifting
+extra,13,prolonged sitting
+extra,13,reaching
+extra,13,"stooping, kneeling and crouching"
+extra,13,color vision
+extra,13,depth perception
+extra,13,hearing
+extra,13,PPE
+extra,14,X-Band
+extra,19,databases
+extra,19,data warehousing
+extra,19,slowly changing dimensions
+extra,19,debugging macros
+extra,19,data modeling
+extra,19,performance optimization
+extra,19,troubleshooting
+extra,19,code review
+extra,19,documentation
+extra,19,data lineage
+extra,19,cross-functional collaboration
+extra,19,adaptability
+extra,21,audit program development
+extra,21,audit execution
+extra,21,consulting
+extra,21,technology audit risk assessment
+extra,21,annual audit planning
+extra,21,audit testing
+extra,21,report writing
+extra,21,working paper preparation
+extra,21,recommendation development
+extra,21,mentoring
+extra,21,performance feedback
+extra,21,issue identification
+extra,21,criteria development
+extra,21,process documentation
+extra,21,interviewing
+extra,21,oral presentation
+extra,21,independent judgment
+extra,21,vendor risk assessment
+extra,21,external audit coordination
+extra,21,governance
+extra,21,emerging technology risk
+extra,21,IT general controls
+extra,21,IT infrastructure
+extra,21,state and federal laws
+extra,24,product knowledge
+extra,24,GUEST service model
+extra,24,understand customer needs
+extra,24,fitting customers
+extra,24,floor organization
+extra,24,teamwork
+extra,29,impact assessment
+extra,29,Administrative Procedure Act
+extra,29,Regulatory Flexibility Act
+extra,29,Paperwork Reduction Act
+extra,29,Unfunded Mandates Reform Act
+extra,29,Executive Order 12866 Regulatory Planning and Review
+extra,29,OMB Circular A-4
+extra,29,data interpretation
+extra,29,present technical information
+extra,29,teamwork
+extra,30,warehouse equipment operation
+extra,30,warehouse safety procedures
+extra,31,test planning
+extra,31,automated test frameworks
+extra,31,web application testing
+extra,31,mobile application testing
+extra,31,test result analysis
+extra,31,defect identification
+extra,31,mentoring
+extra,31,code review
+extra,31,collaboration
+extra,31,testing methodologies
+extra,31,testing techniques
+extra,33,supervision
+extra,33,team leadership
+extra,33,report preparation
+extra,33,analytical skills
+extra,34,care coordination
+extra,34,State Board of Nursing requirements
+extra,34,lifting
+extra,34,patient turning
+extra,34,push/pull/grip
+extra,35,toe trimming
+extra,35,water hose
+extra,35,vitamin gel preparation
+extra,35,organization
+extra,35,formaldehyde
+extra,35,disinfectant
+extra,35,personal protective equipment
+extra,35,Hazard Communication
+extra,35,Respiratory Protection
+extra,35,Lockout Tagout
+extra,35,risk mitigation
+extra,40,patient care
+extra,40,patient portfolio management
+extra,40,team development
+extra,40,patient evaluation
+extra,40,sports medicine
+extra,40,neuro
+extra,40,oncology
+extra,40,pelvic health
+extra,40,vestibular
+extra,40,concussion
+extra,41,food preparation
+extra,41,technical manuals
+extra,41,average cost inventory system (ACIS)
+extra,41,CAO
+extra,41,company policies
+extra,41,standard practice manual
+extra,41,"local, state and federal regulations"
+extra,41,learning
+extra,41,computers
+extra,41,communication systems
+extra,42,API development
+extra,42,deployment
+extra,42,flow development
+extra,42,application integration
+extra,42,MuleSoft best practices
+extra,42,certificates
+extra,42,integration design
+extra,44,project planning
+extra,44,PowerPoint
+extra,44,Agile frameworks
+extra,44,Launch Excellence processes
+extra,44,regulatory requirements
+extra,44,project portfolio management
+extra,44,dependency management
+extra,44,product launch management
+extra,44,issue management
+extra,44,scope management
+extra,44,budget management
+extra,44,status reporting
+extra,44,creative briefing
+extra,44,KPI development
+extra,44,meeting facilitation
+extra,44,team management
+extra,44,conflict resolution
+extra,44,troubleshooting
+extra,46,analyze diagnostic test results
+extra,46,implement protocols
+extra,46,advanced respiratory therapy
+extra,46,prioritize patient needs
+extra,46,patient instruction
+extra,46,patient assessment
+extra,46,patient coaching
+extra,46,HIPPA
+extra,46,time and attendance policies
+extra,46,social media policies
+extra,46,respiratory therapy practice
+extra,46,typing
+extra,46,email
+extra,46,reading
+extra,46,writing
+extra,47,draft discovery requests
+extra,47,draft discovery responses
+extra,47,draft motions
+extra,47,draft court orders
+extra,47,draft settlement agreements
+extra,47,draft affidavits
+extra,47,draft pleadings
+extra,47,draft legal memoranda
+extra,47,review discovery responses
+extra,47,review depositions
+extra,47,organization
+extra,49,bank reconciliation
+extra,49,sales tax
+extra,49,federal tax
+extra,49,state tax
+extra,49,month-end close
+extra,49,accounts payable
+extra,49,accounts receivable
+extra,55,prioritization
+extra,55,user account management
+extra,55,domain controllers
+extra,55,server administration
+extra,55,Office 365 tenant administration
+extra,55,user provisioning
+extra,55,license management
+extra,55,security configuration
+extra,55,system performance monitoring
+extra,55,collaboration
+extra,55,technical documentation
+extra,55,end-user technical support
+extra,62,data warehousing
+extra,62,enterprise data platform setup
+extra,62,data warehouse modeling
+extra,62,incremental loads
+extra,62,change data capture
+extra,62,Matilion
+extra,62,big data technologies
+extra,64,strategic leadership
+extra,64,operations management
+extra,64,operational plan execution
+extra,64,process improvement
+extra,64,workflow streamlining
+extra,64,bottleneck elimination
+extra,64,best practices implementation
+extra,64,KPI establishment
+extra,64,performance metrics analysis
+extra,64,operational feasibility assessment
+extra,64,scalability
+extra,64,risk mitigation
+extra,64,compliance processes
+extra,64,contingency planning
+extra,64,business continuity
+extra,64,team leadership
+extra,64,mentoring
+extra,64,relationship building
+extra,65,relationship building
+extra,65,prioritization
+extra,69,financial reviews
+extra,69,invoicing
+extra,69,work-in-progress reports
+extra,69,accounting system
+extra,69,Accounting Closing List
+extra,69,organization
+extra,69,independent work
+extra,72,large data handling
+extra,72,infrastructure setup
+extra,72,requirements gathering
+extra,72,architectural design
+extra,72,documentation
+extra,72,implementation
+extra,72,deployment
+extra,74,inventory management
+extra,75,cost evaluation
+extra,75,bid cost evaluation
+extra,75,competitive advantages
+extra,75,communication
+extra,75,bidding process
+extra,75,project strategy execution
+extra,75,competitive bidding
+extra,75,project proposals
+extra,75,budgeting
+extra,75,cost discrepancy resolution
+extra,75,information analysis
+extra,75,cost estimating
+extra,75,accounting principles
+extra,76,company policies and procedures
+extra,76,transaction electronics
+extra,76,"federal, state and local laws"
+extra,76,regulations
+extra,76,loss mitigation
+extra,79,21CFR Part 820
+extra,79,ISO 11135
+extra,79,testing
+extra,79,data interpretation
+extra,79,regulatory liaison
+extra,79,regulatory writing
+extra,79,technical writing
+extra,79,teamwork
+extra,80,financial insights
+extra,80,financial policies
+extra,80,financial regulations
+extra,80,financial reporting systems
+extra,80,cross-functional collaboration
+extra,80,meeting deadlines
+extra,80,financial modeling
+extra,80,presentation skills
+extra,82,trend analysis
+extra,82,investigations
+extra,82,accountability management
+extra,82,policy administration
+extra,82,process improvement
+extra,82,stakeholder buy-in
+extra,82,HRIS
+extra,82,report generation
+extra,82,Mac
+extra,82,PC
+extra,83,IT systems alignment
+extra,83,solution architecture
+extra,83,solution design
+extra,83,solution implementation
+extra,83,architecture leadership
+extra,83,project lifecycle management
+extra,83,project delivery
+extra,83,mentoring
+extra,89,Home Health regulations
+extra,89,reimbursement
+extra,90,FedEx
+extra,94,appellate briefs
+extra,94,pre-trial motions
+extra,94,post-judgment motions
+extra,95,governmental regulations
+extra,95,nursing practice standards
+extra,95,program management
+extra,95,training
+extra,95,problem solving
+extra,96,SEC rule
+extra,96,data readiness
+extra,100,customer service
+extra,100,continuous improvement
+extra,100,balanced financial plan
+extra,100,recruiting
+extra,100,team development
+extra,100,decision-making
+extra,100,accuracy
+extra,100,DOT regulations
+extra,100,OSHA regulations

@@ -39,6 +39,7 @@ LOGS = {  # the only files /api/logs may read (scheduled jobs; see scripts/*.cmd
 INTRUSION = ROOT / "reports" / "intrusion"  # src/intrusion_test.py make -> items.json; the UI appends answers.csv
 SAMPLE = ROOT / "data" / "processed" / "extraction_sample_2000.csv"
 BATCH_MODEL, BATCH_PROMPT = "qwen/qwen3.8-27b", ROOT / "prompts" / "skill_extraction_v3.txt"
+BATCH_RUN = None  # e.g. "qwen_qwen3.8-27b_sample2000v8": count progress via data/processed/cache_keys_<run>.csv
 SKILL_MAP = ROOT / "data" / "processed" / "sprint3_full_2026-10-22" / "canonical_v2" / "skill_map_3d.csv"
 STAGES = ["fetch", "clean", "dedupe", "extract", "link", "load"]
 TASKS = {"extract": r"\SkillPipeline\QwenBatch", "load": r"\SkillPipeline\LoadQwen"}  # Windows Task Scheduler
@@ -128,14 +129,32 @@ class App:
         """Kaggle batch (Groq Qwen, extract_skills.py) progress, counted from its cache every 30 s."""
         if time.time() - self._batch[0] > 30 and SAMPLE.exists():
             import pandas as pd
-            sha = hashlib.sha256(BATCH_PROMPT.read_text(encoding="utf-8").encode()).hexdigest()
             texts = pd.read_csv(SAMPLE, encoding="utf-8-sig").description
-            files = [ROOT / "cache" / "groq" / f"{hashlib.sha256(f'{BATCH_MODEL}|{sha}|{t}'.encode()).hexdigest()}.json"
-                     for t in texts]
+            manifest = ROOT / "data" / "processed" / f"cache_keys_{BATCH_RUN}.csv" if BATCH_RUN else None
+            if manifest and manifest.exists():  # runs after 2026-10-30: keys written by extract_skills.py
+                keys = pd.read_csv(manifest)
+                files = [ROOT / "cache" / r.provider / f"{r.cache_key}.json" for r in keys.itertuples()]
+            else:  # legacy key (model + prompt + text)
+                sha = hashlib.sha256(BATCH_PROMPT.read_text(encoding="utf-8").encode()).hexdigest()
+                files = [ROOT / "cache" / "groq" / f"{hashlib.sha256(f'{BATCH_MODEL}|{sha}|{t}'.encode()).hexdigest()}.json"
+                         for t in texts]
             times = [f.stat().st_mtime for f in files if f.exists()]
             self._batch = (time.time(), {"model": BATCH_MODEL, "done": len(times), "total": len(texts),
                                          "last_ts": max(times) if times else None, "times": sorted(times)})
         return self._batch[1]
+
+    def batch_health(self):
+        """Last line of the Qwen batch log: is it waiting on a Groq rate limit (429) right now?"""
+        path = LOGS["qwen"][1]
+        if not path.exists():
+            return None
+        with path.open("rb") as f:
+            f.seek(0, 2)
+            f.seek(max(0, f.tell() - 4000))
+            lines = [l for l in f.read().decode("utf-8", errors="replace").splitlines() if l.strip()]
+        last = lines[-1].strip() if lines else ""
+        m = re.search(r"429 from API, retrying in (\d+)s", last)
+        return {"last_line": last, "log_modified": path.stat().st_mtime, "retry_s": int(m.group(1)) if m else None}
 
     def models(self):
         """Extractor scores, read from the evaluate.py reports, plus a map of the code files (docstring line 1)."""
@@ -320,7 +339,7 @@ class App:
                             group by 1 order by 2 desc limit 15""")
         return {"counts": counts, "verdicts": verdicts, "runs": runs, "latest": latest, "events": events[-80:],
                 "stages": stages, "active_model": last["model"] if last else None, "switches": switches,
-                "models": models, "batch": self.batch_progress(), "tasks": self.tasks(),
+                "models": models, "batch": self.batch_progress(), "batch_health": self.batch_health(), "tasks": self.tasks(),
                 "history": history, "top_skills": top, "taxonomy": taxonomy,
                 "langfuse": self.langfuse()}
 

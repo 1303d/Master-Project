@@ -40,3 +40,6 @@ exports/
 
 # macOS folder metadata
 .DS_Store
+
+# Google Drive folder icons (Drive for desktop)
+desktop.ini

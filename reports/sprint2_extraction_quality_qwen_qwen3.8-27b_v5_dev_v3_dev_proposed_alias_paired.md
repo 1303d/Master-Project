@@ -1,0 +1,137 @@
+# Sprint 2 — Extraction quality report (Section B, skills)
+
+- **Extractor:** `qwen/qwen3.8-27b` via groq, prompt `skill_extraction_v5`
+- **Gold set:** 50 postings, 709 gold skills (`data\gold\gold_labels_v3_dev_proposed.csv`).
+  Labels are LLM-suggested (Claude/ChatGPT) and human-corrected. The extractor is not one of the suggesting models.
+- **Coverage:** 50 of 50 gold postings scored.
+- **Postings with gold skills but no predictions:** 2 (#45, #97): check these are real empty answers, not parsing problems.
+- **Sectors from:** gold file (sector_fixed, else sector).
+- **Evidence check:** 98% of predicted evidence phrases occur verbatim in the posting.
+
+## Overall (micro-averaged)
+
+| Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient | F1 strict+alias |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **All** | 50 | 709 | 692 | 0.69 | 0.68 | 0.69 | 0.78 | 0.76 | 0.77 | 0.69 |
+
+## By sector
+
+| Group | Postings | Gold skills | Predicted | P strict | R strict | F1 strict | P lenient | R lenient | F1 lenient | F1 strict+alias |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Admin / HR / Customer Service | 4 | 43 | 49 | 0.61 | 0.70 | 0.65 | 0.71 | 0.81 | 0.76 | 0.65 |
+| Engineering | 6 | 104 | 97 | 0.79 | 0.74 | 0.77 | 0.86 | 0.80 | 0.83 | 0.77 |
+| Finance + Accounting | 6 | 108 | 100 | 0.69 | 0.64 | 0.66 | 0.78 | 0.72 | 0.75 | 0.66 |
+| Health Care | 8 | 68 | 77 | 0.62 | 0.71 | 0.66 | 0.68 | 0.76 | 0.72 | 0.66 |
+| IT | 5 | 115 | 103 | 0.86 | 0.77 | 0.82 | 0.90 | 0.81 | 0.85 | 0.82 |
+| Legal | 4 | 42 | 49 | 0.47 | 0.55 | 0.51 | 0.69 | 0.81 | 0.75 | 0.59 |
+| Management | 4 | 37 | 31 | 0.55 | 0.46 | 0.50 | 0.74 | 0.62 | 0.68 | 0.50 |
+| Mixed | 5 | 97 | 85 | 0.75 | 0.66 | 0.70 | 0.82 | 0.72 | 0.77 | 0.70 |
+| Sales + Marketing | 8 | 95 | 101 | 0.62 | 0.66 | 0.64 | 0.70 | 0.75 | 0.72 | 0.64 |
+
+## Compared with `qwen_qwen3.8-27b_v3` (same 50 postings, paired bootstrap, 2000 draws)
+
+| Metric | Baseline F1 | This run F1 | Difference | 95% interval |
+|---|---|---|---|---|
+| strict | 0.676 | 0.685 | +0.009 | [-0.013, +0.032] |
+| lenient | 0.755 | 0.769 | +0.014 | [+0.000, +0.029] |
+| strict+alias | 0.682 | 0.691 | +0.009 | [-0.013, +0.032] |
+
+An interval that contains 0 means the difference is not shown on these postings.
+
+## Zero-skill postings
+
+0 gold postings have no skills; the extractor predicted 0 skills for them.
+
+## Matching rules
+
+(one-to-one, per posting; maximum matching, so the score does not depend on list order),
+after normalising both names (lowercase, filler words removed,
+simple plural -> singular):
+- strict:  normalised names are equal, also with spaces removed ("multi-tasking" = "multitasking");
+           "analyses" is read as "analysis"
+- lenient: equal, OR all words of one name appear in the other
+           ("prototyping" ~ "high-fidelity prototyping", "Visio" ~ "Microsoft Visio")
+The gold set has no evidence offsets, so matching is by name only.
+
+Optional (added 2026-10-30; the strict and lenient numbers above are unchanged by them):
+- --aliases skill_aliases_manual.csv: an extra "strict+alias" score. Both gold and predicted names are first
+  mapped skill_key -> canonical_key (lowercased, exact key), then matched strictly.
+- --same-postings-as RUN [RUN ...]: score only postings that every listed run also finished, so two
+  versions are compared on the same postings (a failed posting would otherwise drop out of one run only).
+- --baseline RUN --bootstrap N: paired bootstrap over postings; 95% interval of (this run - baseline) F1.
+- --sector-source split: sectors from gold_split.csv sector_eval instead of the gold file.
+
+## LLM token usage
+
+Total for the 50 scored postings (each paid once, cached after): **81,995 input** and **20,967 output** tokens (output includes thinking tokens). Per-run log (`reports/token_usage.csv`):
+
+| run_at | provider | model | prompt_version | postings | api_calls | tokens_in | tokens_out |
+|---|---|---|---|---|---|---|---|
+| 2026-10-09T09:31:04+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 3 | 3 | 2502 | 1477 |
+| 2026-10-09T10:08:14+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 100 | 97 | 89052 | 40425 |
+| 2026-10-15T20:52:25+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v1 | 3 | 3 | 2769 | 1195 |
+| 2026-10-15T21:17:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2 | 50 | 50 | 59645 | 18337 |
+| 2026-10-17T16:16:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v2+knn2 | 50 | 50 | 102589 | 19369 |
+| 2026-10-18T20:53:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 50 | 50 | 68045 | 20842 |
+| 2026-10-20T17:45:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v4 | 50 | 50 | 89995 | 21473 |
+| 2026-10-20T23:43:49+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 100 | 50 | 69209 | 19178 |
+| 2026-10-22T23:49:40+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 1 | 1 | 855 | 61 |
+| 2026-10-29T22:55:09+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v5 | 50 | 50 | 81995 | 20967 |
+
+## Error samples (lenient)
+
+**Missed gold skills (false negatives), first 25:**
+
+- #2: sales plans
+- #2: brand localization
+- #2: client relationships
+- #3: Diesel mechanics
+- #3: repair scheduling
+- #5: prospecting
+- #6: construction contract administration
+- #6: construction plans and specifications
+- #6: construction documents
+- #6: resource management
+- #6: conflict resolution
+- #10: verification and validation
+- #10: ECU diagnostics
+- #11: infection control
+- #11: equipment maintenance
+- #11: triaging patients
+- #11: obtaining vitals
+- #12: AWS IAM
+- #12: API testing
+- #12: collaboration
+- #13: distribution
+- #13: warehousing
+- #13: material handling equipment
+- #13: physical inventories
+- #13: cycle counts
+
+**Extra predicted skills (false positives), first 25:**
+
+- #2: sales planning
+- #2: relationship building
+- #2: marketing activities
+- #2: competitor analysis
+- #2: customer feedback analysis
+- #2: reporting
+- #2: residential solar market
+- #2: logical thinking
+- #2: teamwork
+- #3: heavy duty diesel trucks
+- #3: rolling stock
+- #3: diagnosis
+- #3: CNG equipment
+- #3: gas equipment
+- #3: record keeping
+- #6: problem solving
+- #6: supervision
+- #6: communication
+- #8: post-grant
+- #10: Virtual Electronic Control Units
+- #11: vital signs
+- #11: triage
+- #11: OSHA/MOSHA
+- #11: biomedical waste disposal
+- #11: attention to detail

@@ -62,6 +62,12 @@ knowledge of it or ability to use it. A name that only appears in passing is not
   | "Knowledge of HIPAA" | `HIPAA` |
   | "HIPAA compliance experience" | `HIPAA compliance` |
   | "Familiarity with HIPAA regulations" | `HIPAA regulations` |
+  | "Ensure HIPAA compliance" / "Maintain compliance with HIPAA privacy rules" | `HIPAA compliance` |
+  | "HIPAA certification preferred" | nothing (certification, not a skill) |
+  | "Our organization complies with HIPAA" / "HIPAA-compliant text messaging" | nothing (background or tool description) |
+- **Do not infer from the job title:** a healthcare posting that never asks for HIPAA gets no HIPAA label.
+  (Added 2026-10-29 after the noise review, row #79; ESCO has no HIPAA entry, closest is the knowledge
+  "health care legislation"; O\*NET: "Law and Government".)
 - **Industries / practice areas are not skills by themselves:** "General Liability" alone → nothing;
   "knowledge of General Liability law" → `General Liability law`.
 - A specific item and a broad one are **different** skills when scoring ("Paperwork Reduction Act" ≠

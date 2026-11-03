@@ -111,4 +111,5 @@ Git repo (push to `main` only when asked). Python 3.11 at `C:\Users\dhanu\AppDat
 ## Learned rules
 - Classify extracted skills strictly according to ESCO and O*NET definitions, not as traits, and treat them as the grounding rule book.
 - Do not use the professor's provided model or API key for pipeline work; it is only for Claude Code and research.
+- Never score partial benchmark results against a baseline; wait until all postings finish, then score once.
 <!-- end claude-reflect -->

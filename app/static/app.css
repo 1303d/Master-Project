@@ -280,3 +280,11 @@ button.node { font: inherit; text-align: left; color: inherit; cursor: pointer; 
 .pad .flow span { border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; background: var(--panel); }
 .pad table { font-size: 12.5px; } .pad td, .pad th { padding: 4px 6px; vertical-align: top; }
 .pad .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+
+/* ---- extract job traffic light (Pipeline at a glance + Now) ---- */
+.pipe .node.s-ok, .pipe .node.s-done { border-color: var(--req); box-shadow: 0 0 0 3px var(--req-soft); }
+.pipe .node.s-wait { border-color: var(--pref); box-shadow: 0 0 0 3px var(--pref-soft); }
+.pipe .node.s-stop { border-color: var(--warn); box-shadow: 0 0 0 3px var(--warn-soft); }
+.pipe .node.s-ok .m { color: var(--req); } .pipe .node.s-wait .m { color: var(--pref); } .pipe .node.s-stop .m { color: var(--warn); }
+.now .row.running { border-color: var(--req); background: var(--req-soft); }
+.now .row.stopped { border-color: var(--warn); background: var(--warn-soft); }

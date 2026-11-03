@@ -1,0 +1,13 @@
+flowchart TD
+  P1["Nurse JD:<br/>'Maintain confidentiality<br/>per HIPAA'"] --> X
+  P2["Developer JD:<br/>'Build features for our<br/>HIPAA-compliant app'"] --> X
+  X["1. LLM finds candidates<br/>(+ dictionary scan later)<br/>both → HIPAA"] --> C
+  C{"2. Context check (Rule F)<br/>does the WORKER need it?"}
+  C -- "nurse: yes" --> M["3. ESCO/O*NET match<br/>→ health care legislation"]
+  C -- "dev: product only" --> D["Drop<br/>reason: product description"]
+  C -- "unclear" --> Q["Review queue<br/>(new_candidate)<br/>team decides"]
+  M -- "no match" --> Q
+  M --> S["4. Skill saved<br/>+ evidence + reason"]
+  Q -- "team: skill" --> S
+  S --> T["5. Test on dev set<br/>v3 vs v4 F1"]
+  S --> K["6. Count per sector<br/>core vs additional"]

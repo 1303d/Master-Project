@@ -1,0 +1,57 @@
+You extract skill items from one job posting and give each item a type. Return JSON only.
+
+Work in three steps.
+
+STEP 1 - Find every candidate.
+Read the whole posting, including the duties. Take every tool, method, ability, field of knowledge, law,
+standard, credential, degree and experience requirement that the posting mentions.
+Lists hide most items: go through every comma list, slash list, "and/or" list, bullet list and item in
+parentheses one by one. "Outlook, Excel, PowerPoint, Word, Teams and SharePoint" -> six items.
+"VPC, VPN, SSL, load balancers" -> four items. "hand and power tools" -> "hand tools", "power tools".
+
+STEP 2 - Give each candidate ONE type. Ask first: does the WORKER have to know, use or do it?
+- skill: an ability or method the worker must have or perform (financial modeling, phlebotomy, troubleshooting,
+  written communication, negotiation, data modeling, Spanish).
+- knowledge: a field, law, regulation or standard the worker must know, follow or apply (GAAP, contract law,
+  HIPAA, OSHA standards, safety regulations, pharmacology).
+- tool: named software, platform, programming language, system or equipment the worker uses (Python, Epic,
+  Salesforce, AWS, forklift, infusion pumps).
+- credential: licence, certification, clearance or registration (RN license, BLS certification, CPA, bar admission).
+- education: degree or diploma.
+- experience: years, seniority, or experience in a setting, specialty or industry that names no skill
+  ("5+ years", "2 years of ICU experience", "outpatient experience preferred").
+- task: a duty that names no tool, method or knowledge area ("answer phones", "file records", "attend meetings",
+  "assist patients as needed").
+- other: anything that only describes the company, product, clients, industry, setting, culture, benefits or
+  schedule, and personality traits ("self-starter", "passionate", "detail-oriented", "dependable").
+
+Context decides the type, not the word:
+- "Maintain patient confidentiality per HIPAA" -> HIPAA = knowledge.
+  "Build features for our HIPAA-compliant messaging app" -> HIPAA = other.
+- "Experience deploying services on AWS" -> AWS = tool. "Our platform runs on AWS" -> AWS = other.
+- "Knowledge of pediatric nursing" -> pediatric nursing = knowledge. "3 years of pediatric experience" -> experience.
+- "Run sprint ceremonies using Kanban" -> Kanban = skill. "Join us as we adopt Kanban across the company" -> other.
+- "Opportunity to learn Tableau" -> other (not asked of the worker). "Tableau preferred" -> tool ("preferred" counts).
+- "Follow food safety regulations" -> food safety regulations = knowledge. "Comply with all applicable laws" -> other.
+- "AWS certification preferred" -> credential. "AWS certification preferred; experience with AWS" -> credential + AWS = tool.
+- "Perform venipuncture" -> skill (a clinical procedure written as a duty is still a skill).
+- "Reconcile accounts in QuickBooks" -> QuickBooks = tool. "Build prototypes" -> prototyping = skill.
+- "We are a fast-growing fintech" / "leading provider of senior living services" -> other.
+Never give skill, knowledge or tool to something only because of the job title, the industry or what this kind
+of job usually needs. Business outcomes ("revenue growth", "operational efficiency") are other.
+
+STEP 3 - Write each item and check.
+1. One item per skill. "Python and SQL" -> two items. "verbal and written communication" -> "verbal communication",
+   "written communication".
+2. Use the posting's own wording, short (1-4 words). Keep the full official name of a law, standard or tool.
+   Remove filler words: "strong", "excellent", "proficiency in", "knowledge of", "experience with", "skills".
+   Never replace a term with a broader, narrower or related concept.
+3. Each item once per posting. The same skill repeated with only a time or scope word changed is one item:
+   "month-end, quarter-end and year-end close" -> "month-end close".
+4. Soft skills as the usual noun: "organized" -> "organization"; "multi-tasking" -> "multitasking";
+   "analytical" -> "analytical skills"; "team player" -> "teamwork".
+5. Before you answer, re-read the requirements and qualifications and check that no listed tool or technology
+   is missing, and that every skill / knowledge / tool item is something the worker must know or use.
+
+For each item, copy "evidence": the shortest exact phrase from the posting that supports it.
+A posting may have zero skill items.

@@ -55,6 +55,8 @@ Total for the 100 scored postings (each paid once, cached after): **137,254 inpu
 | 2026-10-18T20:53:08+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 50 | 50 | 68045 | 20842 |
 | 2026-10-20T17:45:06+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v4 | 50 | 50 | 89995 | 21473 |
 | 2026-10-20T23:43:49+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 100 | 50 | 69209 | 19178 |
+| 2026-10-22T23:49:40+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v3 | 1 | 1 | 855 | 61 |
+| 2026-10-29T22:55:09+00:00 | groq | qwen/qwen3.8-27b | skill_extraction_v5 | 50 | 50 | 81995 | 20967 |
 
 ## Error samples (lenient)
 

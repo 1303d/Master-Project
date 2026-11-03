@@ -55,15 +55,21 @@ async function loadStatus() {
   // "Now": plain answer to "what is the pipeline doing?" (two scheduled jobs: extract, then hourly load)
   const ex = t.extract, ld = t.load, last = b && b.last_ts ? b.last_ts * 1000 : null;
   const exRunning = ex && ex.state === "Running", fresh = last && Date.now() - last < 15 * 60000;
-  const exCls = exRunning ? (fresh ? "running" : "stalled") : "";
+  // traffic light for the extract job: ok (green) / wait (yellow: rate limit or no progress) / stop (red) / done
+  const h = s.batch_health, retryEnd = h && h.retry_s != null ? (h.log_modified + h.retry_s) * 1000 : null;
+  const limited = exRunning && retryEnd && Date.now() < retryEnd + 120000;
+  const exState = !b ? "" : b.done >= b.total ? "done" : !exRunning ? "stop" : limited || !fresh ? "wait" : "ok";
+  const exCls = { ok: "running", wait: "stalled", stop: "stopped", done: "running" }[exState] || "";
+  const prog = b ? `${b.done}/${b.total} postings (${pct(b.done / b.total)})` : "";
   const exTitle = !b ? "Extraction: no batch file found"
-    : b.done >= b.total ? `Extraction finished: ${b.total}/${b.total} postings`
-    : exRunning ? (fresh ? `● Extracting skills now: ${b.done}/${b.total} postings (${pct(b.done / b.total)})`
-                         : `⚠ Extraction job is on, but no new posting for ${ago(last)} (Groq limit? PC asleep?)`)
-    : `○ Extraction paused: ${b.done}/${b.total} postings (${pct(b.done / b.total)})`;
+    : exState === "done" ? `Extraction finished: ${b.total}/${b.total} postings`
+    : exState === "stop" ? `■ Extraction stopped: ${prog} — the task is not running (PC asleep or task ended)`
+    : limited ? `⏸ Waiting on the Groq rate limit: ${prog} — next try ${Date.now() < retryEnd ? `in ${Math.max(1, Math.round((retryEnd - Date.now()) / 60000))} min` : "now"}`
+    : exState === "wait" ? `⚠ Extraction job is on, but no new posting for ${ago(last)}: ${prog}`
+    : `● Extracting skills now: ${prog}`;
   const exMeta = [last ? `last posting extracted ${ago(last)} (${fmtTime(last)})` : "",
     ex && !exRunning && ex.next_run !== "N/A" ? `restarts ${ex.next_run}` : ""].filter(Boolean).join(" · ");
-  renderPipe(s, exRunning && fresh, ld && ld.state === "Running");
+  renderPipe(s, exState, ld && ld.state === "Running");
   renderCharts(s);
   const run0 = s.runs[0];
   const ldTitle = ld && ld.state === "Running" ? "● Loading new skills into Supabase now"
@@ -110,13 +116,15 @@ async function loadStatus() {
   $("#runs").innerHTML = s.runs.map((r) => `<li><div class="t">${esc(r.source)} · ${esc(r.status)}</div><div class="m">${esc(r.run_id)} · fetched ${r.n_fetched} · new ${r.n_new} · skills ${r.n_statements}</div></li>`).join("");
 }
 // Pipeline diagram: one box per step with live counts; dots move on the links while a job runs.
-function renderPipe(s, extracting, loading) {
+function renderPipe(s, exState, loading) {
+  const extracting = exState === "ok";
   const c = s.counts, b = s.batch, tx = s.taxonomy, n = (x) => (x ?? 0).toLocaleString();
   const known = s.verdicts.find((v) => v.verdict === "known_skill"), total = s.verdicts.reduce((a, v) => a + v.n, 0) || 1;
   const nodes = [
     { ic: "📄", k: "Postings", n: n(c.kaggle), m: `Kaggle sample + ${n(c.greenhouse)} Greenhouse`,
       href: "https://www.kaggle.com/datasets/arshkon/linkedin-job-postings", more: "Kaggle dataset ↗" },
-    { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: `Qwen3.8 27B on Groq (free)`, live: extracting, log: "qwen" },
+    { ic: "🤖", k: "Extract skills", n: b ? `${n(b.done)}/${n(b.total)}` : "—", m: { ok: "Qwen3.8 27B on Groq · running", wait: "rate-limited / waiting", stop: "stopped", done: "finished" }[exState]
+      || "Qwen3.8 27B on Groq (free)", state: exState, log: "qwen" },
     { ic: "🧩", k: "Skill statements", n: n(c.statements), m: `${n(c.unique_skills)} unique skills`, live: loading, pad: true },
     { ic: "🔗", k: "Link ESCO / O*NET", n: known ? pct(known.n / total) : "—", m: "statements matched to a known skill", live: loading },
     { ic: "🗂️", k: "Cluster topics", n: tx ? n(tx.topics) : "—", m: "HDBSCAN on skill embeddings", off: true, href: "/learn/cluster-topics.html#big" },
@@ -126,7 +134,7 @@ function renderPipe(s, extracting, loading) {
   const flows = [extracting, loading, loading, false, false];
   $("#pipe").innerHTML = nodes.map((d, i) =>
     `${i ? `<span class="link ${flows[i - 1] ? "flow" : ""}" aria-hidden="true"></span>` : ""}`
-    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : d.log ? `button type="button" data-log="${d.log}"` : d.pad ? 'button type="button" data-pad="1"' : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""}">`
+    + `<${d.href ? `a href="${d.href}" target="_blank" rel="noopener"` : d.log ? `button type="button" data-log="${d.log}"` : d.pad ? 'button type="button" data-pad="1"' : "div"} class="node ${d.live ? "live" : ""} ${d.off ? "offline" : ""} ${d.state ? `s-${d.state}` : ""}">`
     + `<div class="ic" aria-hidden="true">${d.ic}</div><div class="k">${esc(d.k)}</div><div class="n">${esc(d.n)}</div>`
     + `<div class="m">${esc(d.m)}</div>${d.href ? `<div class="more">${esc(d.more || "How it works →")}</div>` : d.log ? '<div class="more">Live log →</div>' : d.pad ? '<div class="more">See an example →</div>' : ""}`
     + `</${d.href ? "a" : d.log || d.pad ? "button" : "div"}>`).join("");
