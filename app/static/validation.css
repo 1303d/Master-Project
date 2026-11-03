@@ -1,0 +1,30 @@
+/* Gold Validation page: reuses app.css tokens and components; only layout additions here. */
+.gv-grid { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+.gv-grid aside .list { max-height: calc(100vh - 260px); }
+@media (max-width: 1180px) { .gv-grid { grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); } .gv-grid > section:last-child { grid-column: 2; } }
+@media (max-width: 760px) { .gv-grid { grid-template-columns: 1fr; } .gv-grid > section:last-child { grid-column: auto; } }
+.gv-form { display: grid; gap: 8px; }
+.gv-form label { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; color: var(--muted); }
+.gv-form textarea { min-height: 64px; font-family: var(--font); font-size: 13px; }
+.gv-choices { display: flex; flex-wrap: wrap; gap: 6px; }
+.gv-choices label { flex-direction: row; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 999px;
+  padding: 3px 10px; color: var(--text); cursor: pointer; }
+.gv-choices input { margin: 0; }
+.st-PENDING { color: var(--muted); } .st-IN_REVIEW { color: var(--pref); } .st-SUBMITTED, .st-APPROVED { color: var(--req); }
+.st-NEEDS_DISCUSSION { color: var(--warn); } .st-REJECTED { color: var(--unsp); }
+.skill-rows { display: grid; gap: 8px; }
+.skill-row { border: 1px solid var(--line); border-radius: 6px; padding: 8px; display: grid; gap: 6px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 110px auto; align-items: end; }
+.skill-row label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); min-width: 0; }
+.skill-row .notes { grid-column: 1 / -1; }
+.skill-row.bad { border-color: var(--warn); box-shadow: inset 3px 0 0 var(--warn); }
+.skill-row .ev-state { grid-column: 1 / -1; font-size: 12px; }
+.skill-row .ev-state.ok { color: var(--req); } .skill-row .ev-state.no { color: var(--warn); }
+@media (max-width: 760px) { .skill-row { grid-template-columns: 1fr; } }
+.k-match { color: var(--req); } .k-naming_difference { color: var(--accent); } .k-gold_only { color: var(--pref); }
+.k-reviewer_only, .k-shared_omission { color: var(--illus); }
+.redacted { color: var(--muted); font-style: italic; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.metrics .detail table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+#rules-dialog { width: min(900px, 96vw); } #rules-text { max-height: 70vh; }
+.nav-row { display: flex; gap: 6px; } .nav-row button { flex: 1; }

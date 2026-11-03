@@ -1,0 +1,4647 @@
+{
+ "manifest_id": "part1_v1",
+ "part": 1,
+ "version": 1,
+ "created_utc": "2026-11-02T23:49:37+00:00",
+ "implementation_commit": "fd606c479ca9",
+ "gold_version": "v1",
+ "rules": {
+  "file": "data/gold/LABELING_RULES.md",
+  "sha256": "df3f68ac8f12d5b091d4be8857cb9f30182055ce5eeab8042e259d4da55ee237"
+ },
+ "settings": {
+  "runs": [
+   "qwen_v2_dev",
+   "qwen_v3_dev"
+  ],
+  "historical_counts": {
+   "model_only": 228,
+   "gold_only": 209,
+   "total": 437
+  }
+ },
+ "protected_postings_n": [
+  "44",
+  "47"
+ ],
+ "sources": {
+  "data/gold/gold_labels.csv": "380707cb391b671eae5fb7d11662f37523382aa112c5a8dda8d952afa15ff332",
+  "data/gold/gold_split.csv": "c36f81d9984fd91969e93814aa47e91e51e52593a6e1af69cfe97431df6ec15c",
+  "reports/errors_qwen_qwen3.8-27b_v2_dev.csv": "5e2f92df686476eb80ad34d2c895328358dec6f7a7afe43093e2340fc3e3d66a",
+  "reports/sprint2_extraction_quality_qwen_qwen3.8-27b_v2_dev.md": "d69f64a2b0219cee77ff455aed886fddd10070fa2da9199da2d39aa02b1397f3",
+  "reports/errors_qwen_qwen3.8-27b_v3_dev.csv": "ef6addb427c4cd7573ff3aee3de5c907323e29d6b35f1cb8a4ec115006141319",
+  "reports/sprint2_extraction_quality_qwen_qwen3.8-27b_v3_dev.md": "f9f63807e760b7849b4369caaec77b1e69bcdcc546f70c2e9fc05296f7f75421",
+  "settings": "ec11e2a916ab35fc3a86d947585e16226d6c344aa989c10159ac4e8841c93828"
+ },
+ "population": {
+  "eligible_postings": 48,
+  "excluded_postings": {
+   "protected": 2,
+   "other_split": 50,
+   "unknown_split": 0,
+   "duplicate": 0
+  },
+  "excluded_error_rows_per_run": {
+   "qwen_v2_dev": 32,
+   "qwen_v3_dev": 35
+  },
+  "stale_rows_per_run": {},
+  "model_only": 206,
+  "gold_only": 187,
+  "total": 393,
+  "historical": {
+   "model_only": 228,
+   "gold_only": 209,
+   "total": 437
+  },
+  "historical_check": {
+   "available": true,
+   "historical_items_on_eligible_postings": 393,
+   "rebuilt_items": 393,
+   "in_both": 375,
+   "only_historical": 18,
+   "only_rebuilt": 18,
+   "note": "The historical total (437) also counted the protected agreement postings, which are excluded here."
+  }
+ },
+ "items": [
+  {
+   "item_id": "p1-43df134b24a0",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "gold_only",
+   "label": "brand localization",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4a1a153b4494",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "gold_only",
+   "label": "client relationships",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6c42f1475f56",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "gold_only",
+   "label": "sales plans",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9c662c866511",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "competitor analysis",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f1ef6c4c65aa",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "customer feedback analysis",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-00ccbc1b7950",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "logical thinking",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ba53b37a7008",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "market expansion",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-cf12b2cbd9fd",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "marketing activities",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-eb094ed320a1",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "relationship building",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4a576f4d86a7",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "reporting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b967f1c1d002",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "residential solar market",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3d62dc33979c",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "sales planning",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3af9dda26663",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2750f50987ab",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "CNG vehicle maintenance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ee042acdfd37",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "electric vehicle maintenance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f9600c57ec8d",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "hand tools",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-cb2d912665d3",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "heavy-duty truck repair",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-80503859b858",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "hydraulic equipment maintenance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1ba8aaa12e2c",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "maintenance scheduling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8dbdbf53c90d",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "gold_only",
+   "label": "power tools",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-637664f3ac5c",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "model_only",
+   "label": "accurate records",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3dfeb0323c3c",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "model_only",
+   "label": "record keeping",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3a4439790230",
+   "posting_id": "li_3902780709",
+   "n": "3",
+   "type": "model_only",
+   "label": "work independently",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2f05e9bf93a4",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "type": "gold_only",
+   "label": "prospecting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-de1c70bb6096",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "type": "model_only",
+   "label": "prioritization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3e7381a5d39d",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "gold_only",
+   "label": "conflict resolution",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1b493903c889",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "gold_only",
+   "label": "construction contract administration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-881bf0164a4e",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "gold_only",
+   "label": "construction documents",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8c5f16850c91",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "gold_only",
+   "label": "construction plans and specifications",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b94a8e66db45",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "gold_only",
+   "label": "resource management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-46ad60ca1ee9",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "model_only",
+   "label": "communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8f34e937f76d",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "model_only",
+   "label": "problem solving",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1ad5e4ccc960",
+   "posting_id": "li_3890891917",
+   "n": "6",
+   "type": "model_only",
+   "label": "supervision",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9b5889c7f854",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "type": "gold_only",
+   "label": "organizational",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7340cc215f02",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "type": "model_only",
+   "label": "organization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-05eae7a3f9cb",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "type": "model_only",
+   "label": "post-grant",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2cb45f418390",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "gold_only",
+   "label": "ECU diagnostics",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1265712aadc8",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "gold_only",
+   "label": "embedded Electronic Control Unit",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7dd668cce115",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "gold_only",
+   "label": "verification and validation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-66ea783e85e7",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "model_only",
+   "label": "signal data transmission",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0007bfd819b6",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "model_only",
+   "label": "simulation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b442435435ce",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "model_only",
+   "label": "Software Defined Vehicle",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b2e44fd833fe",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "type": "model_only",
+   "label": "Virtual Electronic Control Units",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1c65fcff4cb0",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "disinfection",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-967060237ebc",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "equipment maintenance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-08b655e99108",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "infection control",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4e7f58180b79",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "microscopic preparation",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f53b8f6adc34",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "triaging patients",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4793f5b64a17",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "gold_only",
+   "label": "Urology",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4722084b02f5",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "biomedical waste disposal",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c94f962099fc",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "OSHA compliance",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9456bffcd0ba",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "OSHA/MOSHA compliance",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dc30a07e0159",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "phone communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-fc0728af91ed",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "triage",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-faa4fd08a069",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "type": "model_only",
+   "label": "verbal communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b76b3800e6af",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "type": "gold_only",
+   "label": "API testing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2eb90bdfb85f",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "type": "gold_only",
+   "label": "AWS IAM",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b1e949927b39",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "counting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-069a146505d4",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "cycle counts",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-80e61ff16700",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "distribution",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8ee9252b1265",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "material handling equipment",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-11586c408500",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "OSHA standards",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-cd100903dab5",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "physical inventories",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4da112ce8664",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "shrink-wrap machine",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1f36a6c1f7ba",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "stock rotation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e6eef4855715",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "gold_only",
+   "label": "warehousing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-bd6af830edb5",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "model_only",
+   "label": "independence",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0ea509d5e091",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "model_only",
+   "label": "inventory management",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8a015e7d1ab5",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "type": "model_only",
+   "label": "OSHA compliance",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a2b7156b4b7f",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "data models",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-711059760f95",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "data pipelines",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-62a17ef2c2d7",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "data warehouse",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a15d7c071b81",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "macros",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-14829eefa429",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "testing",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6bc1da51084a",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "gold_only",
+   "label": "UAT",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ba41aa96947c",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "code reviews",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1ccd798e4e03",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "cost efficiency",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-01aedf6121f7",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "data integrity",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-96f7b6f63f35",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "data lineage",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ebc0262c201d",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "data modeling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9c8cf4b99a11",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "data warehousing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e2367a23dc77",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "documentation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-06caf3f6f803",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "performance optimization",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e1dd82bdcf08",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "slowly changing dimensions",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a4142ffabd86",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "type": "model_only",
+   "label": "troubleshooting",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a88e190ea4bd",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Audit Reporting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8a68f356729b",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Audit Testing & Scope Development",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-bb16134f91fb",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Evidence Analysis & Documentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-682663abb248",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Risk-Based Audit Planning",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ad8fb767433a",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Stakeholder Presentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1e6e7474c106",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "gold_only",
+   "label": "Third-Party IT Risk Assessment",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c5e176dc483b",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "audit reports",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dd96e6344a7c",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "document review",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dc8330bc197c",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "governance",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0bf6d1952b64",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "interviewing",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6cb6f43d2acc",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "interviews",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e0ac7d87ae37",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "IT consulting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-beb437713a13",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "oral presentations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e5417b13484f",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "risk-based annual internal audit plan",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7b30319afda7",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "testing approach",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5ccd648a3f20",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "third-party IT vendor assessment",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4d57d89ee990",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "third-party IT vendors",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e142e76a39e9",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "work papers",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2f0d51147927",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "written communication",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2067b9d56b5f",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "type": "model_only",
+   "label": "written reports",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-14d0f99d17b2",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "type": "gold_only",
+   "label": "proper lifting procedures",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c1fc2d8e5484",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "type": "gold_only",
+   "label": "safety regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ef39abf57b94",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "type": "model_only",
+   "label": "GUEST service model",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7bd1ffc02ec7",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "type": "model_only",
+   "label": "product knowledge",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-16c11f7302b5",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-61994291cf9d",
+   "posting_id": "li_3904585174",
+   "n": "26",
+   "type": "model_only",
+   "label": "bathing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-43191eb162ae",
+   "posting_id": "li_3904585174",
+   "n": "26",
+   "type": "model_only",
+   "label": "grooming",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6219a363d927",
+   "posting_id": "li_3904585174",
+   "n": "26",
+   "type": "model_only",
+   "label": "toileting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-89b8999b392b",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "gold_only",
+   "label": "attention to detail",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-da259f50ac29",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "gold_only",
+   "label": "legislative frameworks",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a22fd55ba270",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "gold_only",
+   "label": "statistical software",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d33e1141c388",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "Administrative Procedure Act",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-014351daa93a",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "Executive Order 12866",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ff2749a835d0",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "OMB Circular A-4",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9d44ec5f2c8d",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "Paperwork Reduction Act",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2118c259f4a3",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "Regulatory Flexibility Act",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-60dace0bb1ee",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-83a49454afe5",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "type": "model_only",
+   "label": "Unfunded Mandates Reform Act",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8eb1f3ef42b4",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "type": "gold_only",
+   "label": "palletizing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-12fd7ca5e9a2",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "type": "gold_only",
+   "label": "safety inspections",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d68129afd1b2",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "type": "model_only",
+   "label": "safety procedures",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-054bc2cb2d66",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "API testing",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c38d4a3fe49a",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "automated testing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-96f39ce08504",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "software quality assurance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-29b9c6f7b849",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "software testing principles",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2c267b38b9db",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "test automation frameworks",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b4125880d29c",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "test cases",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-add274880463",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "gold_only",
+   "label": "test plans",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0bbea7ac686a",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "model_only",
+   "label": "automated test frameworks",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-584591122cae",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "model_only",
+   "label": "code reviews",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8f802800d7f9",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "model_only",
+   "label": "collaboration",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d73a4c094df1",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2e9e91a8cff",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "type": "gold_only",
+   "label": "software implementation",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a4f8cd6e79ce",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "type": "model_only",
+   "label": "analytical skills",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5bc18f94e8e8",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "type": "model_only",
+   "label": "attention to detail",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-570cea60b8d0",
+   "posting_id": "li_3905336264",
+   "n": "34",
+   "type": "model_only",
+   "label": "patient care",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c49cf1acd95a",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "gold_only",
+   "label": "animal welfare",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4e78bc913800",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "gold_only",
+   "label": "biosecurity",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f39d0880e261",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "gold_only",
+   "label": "grading",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1868a89e8074",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "gold_only",
+   "label": "safety policies and procedures",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-11ca58d61ece",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "gold_only",
+   "label": "toe trim machine",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d239dcaebc7b",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "chicken processing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1d29d61d6d4e",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "Hazard Communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7e79bc4c6dee",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "high pressure hose operation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-355c8b804105",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "Lock out Tag out",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0691c53ed774",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "Personal Protective equipment",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2134b01a1ad",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "Respiratory Protection",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9807611294c6",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "type": "model_only",
+   "label": "toe trimming",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2146ea991c3a",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "gold_only",
+   "label": "industrial services",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f659313b2bb6",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "business management",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-597fa84fe7aa",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "business owner mindset",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9462093e0257",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "community networking",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2cf1b42fff69",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "concussion conditions",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-86e98bb83a1c",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "concussion treatment",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5bec5a2c011e",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "industrial physical therapy",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3f8e1dff2d9b",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "neuro",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a00f9fc816a9",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "neurological physical therapy",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2b0094d150a1",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "oncology",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6c428620fb2f",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "oncology physical therapy",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ed38f823a62a",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "orthopedic physical therapy",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-16dbcf67ddd5",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "pelvic health",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-58772bebdc47",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "physician relationships",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3bef8045d3b1",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "sports medicine",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6314a4ae0f43",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "team building",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6345355d11f7",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "vestibular",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c84164b644ad",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "type": "model_only",
+   "label": "vestibular therapy",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b6e0ce571e16",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "gold_only",
+   "label": "organization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d578818d8de0",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "gold_only",
+   "label": "sanitation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-db321de47619",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "model_only",
+   "label": "ACIS",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f65af8cfe1d1",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "model_only",
+   "label": "CAO",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-62d96adb3efc",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "model_only",
+   "label": "food preparation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2bf50cbae16",
+   "posting_id": "li_3902325209",
+   "n": "41",
+   "type": "model_only",
+   "label": "organizational skills",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e94859f92e43",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "clusters",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-15d329e4f56a",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "firewall rules",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-28fa786efbe5",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "load balancers",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a9f0231b42fa",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "Mule flows",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a11b35f732d7",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "servers",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-73d2ef0b4a7c",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "SSL",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-617c4646d3b3",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "VPC",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0758313802f4",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "gold_only",
+   "label": "VPN",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-36ffb79aa417",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "model_only",
+   "label": "API integration",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-98d13ac6ae91",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "model_only",
+   "label": "APIs",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3160dd25c843",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "model_only",
+   "label": "certificates",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dd9d0eb9e2bd",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "type": "model_only",
+   "label": "SDK",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-714294d098a4",
+   "posting_id": "li_3904944359",
+   "n": "45",
+   "type": "gold_only",
+   "label": "medical records management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dbfbf28e15ed",
+   "posting_id": "li_3904944359",
+   "n": "45",
+   "type": "gold_only",
+   "label": "patient education",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4e26b741bf5e",
+   "posting_id": "li_3904944359",
+   "n": "45",
+   "type": "gold_only",
+   "label": "policy and procedure improvement",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-39a223341ace",
+   "posting_id": "li_3904944359",
+   "n": "45",
+   "type": "gold_only",
+   "label": "scheduling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2eb9055a1187",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "computers",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-52afc669e4bd",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "continuous quality improvement",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e85a26d766dd",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "flow chart protocols",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d092b4a30e11",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "hand held scanner",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7125aa00b74f",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "isolation policies",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-043d00c018a1",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "respiratory care equipment",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c1b1bdea1bfe",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "Respiratory Care modalities",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5f7e5ac6ba04",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "gold_only",
+   "label": "therapies",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8dc8f77214d4",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "model_only",
+   "label": "email",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b1e9bc889515",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "model_only",
+   "label": "HIPAA compliance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-510b81678355",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "model_only",
+   "label": "patient care",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4232f773554b",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "type": "model_only",
+   "label": "typing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-41b5ab4738e6",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "gold_only",
+   "label": "accounts reconciliation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-94022ff12f68",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "gold_only",
+   "label": "collaboration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1eb01efdb6c0",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "gold_only",
+   "label": "Expense Reimbursement Management",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5c41d91f29f8",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "gold_only",
+   "label": "financial closing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-66a025f9e974",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "bank reconciliation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a2b74c5dad6e",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "customer invoices",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-743e604a358e",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "federal tax",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f0efe54b4f4b",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "month-end close",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-36315313fd03",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "sales tax",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5fb21c747c90",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "state tax",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5a7ec96a6f90",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5069b980c631",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "type": "model_only",
+   "label": "vendors invoices",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d66bea5821dc",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "gold_only",
+   "label": "network infrastructure",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-220dbc038113",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "gold_only",
+   "label": "systems administration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0ded6a493975",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "gold_only",
+   "label": "troubleshooting",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7dd24141e7a8",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "gold_only",
+   "label": "virtualization technologies",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ac0ae9d0ac47",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "documentation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a722c107e009",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "license management",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b19cc759c1cc",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "prioritization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9d6f49d27f02",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "security configurations",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a6c2fa7505a3",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "system performance monitoring",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-54b5c2fc56ee",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "type": "model_only",
+   "label": "user provisioning",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-725fdb60030b",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "type": "gold_only",
+   "label": "analytics design",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e8a8263c788a",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "type": "gold_only",
+   "label": "ETL design",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-411eb92023ce",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "type": "gold_only",
+   "label": "ingestion patterns",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5551af5c80e2",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "type": "gold_only",
+   "label": "Matillion",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a42e63797cfb",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "type": "model_only",
+   "label": "Matilion",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a68ce14984f5",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "contingency plans",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5817fb2fa7ac",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "data driven decision making",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9615c5239e63",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "internal controls",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d5a5abc5671c",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "key performance indicators",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9ab1ec9711b5",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "operational leadership",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c6226b024983",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "gold_only",
+   "label": "resource allocation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ae0f5d53fcdb",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "model_only",
+   "label": "strategic leadership",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a9ff62a450aa",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "type": "model_only",
+   "label": "team management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ff14236d109b",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "gold_only",
+   "label": "business relationships",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3c45a90eb792",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "gold_only",
+   "label": "customer relationships",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2753950f1b52",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "gold_only",
+   "label": "selling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ba26f3dda43a",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "gold_only",
+   "label": "territory analysis",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4aaa042a49c3",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "model_only",
+   "label": "prioritizing",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-959e7847c9b6",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "model_only",
+   "label": "sales",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2e907de2b247",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "type": "model_only",
+   "label": "sales reporting",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b5879570ea25",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "gold_only",
+   "label": "archiving procedures",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-002ab049f8ec",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "gold_only",
+   "label": "organizational skills",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-207330247b38",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "gold_only",
+   "label": "Project Close-out Documentation",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ca934b5fc2ed",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "gold_only",
+   "label": "work-in-progress reporting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0c6bb23a647a",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "accounting system",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4d3bf4fe5795",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "financial transactions",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a1e320fc9a1b",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "organization",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c321937b90c8",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "project financial reviews",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ce791034ecbf",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "retention billing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-90e8e004e504",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "verbal communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ca1e0c7c4035",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "type": "model_only",
+   "label": "WIP reports",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9c2dd4b638ba",
+   "posting_id": "li_3900943350",
+   "n": "71",
+   "type": "model_only",
+   "label": "health care",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-336ecaef1d46",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "back-end development",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c6be035fdd3a",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "container orchestration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ff1af8893d38",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "containerization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5affea980590",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "DevOps",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b254e69f8ab8",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "observability",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1d5ce3253195",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "gold_only",
+   "label": "telemetry collection",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f0b0a347b877",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "model_only",
+   "label": "architectural design",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ad295065e1d4",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "model_only",
+   "label": "deployment",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-27a6c7ea8fa6",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "model_only",
+   "label": "documentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8fc817c4c916",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "type": "model_only",
+   "label": "requirements gathering",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a08660a4ed40",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-629d8328a827",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "customer relationships",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a2d29069cf31",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "English",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2faba1bd43fa",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "Korean",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e7ab5577c7f9",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "sales analysis",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-bf7ab08d679c",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "gold_only",
+   "label": "vendor relationships",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-03a99881ad13",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "complaint resolution",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2bb35a8a548f",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "customer development",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-492702bbdf1e",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "data analysis",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3201b101a2fe",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "filing",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c7e77263c65c",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "inventory management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f5b074522b37",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "order documentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9760b0dbe396",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "purchasing forecasting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8c903e36796a",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "relationship management",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5f393bb0f74c",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "report preparation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-456e13be6960",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "supply chain management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9a3d64a3f1a5",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-93cd2c9fea96",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "vendor account management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9fd26cd52e88",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "type": "model_only",
+   "label": "vendor development",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-96da67f4ec4f",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "type": "gold_only",
+   "label": "competitive bids",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-dc63c1687b59",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "type": "gold_only",
+   "label": "plan reading",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-208456e1edd5",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "type": "model_only",
+   "label": "bidding",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5a70fecd5e6a",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "type": "model_only",
+   "label": "budgeting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a5af3313819a",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "type": "model_only",
+   "label": "construction",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b32aeec824f4",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "collaboration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2064d01605b",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "complaint resolution",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8deee7db55a7",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "financial sales",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-01fd8a4985ba",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "personal computer",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-82bd4566d558",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "problem resolution",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-4f7d0fdb435c",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "retail sales",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7acf7cbe933c",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "gold_only",
+   "label": "security procedures",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-72c312f7d5cf",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "model_only",
+   "label": "safe deposit",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d2c2f64f435f",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "type": "model_only",
+   "label": "telephone answering",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-237210fd19b3",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "gold_only",
+   "label": "regulatory documents",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-cf841af1b06a",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "gold_only",
+   "label": "technical documents",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5fd975b122d6",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "21CFR Part 820",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2d2ea99bdaa",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "documentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b93cfaeed594",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "ISO 11135",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ad8d01c4c1b7",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "regulatory affairs",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9ddd11a15c7e",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-23b397e4b53a",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "type": "model_only",
+   "label": "technical writing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-68d691617df2",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "auditing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-fb73613db781",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "change management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ecc49151e451",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "collaboration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-108d01b1e284",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "continuous improvement",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2b83ae87e423",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "cost accounting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-227268f829bf",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "Excel modeling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-e920314b2925",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "financial management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6a1d02c81b58",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "financial reporting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6c211977e17a",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "meet deadlines",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-83c0d3d9ef7d",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "procedure documentation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-23acb328c616",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "gold_only",
+   "label": "process optimization",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-949c81dbd149",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "type": "model_only",
+   "label": "financial compliance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-cae1b10c4732",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "gold_only",
+   "label": "compensation",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-999cab26dfc9",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "gold_only",
+   "label": "G Suite",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d792388fdee2",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "gold_only",
+   "label": "Human Resource management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-59ef6d0bea3b",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "gold_only",
+   "label": "supervisory skills",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-95765efa5148",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "culture development",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8b24fd738d8b",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "dashboard creation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-71a120c2a54a",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "diversity, equity and inclusion",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2c47e01c3ffd",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "employee engagement",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-97608743e285",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "HR Systems",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7444edaf9945",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "Mac applications",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0aed041d40fa",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "organizational strategy",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f1dc03f7801c",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "PC applications",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-21ff4d169147",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "report generation",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b9653eab1133",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "reporting",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-382ad47040ba",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "supervision",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1c7ecc1935cf",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "talent acquisition",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ee819f877f2f",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "type": "model_only",
+   "label": "talent development",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3f3d0503b47b",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "business processes",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-2af8164e151c",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "cloud migration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-3c3837d534fc",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "configuration",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0e254bdac63b",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "installation",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-34dd7ffe0625",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "Internet Information Services",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c2fef2a6dc0f",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "Microsoft Windows",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0910bea8c80b",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "gold_only",
+   "label": "troubleshooting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0a26424b4bdc",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "model_only",
+   "label": ".NET based solutions",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-fcbe91660ab7",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "model_only",
+   "label": ".Net solutions",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-404fa4405017",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "model_only",
+   "label": "IIS",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-190556813c27",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "model_only",
+   "label": "leadership",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-f156aafc28f4",
+   "posting_id": "li_3901699515",
+   "n": "83",
+   "type": "model_only",
+   "label": "mentoring",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8338fb854084",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "clinical communication",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6faf61c8898f",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "in-home supervisory visits",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0ffe77bded44",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "laboratory report review",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d0f8a3ec62e6",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "patient recertification and discharge management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8fcbdab9cbcc",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "physician order auditing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-24487114f3b0",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "scheduling oversight",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-180ca9820e3f",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "gold_only",
+   "label": "Service request approval",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0084c9e0e43c",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "model_only",
+   "label": "Home Health regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-1e85a762e17f",
+   "posting_id": "li_3904568715",
+   "n": "89",
+   "type": "model_only",
+   "label": "Reimbursement",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-44aa3549cadf",
+   "posting_id": "li_3889702808",
+   "n": "90",
+   "type": "gold_only",
+   "label": "data management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-212344c4e1c0",
+   "posting_id": "li_3889702808",
+   "n": "90",
+   "type": "gold_only",
+   "label": "event planning",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c72d18e7bf49",
+   "posting_id": "li_3889702808",
+   "n": "90",
+   "type": "gold_only",
+   "label": "travel arrangements",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0b2d3fd2e924",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "gold_only",
+   "label": "brief drafting",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-188e2ae218b3",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "gold_only",
+   "label": "motion drafting",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-abaa0622598e",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "model_only",
+   "label": "appellate briefs",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a4b379afc356",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "model_only",
+   "label": "briefing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0a2f384edf9c",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "model_only",
+   "label": "dispositive motions",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-32b2703e2b9f",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "model_only",
+   "label": "post-judgment motions",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9fa92484522e",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "type": "model_only",
+   "label": "pre-trial motions",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7cc223c8bdd4",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "gold_only",
+   "label": "delegation of authority",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-30bab5822449",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "gold_only",
+   "label": "departmental operations assistance",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9cad8b864639",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "gold_only",
+   "label": "leadership",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6bd0dfe618c3",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "gold_only",
+   "label": "policy application",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c8a39a8084ef",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "gold_only",
+   "label": "program oversight",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-d1443763da2d",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "model_only",
+   "label": "governmental regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-95cb42b5bbd6",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "model_only",
+   "label": "nursing",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-9115eeeb4b5d",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "model_only",
+   "label": "problem solving",
+   "runs": [
+    "qwen_v2_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-b266041d9b6d",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "type": "model_only",
+   "label": "training",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-8a7adf6379a3",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "type": "gold_only",
+   "label": "business practices",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c8e1ecd6d39c",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "type": "model_only",
+   "label": "attention to detail",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-5b21428da6fa",
+   "posting_id": "li_3887717230",
+   "n": "97",
+   "type": "gold_only",
+   "label": "computerized ordering system",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-36190c26ee07",
+   "posting_id": "li_3887717230",
+   "n": "97",
+   "type": "gold_only",
+   "label": "health and safety standards",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-c3cac52cad70",
+   "posting_id": "li_3887717230",
+   "n": "97",
+   "type": "gold_only",
+   "label": "teamwork",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7dadd5536c46",
+   "posting_id": "li_3887717230",
+   "n": "97",
+   "type": "gold_only",
+   "label": "upselling",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-57cd47056b81",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "gold_only",
+   "label": "operations management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-0c8dd8378294",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "gold_only",
+   "label": "safety regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-7b4908ced299",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "continuous improvement",
+   "runs": [
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-ba81fd13e586",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "decision making",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-6cf1dbb787e8",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "DOT regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-a53d90c46174",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "financial planning",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-75c113476c37",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "OSHA regulations",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  },
+  {
+   "item_id": "p1-632f2b6cfe86",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "type": "model_only",
+   "label": "personnel management",
+   "runs": [
+    "qwen_v2_dev",
+    "qwen_v3_dev"
+   ],
+   "stale": false
+  }
+ ]
+}

@@ -57,6 +57,7 @@ prompt v3 was frozen, for Qwen and Haiku, on gold v1 and the provisional v2 — 
 | Live feed | `src/pipeline.py`, `config/boards.yaml` | Greenhouse → clean → dedupe → extract (queue) → link → Supabase; every stage logged |
 | LLM router | `src/llm_router.py` | LiteLLM: Groq Qwen, falls back to Gemini on rate limits; Langfuse tracing when keys are set |
 | UI | `app/server.py`, `app/static/` | Pipeline status (stages, active model, fallbacks, DB size), human review queue, skills explorer |
+| Gold validation | `src/validation/`, `/validation` page | Three-part gold review (disagreements, blind agreements, full postings) + adjudication — [docs/GOLD_VALIDATION_WORKFLOW.md](docs/GOLD_VALIDATION_WORKFLOW.md) |
 | Schedule | `scripts/*.cmd` (Windows Task Scheduler) | Hourly Qwen load, nightly Greenhouse run, daily Qwen batch restart |
 
 **One model per posting:** embeddings and search read only `current_statements` — Qwen rows where Qwen has

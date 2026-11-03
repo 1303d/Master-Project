@@ -1,0 +1,49 @@
+# Gold-set validation (three parts) — see docs/GOLD_VALIDATION_WORKFLOW.md
+# All paths are relative to the repository root. Changing a source file or a sampling setting makes the
+# existing manifests stale: rebuild with `python src/validation/cli.py build --new-version` (old reviews are kept).
+
+reviewers: [lochan, dhanush, priyanka]
+
+# Agreement-exercise postings (gold "n"). Never shown, sampled, compared or reported, in any part.
+protected_postings_n: [44, 47]
+allowed_split: dev            # only dev postings are eligible; test and unknown splits are always excluded
+
+paths:
+  gold: data/gold/gold_labels.csv          # gold v1 = the gold the Qwen v2/v3 dev runs were scored against
+  split: data/gold/gold_split.csv
+  rules: data/gold/LABELING_RULES.md
+  postings: [data/gold/gold_postings_dev.csv, data/gold/gold_postings.csv]   # first file found is used (Drive, not Git)
+  historical_audit: reports/audit_dev_key.csv                               # only used to explain count differences
+gold_version: v1
+
+# Prediction runs = the error files written by src/evaluate.py (lenient matching) and their reports.
+runs:
+  qwen_v2_dev:
+    errors: reports/errors_qwen_qwen3.8-27b_v2_dev.csv
+    report: reports/sprint2_extraction_quality_qwen_qwen3.8-27b_v2_dev.md
+  qwen_v3_dev:
+    errors: reports/errors_qwen_qwen3.8-27b_v3_dev.csv
+    report: reports/sprint2_extraction_quality_qwen_qwen3.8-27b_v3_dev.md
+
+part1:                        # disagreements: model-only extras + gold-only misses
+  runs: [qwen_v2_dev, qwen_v3_dev]
+  historical_counts: {model_only: 228, gold_only: 209, total: 437}
+part2:                        # blind check of a random sample of labels the model and gold agree on
+  runs: [qwen_v3_dev]         # a label counts as an agreement when every listed run matched it
+  sample_fraction: 0.25
+  seed: 20261102
+part3:                        # independent annotation of whole postings
+  sample_size: 12
+  seed: 31102026
+
+rule_choices:
+  - "What counts as a skill"
+  - "What does NOT count"
+  - "How to write each skill (1-6)"
+  - "Duties rule"
+  - "A. Named laws, standards and tools"
+  - "B. Specialised duties"
+  - "C. Soft skills only when asked"
+  - "D. How far a label may be rewritten"
+  - "E. ESCO / O*NET rule book"
+  - "Other (explain in reason)"

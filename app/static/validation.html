@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gold Validation</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/validation.css">
+  <script src="/static/validation.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Gold Validation — Three-Part Review</h1>
+      <span class="sub">Section B gold set · dev postings only · agreement postings and the test half are excluded</span>
+    </div>
+    <nav class="tabs" role="tablist" id="gv-tabs">
+      <a class="button ghost" href="/">← Pipeline</a>
+      <button role="tab" data-view="p1" aria-selected="true">Part 1: Disagreements</button>
+      <button role="tab" data-view="p2" aria-selected="false">Part 2: Agreements</button>
+      <button role="tab" data-view="p3" aria-selected="false">Part 3: Full Postings</button>
+      <button role="tab" data-view="adj" aria-selected="false">Team Adjudication</button>
+      <button role="tab" data-view="progress" aria-selected="false">Progress &amp; Reports</button>
+      <button role="tab" data-view="sources" aria-selected="false">Source Versions</button>
+    </nav>
+    <div class="top-actions">
+      <label class="muted">Reviewer
+        <select id="gv-reviewer"><option value="">— choose —</option></select></label>
+    </div>
+  </header>
+
+  <main>
+    <div id="gv-alerts"></div>
+    <div class="cards" id="gv-summary"></div>
+    <div id="gv-save" class="save-status" role="status" aria-live="polite"></div>
+
+    <!-- Part 1 -->
+    <section id="view-p1" class="view">
+      <div class="banner eval">Model-only extras and gold-only misses. Judge by the posting text and the written rules,
+        not by "the model found it". Every proposed change needs a rule and a reason; only adjudication can approve it.</div>
+      <div class="filters">
+        <label class="grow">Search posting ID / label <input id="p1-q" type="search" placeholder="e.g. li_39 or excel"></label>
+        <label>Type <select id="p1-type"><option value="">All</option><option value="model_only">model-only (extra)</option>
+          <option value="gold_only">gold-only (missed)</option></select></label>
+        <label>My status <select id="p1-status"><option value="">All</option><option>PENDING</option><option>IN_REVIEW</option>
+          <option>SUBMITTED</option></select></label>
+        <label>Rule <select id="p1-rule"><option value="">All</option></select></label>
+        <label>Run <select id="p1-run"><option value="">All</option></select></label>
+        <span id="p1-count" class="muted"></span>
+      </div>
+      <div class="gv-grid">
+        <aside><ul id="p1-list" class="list"></ul></aside>
+        <section id="p1-text" class="detail pane empty-state">Select an item.</section>
+        <section id="p1-form" class="detail pane empty-state">Decision panel</section>
+      </div>
+    </section>
+
+    <!-- Part 2 -->
+    <section id="view-p2" class="view" hidden>
+      <div class="banner eval">Blind check. Decide whether the candidate label is a valid skill for this posting under the
+        rules. Where the label came from stays hidden until you submit.</div>
+      <div class="filters">
+        <label class="grow">Search posting ID / label <input id="p2-q" type="search"></label>
+        <label>My status <select id="p2-status"><option value="">All</option><option>PENDING</option><option>IN_REVIEW</option>
+          <option>SUBMITTED</option></select></label>
+        <span id="p2-count" class="muted"></span>
+      </div>
+      <div class="gv-grid">
+        <aside><ul id="p2-list" class="list"></ul></aside>
+        <section id="p2-text" class="detail pane empty-state">Select an item.</section>
+        <section id="p2-form" class="detail pane empty-state">Decision panel</section>
+      </div>
+    </section>
+
+    <!-- Part 3 -->
+    <section id="view-p3" class="view" hidden>
+      <div class="banner eval">Independent annotation. Read the whole posting and list every skill with the exact phrase
+        that supports it. No gold labels, model output or suggestions are shown until you submit.</div>
+      <div class="filters">
+        <label>My status <select id="p3-status"><option value="">All</option><option>PENDING</option><option>IN_REVIEW</option>
+          <option>SUBMITTED</option></select></label>
+        <span id="p3-count" class="muted"></span>
+        <button class="ghost" id="p3-rules-btn" type="button">Show labelling rules</button>
+      </div>
+      <div class="gv-grid p3">
+        <aside><ul id="p3-list" class="list"></ul></aside>
+        <section id="p3-text" class="detail pane empty-state">Select a posting.</section>
+        <section id="p3-form" class="detail pane empty-state">Annotation form</section>
+      </div>
+    </section>
+
+    <!-- Adjudication -->
+    <section id="view-adj" class="view" hidden>
+      <div class="banner eval">Team adjudication. Approving a case records a decision only; gold files change only when
+        someone runs the separate, versioned approve step (see docs/GOLD_VALIDATION_WORKFLOW.md).</div>
+      <div class="filters">
+        <label>Status <select id="adj-status"><option value="">All</option><option>SUBMITTED</option><option>NEEDS_DISCUSSION</option>
+          <option>APPROVED</option><option>REJECTED</option></select></label>
+        <label>Part <select id="adj-part"><option value="">All</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+        <label><span>&nbsp;</span><span class="check"><input type="checkbox" id="adj-conflict"> conflicts only</span></label>
+        <span id="adj-count" class="muted"></span>
+      </div>
+      <div class="split">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Part</th><th>#</th><th>Label</th><th>Reviews</th><th>Proposed</th><th>Status</th></tr></thead>
+          <tbody id="adj-rows"></tbody></table></div>
+        <section id="adj-detail" class="detail empty-state">Select a case.</section>
+      </div>
+    </section>
+
+    <!-- Progress -->
+    <section id="view-progress" class="view" hidden>
+      <div class="row between"><h3>Validation progress</h3>
+        <button id="export-btn" type="button">Export report (reports/validation/)</button></div>
+      <p class="muted">Proposals and candidates are not confirmed gold errors until adjudication approves them.</p>
+      <div id="progress-body"></div>
+    </section>
+
+    <!-- Sources -->
+    <section id="view-sources" class="view" hidden>
+      <h3>Artifacts on this machine</h3>
+      <div class="table-wrap small"><table><thead><tr><th>Artifact</th><th>Path</th><th>Status</th><th>Comes from</th></tr></thead>
+        <tbody id="art-rows"></tbody></table></div>
+      <div class="row between"><h3>Sample manifests</h3>
+        <button id="build-btn" type="button" class="ghost">Build missing samples</button></div>
+      <div id="man-body"></div>
+    </section>
+  </main>
+
+  <dialog id="rules-dialog"><form method="dialog"><h2>Labelling rules</h2>
+    <div id="rules-text" class="posting-text"></div><div class="row end"><button>Close</button></div></form></dialog>
+</body>
+</html>

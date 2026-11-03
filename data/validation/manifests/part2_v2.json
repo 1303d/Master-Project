@@ -1,0 +1,772 @@
+{
+ "manifest_id": "part2_v2",
+ "part": 2,
+ "version": 2,
+ "created_utc": "2026-11-03T03:17:56+00:00",
+ "implementation_commit": "d0e21520675f",
+ "gold_version": "v1",
+ "rules": {
+  "file": "data/gold/LABELING_RULES.md",
+  "sha256": "f2cc15f26dc11bcaaa9c7f0850f120572f56a7f8a96dfe2679cf16a03a4ed431"
+ },
+ "settings": {
+  "runs": [
+   "qwen_v3_dev"
+  ],
+  "sample_fraction": 0.25,
+  "seed": 20261102
+ },
+ "protected_postings_n": [
+  "44",
+  "47"
+ ],
+ "sources": {
+  "data/gold/gold_labels.csv": "380707cb391b671eae5fb7d11662f37523382aa112c5a8dda8d952afa15ff332",
+  "data/gold/gold_split.csv": "c36f81d9984fd91969e93814aa47e91e51e52593a6e1af69cfe97431df6ec15c",
+  "reports/errors_qwen_qwen3.8-27b_v3_dev.csv": "ef6addb427c4cd7573ff3aee3de5c907323e29d6b35f1cb8a4ec115006141319",
+  "reports/sprint2_extraction_quality_qwen_qwen3.8-27b_v3_dev.md": "8a3a3df0ae3ac0f80a27bc08c25ce7ef2c3e6f6af097498d8d6b3f20a01cc4e7",
+  "settings": "2f16f46afa1444a73113f41d5207774b94ecb9a88939f863fead6a07ee248dc0"
+ },
+ "population": {
+  "eligible_postings": 48,
+  "excluded_postings": {
+   "protected": 2,
+   "other_split": 50,
+   "unknown_split": 0,
+   "duplicate": 0
+  },
+  "skipped": {},
+  "eligible_agreements": 483,
+  "sampled": 121,
+  "sample_fraction": 0.25,
+  "seed": 20261102
+ },
+ "items": [
+  {
+   "item_id": "p2-35a56183ad3d",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "label": "English"
+  },
+  {
+   "item_id": "p2-db35d6eeba43",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "label": "market dynamics"
+  },
+  {
+   "item_id": "p2-20b481ff5cbc",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "label": "negotiation"
+  },
+  {
+   "item_id": "p2-a24aedd73977",
+   "posting_id": "li_3891854133",
+   "n": "2",
+   "label": "sales strategies"
+  },
+  {
+   "item_id": "p2-5f296b27afc0",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "label": "active listening"
+  },
+  {
+   "item_id": "p2-f9b9efa34e06",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "label": "LinkedIn Sales Navigator"
+  },
+  {
+   "item_id": "p2-1339807db423",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "label": "phone skills"
+  },
+  {
+   "item_id": "p2-e6c64a77c5a0",
+   "posting_id": "li_3905336446",
+   "n": "5",
+   "label": "time management"
+  },
+  {
+   "item_id": "p2-187fef556a7b",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "label": "IP due diligence"
+  },
+  {
+   "item_id": "p2-bf29fdc1a913",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "label": "litigation"
+  },
+  {
+   "item_id": "p2-48432a99ffe2",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "label": "oral communication"
+  },
+  {
+   "item_id": "p2-6f4815a8071c",
+   "posting_id": "li_3904952109",
+   "n": "10",
+   "label": "Routine Identifiers"
+  },
+  {
+   "item_id": "p2-ab0ea13ee0c7",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "customer service"
+  },
+  {
+   "item_id": "p2-46097049f809",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "database skills"
+  },
+  {
+   "item_id": "p2-4947d11d8737",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "problem-solving"
+  },
+  {
+   "item_id": "p2-ae7e51741a51",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "processing specimens"
+  },
+  {
+   "item_id": "p2-1b2c70b3ea84",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "sterilization"
+  },
+  {
+   "item_id": "p2-9a55eed5a48d",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-8df6e47daaf5",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "AWS SDKs"
+  },
+  {
+   "item_id": "p2-b447f7de4887",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "microservices"
+  },
+  {
+   "item_id": "p2-12ffef1bc157",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "Postman"
+  },
+  {
+   "item_id": "p2-473fb2e9270d",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "RESTful API design"
+  },
+  {
+   "item_id": "p2-dd931485ec61",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "S3"
+  },
+  {
+   "item_id": "p2-6fd85e05b9fe",
+   "posting_id": "li_3901945232",
+   "n": "12",
+   "label": "Swagger"
+  },
+  {
+   "item_id": "p2-b929b1dc7afb",
+   "posting_id": "li_3887719486",
+   "n": "13",
+   "label": "attention to detail"
+  },
+  {
+   "item_id": "p2-9b949d03e0a8",
+   "posting_id": "li_3891039132",
+   "n": "14",
+   "label": "spectrum analyzers"
+  },
+  {
+   "item_id": "p2-f59c9995ed08",
+   "posting_id": "li_3891039132",
+   "n": "14",
+   "label": "verbal communication"
+  },
+  {
+   "item_id": "p2-a4da2387abe3",
+   "posting_id": "li_3891039132",
+   "n": "14",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-6422de48f26c",
+   "posting_id": "li_3903456306",
+   "n": "15",
+   "label": "interpersonal skills"
+  },
+  {
+   "item_id": "p2-b31ab9599b1e",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "label": "problem solving"
+  },
+  {
+   "item_id": "p2-6a770e371c36",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "label": "SQL"
+  },
+  {
+   "item_id": "p2-90f3544a36d9",
+   "posting_id": "li_3900963551",
+   "n": "19",
+   "label": "testing"
+  },
+  {
+   "item_id": "p2-d3cb5fc58938",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "label": "Data Flow Analysis"
+  },
+  {
+   "item_id": "p2-53a2e3af83db",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "label": "IT Audit"
+  },
+  {
+   "item_id": "p2-93df79a962fb",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "label": "basic math"
+  },
+  {
+   "item_id": "p2-71cfa4d6eba5",
+   "posting_id": "li_3889122912",
+   "n": "24",
+   "label": "selling techniques"
+  },
+  {
+   "item_id": "p2-fc9beaa6b4a1",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "label": "benefit-cost analyses"
+  },
+  {
+   "item_id": "p2-8a026ef61713",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "label": "R"
+  },
+  {
+   "item_id": "p2-3308739b048b",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "label": "regulatory impact analyses"
+  },
+  {
+   "item_id": "p2-89aa2c2cadeb",
+   "posting_id": "li_3899527449",
+   "n": "29",
+   "label": "statistical techniques"
+  },
+  {
+   "item_id": "p2-cfadb5340bb7",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "label": "cycle counts"
+  },
+  {
+   "item_id": "p2-290621d4ba4f",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "label": "push carts"
+  },
+  {
+   "item_id": "p2-9c3be0bb1912",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "label": "Warehouse Management System"
+  },
+  {
+   "item_id": "p2-a9dd326898a5",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "label": "communication"
+  },
+  {
+   "item_id": "p2-710a0b77a5a9",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "label": "Cypress"
+  },
+  {
+   "item_id": "p2-a40c09be8795",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "label": "Java"
+  },
+  {
+   "item_id": "p2-2c3cd2495db7",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "label": "project management"
+  },
+  {
+   "item_id": "p2-d650a8826014",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "label": "time management"
+  },
+  {
+   "item_id": "p2-25f49ac11e26",
+   "posting_id": "li_3904991921",
+   "n": "35",
+   "label": "grading"
+  },
+  {
+   "item_id": "p2-a3cb7402dc8d",
+   "posting_id": "li_3905368965",
+   "n": "40",
+   "label": "management"
+  },
+  {
+   "item_id": "p2-9bd42410d553",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "label": "AWS SQS"
+  },
+  {
+   "item_id": "p2-75e523949e03",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "label": "MuleSoft Anypoint Connectors"
+  },
+  {
+   "item_id": "p2-d5b9e69607cf",
+   "posting_id": "li_3899523375",
+   "n": "42",
+   "label": "MuleSoft CloudHub"
+  },
+  {
+   "item_id": "p2-dee1c38311f5",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "label": "continuous quality improvement"
+  },
+  {
+   "item_id": "p2-91e0c75184fe",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "label": "Critical thinking"
+  },
+  {
+   "item_id": "p2-0e027c50c561",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "label": "problem solving"
+  },
+  {
+   "item_id": "p2-ed87c68d514d",
+   "posting_id": "li_3904409652",
+   "n": "46",
+   "label": "respiratory therapy"
+  },
+  {
+   "item_id": "p2-074e1352aec6",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "label": "A/R"
+  },
+  {
+   "item_id": "p2-de9aa96b0984",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "label": "cash flow forecasting"
+  },
+  {
+   "item_id": "p2-b3cc31ac527b",
+   "posting_id": "li_3903813809",
+   "n": "49",
+   "label": "tax reporting"
+  },
+  {
+   "item_id": "p2-5bce2ec9e4a5",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "attention to detail"
+  },
+  {
+   "item_id": "p2-4ef903e9f81c",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "Exchange Online"
+  },
+  {
+   "item_id": "p2-a741a735e5c0",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "Hyper-V"
+  },
+  {
+   "item_id": "p2-c0a72a21860c",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "Office 365 administration"
+  },
+  {
+   "item_id": "p2-7b2284054328",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "problem-solving"
+  },
+  {
+   "item_id": "p2-46f33f3761ce",
+   "posting_id": "li_3902868050",
+   "n": "55",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-5ba7a4d616d9",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Collibra"
+  },
+  {
+   "item_id": "p2-5427c8bd2764",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "communication"
+  },
+  {
+   "item_id": "p2-49a7884539ac",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "data governance"
+  },
+  {
+   "item_id": "p2-18cf8b092a66",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "DW"
+  },
+  {
+   "item_id": "p2-abbe51ea90f1",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "ETL"
+  },
+  {
+   "item_id": "p2-1461bf3938ba",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Informatica"
+  },
+  {
+   "item_id": "p2-3b4f653c023d",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Lake house modeling"
+  },
+  {
+   "item_id": "p2-7cee983a7f7c",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Power BI"
+  },
+  {
+   "item_id": "p2-61fd53c42407",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Snowflake"
+  },
+  {
+   "item_id": "p2-e8f33a4f9d6b",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Snowpipe"
+  },
+  {
+   "item_id": "p2-1d1740664b56",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "SSRS"
+  },
+  {
+   "item_id": "p2-fd4b45ab4e2b",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "label": "Stitch"
+  },
+  {
+   "item_id": "p2-07e4bc0809af",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "label": "cross-functional collaboration"
+  },
+  {
+   "item_id": "p2-2fdf780fa064",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "label": "risk management"
+  },
+  {
+   "item_id": "p2-83fe11296098",
+   "posting_id": "li_3886210955",
+   "n": "64",
+   "label": "strategic planning"
+  },
+  {
+   "item_id": "p2-aa7e6053ce1f",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "label": "customer relationships"
+  },
+  {
+   "item_id": "p2-cee7a36f24e6",
+   "posting_id": "li_3905280056",
+   "n": "65",
+   "label": "time management"
+  },
+  {
+   "item_id": "p2-9b74e7a550ab",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "label": "analytical skills"
+  },
+  {
+   "item_id": "p2-200872c7508d",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "label": "retention billing"
+  },
+  {
+   "item_id": "p2-20a2302f48f8",
+   "posting_id": "li_3901942416",
+   "n": "69",
+   "label": "time-management"
+  },
+  {
+   "item_id": "p2-cc04532b3a52",
+   "posting_id": "li_3900943350",
+   "n": "71",
+   "label": "trial practice"
+  },
+  {
+   "item_id": "p2-ad2ccd6b78a7",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "label": "EC2"
+  },
+  {
+   "item_id": "p2-80d8cf44758d",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "label": "ECS"
+  },
+  {
+   "item_id": "p2-76f91cdb0f46",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "label": "infrastructure as code"
+  },
+  {
+   "item_id": "p2-85444891b521",
+   "posting_id": "li_3901614633",
+   "n": "72",
+   "label": "Lambda"
+  },
+  {
+   "item_id": "p2-d3734afb07e6",
+   "posting_id": "li_3901680075",
+   "n": "74",
+   "label": "sales forecasting"
+  },
+  {
+   "item_id": "p2-7b597a506d30",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "label": "accounting principles"
+  },
+  {
+   "item_id": "p2-f154facc2e80",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "label": "value engineering"
+  },
+  {
+   "item_id": "p2-22213b25cacd",
+   "posting_id": "li_3895544405",
+   "n": "76",
+   "label": "customer service"
+  },
+  {
+   "item_id": "p2-854ef18b1736",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "label": "data analysis"
+  },
+  {
+   "item_id": "p2-c3f262e83b4b",
+   "posting_id": "li_3901341717",
+   "n": "79",
+   "label": "verbal communication"
+  },
+  {
+   "item_id": "p2-cf60323fa769",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "label": "accounting"
+  },
+  {
+   "item_id": "p2-762b701aecfb",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "label": "analytical skills"
+  },
+  {
+   "item_id": "p2-22ae58437a2a",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "label": "Chempax"
+  },
+  {
+   "item_id": "p2-1d8d4f2fcf00",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "label": "PowerPoint"
+  },
+  {
+   "item_id": "p2-3cf6949ca571",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-f6c206d8204e",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "employee relations"
+  },
+  {
+   "item_id": "p2-10f7496a0564",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "leadership"
+  },
+  {
+   "item_id": "p2-bf85b823a83e",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "organization"
+  },
+  {
+   "item_id": "p2-8bed6c36242e",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "project management"
+  },
+  {
+   "item_id": "p2-c7cb9930effd",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "time management"
+  },
+  {
+   "item_id": "p2-ac3a4605dd67",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "verbal communication"
+  },
+  {
+   "item_id": "p2-c496aa52ed8a",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-ffe3440bad7c",
+   "posting_id": "li_3889702808",
+   "n": "90",
+   "label": "written communication"
+  },
+  {
+   "item_id": "p2-b71acb6c479c",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "label": "client management"
+  },
+  {
+   "item_id": "p2-d4d7caa73d9e",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "label": "legal research"
+  },
+  {
+   "item_id": "p2-31e1ad87ba93",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "label": "attention to detail"
+  },
+  {
+   "item_id": "p2-836493c2489c",
+   "posting_id": "li_3905346852",
+   "n": "95",
+   "label": "delegation of authority"
+  },
+  {
+   "item_id": "p2-356070596a6e",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "label": "account analysis"
+  },
+  {
+   "item_id": "p2-130fadc851b1",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "label": "AuditBoard"
+  },
+  {
+   "item_id": "p2-e1c9f912864a",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "label": "ERP"
+  },
+  {
+   "item_id": "p2-0176a14d4de9",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "label": "SOX"
+  },
+  {
+   "item_id": "p2-75655a0f59bf",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "label": "verbal communication"
+  },
+  {
+   "item_id": "p2-de3d9b0670c4",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "label": "analytical"
+  },
+  {
+   "item_id": "p2-a3d29e3d3554",
+   "posting_id": "li_3904949322",
+   "n": "100",
+   "label": "MS Office Suite"
+  }
+ ]
+}

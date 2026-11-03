@@ -1,0 +1,246 @@
+{
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "instructions": "Each question lists 5 skills. Four belong together; pick the one that does not belong (A-E).",
+ "questions": [
+  {
+   "question_id": "Q01",
+   "options": {
+    "A": "solution selling",
+    "B": "technical bid preparation",
+    "C": "bid instructions",
+    "D": "technical bid analysis",
+    "E": "pre bid analysis"
+   }
+  },
+  {
+   "question_id": "Q02",
+   "options": {
+    "A": "7ks",
+    "B": "999",
+    "C": "ts16949",
+    "D": "arp 4754",
+    "E": "j1939"
+   }
+  },
+  {
+   "question_id": "Q03",
+   "options": {
+    "A": "accounting considerations",
+    "B": "financial accounting",
+    "C": "programmatic budgeting",
+    "D": "financial services",
+    "E": "accounting policies"
+   }
+  },
+  {
+   "question_id": "Q04",
+   "options": {
+    "A": "financial strategies",
+    "B": "working capital",
+    "C": "retirement planning",
+    "D": "account management",
+    "E": "accounting principles"
+   }
+  },
+  {
+   "question_id": "Q05",
+   "options": {
+    "A": "pneumatic tube system",
+    "B": "rotary instruments",
+    "C": "pneumatic staples",
+    "D": "pneumatic controls",
+    "E": "pneumatic schematics"
+   }
+  },
+  {
+   "question_id": "Q06",
+   "options": {
+    "A": "financial projections",
+    "B": "long range planning",
+    "C": "statistical forecasting",
+    "D": "projections",
+    "E": "forecasting techniques"
+   }
+  },
+  {
+   "question_id": "Q07",
+   "options": {
+    "A": "sanitizing",
+    "B": "shimming",
+    "C": "splinting",
+    "D": "grounding",
+    "E": "finishing"
+   }
+  },
+  {
+   "question_id": "Q08",
+   "options": {
+    "A": "cybersecurity sales",
+    "B": "sales process",
+    "C": "sales applications",
+    "D": "business report analysis",
+    "E": "sales funnel management"
+   }
+  },
+  {
+   "question_id": "Q09",
+   "options": {
+    "A": "invoice management",
+    "B": "quickbooks",
+    "C": "commercial invoices",
+    "D": "invoice coding",
+    "E": "invoice matching"
+   }
+  },
+  {
+   "question_id": "Q10",
+   "options": {
+    "A": "reporter assays",
+    "B": "clinical trial tables",
+    "C": "clinical trial datasets",
+    "D": "clinical trial management system",
+    "E": "clinical trial management"
+   }
+  },
+  {
+   "question_id": "Q11",
+   "options": {
+    "A": "machinery",
+    "B": "palletizers",
+    "C": "pallet jacks",
+    "D": "powered pallet jacks",
+    "E": "power jack"
+   }
+  },
+  {
+   "question_id": "Q12",
+   "options": {
+    "A": "public speaking",
+    "B": "verbal communication",
+    "C": "consultative skills",
+    "D": "speaking",
+    "E": "speaking programs"
+   }
+  },
+  {
+   "question_id": "Q13",
+   "options": {
+    "A": "enterprise platforms",
+    "B": "power bi development",
+    "C": "oracle hcm",
+    "D": "oracle bi publisher",
+    "E": "power bi report server"
+   }
+  },
+  {
+   "question_id": "Q14",
+   "options": {
+    "A": "mobile design",
+    "B": "ios sdk",
+    "C": "relevant technology",
+    "D": "mobile platforms",
+    "E": "experience cloud"
+   }
+  },
+  {
+   "question_id": "Q15",
+   "options": {
+    "A": "restful services",
+    "B": "api design",
+    "C": "soap web services",
+    "D": "java persistence api",
+    "E": "servicenow platform implementation"
+   }
+  },
+  {
+   "question_id": "Q16",
+   "options": {
+    "A": "desktop hardware",
+    "B": "pcs",
+    "C": "fme desktop",
+    "D": "logmein",
+    "E": "technical software"
+   }
+  },
+  {
+   "question_id": "Q17",
+   "options": {
+    "A": "stakeholder liaison",
+    "B": "strategic sourcing",
+    "C": "stakeholder relations",
+    "D": "stakeholder collaboration",
+    "E": "stakeholder relationship building"
+   }
+  },
+  {
+   "question_id": "Q18",
+   "options": {
+    "A": "specifications development",
+    "B": "requirements capture",
+    "C": "it standards",
+    "D": "non functional requirements",
+    "E": "design specifications"
+   }
+  },
+  {
+   "question_id": "Q19",
+   "options": {
+    "A": "cogs",
+    "B": "cognos",
+    "C": "dlg",
+    "D": "40g",
+    "E": "corrigo"
+   }
+  },
+  {
+   "question_id": "Q20",
+   "options": {
+    "A": "expense budgeting",
+    "B": "business planning tools",
+    "C": "financial budgeting",
+    "D": "budget actualization",
+    "E": "budget preparation"
+   }
+  },
+  {
+   "question_id": "Q21",
+   "options": {
+    "A": "safety standards",
+    "B": "safety programs",
+    "C": "facility maintenance",
+    "D": "workplace health and safety",
+    "E": "yard switching safety"
+   }
+  },
+  {
+   "question_id": "Q22",
+   "options": {
+    "A": "brand management",
+    "B": "brand management principles",
+    "C": "brand consistency",
+    "D": "marketing agency management",
+    "E": "sales life cycle"
+   }
+  },
+  {
+   "question_id": "Q23",
+   "options": {
+    "A": "creo cable harness",
+    "B": "crm software",
+    "C": "elekta unity mr linear accelerator",
+    "D": "creo",
+    "E": "creo schematic"
+   }
+  },
+  {
+   "question_id": "Q24",
+   "options": {
+    "A": "vpc",
+    "B": "moc",
+    "C": "npcc",
+    "D": "joint commission",
+    "E": "apc system"
+   }
+  }
+ ]
+}

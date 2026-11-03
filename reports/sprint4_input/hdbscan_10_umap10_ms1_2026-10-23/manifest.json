@@ -1,0 +1,77 @@
+{
+ "counts": {
+  "assigned": 8646,
+  "dims": 384,
+  "embeddings": 11093,
+  "skills": 11093,
+  "topics": 374,
+  "transversal": 39,
+  "weak": 2447
+ },
+ "data_fingerprint": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2",
+ "embedding_model": {
+  "model_id": "BAAI/bge-small-en-v1.5",
+  "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+ },
+ "excluded": "no postings text, statements, gold labels, credentials or review data",
+ "files_sha256": {
+  "aliases.csv": "3a2bbf7490f394bbdd07297d53255a62e7219929851e524a5afa67810046ee99",
+  "library.csv": "162c08b603a7996f2330caa9bf600f0cbf0a911be3ea8d2cf4f8955b96ff3f9f",
+  "library_links.csv": "389f3f8738c1e3f5f401ef215c24f997cb03c9929e0dba96ae53bc5523dbebdf",
+  "memberships.csv": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37",
+  "reference_links.csv": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845",
+  "run.json": "207f2d3f5074d0b47e3b3be0a6bb2fdbe7ca2f4c09586f8f9dbfc2ca50a5f7f8",
+  "skills.csv": "a7bcfd79827dbd812adcf1bb356faed54d6bd8134aeba1bd3556817ac87b2388",
+  "topics.csv": "c403b44ce6bbd1abde1ac783fd7d31b9fbf64e02e46ae25a66bba3098a361324",
+  "vectors.npy": "93a9839a0c1ddb8773ea9237c40b119e7cf5e79b2ad62ec850d0e34fd4b82b3e"
+ },
+ "ordering": {
+  "aliases.csv": [
+   "alias_key"
+  ],
+  "library.csv": [
+   "skill_key"
+  ],
+  "library_links.csv": [
+   "skill_key",
+   "topic_id"
+  ],
+  "memberships.csv": [
+   "skill_key",
+   "topic_id"
+  ],
+  "reference_links.csv": [
+   "skill_key"
+  ],
+  "skills.csv": [
+   "skill_key"
+  ],
+  "topics.csv": [
+   "topic_id"
+  ],
+  "vectors.npy": "row i = skills.csv vector_row i (sorted skill_key)"
+ },
+ "read_only_transaction": true,
+ "rows": {
+  "aliases.csv": 11449,
+  "library.csv": 196,
+  "library_links.csv": 980,
+  "memberships.csv": 11093,
+  "reference_links.csv": 10659,
+  "skills.csv": 11093,
+  "topics.csv": 374
+ },
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "sprint4_input/1",
+ "snapshot_utc": "2026-11-03T02:08:19+00:00",
+ "source_commit": "84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted",
+ "source_vectors_sha256": "8dc4dbdfd4d774ed80c91d51c391b82618b70b163adae97528eb052eaa69e6dc",
+ "vectors": {
+  "dtype": "float32",
+  "note": "database copy (7 significant digits from load_embeddings.py), rows = skills.csv order",
+  "shape": [
+   11093,
+   384
+  ]
+ }
+}

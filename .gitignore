@@ -43,3 +43,12 @@ exports/
 
 # Google Drive folder icons (Drive for desktop)
 desktop.ini
+
+# Blind reviews: answer keys and reviewer responses never go to Git (a teammate could read them before
+# answering). Keys stay on the machine that built them; responses are handed in once everyone has submitted.
+# Intrusion v2 key: data/interim/intrusion_v2/ (already ignored by data/interim/*).
+data/validation/manifests/*_key.json
+data/validation/reviews/*/*
+!data/validation/reviews/*/.gitkeep
+reports/intrusion_v2/*/responses/
+reports/intrusion_v2/*/submitted/

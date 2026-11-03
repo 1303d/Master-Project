@@ -1,0 +1,61 @@
+{
+ "code": {
+  "commit": "84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted",
+  "numpy": "2.5.4",
+  "platform": "arm64",
+  "python": "3.14.8",
+  "script_sha256": "c5d30f1215645ba24dead31f95216f3086dc70fb008ec36de6151fb9b436f466"
+ },
+ "counts": {
+  "assigned": 8646,
+  "flagged_pairs": 75,
+  "neighbour_rows": 1870,
+  "representatives": 3740,
+  "topics": 374,
+  "transversal": 39,
+  "weak": 2447
+ },
+ "data_fingerprint": "7ed34ef71e306007e7197de7c15b8828f42e47042bd4966de1eba5eda1223ec2",
+ "files_sha256": {
+  "reference_summary.csv": "b45f35b311bbc3e36743e364b2421a349e696bed4b10509ab2c5b8fe66a20865",
+  "representative_skills.csv": "190e18adfa73e81c5ecf6f198927597d3531119b66aef2396f10199282b33eb3",
+  "similar_topic_pairs.csv": "843c1bf2758f49dafa3c5b804cfc7271dd9b8f46c484434139b85f007357262b",
+  "topic_centroids.npy": "64131ea88249c97fd49a353efa3ec71968770b0f03eaa53a318cff8afc7e4864",
+  "topic_features.csv": "29a3cd53e563ec87878bb8eda54f98f33d4ca0fe13e3568328094f9c35f60cec",
+  "topic_ids.csv": "a757f2df785230489fc357df963efc3f2a4e0f1d5da913c691220fa4d1b13ac2",
+  "topic_neighbors.csv": "f139a9bf789a87a24e63e76bc9a95d59fa6da314224f4fd47faa80fbe2faf50b",
+  "topic_similarity.npy": "bf123d0cc7f8d0456b19156833c9b2dcb32f058cfa1e3634afe78d8991a9059f"
+ },
+ "generated_utc": "2026-11-03T02:13:53+00:00",
+ "input_snapshot": {
+  "data_fingerprint": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2",
+  "dir": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23"
+ },
+ "ordering": {
+  "representative_skills.csv": "topic_id, rank (cosine desc, skill_key)",
+  "similar_topic_pairs.csv": "cosine desc, topic ids",
+  "topic_ids.csv / arrays": "sorted topic_id",
+  "topic_neighbors.csv": "topic_id, rank (cosine desc, topic_id)"
+ },
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "sprint4_features/1",
+ "settings": {
+  "centroid": "unweighted mean of assigned members' unit vectors, L2-normalised; weak excluded",
+  "confident_link": "reference_links.verdict == known_skill; ESCO/O*NET from source prefix",
+  "csv_float_decimals": 6,
+  "pair_flag_cosine": 0.9,
+  "purity": "unavailable (no broader-group data in the snapshot)",
+  "top_neighbours": 5,
+  "top_skills": 10
+ },
+ "shapes": {
+  "topic_centroids.npy": [
+   374,
+   384
+  ],
+  "topic_similarity.npy": [
+   374,
+   374
+  ]
+ }
+}

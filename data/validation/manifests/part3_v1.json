@@ -1,0 +1,112 @@
+{
+ "manifest_id": "part3_v1",
+ "part": 3,
+ "version": 1,
+ "created_utc": "2026-11-02T23:49:37+00:00",
+ "implementation_commit": "fd606c479ca9",
+ "gold_version": "v1",
+ "rules": {
+  "file": "data/gold/LABELING_RULES.md",
+  "sha256": "df3f68ac8f12d5b091d4be8857cb9f30182055ce5eeab8042e259d4da55ee237"
+ },
+ "settings": {
+  "sample_size": 12,
+  "seed": 31102026
+ },
+ "protected_postings_n": [
+  "44",
+  "47"
+ ],
+ "sources": {
+  "data/gold/gold_labels.csv": "380707cb391b671eae5fb7d11662f37523382aa112c5a8dda8d952afa15ff332",
+  "data/gold/gold_split.csv": "c36f81d9984fd91969e93814aa47e91e51e52593a6e1af69cfe97431df6ec15c",
+  "settings": "ccbc5ebbfe0816fd96a91f4b17552c06b22916cc9f17f02ec8cfb2bd5f7f4fc2"
+ },
+ "population": {
+  "eligible_postings": 48,
+  "excluded_postings": {
+   "protected": 2,
+   "other_split": 50,
+   "unknown_split": 0,
+   "duplicate": 0
+  },
+  "sampled": 12,
+  "sample_size": 12,
+  "seed": 31102026,
+  "postings_file": null
+ },
+ "items": [
+  {
+   "item_id": "p3-958f963ef0cc",
+   "posting_id": "li_3899539127",
+   "n": "8",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-9ad0307853f0",
+   "posting_id": "li_3891266921",
+   "n": "11",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-096c0ecfedbe",
+   "posting_id": "li_3906221602",
+   "n": "21",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-f7b8f2bc9034",
+   "posting_id": "li_3905331187",
+   "n": "30",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-77c21057ee5f",
+   "posting_id": "li_3886826327",
+   "n": "31",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-5121121b10b5",
+   "posting_id": "li_3894890877",
+   "n": "33",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-67bcd94187fe",
+   "posting_id": "li_3899523363",
+   "n": "62",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-9624363d6b5c",
+   "posting_id": "li_3903493569",
+   "n": "75",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-837990aa97e6",
+   "posting_id": "li_3902352352",
+   "n": "80",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-f0f21a2e92e3",
+   "posting_id": "li_3886890185",
+   "n": "82",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-515380c05ea1",
+   "posting_id": "li_3884437728",
+   "n": "94",
+   "description_sha256": null
+  },
+  {
+   "item_id": "p3-f6cf8b5756a6",
+   "posting_id": "li_3891263924",
+   "n": "96",
+   "description_sha256": null
+  }
+ ]
+}

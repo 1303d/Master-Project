@@ -28,6 +28,7 @@ from wsgiref.simple_server import make_server
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 import db  # noqa: E402
+from validation_api import ValidationAPI  # noqa: E402  Gold Validation page (files only, no database)
 
 STATIC = Path(__file__).resolve().parent / "static"
 LEARN = ROOT / "learn"  # study pages, linked from the pipeline diagram
@@ -108,6 +109,7 @@ def login(environ, start):
 class App:
     def __init__(self):
         self.con, self._batch, self._tasks, self._lf = None, (0, None), (0, {}), (0, None)
+        self.validation = ValidationAPI()
 
     def q(self, sql, params=None):
         """Rows as dicts; reconnects once if the pooled connection dropped."""
@@ -427,6 +429,8 @@ class App:
                 return self.send(start, {"error": "not signed in"}, "401 Unauthorized")
             start("303 See Other", [("Location", "/login")])
             return [b""]
+        if path.rstrip("/") == "/validation" or path.startswith("/api/validation/"):
+            return self.validation(environ, start)  # after the login check, so a shared UI protects it too
         try:
             if path == "/" or path.startswith(("/static/", "/learn/")):
                 base = LEARN if path.startswith("/learn/") else STATIC

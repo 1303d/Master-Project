@@ -1,0 +1,92 @@
+{
+ "test": "intrusion_v2",
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "vectors_sha256": "8dc4dbdfd4d774ed80c91d51c391b82618b70b163adae97528eb052eaa69e6dc",
+ "snapshot_sha256": "ea6b599877b6747f40c649c4d64f331f2a3a64b12a6e6a60458e1f1c5f4508b0",
+ "generated_utc": "2026-11-03T01:49:02+00:00",
+ "seed": 20261103,
+ "settings": {
+  "strata": {
+   "transversal": 4,
+   "low_confidence": 4,
+   "long_tail": 4,
+   "large": 4,
+   "medium": 4,
+   "small": 4
+  },
+  "genuine_max_cos": 0.95,
+  "intruder_max_cos": [
+   0.7,
+   0.75,
+   0.8
+  ],
+  "neighbour_ranks": [
+   2,
+   15
+  ],
+  "plausible_pool": 10,
+  "options": 5
+ },
+ "sampling": {
+  "strata_requested": {
+   "transversal": 4,
+   "low_confidence": 4,
+   "long_tail": 4,
+   "large": 4,
+   "medium": 4,
+   "small": 4
+  },
+  "strata_drawn": {
+   "transversal": 4,
+   "low_confidence": 4,
+   "long_tail": 4,
+   "large": 4,
+   "medium": 4,
+   "small": 4
+  },
+  "pool_sizes": {
+   "transversal": 37,
+   "low_confidence": 86,
+   "long_tail": 88,
+   "large": 103,
+   "medium": 100,
+   "small": 123
+  },
+  "cuts": {
+   "size_terciles": [
+    15,
+    24
+   ],
+   "mean_score_q25": 0.8425652173913041,
+   "min_score_q25": 0.7306
+  },
+  "excluded_topics": [
+   "T0007",
+   "T0013",
+   "T0024",
+   "T0026",
+   "T0053",
+   "T0058",
+   "T0072",
+   "T0115",
+   "T0126",
+   "T0141",
+   "T0328"
+  ],
+  "eligible_topics": 363,
+  "questions": 24
+ },
+ "skipped_topic_count": 0,
+ "questions_sha256": "0ef8bedfb624576755a1e7be41d59456bf8160e91a23296b58a703581a74a291",
+ "answer_key": {
+  "path": "data/interim/intrusion_v2/hdbscan_10_umap10_ms1_2026-10-23/answer_key.json",
+  "sha256": "1e4435c7dc74c4324230fefbcc60ecfa79ea784e7b7a5c2576390a1b2e9b7d86",
+  "note": "gitignored; only its hash is tracked, so it cannot be changed after reviews"
+ },
+ "reviewers": [
+  "lochan",
+  "priyanka",
+  "dhanush"
+ ],
+ "chance_accuracy": 0.2
+}
