@@ -1,0 +1,29 @@
+{
+ "schema": "rate_limits/1",
+ "provider": "groq",
+ "model_id": "qwen/qwen3.8-27b",
+ "safety_factor": "0.9",
+ "plans": {
+  "free": {
+   "rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000, "input_tpm": null, "output_tpm": null,
+   "source": "https://console.groq.com/docs/rate-limits",
+   "note": "row for qwen/qwen3.8-27b on the rate-limits page (30 RPM, 1K RPD, 8K TPM, 200K TPD); the page does not label the plan, so it is used as the conservative free-tier configuration"
+  },
+  "developer": {
+   "rpm": 1000, "rpd": null, "tpm": 250000, "tpd": null, "input_tpm": null, "output_tpm": null,
+   "source": "https://console.groq.com/docs/models",
+   "note": "'RATE LIMITS (DEVELOPER PLAN)' column: 250K TPM, 1K RPM; RPD and TPD are not listed (null = no local limit)"
+  }
+ },
+ "headers": {
+  "x-ratelimit-limit-requests": "requests per DAY (RPD)",
+  "x-ratelimit-remaining-requests": "requests per DAY (RPD)",
+  "x-ratelimit-reset-requests": "requests per DAY (RPD), duration such as 2m59.56s",
+  "x-ratelimit-limit-tokens": "tokens per MINUTE (TPM)",
+  "x-ratelimit-remaining-tokens": "tokens per MINUTE (TPM)",
+  "x-ratelimit-reset-tokens": "tokens per MINUTE (TPM), duration such as 7.66s",
+  "retry-after": "seconds; only sent with HTTP 429"
+ },
+ "header_policy": "header limits are the account's actual limits and replace the configured RPD / TPM once seen; RPM and TPD are not reported in headers and stay as configured",
+ "verified_utc_date": "2026-11-03"
+}

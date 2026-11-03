@@ -1,0 +1,345 @@
+{
+ "code": {
+  "commit": "2bbb95a27f5fd1fb7edb22b0c6b61522cbc2ea36+uncommitted",
+  "numpy": "2.4.6",
+  "platform": "arm64",
+  "python": "3.11.15",
+  "script_sha256": "37aa03256d0742455c58ac9f9feb18336de6de98659567bb13bb66de0d717586"
+ },
+ "counts": {
+  "low_cohesion": 94,
+  "low_reference_coverage": 64,
+  "near_duplicate_topic": 88,
+  "no_reference_link": 7,
+  "pilot": 24,
+  "request_problems": 0,
+  "requests": 374,
+  "review_flagged": 152,
+  "topics": 374,
+  "transversal": 39,
+  "user_message_chars": {
+   "max": 1777,
+   "median": 1277,
+   "min": 509
+  },
+  "weak_exceeds_assigned": 9
+ },
+ "data_fingerprint": "b7ba502d08c6c4e3e2bf8d2a8161baa894fc130485556ea29b4372bc968bd68a",
+ "excluded": "no LLM output, no intrusion-test data, no current topic labels, no weak members, no posting text",
+ "files_sha256": {
+  "evidence.jsonl": "0f6f74b386f4058de6f7e3ffbf095eede4692d7d42517e7be4e705190829daa0",
+  "pilot_topics.csv": "47d6b223d740c22bccb9c82f64dd4286e33371a925552f54a9e06bb0b1c1ccd0",
+  "requests.jsonl": "8f70a0ac3ffa09c00c69bba968336c2d47524c7b61ba036885262875d4fd1288",
+  "topic_flags.csv": "5db10c5d84c8f8f5f048e80236197bd291425af866f09d6afdec24391aea5b94"
+ },
+ "generated_utc": "2026-11-03T15:58:13+00:00",
+ "inputs": {
+  "features_fingerprint": "7ed34ef71e306007e7197de7c15b8828f42e47042bd4966de1eba5eda1223ec2",
+  "snapshot_fingerprint": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2"
+ },
+ "intrusion_strata_overlap": {
+  "identical": true,
+  "low_cohesion": 94,
+  "low_confidence": 94,
+  "overlap": 94
+ },
+ "model": {
+  "api": "https://api.groq.com/openai/v1 (REST, no SDK retries)",
+  "fallback": null,
+  "max_completion_tokens": 512,
+  "model_id": "qwen/qwen3.8-27b",
+  "model_status": "Preview (may be discontinued at short notice)",
+  "provider": "groq",
+  "reasoning_effort": "none",
+  "reasoning_format": "hidden",
+  "response_format": {
+   "type": "json_object"
+  },
+  "temperature": 0,
+  "tracing": null
+ },
+ "offline_estimate": {
+  "assumptions": {
+   "chars_per_token_typical": 3.5,
+   "chars_per_token_upper": 2.5,
+   "no_local_cache_hits": true,
+   "no_retries": true,
+   "overhead_tokens": 50,
+   "typical_output_tokens": 200,
+   "upper_output_tokens": 512
+  },
+  "full_run": {
+   "estimated_cost_typical_usd": "0.66231440",
+   "estimated_cost_upper_usd": "1.26826160",
+   "quota": {
+    "days_needed_typical": 3,
+    "days_needed_upper": 5,
+    "minutes_of_requests_upper": 125,
+    "plan": "free",
+    "requests_per_minute_planning_upper": 3,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": 0.4156,
+    "share_of_daily_tokens_typical": 2.9372,
+    "share_of_daily_tokens_upper": 4.5521
+   },
+   "requests": 374,
+   "tokens_typical": 528693,
+   "tokens_upper": 819375,
+   "topics": 374
+  },
+  "pilot": {
+   "estimated_cost_typical_usd": "0.04226800",
+   "estimated_cost_upper_usd": "0.08105600",
+   "quota": {
+    "days_needed_typical": 1,
+    "days_needed_upper": 1,
+    "minutes_of_requests_upper": 8,
+    "plan": "free",
+    "requests_per_minute_planning_upper": 3,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": 0.0267,
+    "share_of_daily_tokens_typical": 0.1869,
+    "share_of_daily_tokens_upper": 0.2898
+   },
+   "requests": 24,
+   "tokens_typical": 33635,
+   "tokens_upper": 52168,
+   "topics": 24
+  },
+  "pricing_error": null,
+  "pricing_version": "groq_qwen_qwen3.8-27b_2026-11-03",
+  "rate_limits_error": null
+ },
+ "pilot": {
+  "per_stratum": 4,
+  "seed": 20261104,
+  "strata": [
+   {
+    "name": "transversal",
+    "rule": "is_transversal"
+   },
+   {
+    "name": "low_cohesion",
+    "rule": "flag low_cohesion and not transversal"
+   },
+   {
+    "name": "near_duplicate",
+    "rule": "flag near_duplicate_topic (a neighbour centroid cosine >= 0.90)"
+   },
+   {
+    "name": "sparse_reference",
+    "rule": "reference coverage_any < 0.30 (includes no link at all)"
+   },
+   {
+    "name": "weak_heavy",
+    "rule": "n_weak > n_assigned"
+   },
+   {
+    "name": "baseline",
+    "rule": "no review flag and not transversal"
+   }
+  ],
+  "topics": [
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "transversal",
+    "topic_id": "T0019"
+   },
+   {
+    "also_matches": "near_duplicate;weak_heavy",
+    "size_tercile": "large",
+    "stratum": "transversal",
+    "topic_id": "T0040"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "transversal",
+    "topic_id": "T0053"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "transversal",
+    "topic_id": "T0153"
+   },
+   {
+    "also_matches": "near_duplicate",
+    "size_tercile": "large",
+    "stratum": "low_cohesion",
+    "topic_id": "T0026"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "low_cohesion",
+    "topic_id": "T0090"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "large",
+    "stratum": "low_cohesion",
+    "topic_id": "T0175"
+   },
+   {
+    "also_matches": "sparse_reference",
+    "size_tercile": "medium",
+    "stratum": "low_cohesion",
+    "topic_id": "T0262"
+   },
+   {
+    "also_matches": "transversal",
+    "size_tercile": "large",
+    "stratum": "near_duplicate",
+    "topic_id": "T0001"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "near_duplicate",
+    "topic_id": "T0252"
+   },
+   {
+    "also_matches": "sparse_reference",
+    "size_tercile": "medium",
+    "stratum": "near_duplicate",
+    "topic_id": "T0283"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "near_duplicate",
+    "topic_id": "T0336"
+   },
+   {
+    "also_matches": "low_cohesion",
+    "size_tercile": "large",
+    "stratum": "sparse_reference",
+    "topic_id": "T0088"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "large",
+    "stratum": "sparse_reference",
+    "topic_id": "T0124"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "small",
+    "stratum": "sparse_reference",
+    "topic_id": "T0303"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "medium",
+    "stratum": "sparse_reference",
+    "topic_id": "T0324"
+   },
+   {
+    "also_matches": "low_cohesion;near_duplicate;sparse_reference",
+    "size_tercile": "large",
+    "stratum": "weak_heavy",
+    "topic_id": "T0103"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0274"
+   },
+   {
+    "also_matches": "near_duplicate",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0277"
+   },
+   {
+    "also_matches": "low_cohesion;sparse_reference",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0374"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0168"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0275"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0309"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "baseline",
+    "topic_id": "T0363"
+   }
+  ]
+ },
+ "pricing_snapshot": {
+  "path": "config/pricing/groq_qwen_qwen3.8-27b.json",
+  "sha256": "52ee3ff6493f236627063a4ef474531a9485b9ad95edb4b812ad7b7710a96ef0",
+  "version": "groq_qwen_qwen3.8-27b_2026-11-03"
+ },
+ "prompt": {
+  "path": "prompts/topic_naming_v1.txt",
+  "sha256": "9e5a343f76dfb91530965cb8d2ff12c9871cc1829bfab28faf0d28f6059ffaa4",
+  "version": "topic_naming_v1"
+ },
+ "provenance_gaps": [
+  "input snapshot manifest records source commit '84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted', which is not in this repository's history",
+  "topic features manifest records source commit '84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted', which is not in this repository's history",
+  "topic features were built with Python 3.14.8 / numpy 2.5.4; this run uses Python 3.11.15 / numpy 2.4.6 (outputs still hash-verified)",
+  "intrusion v2 'low confidence' and 'low cohesion' bottom quartiles are the same 94 topics (score_mean and cos_mean both measure cosine to centroid): one signal, not two; the intrusion result is single-reviewer and exploratory, so it is not used to name or flag topics",
+  "ESCO / O*NET purity is unavailable (snapshot has no broader-group data); reference hints are per-skill matcher output and can be wrong"
+ ],
+ "rate_limits": {
+  "limits": {
+   "input_tpm": null,
+   "output_tpm": null,
+   "rpd": 1000,
+   "rpm": 30,
+   "tpd": 200000,
+   "tpm": 8000
+  },
+  "path": "config/rate_limits/groq_qwen_qwen3.8-27b.json",
+  "plan": "free",
+  "safety": 0.9,
+  "sha256": "449dced0b56234403ccfb51137ad2a34df5d406f4e1d5509d5d85363b6362042"
+ },
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "sprint4_naming/3",
+ "settings": {
+  "additional_members_selection": "assigned non-representative members sorted by cosine to centroid desc, evenly spaced picks",
+  "cohesion_band": {
+   "metric": "cos_mean",
+   "q25": 0.842669,
+   "q75": 0.8846345
+  },
+  "low_reference_coverage": 0.3,
+  "max_user_tokens_estimate": 3000,
+  "n_additional_members": 20,
+  "n_neighbour_skills": 3,
+  "n_neighbours": 3,
+  "n_reference_hints": 5,
+  "n_representatives": 10,
+  "near_duplicate_cosine": 0.9,
+  "review_flags": [
+   "low_cohesion",
+   "weak_exceeds_assigned",
+   "no_reference_link",
+   "near_duplicate_topic"
+  ]
+ },
+ "stage": "prepare"
+}
