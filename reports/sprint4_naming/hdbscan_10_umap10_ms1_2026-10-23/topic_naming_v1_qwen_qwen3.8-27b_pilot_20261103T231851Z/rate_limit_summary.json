@@ -1,0 +1,106 @@
+{
+ "config_error": null,
+ "config_sha256": "449dced0b56234403ccfb51137ad2a34df5d406f4e1d5509d5d85363b6362042",
+ "daily_quota_exhaustion_events": 1,
+ "header_meaning": {
+  "x-ratelimit-*-requests": "per day (RPD)",
+  "x-ratelimit-*-tokens": "per minute (TPM)"
+ },
+ "last_quota_stop": {
+  "available_at_is": "local estimate",
+  "available_at_utc": "2026-11-04T21:04:10+00:00",
+  "available_in_s": 78317.93318414688,
+  "reason": "daily token limit (local estimate): 178850 + 2218 > 180000 tokens in this machine's last 24 h; Groq reports no TPD header and does not document the reset",
+  "source": "local_estimate"
+ },
+ "limits_configured": {
+  "input_tpm": null,
+  "output_tpm": null,
+  "rpd": 1000,
+  "rpm": 30,
+  "tpd": 200000,
+  "tpm": 8000
+ },
+ "limits_from_headers": {
+  "rpd": 1000,
+  "tpm": 8000
+ },
+ "limits_used_at_end": {
+  "input_tpm": null,
+  "output_tpm": null,
+  "rpd": 1000,
+  "rpm": 30,
+  "tpd": 200000,
+  "tpm": 8000
+ },
+ "plan": "free",
+ "quota": {
+  "local_estimate": {
+   "caps_after_safety": {
+    "rpd": 900,
+    "rpm": 27,
+    "tpd": 180000,
+    "tpm": 7200
+   },
+   "requests_last_day": 167,
+   "requests_last_minute": 0,
+   "source": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+   "tokens_last_day": 178850,
+   "tokens_last_minute": 0,
+   "used_for": "RPD only when Groq reported nothing; TPD always (no provider TPD header); RPM/TPM together with the provider TPM header"
+  },
+  "provider_reported": {
+   "from_429_messages": {},
+   "observed_at_utc": "2026-11-03T23:08:15+00:00",
+   "requests_per_day": {
+    "limit": 1000,
+    "remaining": 860,
+    "reset_at_utc": "2026-11-04T02:29:51+00:00"
+   },
+   "source": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+   "tokens_per_day": "not reported in headers by Groq",
+   "tokens_per_minute": {
+    "limit": 8000,
+    "remaining": 5944,
+    "reset_at_utc": "2026-11-03T23:08:31+00:00"
+   }
+  }
+ },
+ "quota_sources": {
+  "local_estimate": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+  "provider_429_message": "parsed from a Groq 429 error message (message format is not documented by Groq; best effort)",
+  "provider_headers": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+  "provider_retry_after": "Groq retry-after header on HTTP 429"
+ },
+ "remaining_topics": 228,
+ "requests": {
+  "failed": 0,
+  "http_429": 0,
+  "successful": 0,
+  "total": 0
+ },
+ "resume": {
+  "carried_over_completed": 146,
+  "not_before_is": "local estimate",
+  "not_before_utc": "2026-11-04T21:04:10+00:00",
+  "note": "a provider-reported time is Groq's; a local estimate is conservative; unknown = try later",
+  "resume_command": "python src/topic_naming.py generate --live --resume topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T231851Z",
+  "resume_possible": true,
+  "resumed_from": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T231820Z"
+ },
+ "run_id": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T231851Z",
+ "run_status": "quota_exhausted",
+ "safety_factor": 0.9,
+ "source": "https://console.groq.com/docs/rate-limits",
+ "stop_reason": "rate limit: daily token limit (local estimate): 178850 + 2218 > 180000 tokens in this machine's last 24 h; Groq reports no TPD header and does not document the reset",
+ "throttle_events": 0,
+ "tokens": {
+  "input": 0,
+  "output": 0
+ },
+ "wait_seconds": {
+  "backoff_and_retry_after": 0.0,
+  "throttle": 0.0,
+  "total": 0.0
+ }
+}

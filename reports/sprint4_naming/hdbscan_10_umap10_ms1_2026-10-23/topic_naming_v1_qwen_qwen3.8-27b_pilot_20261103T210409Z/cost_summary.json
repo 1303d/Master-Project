@@ -1,0 +1,119 @@
+{
+ "api_attempts": 27,
+ "api_attempts_by_status": {
+  "api_error": 3,
+  "ok": 24
+ },
+ "average_estimated_cost_per_successful_topic_usd": "0.00127407",
+ "budget_basis": "estimated cost at published rates (Groq returns no charge)",
+ "budget_note": "pre-request checks use an estimate and cannot guarantee an exact cap",
+ "budget_usd": "1.00000000",
+ "cost_usd": {
+  "billed_total": null,
+  "billing_note": "Groq returns no charge and does not document free-tier billing; check the Groq console. Unknown billing is never reported as zero",
+  "billing_status": "not_determinable_from_api",
+  "estimate_basis": "actual tokens x published Groq rates",
+  "estimate_status": "incomplete: see unknown_cost_attempts / error_attempts_without_usage",
+  "estimated_input": "0.01836160",
+  "estimated_output": "0.01221600",
+  "estimated_total": "0.03057760"
+ },
+ "error_attempts_without_usage": 3,
+ "offline_estimate": {
+  "assumptions": {
+   "chars_per_token_typical": 3.5,
+   "chars_per_token_upper": 2.5,
+   "no_local_cache_hits": true,
+   "no_retries": true,
+   "overhead_tokens": 50,
+   "typical_output_tokens": 200,
+   "upper_output_tokens": 512
+  },
+  "full_run": {
+   "estimated_cost_typical_usd": "0.66231440",
+   "estimated_cost_upper_usd": "1.26826160",
+   "quota": {
+    "days_needed_typical": 3,
+    "days_needed_upper": 5,
+    "minutes_of_requests_upper": 125,
+    "plan": "free",
+    "requests_per_minute_planning_upper": 3,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": 0.4156,
+    "share_of_daily_tokens_typical": 2.9372,
+    "share_of_daily_tokens_upper": 4.5521
+   },
+   "requests": 374,
+   "tokens_typical": 528693,
+   "tokens_upper": 819375,
+   "topics": 374
+  },
+  "pricing_version": "groq_qwen_qwen3.8-27b_2026-11-03",
+  "selected": {
+   "estimated_cost_typical_usd": "0.04226800",
+   "estimated_cost_upper_usd": "0.08105600",
+   "quota": {
+    "days_needed_typical": 1,
+    "days_needed_upper": 1,
+    "minutes_of_requests_upper": 8,
+    "plan": "free",
+    "requests_per_minute_planning_upper": 3,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": 0.0267,
+    "share_of_daily_tokens_typical": 0.1869,
+    "share_of_daily_tokens_upper": 0.2898
+   },
+   "requests": 24,
+   "tokens_typical": 33635,
+   "tokens_upper": 52168,
+   "topics": 24
+  }
+ },
+ "pricing_snapshot": {
+  "file": "pricing_snapshot.json",
+  "sha256": "52ee3ff6493f236627063a4ef474531a9485b9ad95edb4b812ad7b7710a96ef0",
+  "sources": [
+   "https://console.groq.com/docs/models",
+   "https://console.groq.com/docs/model/qwen/qwen3.8-27b"
+  ],
+  "verified_utc_date": "2026-11-03",
+  "version": "groq_qwen_qwen3.8-27b_2026-11-03"
+ },
+ "projection": {
+  "basis": "average estimated cost per successful topic in this run (None when unknown)",
+  "completed_overall": 24,
+  "estimated_cost_remaining_usd": "0.44592333",
+  "projected_full_run_usd": "0.47650093",
+  "remaining_topics": 350,
+  "total_topics": 374
+ },
+ "requested_model": "qwen/qwen3.8-27b",
+ "retries": 3,
+ "run_id": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z",
+ "run_status": "completed",
+ "scope": "pilot",
+ "served_models": [
+  "qwen/qwen3.8-27b"
+ ],
+ "stop_reason": null,
+ "this_run_estimated_cost_usd": "0.03057760",
+ "tokens": {
+  "cached_input": 0,
+  "input": 22952,
+  "note": "local cache hits make no API call; cached_input = provider-side prompt caching, if reported",
+  "output": 3054,
+  "reasoning": 0,
+  "total": 26006
+ },
+ "topics": {
+  "attempted": 24,
+  "failed": 0,
+  "local_cache_hits": 0,
+  "not_attempted": 0,
+  "requested": 24,
+  "resumed_from_previous_run": 0,
+  "successful": 24,
+  "successful_via_api": 24
+ },
+ "unknown_cost_attempts": 0
+}

@@ -1,0 +1,100 @@
+{
+ "config_error": null,
+ "config_sha256": "449dced0b56234403ccfb51137ad2a34df5d406f4e1d5509d5d85363b6362042",
+ "daily_quota_exhaustion_events": 0,
+ "header_meaning": {
+  "x-ratelimit-*-requests": "per day (RPD)",
+  "x-ratelimit-*-tokens": "per minute (TPM)"
+ },
+ "last_quota_stop": null,
+ "limits_configured": {
+  "input_tpm": null,
+  "output_tpm": null,
+  "rpd": 1000,
+  "rpm": 30,
+  "tpd": 200000,
+  "tpm": 8000
+ },
+ "limits_from_headers": {
+  "rpd": 1000,
+  "tpm": 8000
+ },
+ "limits_used_at_end": {
+  "input_tpm": null,
+  "output_tpm": null,
+  "rpd": 1000,
+  "rpm": 30,
+  "tpd": 200000,
+  "tpm": 8000
+ },
+ "plan": "free",
+ "quota": {
+  "local_estimate": {
+   "caps_after_safety": {
+    "rpd": 900,
+    "rpm": 27,
+    "tpd": 180000,
+    "tpm": 7200
+   },
+   "requests_last_day": 27,
+   "requests_last_minute": 4,
+   "source": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+   "tokens_last_day": 26006,
+   "tokens_last_minute": 4184,
+   "used_for": "RPD only when Groq reported nothing; TPD always (no provider TPD header); RPM/TPM together with the provider TPM header"
+  },
+  "provider_reported": {
+   "from_429_messages": {},
+   "observed_at_utc": "2026-11-03T21:09:53+00:00",
+   "requests_per_day": {
+    "limit": 1000,
+    "remaining": 973,
+    "reset_at_utc": "2026-11-03T21:48:46+00:00"
+   },
+   "source": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+   "tokens_per_day": "not reported in headers by Groq",
+   "tokens_per_minute": {
+    "limit": 8000,
+    "remaining": 6001,
+    "reset_at_utc": "2026-11-03T21:10:08+00:00"
+   }
+  }
+ },
+ "quota_sources": {
+  "local_estimate": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+  "provider_429_message": "parsed from a Groq 429 error message (message format is not documented by Groq; best effort)",
+  "provider_headers": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+  "provider_retry_after": "Groq retry-after header on HTTP 429"
+ },
+ "remaining_topics": 0,
+ "requests": {
+  "failed": 3,
+  "http_429": 0,
+  "successful": 24,
+  "total": 27
+ },
+ "resume": {
+  "carried_over_completed": 0,
+  "not_before_is": "not applicable",
+  "not_before_utc": null,
+  "note": "a provider-reported time is Groq's; a local estimate is conservative; unknown = try later",
+  "resume_command": null,
+  "resume_possible": false,
+  "resumed_from": null
+ },
+ "run_id": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z",
+ "run_status": "completed",
+ "safety_factor": 0.9,
+ "source": "https://console.groq.com/docs/rate-limits",
+ "stop_reason": null,
+ "throttle_events": 4,
+ "tokens": {
+  "input": 22952,
+  "output": 3054
+ },
+ "wait_seconds": {
+  "backoff_and_retry_after": 8.539,
+  "throttle": 231.702,
+  "total": 240.241
+ }
+}

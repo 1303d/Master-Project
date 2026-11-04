@@ -1,0 +1,391 @@
+{
+ "schema": "p1_remediation_proposals/1",
+ "author": "Claude Code (claude-opus-5-5), in-session reading of p1_evidence_traceability.csv; no external LLM API call",
+ "status": "AI-GENERATED PROPOSALS - NOT HUMAN-VALIDATED. Nothing has been applied: no deletion, split, merge, rename or reassignment.",
+ "created_utc": "2026-11-04",
+ "remediation_set": ["RETAIN_PENDING_REVIEW", "RENAME_PENDING_REVIEW", "INVESTIGATE_MEMBER_REASSIGNMENT", "INVESTIGATE_TOPIC_SPLIT", "INVESTIGATE_TOPIC_EXCLUSION", "NEEDS_SOURCE_EVIDENCE"],
+ "diagnosis_codes": {"A": "extraction error", "B": "skill normalisation error", "C": "ambiguous skill requiring context", "D": "clustering error", "E": "incorrect reference linking", "F": "insufficient evidence"},
+ "conventions": [
+  "confirmed_observations quote or count what is in a source file. 'string occurrence' means the member string was found in a local posting text, NOT that the extractor took it from that posting.",
+  "ai_interpretation and the member lists are AI readings of that evidence.",
+  "Acronyms are expanded only where the posting text itself spells the expansion; otherwise they are left unexpanded."
+ ],
+ "lineage": [
+  ["1. Original LinkedIn posting", "Kaggle arshkon/linkedin-job-postings -> Supabase `postings` (Sprint 3 corpus). Local copies: 2,000-posting sample (Downloads/sample2000_qwen_v3_2026-10-21_1545/extraction_sample_2000.csv), 50 gold dev postings (data/gold/gold_postings_dev.csv), full JDs embedded in the Sprint 3 noise-review workbooks (reports/noise_review/noise_review_*.xlsx, one example posting per weak skill). data/raw/ is empty on this machine.", "partial"],
+  ["2. Extracted skill statement (skill + evidence quote)", "Sprint 3 `prepared_mentions.csv` in data/processed/sprint3_full_2026-10-22/ (teammate's machine) and Supabase `statements`. Local: sample2000 Qwen v3 statements (1,005 statements from 87 postings) and the bold-red evidence span in each noise-review JD.", "partial: weak members yes (via noise review), assigned members almost never"],
+  ["3. Normalised skill (alias -> skill_key)", "sprint4_input snapshot aliases.csv (rules R1-R4 from src/normalize_aliases.py).", "yes"],
+  ["4. Sprint 3 membership (assigned / weak, score, margin)", "sprint4_input snapshot memberships.csv; posting / mention counts per skill in reports/sprint3_noise.xlsx (Skills sheet).", "yes"],
+  ["5. Sprint 4 topic", "sprint4_input topics.csv; features; assembled naming results; review workbook.", "yes"],
+  ["6. ESCO / O*NET reference link", "sprint4_input reference_links.csv (one best candidate per skill, verdict known_skill / new_candidate / trait, score, match type, review_status = auto).", "yes"]
+ ],
+ "evidence_gaps": [
+  "Sprint 3 mention-level data (prepared_mentions.csv: posting_id + skill + evidence for every statement) is not on this machine and Supabase was not queried (read-only, no external calls). This is why 553 of 567 assigned members have no extraction record here.",
+  "For assigned members, the CSV shows up to 3 string occurrences in locally available postings. These are context hints only: several land on the wrong sense (e.g. 'unity' in 'creativity, innovation, and unity'; 'prisma' in 'Prisma Health'; 'far' in 'how far you can go'; 'r' in a requisition number), which shows why they must not be treated as extraction evidence.",
+  "Weak members have one extraction example each (the noise-review JD) plus a Sprint 3 noise-review decision. Two of the three reviewer files were re-saved (Numbers) and lost the bold evidence spans, so spans were read from the original generated copies; decisions were read from the reviewed copies. Dhanush's decisions are marked 'Claude (please check)' / 'Claude + GPT (please check)' in the file, so they may be AI-suggested.",
+  "775 of the 976 P1 members occur in exactly one posting (sprint3_noise.xlsx), so most have at most one context to judge from.",
+  "Reference links are automatic (review_status = auto). Several 'exact' matches with score 1.0 are abbreviation collisions with an ESCO alternative label (e.g. sem -> search engine optimisation, rt -> radiotherapy, dmp -> dance therapy).",
+  "ESCO / O*NET broader-group purity is unavailable in the snapshot."
+ ],
+ "topics": {
+  "T0018": {
+   "diagnosis": ["D", "C", "F"],
+   "confirmed_observations": [
+    "30 assigned / 39 weak. Extraction quotes exist for python ('Strong programming skills in Python', 86 postings), java (36), golang (5), scala (4).",
+    "String occurrences place several members in non-programming lists: discord and bluesky in social-media channel lists, reddit with Kajabi/Facebook, bluebeam with construction tools, blue yonder as a 3rd-party supply-chain tool, argus with Word/Excel/PowerPoint.",
+    "'unity' occurs only as 'creativity, innovation, and unity'; its known_skill link is 'design principles' (match exact, score 1.0).",
+    "'r programming' is here while 'r', 'r shiny', 'r administration' are in T0162."
+   ],
+   "ai_interpretation": [
+    "A coherent core of programming languages and frameworks (python, java, scala, ruby, golang, django, flask, maven, gulp) is mixed with brand / platform names that share letters (blue*, *portal, meta, lucid).",
+    "The 'r programming' / 'r' split across two topics is a clustering artefact of very short strings."
+   ],
+   "suspected_extraction_errors": ["unity"],
+   "suspected_clustering_errors": ["discord", "reddit", "bluesky", "blue yonder", "bluebeam", "bluebeam pdf", "hrally portal", "argus", "meta", "lucid", "portal"],
+   "questionable_reference_links": ["unity"],
+   "normalisation_issues": ["bluebeam pdf ~ bluebeam"],
+   "remediation": "INVESTIGATE_MEMBER_REASSIGNMENT",
+   "remediation_reason": "The programming core is real and well evidenced; the brand/social-platform members look attached by string similarity. Reassigning them is a smaller change than splitting the topic."
+  },
+  "T0040": {
+   "diagnosis": ["A", "D", "E", "C"],
+   "confirmed_observations": [
+    "28 assigned / 38 weak. Only 'flexibility' (16 postings) and 'adaptability' (57) match the name.",
+    "String occurrences: 'packages' in 'comprehensive benefits packages', 'box' in 'think outside the box', 'assortment' in 'work an assortment of days', 'containers' in 'Docker containers', 'umbrella' in a Cisco product list (AMP, Umbrella, NAM).",
+    "Links: dock carts -> 'moor vessels' (known_skill), box -> 'types of boxes', boating -> 'teach boating principles'.",
+    "Validity screening = mixed; the earlier Claude validity proposal (not human-confirmed) lists extraction_noise."
+   ],
+   "ai_interpretation": [
+    "Most assigned members are physical objects, product names or boilerplate words, and there is no shared meaning; the two real soft skills are transversal and would fit better elsewhere.",
+    "'packages', 'box', 'assortment' look like extraction errors, but this is based on string occurrences only - the extractor's own quote is not on disk."
+   ],
+   "suspected_extraction_errors": ["packages", "box", "assortment", "free float"],
+   "suspected_clustering_errors": ["flexibility", "adaptability", "containers", "flexray", "hootsuite", "windchill", "umbrella", "conformal", "alignrt", "turbocourt", "pole foreman", "pontoon"],
+   "questionable_reference_links": ["dock carts", "box"],
+   "normalisation_issues": ["packing lists ~ packing"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "No common skill; the name describes 2 of 28 members. Investigate excluding the topic from the hierarchy and reassigning flexibility / adaptability."
+  },
+  "T0057": {
+   "diagnosis": ["D", "B"],
+   "confirmed_observations": [
+    "33 assigned / 28 weak. c++ has an extraction quote ('and or C++', 29 postings); c# appears in 16 postings.",
+    "String occurrences: arc flash / arc flash analysis / arc flash mitigation in power-system study lists; 'plasma arc melt' with 'Electron Beam, and VAR furnaces'; 'arc core' in a reading-programme list ('ARC Core, 100 Book Challenge'); 'oasis' in 'All OASIS documentation'; 'delphi' with 'Opera ... PMS/CRM'; 'procore' in a construction posting.",
+    "'.net core' and 'dotnet core' are separate skill keys; dotnet core is linked to 'Visual Studio .NET'."
+   ],
+   "ai_interpretation": [
+    "The C++ / .NET / build-tool core is coherent. Members joined by the strings 'arc', 'core' and 'open source' belong to other fields (electrical safety, metallurgy, education, home health, hospitality)."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["arc flash", "arc flash analysis", "arc flash mitigation", "plasma arc melt", "arc core", "oasis", "delphi", "procore", "core text", "cxone"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["dotnet core ~ .net core", ".net development ~ .net"],
+   "remediation": "INVESTIGATE_MEMBER_REASSIGNMENT",
+   "remediation_reason": "The name fits the core; about 10 string-matched members should be checked for reassignment. The current name could likely be retained after that."
+  },
+  "T0103": {
+   "diagnosis": ["C", "D", "E", "F"],
+   "confirmed_observations": [
+    "40 assigned / 43 weak; validity screening = surface_form_cluster (acronym share 0.85).",
+    "Expansions present in posting text: 'Manufacturing Execution System (MES)'. Most other acronyms appear only in lists without an expansion.",
+    "'ats' (assigned) and 'ats units' (weak, 'UPS systems, ATS units') co-exist; the extraction context for 'ats' is not on disk.",
+    "Links: ifrs -> 'visual flight rules', ifsp -> 'visual flight rules', ams -> 'use aeronautical mobile service communications', nam -> 'NAMD' (all known_skill).",
+    "Noise-review decisions for weak members include not_a_skill (asee), alias (pos, accepted abbreviations), unsure (submittals)."
+   ],
+   "ai_interpretation": [
+    "Grouped by letter shape (three-letter codes ending in -s), not meaning. Several acronyms are ambiguous and cannot be disambiguated without the extraction record."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["ansys", "ishikawa", "ecosys", "mesos", "unisys 2200", "sla management", "ledes ids"],
+   "questionable_reference_links": ["ifrs", "ifsp", "ams", "nam"],
+   "normalisation_issues": ["slas ~ sla management", "mes/mom ~ mes"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Surface-form cluster; hierarchy treatment is already exclude_until_reclustered. Ambiguous acronyms need their extraction record before any reassignment."
+  },
+  "T0104": {
+   "diagnosis": ["D", "C", "E", "F"],
+   "confirmed_observations": [
+    "38 assigned / 18 weak; validity = surface_form_cluster (digit share 0.66).",
+    "String occurrences: cat5 / cat6 / cat5e in cabling lists; ho3-ho6 in a list 'insurance contracts to include HO3, HO4, HO5 HO6'; 5s with 'Housekeeping'; a3 with '8Ds, Kaizen, A3, Ishikawa'; s3 in 'AWS services such as S3'; rt in an NDT method list 'PT, MT, UT, RT, ET'.",
+    "rt is linked to 'radiotherapy' (known_skill, match exact, score 1.0).",
+    "catia, catia v5, catia v6 are three keys; primavera, primavera 6, primavera p6, p6, oracle p6 are five keys."
+   ],
+   "ai_interpretation": [
+    "Members are tied together by digits and short letter codes from unrelated domains (networking, CAD, lean, insurance, cloud, scheduling). Variants of the same tool are not merged."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["cat5", "cat6", "cat5e", "catia", "catia v5", "catia v6", "5s", "5 why", "a3", "ho3", "ho4", "ho5", "ho6", "s3", "3pl", "primavera", "primavera p6", "p6"],
+   "questionable_reference_links": ["rt"],
+   "normalisation_issues": ["catia v5 ~ catia", "primavera p6 ~ primavera 6", "oracle p6 ~ p6"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "No shared skill; members belong to many other topics. Already exclude_until_reclustered in validity screening."
+  },
+  "T0121": {
+   "diagnosis": ["C", "D", "B", "E", "F"],
+   "confirmed_observations": [
+    "40 assigned / 16 weak; validity = surface_form_cluster (acronym share 0.85). Same provisional name as T0135.",
+    "Expansions present in text: 'Microsoft Team Foundation Server (TFS)', 'Transit Feed Specification (GTFS)', 'Lean Sigma DMAIC framework'.",
+    "dmp and dmps are both linked to 'dance therapy' (known_skill, exact, 1.0); string occurrences are in a marketing data-platform list ('DMP, CDP, Data Onboarders'; 'DSPs, SSPs, DMPs').",
+    "'dsm' ('diagnosing according to the DSM') and 'dsm v' ('DSM-V/ICD 10') are separate keys; 'pfema' occurs as 'pFEMA, control plan' while 'pfmea' is a weak member of T0135."
+   ],
+   "ai_interpretation": [
+    "Grouped by the letters d/f/m/s. Several variants of one term are split across keys or topics."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["figma", "jamf", "nuovafima", "ccc1", "demarc extensions"],
+   "questionable_reference_links": ["dmp", "dmps"],
+   "normalisation_issues": ["dmps ~ dmp", "dsm v ~ dsm", "pfema ~ pfmea"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Surface-form cluster (exclude_until_reclustered). Do not merge with T0135 despite the shared name: both are acronym noise."
+  },
+  "T0135": {
+   "diagnosis": ["C", "D", "A", "B", "F"],
+   "confirmed_observations": [
+    "34 assigned / 24 weak; validity = surface_form_cluster (acronym share 0.79). Same provisional name as T0121.",
+    "String occurrences: 'MSA Safety is the perfect...' (employer name), 'here at Prisma Health' (employer name), 'Multiple Sleep Latency Test (MSLT)'; fmla / flsa with 'Title VII, ADA ... FEHA, PAGA'.",
+    "'msds' and 'msds sheets' are separate keys. Weak 'hsa' and 'hse' have reviewer decision not_a_skill."
+   ],
+   "ai_interpretation": [
+    "Letter-shape cluster mixing employment law, safety, software and clinical tests. 'msa' and 'prisma' may be employer names picked up by extraction, but the extractor's quote is not on disk, so this is unconfirmed."
+   ],
+   "suspected_extraction_errors": ["msa", "prisma"],
+   "suspected_clustering_errors": ["asana", "akamai", "jpa", "coda", "mslt", "scd boots"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["msds sheets ~ msds"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Surface-form cluster (exclude_until_reclustered); possible employer-name extraction errors need their extraction records."
+  },
+  "T0140": {
+   "diagnosis": ["D", "E", "C"],
+   "confirmed_observations": [
+    "33 assigned / 5 weak; 25/33 have confident links, but the links themselves point to different fields (alter wearing apparel, dispense corrective lenses, tend punch press, operate drill press).",
+    "Extraction quote: dressing changes = 'Perform dressing changes'; it is linked to 'alter wearing apparel'.",
+    "String occurrences: 'Google Sheets' for sheets; 'a pressing business problem' for pressing; 'Brocade SAN Fabric'; 'punch down patch panels' with CAT5e wiring.",
+    "Weak 'attention to detail' (359 postings) has reviewer decision trait."
+   ],
+   "ai_interpretation": [
+    "Three themes joined by the words fit / press / punch: garment fitting and tailoring, optical lens fitting, and industrial presses. 'dressing changes' is a wound-care task wrongly linked to clothing."
+   ],
+   "suspected_extraction_errors": ["pressing"],
+   "suspected_clustering_errors": ["presses", "drill presses", "punch press", "extrusion press", "punch list", "punch down", "san fabric", "sheets", "dressing changes", "form/fit/function", "fitment", "club fitting", "pap mask fitting"],
+   "questionable_reference_links": ["dressing changes", "pressing", "lens options", "extrusion press"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_TOPIC_SPLIT",
+   "remediation_reason": "Each theme is coherent on its own (garment vs optical vs presses), so a split is the natural candidate; the garment part may relate to T0293."
+  },
+  "T0162": {
+   "diagnosis": ["D", "C", "A", "F"],
+   "confirmed_observations": [
+    "25 assigned / 17 weak; coverage 8%.",
+    "String occurrences: 'R programming, R shiny / R Markdown', 'R administration'; for 'r' the only local occurrence is a requisition code 'R-0421175'; 'arm' in 'repetitive hand and arm motions'; 'sabre' in travel booking; 'archer' as 'Archer/CIT eGRC tool'.",
+    "Extraction quote: redtail = 'Redtail and Charles Schwab platforms are a plus'."
+   ],
+   "ai_interpretation": [
+    "A small R-language core (r, r shiny, r administration) plus many tools whose names start with r / contain 'red'. 'arm' looks like a physical-demand phrase, not a skill, but the extraction record is missing."
+   ],
+   "suspected_extraction_errors": ["arm"],
+   "suspected_clustering_errors": ["redcap", "rhel", "redhat", "redtail", "sabre", "archer", "crestron", "rubrik", "erwin", "dagger", "dovetail", "nadcap", "red rides", "pls pole", "ike"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["redhat ~ rhel"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "The R core is 3-4 members and is split from 'r programming' (T0018); the rest is string-similar noise. Investigate exclusion and moving the R core."
+  },
+  "T0171": {
+   "diagnosis": ["C", "F", "E"],
+   "confirmed_observations": [
+    "29 assigned / 5 weak; validity = mixed.",
+    "String occurrences show different senses of 'site': 'SharePoint site development', 'landscape design, grading, site planning', 'clinical site start-up', 'construction-specific areas of Site Handler'.",
+    "site development and site planning are both linked to 'prepare building site'; design experience -> 'think creatively' (exact, 1.0).",
+    "Weak 'mr experience' and 'go live' have reviewer decision not_a_skill."
+   ],
+   "ai_interpretation": [
+    "The UX / journey core (user journeys, journey mapping, user experience, user stories, sitemapping, journey builder) is coherent; 'site' members mix web, construction and clinical-trial meanings. All assigned-member contexts are string occurrences, not extraction records."
+   ],
+   "suspected_extraction_errors": ["computer experience", "design experience"],
+   "suspected_clustering_errors": ["site planning", "site start up", "site handler", "route navigation apps", "virtual worlds", "arm templates"],
+   "questionable_reference_links": ["site development", "design experience"],
+   "normalisation_issues": ["journey building ~ journey builder", "user journey maps ~ journey mapping"],
+   "remediation": "NEEDS_SOURCE_EVIDENCE",
+   "remediation_reason": "Whether 'site' members are web or construction / clinical can only be settled with the extraction records (prepared_mentions / Supabase statements). Possible POTENTIAL_MERGE with T0123 depends on that."
+  },
+  "T0172": {
+   "diagnosis": ["D", "A", "C", "F"],
+   "confirmed_observations": [
+    "30 assigned / 28 weak; cos_min 0.652.",
+    "String occurrences: 'quantity take-offs', 'electronic take-offs', 'door take-offs' (estimating); 'consolidating adjustments and eliminations' (accounting); 'terminations' in an HR list; 'less' in 'won't strive for anything less'; 'far' in 'see how far you can go'; 'circulate' in 'Scrub and/or circulate general surgery'; 'phasing' with Dynamo (BIM).",
+    "Extraction quote: rooming = 'standard rooming responsibilities'.",
+    "Weak 'retractor handling' and 'shrink' have reviewer decision not_a_skill."
+   ],
+   "ai_interpretation": [
+    "Two real subgroups (construction take-offs; financial consolidation) plus single words from unrelated contexts. 'less' and 'far' look like extraction errors, but only string occurrences are available ('far' may also be an acronym in its real extraction context)."
+   ],
+   "suspected_extraction_errors": ["less", "far", "rooming", "working backwards", "adjustment"],
+   "suspected_clustering_errors": ["circulate", "phasing", "terminations", "redundancy", "feeders", "door strikes", "farcaster", "lookback", "flighting", "obsolescence", "rework"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["consolidations ~ consolidating adjustments"],
+   "remediation": "INVESTIGATE_TOPIC_SPLIT",
+   "remediation_reason": "The take-off members form a coherent subgroup worth keeping; the rest should be split off or reassigned after their extraction records are checked."
+  },
+  "T0177": {
+   "diagnosis": ["C", "D", "E", "B", "F"],
+   "confirmed_observations": [
+    "31 assigned / 24 weak; validity = surface_form_cluster (acronym share 0.84).",
+    "Expansions present in text: 'Product Lifecycle Management (PLM)', 'Building Information Modeling (BIM)', 'Transportation Management System (TMS)'.",
+    "sem occurs in an analytical-technique list ('GPC, FTIR, NMR, SEM, XPS') and is linked to 'search engine optimisation' (exact, 1.0). wpm occurs as 'Typing speed of 50 wpm'.",
+    "tpm and tpms are separate keys."
+   ],
+   "ai_interpretation": [
+    "Only the BOM / PLM members match the name; the rest are three-letter codes ending in -m from many domains."
+   ],
+   "suspected_extraction_errors": ["wpm"],
+   "suspected_clustering_errors": ["bim", "tms", "sem", "veeam", "ohm's law", "cyme", "t1", "ipam", "uvm"],
+   "questionable_reference_links": ["sem", "tdm"],
+   "normalisation_issues": ["tpms ~ tpm"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Surface-form cluster (exclude_until_reclustered); the BOM / PLM core (bom, bom analysis, bom creation, plm) could be reassigned."
+  },
+  "T0190": {
+   "diagnosis": ["D", "C", "E"],
+   "confirmed_observations": [
+    "27 assigned / 9 weak; validity = coherent (rules).",
+    "String occurrences: 'Material design guidelines and Human Interface guidelines' (UI design); 'administering contrast materials, and positioning patients' (radiology); 'explant preparation'; 'soybean transformation or genome editing'; 'make-ready program for the property'; 'the formulation of action plans'.",
+    "Extraction quote: reagent preparation = 'Prepare the stains and reagents'.",
+    "formulation -> 'food product ingredients' (known_skill)."
+   ],
+   "ai_interpretation": [
+    "Most members share the word 'material(s)' and are broadly about materials; 'preparation' / 'transformation' / 'make ready' members come from lab, medical, UI and property contexts."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["material design guidelines", "contrast materials", "contrast preparation", "drug preparation", "explant preparation", "soybean transformation", "make ready process", "make ready program", "time and material"],
+   "questionable_reference_links": ["formulation"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_MEMBER_REASSIGNMENT",
+   "remediation_reason": "A broad materials topic is defensible; about 9 word-matched members from other fields should be checked for reassignment."
+  },
+  "T0192": {
+   "diagnosis": ["D", "C", "E"],
+   "confirmed_observations": [
+    "26 assigned / 22 weak.",
+    "String occurrences: 'animation rigging/set-up, and character' (3D animation); 'ground rigging support', 'High rigging with harness'; 'Install Grounding, as required by NECA'; 'tunneling methods like ipsec'; 'material usage and cavitation' (moulding); 'suturing' and 'suture cutting' in clinical lists; 'centrifuging' and 'aliquotting' in specimen handling.",
+    "Extraction quotes: splinting = 'Apply splints, casts, dressings'; suture removal = 'remove sutures with competency'.",
+    "waxing -> 'wax body parts' (known_skill) while the string occurs in car-detailing text ('cleaning and waxing'). Weak 'working at height' and 'floor buffing' have reviewer decision not_a_skill."
+   ],
+   "ai_interpretation": [
+    "Three themes: rigging / grounding, surface finishing, and clinical / lab procedures, plus string matches on 'ground' and 'tunnel'. 'rigging' itself may be animation rigging in some postings."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["suturing", "suture cutting", "suture removal", "splinting", "sheath removal", "centrifuging", "aliquotting", "tunneling", "cavitation", "garnishing", "ground up construction", "ground support equipment"],
+   "questionable_reference_links": ["waxing"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_TOPIC_SPLIT",
+   "remediation_reason": "Two trade subgroups (rigging, surface finishing) and a clinical subgroup are each coherent; a split is the candidate. T0050 Hand and Power Tool Operation is the near-duplicate for the trade part."
+  },
+  "T0193": {
+   "diagnosis": ["D"],
+   "confirmed_observations": [
+    "23 assigned / 2 weak; validity = coherent; 11 confident links all to art / painting ESCO skills.",
+    "String occurrences: 'iTero Digital Impressions' and 'CEREC One Day Crowns' (dental); 'artworking of slides Pitch deck'; 'mock-ups, wireframes, and prototypes' (UI design).",
+    "6 'impression' members (impression materials, impression pouring, custom impression trays, digital impressions, itero digital impressions, impression casts)."
+   ],
+   "ai_interpretation": [
+    "The painting / art core is coherent. The dental impression members joined through the word 'impression'; mockups belong with UI / design prototyping."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["impression materials", "impression pouring", "custom impression trays", "digital impressions", "itero digital impressions", "impression casts", "mockups", "mock ups"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["mock ups ~ mockups"],
+   "remediation": "INVESTIGATE_MEMBER_REASSIGNMENT",
+   "remediation_reason": "Reassigning the 6 dental and 2 mock-up members would probably leave a coherent topic whose current name can be retained."
+  },
+  "T0211": {
+   "diagnosis": ["A", "D", "C", "F"],
+   "confirmed_observations": [
+    "23 assigned / 54 weak; validity = mixed.",
+    "String occurrences: 'can' in 'so they can get the most'; 'bob' as a contact person's first name in an application instruction; 'accessibility' in an accessibility-of-our-website notice; 'ot' in a therapy-discipline list 'SN, PT, OT, ST'; 'ilocano' in 'Bilingual in Ilocano and English'.",
+    "Weak 'nyc dep' has reviewer decision not_a_skill; 'tact' and 'judgement' are trait."
+   ],
+   "ai_interpretation": [
+    "A noise sink: very short tokens and unrelated product names. 'can', 'bob' and 'accessibility' look like extraction errors, but the extractor's quote is not on disk."
+   ],
+   "suspected_extraction_errors": ["can", "bob", "accessibility"],
+   "suspected_clustering_errors": ["pardot", "tenable", "snowflake", "incopy", "siprnet", "bobcat", "ilocano", "black duck", "katapult", "von duprin", "stucky"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["pls ~ pls cadd"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "No shared skill; the largest noise attractor among P1 (54 weak members, 5 near-duplicate topics)."
+  },
+  "T0229": {
+   "diagnosis": ["A", "D", "E", "C"],
+   "confirmed_observations": [
+    "14 assigned / 16 weak.",
+    "String occurrences: 'Panorama City' (a place name); 'the cornerstone of the enterprise'; 'may give rise to a potential conflict'; 'installing or repairing scales and calibrates' (weighing equipment); 'Salesforce Apex'; 'Video: Axis, Exacq, Milestone' (security cameras); 'COBRA administration' (benefits).",
+    "scales -> 'design principles' (exact, 1.0) and scaling -> 'design principles' (known_skill)."
+   ],
+   "ai_interpretation": [
+    "Common words and brand names that happen to share letters with 'scale' / 'zoom'. 'rise', 'panorama' and 'cornerstone' look like extraction errors (string-occurrence evidence only)."
+   ],
+   "suspected_extraction_errors": ["rise", "panorama", "cornerstone"],
+   "suspected_clustering_errors": ["zoom", "zoominfo", "apex", "axis", "lawson", "cobra", "hardscape", "scales"],
+   "questionable_reference_links": ["scales", "scaling"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Small topic with no shared skill; the few real tools (zoom, zoominfo, apex, lawson) belong to other topics."
+  },
+  "T0234": {
+   "diagnosis": ["D", "B", "C"],
+   "confirmed_observations": [
+    "22 assigned / 19 weak; validity = surface_form_cluster.",
+    "String occurrences: 'Ciso, Avya, contact center' (misspelt next to 'Ciso'); 'Avaya, Fusion, IPC'; 'Environmental, Health, and Safety (EHS)'; 'Kapton, and Rivnuts onto structures'; 'TCP/IP, EIGRP, BGP'.",
+    "'avya' and 'avaya' are separate keys."
+   ],
+   "ai_interpretation": [
+    "Product names grouped by sound (av-, ak-, ek-, as-). 'avya' is a misspelling of avaya that normalisation did not merge."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["avimark", "canva", "okta", "avalara", "eigrp", "rivnuts", "ehs", "eks", "akka", "ekahau", "magaya", "aspera"],
+   "questionable_reference_links": [],
+   "normalisation_issues": ["avya ~ avaya"],
+   "remediation": "INVESTIGATE_TOPIC_EXCLUSION",
+   "remediation_reason": "Surface-form cluster (exclude_until_reclustered). Members are real tools but share no skill."
+  },
+  "T0239": {
+   "diagnosis": ["D", "E"],
+   "confirmed_observations": [
+    "22 assigned / 0 weak; validity = coherent (rules).",
+    "String occurrences: 'bakery decorative designs', 'cookie decorating', 'decorating bags, tips, nozzles' (bakery); 'Ensure style guides and design principles', 'understand AP Style' (writing / brand); 'mood boards, storyboards and style frames' (motion design); 'Paste print, stencil design, solder inspection' (electronics); 'specified fuel gas and acetylene'.",
+    "Links: styling -> 'hairdressing', food styling -> 'hairdressing', style frames -> 'optical components', spray booth -> 'pump paint' (all known_skill)."
+   ],
+   "ai_interpretation": [
+    "A bakery / decorating subgroup and a style-guide / design subgroup joined by the words 'style' and 'decor', plus unrelated members (stencil design for solder paste, acetylene, upholstery). The rule-based 'coherent' result does not hold up against the posting contexts."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["style guides", "ap style", "stylesheets", "style frames", "stencil design", "acetylene", "upholstery", "spray booth", "diverse music styles", "booth design"],
+   "questionable_reference_links": ["styling", "food styling", "style frames"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_TOPIC_SPLIT",
+   "remediation_reason": "The bakery-decorating members form one coherent group and the style-guide members another; the rest should be reassigned."
+  },
+  "T0293": {
+   "diagnosis": ["D", "C", "E"],
+   "confirmed_observations": [
+    "19 assigned / 2 weak; validity = coherent (rules).",
+    "String occurrences: 'braze' occurs as 'Adobe Campaign, Braze, Salesforce' (a marketing platform list), while 'brazing' / 'brazing alloy' occur as 'Selects torch tip, flux and brazing alloy'; 'classical hand analysis' occurs next to 'NASTRAN/PATRAN, CSW, IAS' (engineering analysis); 'hand scratches from job walks' (construction).",
+    "classical hand analysis -> 'read palms' (known_skill); hand sewing -> 'use manual knitting techniques'."
+   ],
+   "ai_interpretation": [
+    "The sewing core is coherent. Brazing is metal joining. 'braze' (marketing platform) shows that merging braze with brazing would be WRONG: an ambiguous string needing context. 'classical hand analysis' is an engineering term wrongly linked to palm reading."
+   ],
+   "suspected_extraction_errors": [],
+   "suspected_clustering_errors": ["hand brazing", "induction brazing", "brazing", "brazing alloy", "braze", "classical hand analysis", "hand scratches", "hand to surface method"],
+   "questionable_reference_links": ["classical hand analysis", "hand sewing"],
+   "normalisation_issues": [],
+   "remediation": "INVESTIGATE_MEMBER_REASSIGNMENT",
+   "remediation_reason": "Reassigning about 8 members would leave a coherent sewing topic whose name could be retained."
+  }
+ },
+ "verification": [
+  "All 976 P1 members (567 assigned + 409 weak) from memberships.csv are in p1_evidence_traceability.csv, one row each; every member has a posting count (sprint3_noise.xlsx) and alias rows; 36 have no reference_links row.",
+  "Every skill named in this JSON is a P1 member (asserted by src/build_p1_traceability.py).",
+  "Source files and the review workbook have identical sha256 before and after the run (asserted in the script and re-checked with shasum over data/processed and config/topic_validity).",
+  "No LLM / external API calls; Supabase not queried or modified; nothing staged or committed."
+ ]
+}

@@ -1,0 +1,210 @@
+{
+ "schema": "p1_evidence_reconciliation/2",
+ "generated_utc": "2026-11-04T17:42:38+00:00",
+ "script": "src/reconcile_p1_evidence.py",
+ "script_sha256": "0cf7e11a63fefd5e3f5d8fda9540d5eaad7cb6024d4caf7e1d00d5aa6a675fda",
+ "python": "3.11.15",
+ "pandas": "3.1.0",
+ "platform": "macOS-27.2-arm64-arm-64bit",
+ "clustering_run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "read_only": true,
+ "api_calls": "none",
+ "database": "not accessed",
+ "inputs": {
+  "prepared_mentions": {
+   "path": "data/interim/prepared_mentions.csv",
+   "sha256": "753f905f114f8dcecee29a53ee98ce52f31ec0564fe3e85d19c7883d7b0cf409"
+  },
+  "aliases": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/aliases.csv",
+   "sha256": "3a2bbf7490f394bbdd07297d53255a62e7219929851e524a5afa67810046ee99"
+  },
+  "memberships": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/memberships.csv",
+   "sha256": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37"
+  },
+  "p1_traceability_v1": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_evidence_traceability.csv",
+   "sha256": "a5ac63c4b40c9c05f0cf8fed4e6530d4a6095432a8cd446c36546af5b790ea28"
+  },
+  "input_manifest": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/manifest.json",
+   "sha256": "fba34be9885083452ff8c9b665b3a4fbab8745ab05e9f01dbdeba0ac54b17ec2"
+  },
+  "reference_links": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/reference_links.csv",
+   "sha256": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845"
+  },
+  "sprint3_noise_workbook": {
+   "path": "reports/sprint3_noise.xlsx",
+   "sha256": "d102ffada17afbe3716766fa84de8288af23155d152aa11246cf1640aa672c40"
+  },
+  "p1_remediation_proposals_v1_ai": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_remediation_proposals.json",
+   "sha256": "d8aa972eb5dda2b2f50f6c3e3393e1fd163fc9a8193b36bee2eb198cc0734412"
+  },
+  "noise_review_jd_Dhanush": {
+   "path": "reports/noise_review/noise_review_Dhanush.xlsx",
+   "sha256": "bbf5d860c43fbde640462b60407299d97a24de58086e069e4bec8b19249d88b2"
+  },
+  "noise_review_jd_Lochan": {
+   "path": "reports/noise_review/noise_review_Lochan.xlsx",
+   "sha256": "67fd2b3f06c9391b215f8d5388d48e422cbae3a45104ae46516206dbaed35967"
+  },
+  "noise_review_jd_Priyanka": {
+   "path": "reports/noise_review/noise_review_Priyanka.xlsx",
+   "sha256": "2b26deb52c9c0f058623c12315eeab582af84c93358c95958f24a8dbc2f4ccb6"
+  },
+  "sample2000_postings": {
+   "path": "/Users/lochan/Downloads/sample2000_qwen_v3_2026-10-21_1545/extraction_sample_2000.csv",
+   "sha256": "be0ede93a5894d9f7ef0f36340dc971c4e39ad4d760e5fffc7a20927292f49b8"
+  },
+  "gold_postings_dev": {
+   "path": "data/gold/gold_postings_dev.csv",
+   "sha256": "c5f5ea3ffad2e60efc0e00c667344184237d7d1e3fad2ee354fb8da95798182a"
+  },
+  "system_wordlist": {
+   "path": "/usr/share/dict/words",
+   "sha256": "be41ad97963bf8dabedd5871d5d691596175269d540956b0f9965a885c2bbab9"
+  }
+ },
+ "protected_unchanged": {
+  "review_workbook": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/sprint4_topic_quality_review.xlsx",
+   "sha256": "4aa2aba9ee3b348b212150227a2b308044a3615f5af926574df94d253a258396"
+  },
+  "p1_topic_review_csv": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_topic_review.csv",
+   "sha256": "fb6b2d7cfc2fc0803a540881f21b6b9de53366b2386fe56c95e5b42f6075c8b0"
+  },
+  "p1_topic_review_md": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_topic_review.md",
+   "sha256": "b20e28927122dccdae9533deff65fd7453e7da8cde930af6e5bf8dcb1d98f1a0"
+  },
+  "p1_evidence_investigation_md": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_evidence_investigation.md",
+   "sha256": "303733ace9267755621c970d17b7f627c58e0207bede3e8b9ce7cc8f12666e91"
+  },
+  "p1_ai_recommendations_v1": {
+   "path": "reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_ai_recommendations_v1.json",
+   "sha256": "b3db528320ee6d1aa345a0addc6847b1b524b2f6470d3fe73655fd55ca680f9c"
+  },
+  "snapshot_aliases.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/aliases.csv",
+   "sha256": "3a2bbf7490f394bbdd07297d53255a62e7219929851e524a5afa67810046ee99"
+  },
+  "snapshot_library.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/library.csv",
+   "sha256": "162c08b603a7996f2330caa9bf600f0cbf0a911be3ea8d2cf4f8955b96ff3f9f"
+  },
+  "snapshot_library_links.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/library_links.csv",
+   "sha256": "389f3f8738c1e3f5f401ef215c24f997cb03c9929e0dba96ae53bc5523dbebdf"
+  },
+  "snapshot_manifest.json": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/manifest.json",
+   "sha256": "fba34be9885083452ff8c9b665b3a4fbab8745ab05e9f01dbdeba0ac54b17ec2"
+  },
+  "snapshot_memberships.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/memberships.csv",
+   "sha256": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37"
+  },
+  "snapshot_reference_links.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/reference_links.csv",
+   "sha256": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845"
+  },
+  "snapshot_run.json": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/run.json",
+   "sha256": "207f2d3f5074d0b47e3b3be0a6bb2fdbe7ca2f4c09586f8f9dbfc2ca50a5f7f8"
+  },
+  "snapshot_skills.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/skills.csv",
+   "sha256": "a7bcfd79827dbd812adcf1bb356faed54d6bd8134aeba1bd3556817ac87b2388"
+  },
+  "snapshot_topics.csv": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/topics.csv",
+   "sha256": "c403b44ce6bbd1abde1ac783fd7d31b9fbf64e02e46ae25a66bba3098a361324"
+  },
+  "snapshot_vectors.npy": {
+   "path": "data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/vectors.npy",
+   "sha256": "93a9839a0c1ddb8773ea9237c40b119e7cf5e79b2ad62ec850d0e34fd4b82b3e"
+  },
+  "noise_review_decisions_Lochan": {
+   "path": "reports/noise_review/reviewed_lochan.xlsx",
+   "sha256": "4be9544ee6a72d856bdaac6c86ce5ad4b5dbd7b64fa0bc749131e75bdeded69a"
+  },
+  "noise_review_decisions_Priyanka": {
+   "path": "reports/noise_review/noise_review_Priyanka_FINAL.xlsx",
+   "sha256": "e6e7072f1580233fa216a2453d3f14250399b966b7510948058156a423608262"
+  }
+ },
+ "expected": {
+  "p1_topics": 20,
+  "p1_skills": 976,
+  "membership_records": 976,
+  "linked_records": 2013,
+  "unmapped_aliases": 0,
+  "missing_p1_members": 0,
+  "duplicate_statement_ids": 0
+ },
+ "counts": {
+  "p1_topics": 20,
+  "p1_skills": 976,
+  "membership_records": 976,
+  "linked_records": 2013,
+  "unmapped_aliases": 0,
+  "missing_p1_members": 0,
+  "duplicate_statement_ids": 0,
+  "prepared_mentions_rows": 28777,
+  "prepared_mentions_postings": 1931,
+  "linked_postings": 967,
+  "linked_models": {
+   "claude-haiku-5-5": 1975,
+   "qwen/qwen3.8-27b": 38
+  },
+  "linked_review_status": {
+   "not_manually_reviewed": 2013
+  },
+  "records_where_evidence_differs_from_original": 0,
+  "records_where_skill_differs_from_original": 0,
+  "records_via_alias_rule": 70,
+  "posting_context_check": {
+   "verified_exact": 1992,
+   "not_found_in_local_text": 17,
+   "verified_normalised_whitespace_case": 4
+  },
+  "skills_with_human_review_decision": 409,
+  "skills_cand_ambiguous_acronym": 291,
+  "skills_cand_generic_noun": 149,
+  "skills_cand_reference_mapping": 65,
+  "skills_cand_conflicting_meaning": 88,
+  "skills_candidate_for_human_review": 461,
+  "skills_single_posting": 775
+ },
+ "outputs": {
+  "p1_extraction_evidence_v2.csv": {
+   "sha256": "ed4222be89d45dcd0beb95ce6317849a881e55b0f81efd60cb9b3eaf1510c32e"
+  },
+  "p1_skill_evidence_summary_v2.csv": {
+   "sha256": "fbe570e0e97d33dea4bd572af031c28aedf6a5d78e0a34841a6986870fd85010"
+  },
+  "p1_topic_evidence_summary_v2.csv": {
+   "sha256": "e7d1e75f46cfd01426e25d45d3f865964be2791d41c6e939e603c33fa2496b19"
+  },
+  "p1_evidence_reconciliation_v2.md": {
+   "sha256": "299e512736ab9e995f9f94eb7d2d7708476735fb5baac83ad068a04fb2bcad7e"
+  }
+ },
+ "candidate_rules": {
+  "cand_ambiguous_acronym": "one token of <=5 alphanumerics or a token mixing letters and digits; no confident lexically matching reference link; no '(KEY)' / 'KEY (' expansion pattern in any evidence quote",
+  "cand_generic_noun": "single alphabetic token found in /usr/share/dict/words, without a confident lexically matching reference link",
+  "cand_reference_mapping": "known_skill reference link whose label shares no 4-letter word stem with the skill and neither compact string contains the other",
+  "cand_conflicting_meaning": ">=2 postings and no two evidence quotes share a content word besides the skill's own words"
+ },
+ "labels": {
+  "extraction": "extraction (AI-generated statement; not manually reviewed)",
+  "posting_context": "verbatim quote check against contact-masked local posting text; confirms the quote exists, not its meaning",
+  "human_review": "Sprint 3 noise-review decisions (weak members only), provenance as marked in each file",
+  "ai_v1": "copied from p1_remediation_proposals.json (AI-generated, not human-validated)"
+ }
+}

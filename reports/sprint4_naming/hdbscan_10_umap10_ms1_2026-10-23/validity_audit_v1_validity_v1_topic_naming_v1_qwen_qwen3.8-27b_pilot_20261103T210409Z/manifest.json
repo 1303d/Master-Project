@@ -1,0 +1,133 @@
+{
+ "diversity": {
+  "cohesion_band": {
+   "high": 3,
+   "low": 18,
+   "medium": 9
+  },
+  "cos_mean": [
+   0.788,
+   0.9042
+  ],
+  "coverage_any": [
+   0.0,
+   0.8333
+  ],
+  "n_assigned": [
+   10,
+   54
+  ],
+  "weak_share": [
+   0.0,
+   0.52
+  ]
+ },
+ "exposure": {
+  "exposed_topics_in_sample": 11,
+  "note": "per-topic exposure is in the sealed file; topics whose automatic class was printed in the 2026-11-03 session are not blind for its readers"
+ },
+ "files_sha256": {
+  "REVIEW_INSTRUCTIONS.md": "2478a3198c5e3f81773c322af090525849342fa698e88f0e2ed211b1c50dead7",
+  "blinded_evidence.jsonl": "76f0b9f9d5573d0fa8dc0b5a43438cf11ccb730481fc3e06e9c295d45bdf51b3",
+  "blinded_evidence.md": "ce8a4076df246d555775ffa3b972a274962af2c1817c9be6f164c206ad729691",
+  "reviewer_sheet.csv": "2c668afa66195e4af593dc9afad582a096e24ef3909f2f44040e1b0735bbe17c"
+ },
+ "generated_utc": "2026-11-03T21:28:21+00:00",
+ "hidden_from_reviewer": [
+  "validity",
+  "treatment",
+  "provisional_name",
+  "llm_confidence",
+  "head_word",
+  "acronym_share",
+  "digit_share",
+  "initial_share",
+  "review_required",
+  "stratum"
+ ],
+ "inputs": {
+  "features": "7ed34ef71e306007e7197de7c15b8828f42e47042bd4966de1eba5eda1223ec2",
+  "snapshot": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2",
+  "validity_summary_files_sha256": {
+   "pilot_validity.csv": "7b54e903523455a5d0455c06b3bf1781219dcb3c210851a43b9eb39041d73fd8",
+   "topic_validity_all.csv": "1825e7579b2b44a842127306a1e689e2e62d96306e805bcd189754d31cf01dd8",
+   "topic_validity_review.md": "e21a06f37669950cbb85e5a2cb01669c854475afd18ca2eaaaac99e62d712fb4"
+  }
+ },
+ "procedure": {
+  "plan": {
+   "coherent": 12,
+   "mixed": 12,
+   "surface_form_cluster": 6
+  },
+  "pool_size": 368,
+  "population": "all topics minus development topics ['T0040', 'T0088', 'T0103', 'T0262', 'T0274', 'T0374']",
+  "review_order": "random.Random(seed + 1).shuffle",
+  "seed": 20261105,
+  "strata": "validity_auto",
+  "unsampled_classes": {},
+  "within_stratum": "sort by (cohesion band, reference coverage, n_assigned, weak share, topic_id); systematic sampling with one random start u ~ U[0, N/n)"
+ },
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "validity_audit/1",
+ "sealed_predictions_sha256": "6112ac127ec1ae84cac92201d246c386b859b527ce922808ae4900cda057d237",
+ "strata": {
+  "coherent": {
+   "N": 312,
+   "inclusion_probability": 0.038461538461538464,
+   "interval": 26.0,
+   "n": 12,
+   "random_start": 3.346615171481578,
+   "weight": 26.0
+  },
+  "mixed": {
+   "N": 36,
+   "inclusion_probability": 0.3333333333333333,
+   "interval": 3.0,
+   "n": 12,
+   "random_start": 2.0442813811129703,
+   "weight": 3.0
+  },
+  "surface_form_cluster": {
+   "N": 20,
+   "inclusion_probability": 0.3,
+   "interval": 3.3333333333333335,
+   "n": 6,
+   "random_start": 0.5034227667215778,
+   "weight": 3.3333333333333335
+  }
+ },
+ "topics_sorted": [
+  "T0003",
+  "T0012",
+  "T0027",
+  "T0029",
+  "T0041",
+  "T0052",
+  "T0058",
+  "T0078",
+  "T0132",
+  "T0137",
+  "T0155",
+  "T0161",
+  "T0172",
+  "T0178",
+  "T0183",
+  "T0190",
+  "T0191",
+  "T0214",
+  "T0220",
+  "T0231",
+  "T0246",
+  "T0251",
+  "T0273",
+  "T0276",
+  "T0277",
+  "T0306",
+  "T0314",
+  "T0316",
+  "T0332",
+  "T0372"
+ ],
+ "validity_run": "validity_v1_topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z"
+}

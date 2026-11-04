@@ -4,7 +4,17 @@
     python src/topic_naming.py prepare                       # same, then write the prepare folder (never overwritten)
     python src/topic_naming.py verify                        # re-hash the prepare folder against its manifest
     python src/topic_naming.py generate --scope pilot --live # LIVE Groq calls: needs explicit approval first
-    python src/topic_naming.py generate --live --resume <naming_run_id>   # continue a stopped / interrupted run
+    python src/topic_naming.py generate --live --resume <naming_run_id>   # continue a run (scope is inherited)
+
+Providers (--provider groq | anthropic; default groq, byte-identical to the Qwen runs):
+    python src/topic_naming.py prepare --provider anthropic                          # offline
+    python src/topic_naming.py select-missing --only-missing-from groq --limit 20    # offline: 213 without a Qwen answer
+    python src/topic_naming.py generate --provider anthropic --scope pilot --only-missing-from groq --limit 20 \
+        --live --key-authorization "<who authorised this key for pipeline use, and when>"
+    python src/topic_naming.py assemble [--allow-incomplete] [--no-write]          # offline mixed-provider result
+  Anthropic: official SDK (max_retries=0), claude-sonnet-5-5 only, structured output, no sampling / fallback,
+  per-minute RPM / ITPM / OTPM from anthropic-ratelimit-* headers, 529 retried, spend-limit 429 / 400 stop the run.
+  A live Anthropic run refuses to start without --key-authorization (CLAUDE.md:113).
 
 Inputs (read only, hash-checked first): data/processed/sprint4_input_<run>/ and sprint4_features_<run>/.
 Nothing here writes to those folders, to Supabase, or changes memberships / centroids.
@@ -109,7 +119,8 @@ FORBIDDEN_KEYS = {"label", "answer", "answer_key", "intruder", "question", "ques
 RESULT_COLS = ["topic_id", "status", "provisional_name", "description", "supporting_skills", "llm_confidence",
                "llm_confidence_reason", "topic_quality_flags", "name_flags", "review_required", "review_reason",
                "model", "served_model", "prompt_version", "prompt_sha256", "run_id", "clustering_run_id",
-               "evidence_fingerprint", "cache_key", "cached", "resumed", "attempts", "estimated_cost_usd", "error"]
+               "evidence_fingerprint", "cache_key", "cached", "resumed", "attempts", "estimated_cost_usd", "error",
+               "provider"]
 PROVENANCE_FIELDS = ("model", "served_model", "prompt_version", "prompt_sha256", "run_id", "clustering_run_id",
                      "evidence_fingerprint", "cache_key")
 STATUSES = ("ok", "failed", "not_attempted")
@@ -123,31 +134,53 @@ CHARS_PER_TOKEN_UPPER, CHARS_PER_TOKEN_TYPICAL = 2.5, 3.5   # assumptions (Qwen 
 REQUEST_OVERHEAD_TOKENS = 50    # assumption: chat template tokens
 TYPICAL_OUTPUT_TOKENS = 200     # assumption for the typical estimate only (the upper bound uses max tokens)
 MAX_ATTEMPTS = 5
-RETRYABLE = {429, 498, 500, 502, 503, 504, 599}
+RETRYABLE = {429, 498, 500, 502, 503, 504, 529, 599}   # 529 = Anthropic "overloaded"
 CONFIG_ERROR_STATUSES = {400, 401, 403, 404}   # Groq errors page: fix the request / credentials, do not retry
 CONTENT_ERROR_CODES = {"json_validate_failed"}  # Groq 400 code for JSON-mode output failures (seen in practice; not
                                                # on the errors page): a per-topic content failure, not a config error
+QUOTA_ERROR_CODES = {"enforced_spend_limit_reached"}  # Anthropic 429 at the monthly spend cap (no retry-after): stop
+SPEND_LIMIT_PREFIX = "You have reached your specified"  # Anthropic 400 when a user-set spend limit is reached: stop
+ANTHROPIC_PREFIXES = ("https://platform.claude.com/", "https://www.anthropic.com/", "https://claude.com/")
+ANTHROPIC_MODELS = {  # only models with a verified request configuration (platform.claude.com docs, 2026-11-03)
+    "claude-sonnet-5-5": {"thinking": {"type": "between_tools"}, "effort": "medium"},
+}
+ANTHROPIC_MAX_TOKENS = 1024
+ANTHROPIC_OVERHEAD_TOKENS = 400  # assumption: structured-output schema + request scaffolding
+OUTPUT_SCHEMA = {"type": "object", "additionalProperties": False, "required": list(OUTPUT_KEYS),
+                 "properties": {"provisional_name": {"type": "string"}, "description": {"type": "string"},
+                                "supporting_skills": {"type": "array", "items": {"type": "string"}},
+                                "confidence": {"type": "string", "enum": list(CONFIDENCE)},
+                                "confidence_reason": {"type": "string"}}}
 BACKOFF_BASE_S, BACKOFF_CAP_S, BACKOFF_JITTER = 2.0, 60.0, 0.25
 MAX_RETRY_AFTER_S = 600.0       # a longer Retry-After means a daily quota: stop and resume later
 MAX_LIMITER_WAIT_S = 900.0      # never wait longer than this for one request
 MINUTE_S, DAY_S = 60.0, 86400.0
 MTOK, USD_Q = Decimal(1_000_000), Decimal("0.00000001")
 SECRET_RE = re.compile(r"(gsk_[A-Za-z0-9]{8,}|sk-ant-[A-Za-z0-9_\-]{8,}|Bearer\s+\S+)")
-COST_COLS = ["run_id", "topic_id", "attempt", "retry_count", "timestamp_utc", "requested_model", "served_model",
-             "request_status", "api_call", "local_cache", "http_status", "error_class", "finish_reason", "input_tokens", "output_tokens",
-             "reasoning_tokens", "cached_input_tokens", "total_tokens", "rate_limit_wait_s", "backoff_wait_s",
-             "retry_after_s", "provider_remaining_requests_day", "provider_remaining_tokens_minute",
-             "provider_reset_requests_day_s", "provider_reset_tokens_minute_s", "pricing_version", "pricing_sha256", "estimated_max_cost_usd",
-             "estimated_input_cost_usd", "estimated_output_cost_usd", "estimated_cost_usd", "estimate_status",
+HEADER_KEYS = ["limit_requests_day", "remaining_requests_day", "reset_requests_day_s", "limit_tokens_minute",
+               "remaining_tokens_minute", "reset_tokens_minute_s", "limit_requests_minute", "remaining_requests_minute",
+               "reset_requests_minute_s", "limit_input_tokens_minute", "remaining_input_tokens_minute",
+               "reset_input_tokens_minute_s", "limit_output_tokens_minute", "remaining_output_tokens_minute",
+               "reset_output_tokens_minute_s", "retry_after_s"]
+COST_HEADER_KEYS = ["remaining_requests_day", "remaining_tokens_minute", "reset_requests_day_s", "reset_tokens_minute_s",
+                    "remaining_requests_minute", "remaining_input_tokens_minute", "remaining_output_tokens_minute"]
+LIMIT_ADOPT = {"limit_requests_day": "rpd", "limit_tokens_minute": "tpm", "limit_requests_minute": "rpm",
+               "limit_input_tokens_minute": "input_tpm", "limit_output_tokens_minute": "output_tpm"}
+COST_COLS = ["run_id", "topic_id", "attempt", "retry_count", "timestamp_utc", "provider", "requested_model", "served_model",
+             "prompt_version", "payload_sha256", "request_status", "validation_status", "api_call", "local_cache",
+             "http_status", "error_class", "finish_reason", "latency_ms", "input_tokens", "output_tokens", "reasoning_tokens",
+             "cached_input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "total_tokens",
+             "rate_limit_wait_s", "backoff_wait_s", "retry_after_s", *[f"provider_{k}" for k in COST_HEADER_KEYS],
+             "pricing_version", "pricing_sha256", "estimated_max_cost_usd", "estimated_input_cost_usd",
+             "estimated_output_cost_usd", "estimated_cache_cost_usd", "estimated_cost_usd", "estimate_status",
              "estimate_note", "billed_cost_usd", "billing_status", "cumulative_estimated_cost_usd", "request_id", "error"]
 RL_COLS = ["run_id", "topic_id", "attempt", "timestamp_utc", "event", "wait_s", "reason", "quota_source",
            "est_input_tokens", "est_output_tokens", "actual_tokens", "local_requests_last_minute",
            "local_tokens_last_minute", "local_requests_last_day", "local_tokens_last_day", "limit_rpm", "limit_rpd",
-           "limit_tpm", "limit_tpd", "provider_limit_requests_day", "provider_remaining_requests_day",
-           "provider_reset_requests_day_s", "provider_limit_tokens_minute", "provider_remaining_tokens_minute",
-           "provider_reset_tokens_minute_s", "provider_retry_after_s"]
+           "limit_tpm", "limit_tpd", "limit_input_tpm", "limit_output_tpm", *[f"provider_{k}" for k in HEADER_KEYS]]
 BILLING_STATUS = "not_determinable_from_api"
 SLEEP, CLOCK, RNG = time.sleep, time.time, random.Random()   # tests replace them
+PERF = time.perf_counter                                       # request latency
 
 
 def sha(b):
@@ -166,32 +199,34 @@ def naming_dir(root, run_id):
     return Path(root) / "data" / "processed" / f"sprint4_naming_{run_id}"
 
 
-def prepare_dir(root, run_id, pv=PROMPT_VERSION):
-    return naming_dir(root, run_id) / f"prepare_{pv}_{MODEL_SLUG}"
+def prepare_dir(root, run_id, pv=PROMPT_VERSION, prov=None):
+    return naming_dir(root, run_id) / f"prepare_{pv}_{_p(prov).prepare_tag}"
 
 
 def tracked_dir(root, run_id):
     return Path(root) / "reports" / "sprint4_naming" / run_id
 
 
-def cache_dir(root):
-    return Path(root) / "cache" / "topic_naming" / PROVIDER
+def cache_dir(root, prov=None):
+    return Path(root) / "cache" / "topic_naming" / _p(prov).name
 
 
-def rate_state_dir(root):
-    return cache_dir(root) / "rate_state"
+def rate_state_dir(root, prov=None):
+    return cache_dir(root, prov) / "rate_state"
 
 
 def prompt_path(root, pv=PROMPT_VERSION):
     return Path(root) / "prompts" / f"{pv}.txt"
 
 
-def pricing_path(root):
-    return Path(root) / "config" / "pricing" / f"{PROVIDER}_{MODEL_SLUG}.json"
+def pricing_path(root, prov=None):
+    p = _p(prov)
+    return Path(root) / "config" / "pricing" / f"{p.name}_{p.slug}.json"
 
 
-def rate_limits_path(root):
-    return Path(root) / "config" / "rate_limits" / f"{PROVIDER}_{MODEL_SLUG}.json"
+def rate_limits_path(root, prov=None):
+    p = _p(prov)
+    return Path(root) / "config" / "rate_limits" / f"{p.name}_{p.slug}.json"
 
 
 # ---------- inputs ----------
@@ -343,17 +378,17 @@ def user_message(payload):
 
 
 def request_settings():
-    """Everything in the request besides system prompt and user message (part of the cache key)."""
+    """Groq: everything in the request besides system prompt and user message (part of the cache key).
+    Unchanged since the Qwen runs, so the 161 cached Qwen answers keep their keys."""
     return {"provider": PROVIDER, "model": MODEL_ID, "temperature": TEMPERATURE, "max_completion_tokens": MAX_COMPLETION_TOKENS,
             "reasoning_effort": REASONING_EFFORT, "reasoning_format": REASONING_FORMAT, "response_format": RESPONSE_FORMAT}
 
 
-def build_request(system, payload):
+def build_request(system, payload, prov=None):
+    p = _p(prov)
     user = user_message(payload)
-    body = {"model": MODEL_ID, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-            "temperature": TEMPERATURE, "max_completion_tokens": MAX_COMPLETION_TOKENS,
-            "reasoning_effort": REASONING_EFFORT, "reasoning_format": REASONING_FORMAT, "response_format": RESPONSE_FORMAT}
-    key = sha(json.dumps({"settings": request_settings(), "prompt_sha256": sha(system), "user": user}, sort_keys=True))
+    body = p.build_body(system, user)
+    key = sha(json.dumps({"settings": p.request_settings(), "prompt_sha256": sha(system), "user": user}, sort_keys=True))
     return {"topic_id": payload["topic_id"], "cache_key": key, "body": body}
 
 
@@ -367,19 +402,20 @@ def all_keys(x):
             yield from all_keys(v)
 
 
-def validate_request(req, record, assigned, known_ids, secrets=()):
+def validate_request(req, record, assigned, known_ids, secrets=(), prov=None):
     """Offline checks of one request; returns a list of problems ([] = OK)."""
+    prv = _p(prov)
     p, t, body = [], record["topic_id"], req["body"]
-    if set(body) != BODY_KEYS or body.get("model") != MODEL_ID:
-        p.append("body: model not pinned or unexpected fields (fallback, tools, streaming, tracing?)")
-    settings = {k: body.get(k) for k in BODY_KEYS - {"model", "messages"}}
-    if settings != {k: v for k, v in request_settings().items() if k in settings}:
-        p.append("body: temperature / max tokens / reasoning / response_format differ from the pinned settings")
-    msgs = body.get("messages", [])
-    if [m.get("role") for m in msgs] != ["system", "user"] or "JSON" not in str(msgs[0].get("content")):
-        return p + ["messages: expected system + user; the system prompt must mention JSON (json_object mode)"]
+    if set(body) != prv.body_keys or body.get("model") != prv.model:
+        p.append("body: model not pinned or unexpected fields (fallback, tools, streaming, tracing, sampling?)")
+    pinned = {k: v for k, v in prv.request_settings().items() if k not in ("provider", "model")}
+    if {k: body.get(k) for k in pinned} != pinned:
+        p.append("body: temperature / max tokens / reasoning / output format differ from the pinned settings")
+    msg_problems, user = prv.message_check(body)
+    if user is None:
+        return p + msg_problems
     try:
-        pl = json.loads(msgs[1]["content"])
+        pl = json.loads(user)
     except (json.JSONDecodeError, KeyError, TypeError):
         return p + ["user message is not valid JSON"]
     if pl != record["payload"] or pl.get("topic_id") != t or req["topic_id"] != t:
@@ -398,7 +434,7 @@ def validate_request(req, record, assigned, known_ids, secrets=()):
         p.append("reference_hints: too many")
     if FORBIDDEN_KEYS & set(all_keys(pl)):
         p.append(f"forbidden keys in payload: {sorted(FORBIDDEN_KEYS & set(all_keys(pl)))}")
-    if len(msgs[1]["content"]) / 4 > MAX_USER_TOKENS:
+    if len(user) / 4 > MAX_USER_TOKENS:
         p.append("user message too long")
     text = json.dumps(req)
     if any(s and s in text for s in secrets) or SECRET_RE.search(text):
@@ -419,7 +455,7 @@ def check_date(p, today, probs):
         probs.append("verified_utc_date missing or not an ISO date")
 
 
-def load_pricing(path, today=None):
+def load_pricing(path, today=None, prov=None):
     """Validated pricing snapshot (Decimal rates) or ValueError. Never guesses a price."""
     path = Path(path)
     if not path.is_file():
@@ -429,31 +465,32 @@ def load_pricing(path, today=None):
         p = json.loads(raw)
     except json.JSONDecodeError as e:
         raise ValueError(f"pricing snapshot is not JSON: {e}") from None
+    prv = _p(prov)
     probs = [f"missing {k}" for k in ("schema", "version", "provider", "model_id", "currency", "unit", "rates", "sources",
                                        "verified_utc_date") if k not in p]
     if probs:
         raise ValueError("pricing snapshot invalid: " + "; ".join(probs))
-    if (p["provider"], p["model_id"]) != (PROVIDER, MODEL_ID):
-        probs.append(f"snapshot is for {p['provider']}/{p['model_id']}, not {PROVIDER}/{MODEL_ID}")
+    if (p["provider"], p["model_id"]) != (prv.name, prv.model):
+        probs.append(f"snapshot is for {p['provider']}/{p['model_id']}, not {prv.name}/{prv.model}")
     if (p["currency"], p["unit"]) != ("USD", "per_million_tokens"):
         probs.append("currency must be USD and unit per_million_tokens")
     rates = {}
-    for k in RATE_KEYS:
+    for k in prv.rate_keys:
         try:
             rates[k] = Decimal(str(p["rates"][k]))
             if not rates[k].is_finite() or rates[k] <= 0:
                 probs.append(f"rate {k} must be a positive number")
         except (KeyError, InvalidOperation, TypeError):
             probs.append(f"rate {k} missing or not a number")
-    if not p["sources"] or not all(str(s.get("url", "")).startswith(OFFICIAL_PREFIXES) for s in p["sources"]):
-        probs.append("sources must be official Groq URLs")
+    if not p["sources"] or not all(str(s.get("url", "")).startswith(prv.official_prefixes) for s in p["sources"]):
+        probs.append(f"sources must be official {prv.label} URLs")
     check_date(p, today, probs)
     if probs:
         raise ValueError("pricing snapshot invalid: " + "; ".join(probs))
     return {"data": p, "raw": raw, "sha256": sha(raw), "version": p["version"], "rates": rates}
 
 
-def load_rate_limits(path, plan="free", today=None):
+def load_rate_limits(path, plan=None, today=None, prov=None):
     """Validated rate-limit configuration for one plan, or ValueError."""
     path = Path(path)
     if not path.is_file():
@@ -463,15 +500,17 @@ def load_rate_limits(path, plan="free", today=None):
         p = json.loads(raw)
     except json.JSONDecodeError as e:
         raise ValueError(f"rate-limit configuration is not JSON: {e}") from None
+    prv = _p(prov)
+    plan = plan or prv.default_plan
     probs, limits, safety = [], {}, None
-    if (p.get("provider"), p.get("model_id")) != (PROVIDER, MODEL_ID):
-        probs.append(f"rate limits are for {p.get('provider')}/{p.get('model_id')}, not {PROVIDER}/{MODEL_ID}")
+    if (p.get("provider"), p.get("model_id")) != (prv.name, prv.model):
+        probs.append(f"rate limits are for {p.get('provider')}/{p.get('model_id')}, not {prv.name}/{prv.model}")
     cfg = p.get("plans", {}).get(plan)
     if cfg is None:
         probs.append(f"unknown plan {plan!r}")
     else:
-        if not str(cfg.get("source", "")).startswith(OFFICIAL_PREFIXES):
-            probs.append("plan source must be an official Groq URL")
+        if not str(cfg.get("source", "")).startswith(prv.official_prefixes):
+            probs.append(f"plan source must be an official {prv.label} URL")
         for k in ("rpm", "rpd", "tpm", "tpd", "input_tpm", "output_tpm"):
             v = cfg.get(k)
             if v is not None and (not isinstance(v, int) or isinstance(v, bool) or v <= 0):
@@ -505,7 +544,8 @@ def usage_tokens(usage):
 def price_usage(usage, pricing):
     """Tokens + Decimal estimated cost at published rates. Costs None (unknown) when usage is missing."""
     out = {"input_tokens": None, "output_tokens": None, "reasoning_tokens": None, "cached_input_tokens": None,
-           "total_tokens": None, "estimated_input_cost": None, "estimated_output_cost": None, "estimated_cost": None}
+           "cache_creation_input_tokens": None, "cache_read_input_tokens": None, "total_tokens": None,
+           "estimated_input_cost": None, "estimated_output_cost": None, "estimated_cache_cost": None, "estimated_cost": None}
     tok = usage_tokens(usage)
     if tok is None:
         return {**out, "estimate_status": "missing_usage", "estimate_note": "response carried no valid token usage"}
@@ -518,40 +558,48 @@ def price_usage(usage, pricing):
     if cached:
         note += "; cached input priced at the full input rate (no verified cached rate): upper bound"
     return {**out, "input_tokens": pin, "output_tokens": pout, "reasoning_tokens": reasoning, "cached_input_tokens": cached,
+            "cache_creation_input_tokens": 0, "cache_read_input_tokens": cached,
             "total_tokens": usage.get("total_tokens") if is_count(usage.get("total_tokens")) else pin + pout,
-            "estimated_input_cost": ic, "estimated_output_cost": oc, "estimated_cost": ic + oc,
+            "estimated_input_cost": ic, "estimated_output_cost": oc, "estimated_cache_cost": Decimal(0), "estimated_cost": ic + oc,
             "estimate_status": "estimated", "estimate_note": note}
 
 
-def estimate_input_tokens(body, chars_per_token):
-    chars = sum(len(m["content"]) for m in body["messages"])
-    return math.ceil(chars / chars_per_token) + REQUEST_OVERHEAD_TOKENS
+def estimate_input_tokens(body, chars_per_token, overhead=None):
+    chars = len(body.get("system") or "") + sum(len(m["content"]) for m in body["messages"])
+    return math.ceil(chars / chars_per_token) + (REQUEST_OVERHEAD_TOKENS if overhead is None else overhead)
 
 
-def max_request_cost(body, pricing):
-    """Upper-bound ESTIMATE for one attempt: conservative input tokens + max_completion_tokens output."""
-    r = pricing["rates"]
-    return (Decimal(estimate_input_tokens(body, CHARS_PER_TOKEN_UPPER)) * r["input"]
-            + Decimal(body["max_completion_tokens"]) * r["output"]) / MTOK
+def max_request_cost(body, pricing, prov=None):
+    """Upper-bound ESTIMATE for one attempt: conservative input tokens + the maximum output tokens."""
+    p, r = _p(prov), pricing["rates"]
+    return (Decimal(estimate_input_tokens(body, CHARS_PER_TOKEN_UPPER, p.overhead_tokens)) * r["input"]
+            + Decimal(p.max_output(body)) * r["output"]) / MTOK
 
 
-def offline_estimate(reqs, selected_ids, pricing=None, limits=None):
+def offline_estimate(reqs, selected_ids, pricing=None, limits=None, prov=None):
     """Token, cost and quota estimates without any API call (one attempt per topic, no cache hits)."""
+    prv = _p(prov)
+    ein = lambda q, cpt: estimate_input_tokens(q["body"], cpt, prv.overhead_tokens)
+
     def one(rs):
-        typ = sum(estimate_input_tokens(q["body"], CHARS_PER_TOKEN_TYPICAL) + TYPICAL_OUTPUT_TOKENS for q in rs)
-        up = sum(estimate_input_tokens(q["body"], CHARS_PER_TOKEN_UPPER) + MAX_COMPLETION_TOKENS for q in rs)
+        typ = sum(ein(q, CHARS_PER_TOKEN_TYPICAL) + TYPICAL_OUTPUT_TOKENS for q in rs)
+        up = sum(ein(q, CHARS_PER_TOKEN_UPPER) + prv.max_output(q["body"]) for q in rs)
         e = {"topics": len(rs), "requests": len(rs), "tokens_typical": typ, "tokens_upper": up}
         if pricing:
             r = pricing["rates"]
             e["estimated_cost_typical_usd"] = usd(sum(
-                ((Decimal(estimate_input_tokens(q["body"], CHARS_PER_TOKEN_TYPICAL)) * r["input"]
+                ((Decimal(ein(q, CHARS_PER_TOKEN_TYPICAL)) * r["input"]
                   + Decimal(TYPICAL_OUTPUT_TOKENS) * r["output"]) / MTOK for q in rs), Decimal(0)))
-            e["estimated_cost_upper_usd"] = usd(sum((max_request_cost(q["body"], pricing) for q in rs), Decimal(0)))
+            e["estimated_cost_upper_usd"] = usd(sum((max_request_cost(q["body"], pricing, prv) for q in rs), Decimal(0)))
         if limits and rs:
             L, s = limits["limits"], limits["safety"]
             cap = lambda k: None if L.get(k) is None else max(1, int(L[k] * s))
             per_req_upper = up / len(rs)
-            per_min = min((x for x in (cap("rpm"), cap("tpm") and int(cap("tpm") // per_req_upper)) if x is not None),
+            in_up = sum(ein(q, CHARS_PER_TOKEN_UPPER) for q in rs) / len(rs)
+            out_up = sum(prv.max_output(q["body"]) for q in rs) / len(rs)
+            per_min = min((x for x in (cap("rpm"), cap("tpm") and int(cap("tpm") // per_req_upper),
+                                       cap("input_tpm") and int(cap("input_tpm") // in_up),
+                                       cap("output_tpm") and int(cap("output_tpm") // out_up)) if x is not None),
                           default=None)
             e["quota"] = {"plan": limits["plan"], "safety_factor": s,
                           "share_of_daily_requests": round(len(rs) / cap("rpd"), 4) if cap("rpd") else None,
@@ -566,8 +614,9 @@ def offline_estimate(reqs, selected_ids, pricing=None, limits=None):
     return {"selected": one([q for q in reqs if q["topic_id"] in sel]), "full_run": one(reqs),
             "pricing_version": pricing["version"] if pricing else None,
             "assumptions": {"chars_per_token_typical": CHARS_PER_TOKEN_TYPICAL, "chars_per_token_upper": CHARS_PER_TOKEN_UPPER,
-                            "overhead_tokens": REQUEST_OVERHEAD_TOKENS, "typical_output_tokens": TYPICAL_OUTPUT_TOKENS,
-                            "upper_output_tokens": MAX_COMPLETION_TOKENS, "no_local_cache_hits": True, "no_retries": True}}
+                            "overhead_tokens": prv.overhead_tokens, "typical_output_tokens": TYPICAL_OUTPUT_TOKENS,
+                            "upper_output_tokens": prv.max_output(reqs[0]["body"]) if reqs else None,
+                            "no_local_cache_hits": True, "no_retries": True}}
 
 
 class Ledger:
@@ -593,8 +642,9 @@ class Ledger:
             self.spent += priced["estimated_cost"]
             if self.spent > self.budget and not self.stop_reason:
                 self.stop_reason = f"budget: estimated spend ${usd(self.spent)} exceeded ${usd(self.budget)} after a response"
-        elif priced["estimate_status"] == "missing_usage" and not self.stop_reason:
-            self.stop_reason = f"usage missing: {priced['estimate_note']}; live requests stopped until resolved"
+        elif priced["estimate_status"] in ("missing_usage", "unpriced") and not self.stop_reason:
+            self.stop_reason = (f"usage {priced['estimate_status'].replace('_', ' ')}: {priced['estimate_note']}; "
+                                "live requests stopped until resolved")
 
 
 # ---------- rate limiting ----------
@@ -621,7 +671,7 @@ def parse_int(x):
         return None
 
 
-def read_rate_headers(headers):
+def read_rate_headers(headers, now=None):
     """Groq: *-requests = per DAY, *-tokens = per MINUTE (console.groq.com/docs/rate-limits)."""
     h = {str(k).lower(): v for k, v in (headers or {}).items()}
     return {"limit_requests_day": parse_int(h.get("x-ratelimit-limit-requests")),
@@ -631,6 +681,36 @@ def read_rate_headers(headers):
             "remaining_tokens_minute": parse_int(h.get("x-ratelimit-remaining-tokens")),
             "reset_tokens_minute_s": parse_duration(h.get("x-ratelimit-reset-tokens")),
             "retry_after_s": parse_duration(h.get("retry-after"))}
+
+
+def parse_reset_time(value, now=None):
+    """Anthropic reset headers are RFC 3339 times of full replenishment -> seconds from `now` (durations also accepted)."""
+    if value is None:
+        return None
+    d = parse_duration(value)
+    if d is not None:
+        return d
+    try:
+        t = datetime.fromisoformat(str(value).strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if t.tzinfo is None:
+        t = t.replace(tzinfo=timezone.utc)
+    return max(0.0, t.timestamp() - (CLOCK() if now is None else now))
+
+
+def read_anthropic_rate_headers(headers, now=None):
+    """Anthropic anthropic-ratelimit-{requests,input-tokens,output-tokens,tokens}-{limit,remaining,reset}: per-minute
+    token buckets (platform.claude.com/docs/en/api/rate-limits); `tokens` = the most restrictive token limit."""
+    h = {str(k).lower(): v for k, v in (headers or {}).items()}
+    out = {k: None for k in HEADER_KEYS}
+    for kind, key in (("requests", "requests_minute"), ("input-tokens", "input_tokens_minute"),
+                      ("output-tokens", "output_tokens_minute"), ("tokens", "tokens_minute")):
+        out[f"limit_{key}"] = parse_int(h.get(f"anthropic-ratelimit-{kind}-limit"))
+        out[f"remaining_{key}"] = parse_int(h.get(f"anthropic-ratelimit-{kind}-remaining"))
+        out[f"reset_{key}_s"] = parse_reset_time(h.get(f"anthropic-ratelimit-{kind}-reset"), now)
+    out["retry_after_s"] = parse_duration(h.get("retry-after"))
+    return out
 
 
 TPD_MSG_RE = re.compile(r"tokens per day \(TPD\):\s*Limit (\d+),\s*Used (\d+),\s*Requested (\d+)", re.I)
@@ -662,8 +742,9 @@ class RateLimiter:
     windows over this machine's request log (60 s and 24 h) are a conservative fallback and are labelled as estimates.
     events = (time, input tokens, output tokens). check() -> (action, seconds, reason, source)."""
 
-    def __init__(self, limits, safety, clock=None, sleep=None, history=(), max_wait=MAX_LIMITER_WAIT_S):
+    def __init__(self, limits, safety, clock=None, sleep=None, history=(), max_wait=MAX_LIMITER_WAIT_S, header_reader=None):
         self.configured, self.limits, self.safety = dict(limits), dict(limits), float(safety)
+        self.header_reader = header_reader or read_rate_headers
         self.clock, self.sleep, self.max_wait = clock or CLOCK, sleep or SLEEP, max_wait
         self.events = deque(sorted(history))
         self.provider, self.provider_daily = {}, {}   # headers snapshot / 429-message details, absolute reset times
@@ -743,6 +824,13 @@ class RateLimiter:
             if at is not None and at > now:
                 waits.append((at - now, f"TPM (provider-reported): {p['remaining_tokens_minute']} tokens left this minute "
                               f"< {est}", "provider_headers"))
+        for rem, label, need in (("requests_minute", "RPM", 1), ("input_tokens_minute", "ITPM", est_in),
+                                 ("output_tokens_minute", "OTPM", est_out)):   # Anthropic per-minute buckets
+            if p.get(f"remaining_{rem}") is not None and p[f"remaining_{rem}"] < need:
+                at = p.get(f"reset_{rem}_at")
+                if at is not None and at > now:
+                    waits.append((at - now, f"{label} (provider-reported): {p[f'remaining_{rem}']} left < {need}",
+                                  "provider_headers"))
         if waits:
             w, why, src = max(waits)
             return "wait", max(w, 0.0) + 0.05, why, src
@@ -778,17 +866,20 @@ class RateLimiter:
                           "local estimate" if source == "local_estimate" else "unknown"}
 
     def record(self, in_tokens, out_tokens, headers):
-        """Count one request (tokens actually used; 0 when unknown) and keep Groq's header values as provider data."""
+        """Count one request (tokens actually used; 0 when unknown) and keep the provider's header values."""
         now = self.clock()
         self.events.append((now, int(in_tokens or 0), int(out_tokens or 0)))
-        h = read_rate_headers(headers)
+        h = self.header_reader(headers, now)
         if any(v is not None for k, v in h.items() if k != "retry_after_s"):
-            self.provider = {"observed_at": now, **{k: h[k] for k in ("limit_requests_day", "remaining_requests_day",
-                                                                      "limit_tokens_minute", "remaining_tokens_minute")},
-                             "reset_requests_day_at": None if h["reset_requests_day_s"] is None else now + h["reset_requests_day_s"],
-                             "reset_tokens_minute_at": None if h["reset_tokens_minute_s"] is None else now + h["reset_tokens_minute_s"]}
-        for hk, lk in (("limit_requests_day", "rpd"), ("limit_tokens_minute", "tpm")):
-            if h[hk] is not None:
+            snap = {"observed_at": now}
+            for k, v in h.items():
+                if k.startswith("reset_") and k.endswith("_s"):
+                    snap[k[:-2] + "_at"] = None if v is None else now + v
+                elif k != "retry_after_s":
+                    snap[k] = v
+            self.provider = snap
+        for hk, lk in LIMIT_ADOPT.items():
+            if h.get(hk) is not None:
                 self.limits[lk] = h[hk]
                 self.header_adopted[lk] = h[hk]
         return h
@@ -809,7 +900,7 @@ class RateLimiter:
         prov = (d or {}).get("provider") or {}
         if prov.get("observed_at") and prov["observed_at"] > now - DAY_S:
             self.provider = prov
-            for hk, lk in (("limit_requests_day", "rpd"), ("limit_tokens_minute", "tpm")):
+            for hk, lk in LIMIT_ADOPT.items():
                 if prov.get(hk) is not None:
                     self.limits[lk] = prov[hk]
                     self.header_adopted[lk] = prov[hk]
@@ -830,11 +921,15 @@ class RateLimiter:
                 "tokens_per_minute": {"limit": p.get("limit_tokens_minute"), "remaining": p.get("remaining_tokens_minute"),
                                       "reset_at_utc": ts(p.get("reset_tokens_minute_at"))},
                 "tokens_per_day": "not reported in headers by Groq",
+                **{f"{k}_per_minute": {"limit": p.get(f"limit_{k}_minute"), "remaining": p.get(f"remaining_{k}_minute"),
+                                       "reset_at_utc": ts(p.get(f"reset_{k}_minute_at"))}
+                   for k in ("requests", "input_tokens", "output_tokens")},
                 "from_429_messages": {k: {**{x: v[x] for x in ("limit", "used", "requested")},
                                           "retry_at_utc": ts(v.get("retry_at")), "source": QUOTA_SOURCES["provider_429_message"]}
                                       for k, v in self.provider_daily.items()}},
             "local_estimate": {"source": QUOTA_SOURCES["local_estimate"], **u,
-                               "caps_after_safety": {k: self.cap(k) for k in ("rpm", "rpd", "tpm", "tpd")},
+                               "caps_after_safety": {k: self.cap(k) for k in ("rpm", "rpd", "tpm", "tpd", "input_tpm",
+                                                                              "output_tpm")},
                                "used_for": "RPD only when Groq reported nothing; TPD always (no provider TPD header); "
                                            "RPM/TPM together with the provider TPM header"},
         }
@@ -1018,10 +1113,8 @@ def provenance_gaps(root, inp, overlap):
     return gaps
 
 
-def model_manifest():
-    return {"provider": PROVIDER, "model_id": MODEL_ID, "api": f"{API_URL} (REST, no SDK retries)",
-            **{k: v for k, v in request_settings().items() if k not in ("provider", "model")},
-            "fallback": None, "tracing": None, "model_status": "Preview (may be discontinued at short notice)"}
+def model_manifest(prov=None):
+    return _p(prov).manifest()
 
 
 def load_optional(fn, *a):
@@ -1032,8 +1125,11 @@ def load_optional(fn, *a):
 
 
 def prepare(root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, write=True, secrets=(), pilot_per=PILOT_PER_STRATUM,
-            today=None, plan="free"):
-    pdir, tdir = prepare_dir(root, run_id), tracked_dir(root, run_id) / prepare_dir(root, run_id).name
+            today=None, plan=None, prov=None):
+    prv = _p(prov)
+    plan = plan or prv.default_plan
+    pdir = prepare_dir(root, run_id, prov=prv)
+    tdir = tracked_dir(root, run_id) / pdir.name
     if write and (pdir.exists() or tdir.exists()):
         raise FileExistsError(f"{pdir.name} already exists; never overwritten")
     pp = prompt_path(root)
@@ -1048,18 +1144,18 @@ def prepare(root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, write=True, secrets=
         if m["state"] == "assigned":
             assigned[m["topic_id"]].add(m["skill_key"])
     known = set(inp["topic_ids"])
-    reqs = [build_request(system, r["payload"]) for r in records]
-    problems = {r["topic_id"]: validate_request(q, r, assigned[r["topic_id"]], known, secrets) for q, r in zip(reqs, records)}
+    reqs = [build_request(system, r["payload"], prv) for r in records]
+    problems = {r["topic_id"]: validate_request(q, r, assigned[r["topic_id"]], known, secrets, prv) for q, r in zip(reqs, records)}
     problems = {t: p for t, p in problems.items() if p}
     if len(records) != len(inp["topic_ids"]) or len({r["topic_id"] for r in records}) != len(records):
         problems["_all"] = ["evidence does not cover every topic exactly once"]
     pilot = select_pilot(records, per=pilot_per)
     overlap = strata_overlap(records)
-    pricing, pricing_err = load_optional(load_pricing, pricing_path(root), today)
-    limits, limits_err = load_optional(load_rate_limits, rate_limits_path(root), plan, today)
-    estimate = offline_estimate(reqs, [p["topic_id"] for p in pilot], pricing, limits)
+    pricing, pricing_err = load_optional(load_pricing, pricing_path(root, prv), today, prv)
+    limits, limits_err = load_optional(load_rate_limits, rate_limits_path(root, prv), plan, today, prv)
+    estimate = offline_estimate(reqs, [p["topic_id"] for p in pilot], pricing, limits, prv)
     estimate = {"pilot": estimate.pop("selected"), **estimate, "pricing_error": pricing_err, "rate_limits_error": limits_err}
-    sizes = [len(q["body"]["messages"][1]["content"]) for q in reqs]
+    sizes = [len(prv.message_check(q["body"])[1] or "") for q in reqs]
     flag_rows = [{"topic_id": r["topic_id"], "topic_quality_flags": r["topic_quality_flags"], "info_flags": r["info_flags"],
                   **{k: (round(v, 6) if isinstance(v, float) else v) for k, v in r["metrics"].items()}} for r in records]
     files = {"evidence.jsonl": jsonl(records), "requests.jsonl": jsonl(reqs),
@@ -1072,11 +1168,11 @@ def prepare(root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, write=True, secrets=
         "inputs": {"snapshot_fingerprint": inp["snap"]["manifest"]["data_fingerprint"],
                    "features_fingerprint": inp["features_manifest"]["data_fingerprint"]},
         "prompt": {"version": PROMPT_VERSION, "path": pp.relative_to(root).as_posix(), "sha256": sha(system)},
-        "model": model_manifest(),
+        "model": model_manifest(prv),
         "pricing_snapshot": pricing and {"version": pricing["version"], "sha256": pricing["sha256"],
-                                         "path": pricing_path(root).relative_to(root).as_posix()},
+                                         "path": pricing_path(root, prv).relative_to(root).as_posix()},
         "rate_limits": limits and {"plan": limits["plan"], "limits": limits["limits"], "safety": limits["safety"],
-                                   "sha256": limits["sha256"], "path": rate_limits_path(root).relative_to(root).as_posix()},
+                                   "sha256": limits["sha256"], "path": rate_limits_path(root, prv).relative_to(root).as_posix()},
         "offline_estimate": estimate,
         "code": code_version(root),
         "settings": {"n_representatives": N_REPS, "n_additional_members": N_EXTRA, "additional_members_selection":
@@ -1112,8 +1208,8 @@ def prepare(root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, write=True, secrets=
     return {"manifest": manifest, "records": records, "requests": reqs, "pilot": pilot, "problems": problems}
 
 
-def verify(root=ROOT, run_id=RUN_ID):
-    d = prepare_dir(root, run_id)
+def verify(root=ROOT, run_id=RUN_ID, prov=None):
+    d = prepare_dir(root, run_id, prov=prov)
     tm = tracked_dir(root, run_id) / d.name / "manifest.json"
     m = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
     p = [f"{f}: hash differs" for f, h in m["files_sha256"].items() if not (d / f).is_file() or sha((d / f).read_bytes()) != h]
@@ -1130,11 +1226,16 @@ class ApiErr(Exception):
         self.usage, self.request_id, self.headers = usage, request_id, headers or {}
         e = (body or {}).get("error") if isinstance(body, dict) else None
         e = e if isinstance(e, dict) else {}
-        self.error_type, self.error_code, self.failed_generation = e.get("type"), e.get("code"), bool(e.get("failed_generation"))
+        details = e.get("details") if isinstance(e.get("details"), dict) else {}
+        self.error_type, self.error_code = e.get("type"), e.get("code") or details.get("error_code")
+        self.failed_generation = bool(e.get("failed_generation"))
 
     @property
     def error_class(self):
-        """rate_limit / transient (retried) | content (this topic fails) | config (stop the run) | other (topic fails)."""
+        """quota (spend limit: stop the run) | rate_limit / transient (retried) | content (this topic fails) |
+        config (stop the run) | other (topic fails)."""
+        if self.error_code in QUOTA_ERROR_CODES or (self.status == 400 and str(self.message).startswith(SPEND_LIMIT_PREFIX)):
+            return "quota"
         if self.status == 429:
             return "rate_limit"
         if self.status in RETRYABLE:
@@ -1198,6 +1299,228 @@ class GroqBackend:
                 "request_id": (d.get("x_groq") or {}).get("id") or hdr.get("x-request-id") or d.get("id")}
 
 
+class AnthropicBackend:
+    """Anthropic Messages API through the official SDK, SDK retries off (generate() retries and logs every attempt).
+    with_raw_response gives the anthropic-ratelimit-* headers. send(body) -> dict(content, finish_reason, model, usage,
+    request_id, headers). The API key is read from the environment / .env and never logged."""
+
+    def __init__(self, model, client=None):
+        if client is None:
+            import anthropic
+            from dotenv import dotenv_values
+            key = os.getenv("ANTHROPIC_API_KEY") or dotenv_values(ROOT / ".env").get("ANTHROPIC_API_KEY")
+            if not key:
+                raise SystemExit("ANTHROPIC_API_KEY is missing")
+            client = anthropic.Anthropic(api_key=key, max_retries=0, timeout=120.0)
+        self.client, self.model = client, model
+
+    def check_model(self):
+        """Live pre-flight: GET /v1/models/<id> must return this model."""
+        import anthropic
+        try:
+            m = self.client.models.retrieve(self.model)
+        except anthropic.APIStatusError as e:
+            return False, f"model check HTTP {e.status_code}"
+        except anthropic.APIConnectionError as e:
+            return False, f"model check failed: {type(e).__name__}"
+        mid = getattr(m, "id", None)
+        return (mid == self.model, f"model {self.model} available" if mid == self.model
+                else f"model {self.model} not available (id={mid!r})")
+
+    def send(self, body):
+        import anthropic
+        try:
+            raw = self.client.messages.with_raw_response.create(**body)
+            msg, hdr = raw.parse(), {str(k).lower(): v for k, v in dict(raw.headers).items()}
+        except anthropic.APIStatusError as e:
+            hdr = {str(k).lower(): v for k, v in dict(e.response.headers).items()}
+            b = e.body if isinstance(e.body, dict) else {}
+            err = b.get("error") if isinstance(b.get("error"), dict) else {}
+            raise ApiErr(e.status_code, str(err.get("message") or e.message or "")[:300], parse_duration(hdr.get("retry-after")),
+                         None, hdr.get("request-id"), hdr, b) from None
+        except anthropic.APIConnectionError as e:
+            raise ApiErr(599, f"{type(e).__name__}: connection failed") from None
+        d = msg.model_dump()
+        text = "".join(c.get("text") or "" for c in (d.get("content") or []) if c.get("type") == "text")
+        return {"content": text, "finish_reason": d.get("stop_reason"), "model": d.get("model"), "usage": d.get("usage"),
+                "headers": hdr, "request_id": hdr.get("request-id") or d.get("id")}
+
+
+def anthropic_usage_tokens(usage):
+    """(input + cache-write tokens, output tokens): what counts toward Anthropic ITPM / OTPM. None when missing."""
+    if not isinstance(usage, dict):
+        return None
+    tin, tout, cw = usage.get("input_tokens"), usage.get("output_tokens"), usage.get("cache_creation_input_tokens") or 0
+    return (tin + cw, tout) if is_count(tin) and is_count(tout) and is_count(cw) else None
+
+
+def anthropic_price_usage(usage, pricing):
+    """Anthropic usage -> tokens + Decimal costs (input, output, cache write 5m / 1h, cache read priced separately).
+    Unknown categories (server tools, other tiers / geos, cache writes without TTL breakdown) -> unpriced (never 0)."""
+    out = {"input_tokens": None, "output_tokens": None, "reasoning_tokens": None, "cached_input_tokens": None,
+           "cache_creation_input_tokens": None, "cache_read_input_tokens": None, "total_tokens": None,
+           "estimated_input_cost": None, "estimated_output_cost": None, "estimated_cache_cost": None, "estimated_cost": None}
+    if not isinstance(usage, dict):
+        return {**out, "estimate_status": "missing_usage", "estimate_note": "response carried no usage object"}
+    tin, tout = usage.get("input_tokens"), usage.get("output_tokens")
+    cw, cr = usage.get("cache_creation_input_tokens") or 0, usage.get("cache_read_input_tokens") or 0
+    cc = usage.get("cache_creation") or {}
+    w5, w1 = cc.get("ephemeral_5m_input_tokens") or 0, cc.get("ephemeral_1h_input_tokens") or 0
+    if not all(is_count(x) for x in (tin, tout, cw, cr, w5, w1)):
+        return {**out, "estimate_status": "missing_usage", "estimate_note": "input/output/cache token counts missing or invalid"}
+    base = {**out, "input_tokens": tin, "output_tokens": tout, "cached_input_tokens": cr, "cache_creation_input_tokens": cw,
+            "cache_read_input_tokens": cr, "total_tokens": tin + cw + cr + tout}
+    stu = {k: v for k, v in (usage.get("server_tool_use") or {}).items() if v}
+    reasons = [x for x, bad in (("cache write tokens without a matching 5m/1h breakdown", cw and w5 + w1 != cw),
+                                ("server tool usage is not in the pricing snapshot", bool(stu)),
+                                (f"service tier {usage.get('service_tier')!r} is not priced", usage.get("service_tier") not in (None, "standard")),
+                                (f"inference_geo {usage.get('inference_geo')!r} is not priced",
+                                 usage.get("inference_geo") not in (None, "global", "not_available"))) if bad]
+    if reasons:
+        return {**base, "estimate_status": "unpriced", "estimate_note": "; ".join(reasons)}
+    r = pricing["rates"]
+    ic, oc = Decimal(tin) * r["input"] / MTOK, Decimal(tout) * r["output"] / MTOK
+    cache = (Decimal(w5) * r["cache_write_5m"] + Decimal(w1) * r["cache_write_1h"] + Decimal(cr) * r["cache_read"]) / MTOK
+    return {**base, "estimated_input_cost": ic, "estimated_output_cost": oc, "estimated_cache_cost": cache,
+            "estimated_cost": ic + oc + cache, "estimate_status": "estimated",
+            "estimate_note": "published-rate estimate (input, output, cache write and cache read priced separately)"}
+
+
+# ---------- providers ----------
+class GroqProvider:
+    """Groq Qwen: exactly the request, cache key, usage and header rules of the Qwen runs (cache keys unchanged)."""
+    name, label, default_plan, ok_finish = "groq", "Groq", "free", "stop"
+    rate_keys = ("input", "output")
+    header_meaning = {"x-ratelimit-*-requests": "per day (RPD)", "x-ratelimit-*-tokens": "per minute (TPM)"}
+    billing_note = ("Groq returns no charge and does not document free-tier billing; check the Groq console. "
+                    "Unknown billing is never reported as zero")
+
+    def __init__(self, model=None):
+        if model not in (None, MODEL_ID):
+            raise ValueError(f"unsupported Groq model {model!r}: only {MODEL_ID} has a verified configuration")
+        self._model = model
+
+    model = property(lambda self: self._model or MODEL_ID)
+    slug = property(lambda self: self.model.replace("/", "_"))
+    prepare_tag = property(lambda self: self.slug)
+    official_prefixes = property(lambda self: OFFICIAL_PREFIXES)
+    body_keys = property(lambda self: BODY_KEYS)
+    overhead_tokens = property(lambda self: REQUEST_OVERHEAD_TOKENS)
+
+    def request_settings(self):
+        return request_settings()
+
+    def build_body(self, system, user):
+        return {"model": self.model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+                "temperature": TEMPERATURE, "max_completion_tokens": MAX_COMPLETION_TOKENS,
+                "reasoning_effort": REASONING_EFFORT, "reasoning_format": REASONING_FORMAT, "response_format": RESPONSE_FORMAT}
+
+    def message_check(self, body):
+        msgs = body.get("messages", [])
+        if [m.get("role") for m in msgs] != ["system", "user"] or "JSON" not in str(msgs[0].get("content")):
+            return ["messages: expected system + user; the system prompt must mention JSON (json_object mode)"], None
+        return [], msgs[1]["content"]
+
+    def max_output(self, body):
+        return body["max_completion_tokens"]
+
+    def usage_tokens(self, usage):
+        return usage_tokens(usage)
+
+    def price_usage(self, usage, pricing):
+        return price_usage(usage, pricing)
+
+    def read_rate_headers(self, headers, now=None):
+        return read_rate_headers(headers)
+
+    def backend(self):
+        return GroqBackend()
+
+    def manifest(self):
+        return {"provider": self.name, "model_id": self.model, "api": f"{API_URL} (REST, no SDK retries)",
+                **{k: v for k, v in self.request_settings().items() if k not in ("provider", "model")},
+                "fallback": None, "tracing": None, "model_status": "Preview (may be discontinued at short notice)"}
+
+
+class AnthropicProvider:
+    """Anthropic Claude through the official SDK. Same prompt and five-field answer, enforced with structured output
+    (output_config.format json_schema). No sampling parameters (Sonnet 5.5 rejects non-default values), no fallback
+    model, thinking off (between_tools). Per-minute RPM / ITPM / OTPM limits from anthropic-ratelimit-* headers."""
+    name, label, default_plan, ok_finish = "anthropic", "Anthropic", "conservative", "end_turn"
+    rate_keys = ("input", "output", "cache_write_5m", "cache_write_1h", "cache_read")
+    official_prefixes = ANTHROPIC_PREFIXES
+    body_keys = {"model", "max_tokens", "system", "messages", "thinking", "output_config"}
+    overhead_tokens = ANTHROPIC_OVERHEAD_TOKENS
+    header_meaning = {"anthropic-ratelimit-requests-*": "requests per minute (token bucket)",
+                      "anthropic-ratelimit-input-tokens-*": "uncached input + cache-write tokens per minute",
+                      "anthropic-ratelimit-output-tokens-*": "output tokens per minute",
+                      "anthropic-ratelimit-tokens-*": "the most restrictive token limit",
+                      "*-reset": "RFC 3339 time of full replenishment"}
+    billing_note = ("the Messages API returns usage but no charge; check Usage / Billing in the Claude Console. "
+                    "Unknown billing is never reported as zero")
+
+    def __init__(self, model="claude-sonnet-5-5"):
+        if model not in ANTHROPIC_MODELS:
+            raise ValueError(f"unsupported Anthropic model {model!r}: only {sorted(ANTHROPIC_MODELS)} have a verified "
+                             "request configuration")
+        self.model, self.cfg = model, ANTHROPIC_MODELS[model]
+
+    slug = property(lambda self: self.model)
+    prepare_tag = property(lambda self: f"anthropic_{self.model}")
+
+    def request_settings(self):
+        return {"provider": self.name, "model": self.model, "max_tokens": ANTHROPIC_MAX_TOKENS,
+                "thinking": self.cfg["thinking"],
+                "output_config": {"effort": self.cfg["effort"], "format": {"type": "json_schema", "schema": OUTPUT_SCHEMA}}}
+
+    def build_body(self, system, user):
+        st = self.request_settings()
+        return {"model": self.model, "max_tokens": st["max_tokens"], "system": system,
+                "messages": [{"role": "user", "content": user}], "thinking": st["thinking"],
+                "output_config": st["output_config"]}
+
+    def message_check(self, body):
+        msgs = body.get("messages", [])
+        if [m.get("role") for m in msgs] != ["user"] or "JSON" not in str(body.get("system")):
+            return ["messages: expected one user message and a system prompt that describes the JSON answer"], None
+        return [], msgs[0]["content"]
+
+    def max_output(self, body):
+        return body["max_tokens"]
+
+    def usage_tokens(self, usage):
+        return anthropic_usage_tokens(usage)
+
+    def price_usage(self, usage, pricing):
+        return anthropic_price_usage(usage, pricing)
+
+    def read_rate_headers(self, headers, now=None):
+        return read_anthropic_rate_headers(headers, now)
+
+    def backend(self):
+        return AnthropicBackend(self.model)
+
+    def manifest(self):
+        return {"provider": self.name, "model_id": self.model,
+                "api": "Anthropic Messages API, official SDK (max_retries=0, raw responses for rate-limit headers)",
+                **{k: v for k, v in self.request_settings().items() if k not in ("provider", "model")},
+                "sampling": None, "fallback": None, "tracing": None, "key_authorization_required": True}
+
+
+PROVIDERS = {"groq": GroqProvider, "anthropic": AnthropicProvider}
+GROQ = GroqProvider()
+
+
+def make_provider(name="groq", model=None):
+    if name not in PROVIDERS:
+        raise ValueError(f"unknown provider {name!r}; choose one of {sorted(PROVIDERS)}")
+    return PROVIDERS[name](model) if model else PROVIDERS[name]()
+
+
+def _p(prov):
+    return prov or GROQ
+
+
 # ---------- generation ----------
 def redact(text, secrets):
     text = SECRET_RE.sub("[REDACTED]", text)
@@ -1207,10 +1530,11 @@ def redact(text, secrets):
     return text
 
 
-def summarise_costs(attempts, rows, ledger, pricing, meta, estimate):
+def summarise_costs(attempts, rows, ledger, pricing, meta, estimate, prov=None):
+    p = _p(prov)
     api = [a for a in attempts if a["api_call"]]
     est = [a for a in api if a["estimate_status"] == "estimated"]
-    unknown = [a for a in api if a["estimate_status"] == "missing_usage"]
+    unknown = [a for a in api if a["estimate_status"] in ("missing_usage", "unpriced")]
     err_no_usage = [a for a in api if a["estimate_status"] == "no_usage_on_error"]
     tok = lambda k: sum(a[k] for a in api if is_count(a[k]))
     total = sum((a["estimated_cost"] for a in est), Decimal(0))
@@ -1218,14 +1542,15 @@ def summarise_costs(attempts, rows, ledger, pricing, meta, estimate):
     ok_api = [r for r in ok if not r["cached"]]
     avg = total / len(ok_api) if ok_api and not unknown else None
     remaining = meta["total_topics"] - meta["completed_overall"]
+    lat = sorted(a["latency_ms"] for a in api if isinstance(a.get("latency_ms"), (int, float)))
     return {
         "run_id": meta["naming_run_id"], "scope": meta["scope"], "run_status": meta["run_status"],
-        "stop_reason": meta["stop_reason"], "requested_model": MODEL_ID,
+        "stop_reason": meta["stop_reason"], "provider": p.name, "requested_model": p.model,
         "served_models": sorted({a["served_model"] for a in api if a["served_model"]}),
         "pricing_snapshot": {"file": "pricing_snapshot.json", "version": pricing["version"], "sha256": pricing["sha256"],
                              "verified_utc_date": pricing["data"]["verified_utc_date"],
                              "sources": [s["url"] for s in pricing["data"]["sources"]]},
-        "budget_usd": usd(ledger.budget), "budget_basis": "estimated cost at published rates (Groq returns no charge)",
+        "budget_usd": usd(ledger.budget), "budget_basis": f"estimated cost at published rates ({p.label} returns no charge)",
         "budget_note": "pre-request checks use an estimate and cannot guarantee an exact cap",
         "topics": {"requested": len(rows), "attempted": sum(r["status"] != "not_attempted" for r in rows),
                    "successful": len(ok), "successful_via_api": len(ok_api), "failed": sum(r["status"] == "failed" for r in rows),
@@ -1234,18 +1559,20 @@ def summarise_costs(attempts, rows, ledger, pricing, meta, estimate):
                    "resumed_from_previous_run": sum(bool(r.get("resumed")) for r in rows)},
         "api_attempts": len(api), "retries": sum(a["retry_count"] > 0 for a in api),
         "api_attempts_by_status": dict(sorted(Counter(a["request_status"] for a in api).items())),
+        "latency_ms": {"n": len(lat), "mean": round(sum(lat) / len(lat), 1) if lat else None,
+                       "median": lat[len(lat) // 2] if lat else None, "max": lat[-1] if lat else None},
         "tokens": {"input": tok("input_tokens"), "output": tok("output_tokens"), "reasoning": tok("reasoning_tokens"),
-                   "cached_input": tok("cached_input_tokens"), "total": tok("total_tokens"),
-                   "note": "local cache hits make no API call; cached_input = provider-side prompt caching, if reported"},
+                   "cached_input": tok("cached_input_tokens"), "cache_creation_input": tok("cache_creation_input_tokens"),
+                   "cache_read_input": tok("cache_read_input_tokens"), "total": tok("total_tokens"),
+                   "note": "local cache hits make no API call; cache_* = provider-side prompt caching, if reported"},
         "cost_usd": {"estimated_total": usd(total),
                      "estimated_input": usd(sum((a["estimated_input_cost"] for a in est), Decimal(0))),
                      "estimated_output": usd(sum((a["estimated_output_cost"] for a in est), Decimal(0))),
-                     "estimate_basis": "actual tokens x published Groq rates",
+                     "estimated_cache": usd(sum((a["estimated_cache_cost"] or Decimal(0) for a in est), Decimal(0))),
+                     "estimate_basis": f"actual tokens x published {p.label} rates",
                      "estimate_status": "complete" if not unknown and not err_no_usage else
                                         "incomplete: see unknown_cost_attempts / error_attempts_without_usage",
-                     "billed_total": None, "billing_status": BILLING_STATUS,
-                     "billing_note": "Groq returns no charge and does not document free-tier billing; check the Groq "
-                                     "console. Unknown billing is never reported as zero"},
+                     "billed_total": None, "billing_status": BILLING_STATUS, "billing_note": p.billing_note},
         "unknown_cost_attempts": len(unknown), "error_attempts_without_usage": len(err_no_usage),
         "average_estimated_cost_per_successful_topic_usd": jusd(avg),
         "this_run_estimated_cost_usd": usd(total),
@@ -1258,43 +1585,56 @@ def summarise_costs(attempts, rows, ledger, pricing, meta, estimate):
     }
 
 
-def summarise_rate(rl_rows, attempts, rows, limiter, rl_cfg, meta, backoff_total):
+def resume_command(naming_run_id, prov=None):
+    p = _p(prov)
+    extra = "" if p.name == "groq" else (f" --provider {p.name} --model {p.model} "
+                                         "--key-authorization \"<who authorised this key, and when>\"")
+    return f"python src/topic_naming.py generate --live --resume {naming_run_id}{extra}"
+
+
+def summarise_rate(rl_rows, attempts, rows, limiter, rl_cfg, meta, backoff_total, prov=None):
+    p = _p(prov)
     api = [a for a in attempts if a["api_call"]]
     left = any(r["status"] != "ok" for r in rows)
+    blocked = meta["config_error"] or meta.get("spend_limit")
     return {
         "run_id": meta["naming_run_id"], "run_status": meta["run_status"], "stop_reason": meta["stop_reason"],
-        "plan": rl_cfg["plan"], "config_sha256": rl_cfg["sha256"], "source": rl_cfg["source"], "safety_factor": rl_cfg["safety"],
-        "limits_configured": limiter.configured, "limits_used_at_end": limiter.limits,
-        "limits_from_headers": limiter.header_adopted,
-        "header_meaning": {"x-ratelimit-*-requests": "per day (RPD)", "x-ratelimit-*-tokens": "per minute (TPM)"},
+        "provider": p.name, "plan": rl_cfg["plan"], "config_sha256": rl_cfg["sha256"], "source": rl_cfg["source"],
+        "safety_factor": rl_cfg["safety"], "limits_configured": limiter.configured, "limits_used_at_end": limiter.limits,
+        "limits_from_headers": limiter.header_adopted, "header_meaning": p.header_meaning,
         "requests": {"total": len(api), "successful": sum(a["request_status"] == "ok" for a in api),
                      "failed": sum(a["request_status"] != "ok" for a in api),
                      "http_429": sum(a["http_status"] == 429 for a in api)},
+        "http_errors": {"http_529": sum(a["http_status"] == 529 for a in api),
+                        "http_5xx": sum(isinstance(a["http_status"], int) and 500 <= a["http_status"] < 600 for a in api),
+                        "by_status": dict(sorted(Counter(a["http_status"] for a in api if a["http_status"] not in ("", 200)).items()))},
         "wait_seconds": {"throttle": round(limiter.throttle_wait_s, 3), "backoff_and_retry_after": round(backoff_total, 3),
                          "total": round(limiter.throttle_wait_s + backoff_total, 3)},
         "tokens": {"input": sum(a["input_tokens"] or 0 for a in api), "output": sum(a["output_tokens"] or 0 for a in api)},
         "quota": limiter.report(),
         "quota_sources": QUOTA_SOURCES,
         "last_quota_stop": limiter.last_stop,
-        "config_error": meta["config_error"],
+        "config_error": meta["config_error"], "spend_limit": meta.get("spend_limit"),
         "daily_quota_exhaustion_events": limiter.daily_exhaustion_events,
         "remaining_topics": sum(r["status"] != "ok" for r in rows),
         "resume": {"resumed_from": meta["resumed_from"], "carried_over_completed": meta["carried_over"],
-                   "resume_possible": left and not meta["config_error"],
+                   "resume_possible": bool(left and not blocked),
                    "not_before_utc": (limiter.last_stop or {}).get("available_at_utc"),
                    "not_before_is": (limiter.last_stop or {}).get("available_at_is", "not applicable"),
                    "note": "fix the request settings first" if meta["config_error"] else
-                           "a provider-reported time is Groq's; a local estimate is conservative; unknown = try later",
-                   "resume_command": f"python src/topic_naming.py generate --live --resume {meta['naming_run_id']}"
-                   if left else None},
+                           "the provider spend limit must be raised first" if meta.get("spend_limit") else
+                           "a provider-reported time is the provider's; a local estimate is conservative; unknown = try later",
+                   "resume_command": resume_command(meta["naming_run_id"], p) if left else None},
         "throttle_events": sum(r["event"] == "throttle_wait" for r in rl_rows),
     }
 
 
 def cost_markdown(s, r):
     t, c, k = s["topics"], s["cost_usd"], s["tokens"]
+    q = r["quota"]["provider_reported"]
     lines = [f"# Topic naming cost and rate-limit report — {s['run_id']}", "",
-             f"- Scope **{s['scope']}**, run status **{s['run_status']}**" + (f" (stop: {s['stop_reason']})" if s["stop_reason"] else ""),
+             f"- Provider `{s['provider']}`; scope **{s['scope']}**, run status **{s['run_status']}**"
+             + (f" (stop: {s['stop_reason']})" if s["stop_reason"] else ""),
              f"- Model requested `{s['requested_model']}`; served {', '.join(f'`{m}`' for m in s['served_models']) or '—'}",
              f"- Pricing `{s['pricing_snapshot']['version']}` (verified {s['pricing_snapshot']['verified_utc_date']}; "
              f"sha {s['pricing_snapshot']['sha256'][:12]}); source {s['pricing_snapshot']['sources'][0]}",
@@ -1303,29 +1643,31 @@ def cost_markdown(s, r):
              "|---|---|---|---|---|---|---|",
              f"| | {t['requested']} | {t['successful']} | {t['failed']} | {t['not_attempted']} | {t['local_cache_hits']} | "
              f"{t['resumed_from_previous_run']} |", "",
-             "| Tokens | input | output | reasoning | cached input |", "|---|---|---|---|---|",
-             f"| | {k['input']} | {k['output']} | {k['reasoning']} | {k['cached_input']} |", "",
-             f"**Estimated cost (published rates): ${c['estimated_total']}** ({c['estimate_status']}). "
+             "| Tokens | input | output | reasoning | cache write | cache read |", "|---|---|---|---|---|---|",
+             f"| | {k['input']} | {k['output']} | {k['reasoning']} | {k['cache_creation_input']} | {k['cache_read_input']} |", "",
+             f"**Estimated cost (published rates): ${c['estimated_total']}** (input ${c['estimated_input']}, output "
+             f"${c['estimated_output']}, cache ${c['estimated_cache']}; {c['estimate_status']}). "
              f"**Billed cost: unknown** ({c['billing_status']}: {c['billing_note']}).", "",
-             f"- API attempts {s['api_attempts']} {s['api_attempts_by_status']}, retries {s['retries']}; unknown-cost attempts "
-             f"{s['unknown_cost_attempts']}; error attempts without usage {s['error_attempts_without_usage']}",
+             f"- API attempts {s['api_attempts']} {s['api_attempts_by_status']}, retries {s['retries']}; latency ms "
+             f"{s['latency_ms']}; unknown-cost attempts {s['unknown_cost_attempts']}; error attempts without usage "
+             f"{s['error_attempts_without_usage']}",
              f"- Average estimated cost per successful topic: ${s['average_estimated_cost_per_successful_topic_usd'] or 'unknown'}",
              f"- Remaining topics {s['projection']['remaining_topics']} → estimated "
              f"${s['projection']['estimated_cost_remaining_usd'] or 'unknown'}; projected full run "
              f"${s['projection']['projected_full_run_usd'] or 'unknown'}", "",
              "## Rate limits", "",
              f"- Plan `{r['plan']}` × safety {r['safety_factor']}; configured {r['limits_configured']}; from headers "
-             f"{r['limits_from_headers'] or '—'} (requests headers = per day, tokens headers = per minute)",
+             f"{r['limits_from_headers'] or '—'}; header meaning {r['header_meaning']}",
              f"- Requests {r['requests']}; waits {r['wait_seconds']} s; daily quota exhaustion events "
              f"{r['daily_quota_exhaustion_events']}",
-             f"- **Provider-reported** RPD {r['quota']['provider_reported']['requests_per_day']}, TPM "
-             f"{r['quota']['provider_reported']['tokens_per_minute']}, TPD: "
-             f"{r['quota']['provider_reported']['tokens_per_day']}; from 429 messages "
-             f"{r['quota']['provider_reported']['from_429_messages'] or '—'}",
-             f"- **Local estimate** (this machine, rolling windows; not Groq's reset rule): "
-             f"{r['quota']['local_estimate']['requests_last_day']} requests / "
-             f"{r['quota']['local_estimate']['tokens_last_day']} tokens in the last 24 h",
-             f"- Last quota stop: {r['last_quota_stop'] or '—'}" + (f"; **config error**: {r['config_error']}" if r['config_error'] else ""),
+             f"- **Provider-reported**: RPD {q['requests_per_day']}, TPM {q['tokens_per_minute']}, RPM "
+             f"{q['requests_per_minute']}, ITPM {q['input_tokens_per_minute']}, OTPM {q['output_tokens_per_minute']}; "
+             f"from 429 messages {q['from_429_messages'] or '—'}",
+             f"- **Local estimate** (this machine, rolling windows): {r['quota']['local_estimate']['requests_last_minute']} "
+             f"requests / {r['quota']['local_estimate']['tokens_last_minute']} tokens in the last minute; "
+             f"{r['quota']['local_estimate']['requests_last_day']} / {r['quota']['local_estimate']['tokens_last_day']} in 24 h",
+             f"- Last quota stop: {r['last_quota_stop'] or '—'}" + (f"; **config error**: {r['config_error']}" if r['config_error'] else "")
+             + (f"; **spend limit**: {r['spend_limit']}" if r.get('spend_limit') else ""),
              f"- Remaining topics {r['remaining_topics']}; resume: {r['resume']['resume_command'] or 'not needed'}"
              f" (not before {r['resume']['not_before_utc'] or 'unknown'}, {r['resume']['not_before_is']})", ""]
     e = s["offline_estimate"]
@@ -1340,22 +1682,23 @@ def cost_markdown(s, r):
     return "\n".join(lines) + "\n"
 
 
-def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, naming_run_id=None,
-             budget_usd=None, plan="free", resume_from=None, max_attempts=MAX_ATTEMPTS, today=None, secrets=(),
-             clock=None, sleep=None, rng=None, check_model=True):
-    """Name topics sequentially with rate limiting, cost tracking, budget stops and resume. Re-verifies first."""
+def generate(backend, topic_ids=None, *, scope=None, root=ROOT, run_id=RUN_ID, expected=fz.EXPECTED, naming_run_id=None,
+             budget_usd=None, plan=None, resume_from=None, max_attempts=MAX_ATTEMPTS, today=None, secrets=(),
+             clock=None, sleep=None, rng=None, check_model=True, prov=None, key_authorization=None, selection=None):
+    """Name topics sequentially with rate limiting, cost tracking, budget stops and resume. Re-verifies first.
+    scope None: inherited from the resumed run, else 'pilot'. Anthropic runs need an explicit key authorisation."""
     clock, sleep, rng = clock or CLOCK, sleep or SLEEP, rng or RNG
-    if scope not in DEFAULT_BUDGET_USD:
-        raise ValueError(f"scope must be one of {sorted(DEFAULT_BUDGET_USD)}")
-    budget = Decimal(str(budget_usd)) if budget_usd is not None else DEFAULT_BUDGET_USD[scope]
-    if not budget.is_finite() or budget <= 0:
-        raise ValueError("budget must be a positive amount")
-    pricing = load_pricing(pricing_path(root), today)
-    rl_cfg = load_rate_limits(rate_limits_path(root), plan, today)
-    pdir = prepare_dir(root, run_id)
+    p = _p(prov)
+    if p.name != "groq" and not (key_authorization or "").strip():
+        raise SystemExit(f"{p.label} runs need --key-authorization (who authorised this API key for automated pipeline "
+                         "use, and when). CLAUDE.md:113 forbids pipeline use of the professor's key unless authorised.")
+    plan = plan or p.default_plan
+    pricing = load_pricing(pricing_path(root, p), today, p)
+    rl_cfg = load_rate_limits(rate_limits_path(root, p), plan, today, p)
+    pdir = prepare_dir(root, run_id, prov=p)
     if not (pdir / "manifest.json").is_file():
         raise FileNotFoundError(f"prepare folder missing: {pdir} (run prepare first)")
-    problems = verify(root, run_id)
+    problems = verify(root, run_id, prov=p)
     if problems:
         raise SystemExit("prepare folder failed verification: " + "; ".join(problems))
     pm = json.loads((pdir / "manifest.json").read_text(encoding="utf-8"))
@@ -1372,33 +1715,48 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
         if not (prev_dir / "manifest.json").is_file() or not (prev_dir / "results.jsonl").is_file():
             raise FileNotFoundError(f"cannot resume: {resume_from} has no manifest / results")
         prev = json.loads((prev_dir / "manifest.json").read_text(encoding="utf-8"))
-        if (prev.get("prompt_sha256"), prev.get("model"), prev.get("evidence_fingerprint")) != \
-                (sha(system), MODEL_ID, pm["files_sha256"]["evidence.jsonl"]):
-            raise SystemExit("cannot resume: the previous run used another prompt, model or evidence")
+        if (prev.get("prompt_sha256"), prev.get("provider", "groq"), prev.get("model"), prev.get("evidence_fingerprint")) != \
+                (sha(system), p.name, p.model, pm["files_sha256"]["evidence.jsonl"]):
+            raise SystemExit("cannot resume: the previous run used another prompt, provider, model or evidence")
         topic_ids = topic_ids or prev["topic_ids"]
+        scope = scope or prev.get("scope")
+        selection = selection or prev.get("selection")
         prev_ok = {r["topic_id"] for r in map(json.loads, (prev_dir / "results.jsonl").read_text(encoding="utf-8").splitlines())
                    if r["status"] == "ok"}
+    scope = scope or "pilot"
+    if scope not in DEFAULT_BUDGET_USD:
+        raise ValueError(f"scope must be one of {sorted(DEFAULT_BUDGET_USD)}")
+    budget = Decimal(str(budget_usd)) if budget_usd is not None else DEFAULT_BUDGET_USD[scope]
+    if not budget.is_finite() or budget <= 0:
+        raise ValueError("budget must be a positive amount")
     if not topic_ids:
         raise ValueError("no topic IDs given")
     unknown = [t for t in topic_ids if t not in records]
     if unknown or len(set(topic_ids)) != len(topic_ids):
         raise ValueError(f"unknown or repeated topic IDs: {unknown[:5]}")
-    naming_run_id = naming_run_id or f"{PROMPT_VERSION}_{MODEL_SLUG}_{scope}_{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
-    out_dir, tdir = naming_dir(root, run_id) / naming_run_id, tracked_dir(root, run_id) / naming_run_id
-    if out_dir.exists() or tdir.exists():
+    taken = lambda name: (naming_dir(root, run_id) / name).exists() or (tracked_dir(root, run_id) / name).exists()
+    if naming_run_id is None:      # auto ID: unique even for two runs started in the same second
+        stem = f"{PROMPT_VERSION}_{p.slug}_{scope}_{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
+        naming_run_id, k = stem, 2
+        while taken(naming_run_id):
+            naming_run_id, k = f"{stem}_{k}", k + 1
+    elif taken(naming_run_id):
         raise FileExistsError(f"{naming_run_id} exists; never overwritten")
+    out_dir, tdir = naming_dir(root, run_id) / naming_run_id, tracked_dir(root, run_id) / naming_run_id
     if check_model:
         ok, why = backend.check_model()
         if not ok:
             raise SystemExit(f"model pre-flight failed: {why}")
-    reqs = {t: build_request(system, records[t]["payload"]) for t in records}
-    estimate = offline_estimate(list(reqs.values()), topic_ids, pricing, rl_cfg)
-    cdir = cache_dir(root)
+    reqs = {t: build_request(system, records[t]["payload"], p) for t in records}
+    payload_sha = {t: sha(user_message(records[t]["payload"])) for t in records}
+    estimate = offline_estimate(list(reqs.values()), topic_ids, pricing, rl_cfg, p)
+    cdir = cache_dir(root, p)
     cdir.mkdir(parents=True, exist_ok=True)
-    rate_state_dir(root).mkdir(parents=True, exist_ok=True)
-    hist_path = rate_state_dir(root) / "request_log.jsonl"
-    limiter = RateLimiter(rl_cfg["limits"], rl_cfg["safety"], clock, sleep, load_history(hist_path, clock()))
-    quota_path = rate_state_dir(root) / "provider_quota.json"
+    rate_state_dir(root, p).mkdir(parents=True, exist_ok=True)
+    hist_path = rate_state_dir(root, p) / "request_log.jsonl"
+    limiter = RateLimiter(rl_cfg["limits"], rl_cfg["safety"], clock, sleep, load_history(hist_path, clock()),
+                          header_reader=p.read_rate_headers)
+    quota_path = rate_state_dir(root, p) / "provider_quota.json"
     if quota_path.is_file():
         try:
             limiter.load_state(json.loads(quota_path.read_text(encoding="utf-8")), clock())
@@ -1406,10 +1764,10 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
             pass
     save_quota = lambda: quota_path.write_text(json.dumps(limiter.export_state(), sort_keys=True), encoding="utf-8")
     out_dir.mkdir(parents=True)
-    base = {"model": MODEL_ID, "prompt_version": PROMPT_VERSION, "prompt_sha256": sha(system), "run_id": naming_run_id,
-            "clustering_run_id": run_id, "evidence_fingerprint": pm["files_sha256"]["evidence.jsonl"]}
-    ledger, attempts, rl_rows, rows, raw_log = Ledger(budget), [], [], [], []
-    state = {"backoff": 0.0, "stop": None, "config_error": None}
+    base = {"provider": p.name, "model": p.model, "prompt_version": PROMPT_VERSION, "prompt_sha256": sha(system),
+            "run_id": naming_run_id, "clustering_run_id": run_id, "evidence_fingerprint": pm["files_sha256"]["evidence.jsonl"]}
+    ledger, attempts, rl_rows, rows, raw_log, raw_reqs = Ledger(budget), [], [], [], [], {}
+    state = {"backoff": 0.0, "stop": None, "config_error": None, "spend_limit": None}
     fh = (out_dir / "cost_report.csv").open("w", encoding="utf-8", newline="")
     rfh = (out_dir / "rate_limit_report.csv").open("w", encoding="utf-8", newline="")
     writer, rwriter = csv.writer(fh, lineterminator="\n"), csv.writer(rfh, lineterminator="\n")
@@ -1423,36 +1781,36 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
                "wait_s": round(float(wait or 0), 3), "reason": reason, "quota_source": source,
                "est_input_tokens": est[0], "est_output_tokens": est[1], "actual_tokens": actual,
                **{f"local_{k}": v for k, v in u.items() if not k.startswith("_")},
-               **{f"limit_{k}": limiter.limits.get(k) for k in ("rpm", "rpd", "tpm", "tpd")},
-               **{f"provider_{k}": h.get(k) for k in ("limit_requests_day", "remaining_requests_day", "reset_requests_day_s",
-                                                      "limit_tokens_minute", "remaining_tokens_minute",
-                                                      "reset_tokens_minute_s", "retry_after_s")}}
+               **{f"limit_{k}": limiter.limits.get(k) for k in ("rpm", "rpd", "tpm", "tpd", "input_tpm", "output_tpm")},
+               **{f"provider_{k}": h.get(k) for k in HEADER_KEYS}}
         rl_rows.append(row)
         rwriter.writerow([cell(row[c]) for c in RL_COLS])
         rfh.flush()
 
     def log(t, n, status, *, api_call, local="miss", http=None, finish=None, served="", priced=None, est=None,
-            req_id="", error="", rl_wait=0.0, backoff=0.0, h=None, error_class=""):
+            req_id="", error="", rl_wait=0.0, backoff=0.0, h=None, error_class="", latency=None, validation=""):
         if priced is None:
-            priced = {**price_usage(None, pricing), "estimate_status": "no_api_call", "estimate_note": ""}
+            priced = {**p.price_usage(None, pricing), "estimate_status": "no_api_call", "estimate_note": ""}
             if not api_call:
-                priced.update({k: Decimal(0) for k in ("estimated_input_cost", "estimated_output_cost", "estimated_cost")})
+                priced.update({k: Decimal(0) for k in ("estimated_input_cost", "estimated_output_cost",
+                                                       "estimated_cache_cost", "estimated_cost")})
         h = h or {}
         a = {"run_id": naming_run_id, "topic_id": t, "attempt": n, "retry_count": max(0, n - 1) if api_call else 0,
-             "timestamp_utc": now_iso(), "requested_model": MODEL_ID, "served_model": served or "", "request_status": status,
-             "api_call": api_call, "local_cache": local, "http_status": http or "", "error_class": error_class,
-             "finish_reason": finish or "",
+             "timestamp_utc": now_iso(), "provider": p.name, "requested_model": p.model, "served_model": served or "",
+             "prompt_version": PROMPT_VERSION, "payload_sha256": payload_sha[t], "request_status": status,
+             "validation_status": validation, "api_call": api_call, "local_cache": local, "http_status": http or "",
+             "error_class": error_class, "finish_reason": finish or "", "latency_ms": latency,
              "rate_limit_wait_s": round(rl_wait, 3), "backoff_wait_s": round(backoff, 3), "retry_after_s": h.get("retry_after_s"),
-             **{f"provider_{k}": h.get(k) for k in ("remaining_requests_day", "remaining_tokens_minute",
-                                                    "reset_requests_day_s", "reset_tokens_minute_s")},
+             **{f"provider_{k}": h.get(k) for k in COST_HEADER_KEYS},
              "pricing_version": pricing["version"], "pricing_sha256": pricing["sha256"], "estimated_max_cost_usd": est,
              "billed_cost_usd": None, "billing_status": BILLING_STATUS if api_call else "no_api_call",
              "cumulative_estimated_cost_usd": ledger.spent, "request_id": req_id or "", "error": redact(error, secrets),
              **{k: priced[k] for k in ("input_tokens", "output_tokens", "reasoning_tokens", "cached_input_tokens",
-                                       "total_tokens", "estimated_input_cost", "estimated_output_cost", "estimated_cost",
-                                       "estimate_status", "estimate_note")}}
+                                       "cache_creation_input_tokens", "cache_read_input_tokens", "total_tokens",
+                                       "estimated_input_cost", "estimated_output_cost", "estimated_cache_cost",
+                                       "estimated_cost", "estimate_status", "estimate_note")}}
         a.update({"estimated_input_cost_usd": a["estimated_input_cost"], "estimated_output_cost_usd": a["estimated_output_cost"],
-                  "estimated_cost_usd": a["estimated_cost"]})
+                  "estimated_cache_cost_usd": a["estimated_cache_cost"], "estimated_cost_usd": a["estimated_cost"]})
         attempts.append(a)
         writer.writerow([cell(a[c]) for c in COST_COLS])
         fh.flush()
@@ -1491,53 +1849,59 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
         if cpath.is_file():
             try:
                 hit = json.loads(cpath.read_text(encoding="utf-8"))
-                if hit.get("cache_key") != req["cache_key"] or hit.get("served_model") != MODEL_ID:
+                if hit.get("cache_key") != req["cache_key"] or hit.get("served_model") != p.model:
                     raise ValueError("cache entry does not match this request")
                 ans = parse_answer(hit["content"])
             except (ValueError, KeyError, json.JSONDecodeError):
                 hit = None
             if hit:
                 log(t, 0, "local_cache_hit", api_call=False, local="hit", served=hit["served_model"],
-                    req_id=hit.get("request_id", ""))
+                    req_id=hit.get("request_id", ""), validation="valid (cached)")
                 row["cached"] = True
                 return accept(ans, hit["served_model"])
-        est_in = estimate_input_tokens(req["body"], CHARS_PER_TOKEN_UPPER)
-        est_pair = (est_in, MAX_COMPLETION_TOKENS)
+        est_in = estimate_input_tokens(req["body"], CHARS_PER_TOKEN_UPPER, p.overhead_tokens)
+        est_pair = (est_in, p.max_output(req["body"]))
         backoff_before = 0.0
         for n in range(1, max_attempts + 1):
-            est = max_request_cost(req["body"], pricing)
+            est = max_request_cost(req["body"], pricing, p)
             if not ledger.allow(est):
-                log(t, n, "budget_stop", api_call=False, est=est, error=ledger.stop_reason)
+                log(t, n, "budget_stop", api_call=False, est=est, error=ledger.stop_reason, validation="not_requested")
                 return fail("not_attempted" if n == 1 else "failed", ledger.stop_reason)
             waited, stop = limiter.acquire(*est_pair, lambda ev, w, why, src: rl_log(t, n, ev, w, why, est_pair, source=src))
             if stop:
                 state["stop"] = f"rate limit: {stop}"
-                log(t, n, "rate_limit_stop", api_call=False, est=est, error=stop, rl_wait=waited)
+                log(t, n, "rate_limit_stop", api_call=False, est=est, error=stop, rl_wait=waited, validation="not_requested")
                 return fail("not_attempted" if n == 1 else "failed", state["stop"])
+            raw_reqs.setdefault(t, {"topic_id": t, "provider": p.name, "cache_key": req["cache_key"],
+                                    "payload_sha256": payload_sha[t], "body": req["body"]})
+            t0 = PERF()
             try:
                 resp = backend.send(req["body"])
             except ApiErr as e:
-                h = record_request(*(usage_tokens(e.usage) or (0, 0)), e.headers)
+                latency = round((PERF() - t0) * 1000, 1)
+                h = record_request(*(p.usage_tokens(e.usage) or (0, 0)), e.headers)
                 h["retry_after_s"] = e.retry_after if e.retry_after is not None else h.get("retry_after_s")
-                priced = (price_usage(e.usage, pricing) if usage_tokens(e.usage) else
-                          {**price_usage(None, pricing), "estimate_status": "no_usage_on_error",
+                priced = (p.price_usage(e.usage, pricing) if p.usage_tokens(e.usage) else
+                          {**p.price_usage(None, pricing), "estimate_status": "no_usage_on_error",
                            "estimate_note": "provider returned an error without usage"})
                 ledger.record(priced)
                 cls = e.error_class
-                daily = limiter.note_429(e.message, e.retry_after) if e.status == 429 else {}
+                daily = limiter.note_429(e.message, e.retry_after) if e.status == 429 and p.name == "groq" else {}
                 if daily:
                     save_quota()
                 log(t, n, "api_error", api_call=True, http=e.status, priced=priced, est=est, req_id=e.request_id,
                     error=f"{e.status} {e.error_type or ''}/{e.error_code or ''}: {e.message}", rl_wait=waited,
-                    backoff=backoff_before, h=h, error_class=cls)
+                    backoff=backoff_before, h=h, error_class=cls, latency=latency, validation="no_answer")
                 rl_log(t, n, f"http_{e.status}", 0.0, redact(e.message[:160], secrets), est_pair, None, h,
                        source="provider_429_message" if daily else "provider_headers" if e.status == 429 else "")
-                if cls == "config":
-                    state["stop"] = (f"request configuration rejected: HTTP {e.status} {e.error_type or ''} "
-                                     f"{e.error_code or ''}: {e.message}")
-                    state["config_error"] = {"topic_id": t, "attempt": n, "http_status": e.status, "type": e.error_type,
-                                             "code": e.error_code, "message": e.message, "request_id": e.request_id}
-                    rl_log(t, n, "config_stop", 0.0, redact(state["stop"][:200], secrets), est_pair, None, h)
+                if cls in ("config", "quota"):
+                    kind = "spend_limit" if cls == "quota" else "config_error"
+                    state["stop"] = (f"{'provider spend limit reached' if cls == 'quota' else 'request configuration rejected'}: "
+                                     f"HTTP {e.status} {e.error_type or ''} {e.error_code or ''}: {e.message}")
+                    state[kind] = {"topic_id": t, "attempt": n, "http_status": e.status, "type": e.error_type,
+                                   "code": e.error_code, "message": e.message, "request_id": e.request_id}
+                    rl_log(t, n, "config_stop" if cls == "config" else "spend_limit_stop", 0.0,
+                           redact(state["stop"][:200], secrets), est_pair, None, h, source="provider_error")
                     return fail("failed", state["stop"])
                 if not e.retryable or n == max_attempts or ledger.stop_reason:
                     return fail("failed", f"API error {e.status}: {e.message}")
@@ -1553,20 +1917,24 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
                 state["backoff"] += wait
                 backoff_before = wait
                 continue
-            tok = usage_tokens(resp["usage"]) or (0, 0)
+            latency = round((PERF() - t0) * 1000, 1)
+            tok = p.usage_tokens(resp["usage"]) or (0, 0)
             h = record_request(tok[0], tok[1], resp["headers"])
-            priced = price_usage(resp["usage"], pricing)
+            priced = p.price_usage(resp["usage"], pricing)
             ledger.record(priced)
             rl_log(t, n, "response", 0.0, "", est_pair, sum(tok), h)
             served, finish = resp["model"], resp["finish_reason"]
-            raw_log.append({"topic_id": t, "attempt": n, "cache_key": req["cache_key"], "served_model": served,
-                            "finish_reason": finish, "request_id": resp["request_id"], "usage": resp["usage"],
+            raw_log.append({"topic_id": t, "attempt": n, "provider": p.name, "cache_key": req["cache_key"],
+                            "payload_sha256": payload_sha[t], "served_model": served, "finish_reason": finish,
+                            "request_id": resp["request_id"], "latency_ms": latency, "usage": resp["usage"],
                             "content": redact(resp["content"] or "", secrets)})
             ans, status, error = None, "ok", ""
-            if served != MODEL_ID:
-                status, error = "model_mismatch", f"served model {served!r} differs from pinned {MODEL_ID!r}"
+            if served != p.model:
+                status, error = "model_mismatch", f"served model {served!r} differs from pinned {p.model!r}"
                 state["stop"] = state["stop"] or error
-            elif finish != "stop":
+            elif finish == "refusal":
+                status, error = "refusal", "stop_reason refusal"
+            elif finish != p.ok_finish:
                 status, error = "incomplete", f"finish_reason {finish}"
             else:
                 try:
@@ -1574,7 +1942,8 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
                 except (ValueError, json.JSONDecodeError) as e:
                     status, error = "invalid_answer", f"{type(e).__name__}: {str(e)[:200]}"
             log(t, n, status, api_call=True, http=200, finish=finish, served=served, priced=priced, est=est,
-                req_id=resp["request_id"], error=error, rl_wait=waited, backoff=backoff_before, h=h)
+                req_id=resp["request_id"], error=error, rl_wait=waited, backoff=backoff_before, h=h, latency=latency,
+                validation="valid" if status == "ok" else f"invalid: {error}"[:200])
             if status != "ok":
                 return fail("failed", error)
             tmp = cpath.with_suffix(".tmp")
@@ -1598,7 +1967,7 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
                     "name_flags": [], "supporting_skills": []})
                 continue
             rows.append(name_topic(t))
-        run_status = ("config_error" if state["config_error"] else
+        run_status = ("config_error" if state["config_error"] else "spend_limit_reached" if state["spend_limit"] else
                       "quota_exhausted" if state["stop"] and limiter.daily_exhaustion_events
                       else "stopped" if stop_reason() else "completed")
     except KeyboardInterrupt:
@@ -1623,12 +1992,12 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
         meta = {"naming_run_id": naming_run_id, "scope": scope, "run_status": run_status, "stop_reason": stop_reason(),
                 "total_topics": pm["counts"]["topics"], "completed_overall": sum(r["status"] == "ok" for r in rows),
                 "resumed_from": resume_from, "carried_over": len(prev_ok & set(topic_ids)),
-                "config_error": state["config_error"]}
-        cs = summarise_costs(attempts, rows, ledger, pricing, meta, estimate)
-        rs = summarise_rate(rl_rows, attempts, rows, limiter, rl_cfg, meta, state["backoff"])
+                "config_error": state["config_error"], "spend_limit": state["spend_limit"]}
+        cs = summarise_costs(attempts, rows, ledger, pricing, meta, estimate, p)
+        rs = summarise_rate(rl_rows, attempts, rows, limiter, rl_cfg, meta, state["backoff"], p)
         files = {"results.jsonl": jsonl(rows), "results.csv": csv_bytes(rows, RESULT_COLS),
                  "review_queue.csv": csv_bytes([r for r in rows if r["review_required"]], RESULT_COLS),
-                 "raw_responses.jsonl": jsonl(raw_log),
+                 "raw_responses.jsonl": jsonl(raw_log), "raw_requests.jsonl": jsonl(list(raw_reqs.values())),
                  "cost_summary.json": (json.dumps(cs, indent=1, sort_keys=True, default=str) + "\n").encode("utf-8"),
                  "rate_limit_summary.json": (json.dumps(rs, indent=1, sort_keys=True, default=str) + "\n").encode("utf-8"),
                  "cost_report.md": cost_markdown(cs, rs).encode("utf-8"),
@@ -1639,9 +2008,11 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
         streamed = {n: (out_dir / n).read_bytes() for n in ("cost_report.csv", "rate_limit_report.csv")}
         hashes = {n: sha(b) for n, b in sorted({**files, **streamed}.items())}
         manifest = {"schema_version": SCHEMA_VERSION, "stage": "generate", **base, "scope": scope, "run_status": run_status,
-                    "topic_ids": sorted(topic_ids), "resumed_from": resume_from, "prepare_fingerprint": pm["data_fingerprint"],
-                    "model_settings": model_manifest(), "rate_plan": plan, "budget_usd": usd(budget),
-                    "generated_utc": now_iso(), "code": code_version(root), "result_problems": check_results(rows, topic_ids),
+                    "topic_ids": sorted(topic_ids), "resumed_from": resume_from, "selection": selection,
+                    "prepare_fingerprint": pm["data_fingerprint"], "model_settings": model_manifest(p), "rate_plan": plan,
+                    "budget_usd": usd(budget), "key_authorization": redact(key_authorization, secrets) if key_authorization else None,
+                    "names_provisional": True, "generated_utc": now_iso(), "code": code_version(root),
+                    "result_problems": check_results(rows, topic_ids),
                     "cost": {k: cs[k] for k in ("this_run_estimated_cost_usd", "unknown_cost_attempts",
                                                "error_attempts_without_usage", "api_attempts", "stop_reason")},
                     "files_sha256": hashes}
@@ -1656,15 +2027,149 @@ def generate(backend, topic_ids=None, *, scope, root=ROOT, run_id=RUN_ID, expect
     return out_dir, manifest, rows, cs, rs
 
 
+# ---------- topic selection across providers ----------
+def valid_cache_answer(cdir, req, prov):
+    """(cache entry, parsed answer) when `req` has a usable cached answer from `prov`'s pinned model, else None."""
+    path = Path(cdir) / f"{req['cache_key']}.json"
+    if not path.is_file():
+        return None
+    try:
+        c = json.loads(path.read_text(encoding="utf-8"))
+        if c.get("cache_key") != req["cache_key"] or c.get("served_model") != prov.model:
+            return None
+        return c, parse_answer(c["content"])
+    except (ValueError, KeyError, json.JSONDecodeError):
+        return None
+
+
+def select_missing(root=ROOT, run_id=RUN_ID, source="groq", expected=fz.EXPECTED):
+    """Topics without a valid cached answer from `source` (frozen evidence, current prompt). Read-only."""
+    src = make_provider(source)
+    inp = load_inputs(root, run_id, expected)
+    system = prompt_path(root).read_text(encoding="utf-8")
+    present, missing = [], []
+    for r in build_evidence(inp)["records"]:
+        hit = valid_cache_answer(cache_dir(root, src), build_request(system, r["payload"], src), src)
+        (present if hit else missing).append(r["topic_id"])
+    return {"only_missing_from": src.name, "source_model": src.model, "present": present, "missing": missing,
+            "present_count": len(present), "missing_count": len(missing),
+            "present_sha256": sha("\n".join(present)), "missing_sha256": sha("\n".join(missing))}
+
+
+def pilot_subset(ids, limit, seed=PILOT_SEED):
+    """Reproducible pilot subset of a topic list (seeded sample, sorted)."""
+    return sorted(random.Random(seed).sample(sorted(ids), min(limit, len(ids))))
+
+
+# ---------- assembly of a mixed-provider result ----------
+ASSEMBLED_COLS = ["topic_id", "status", "provisional_name", "description", "supporting_skills", "llm_confidence",
+                  "llm_confidence_reason", "topic_quality_flags", "name_flags", "review_required", "review_reason",
+                  "source_provider", "source_model", "source_run_id", "source_cache_key", "prompt_version", "prompt_sha256",
+                  "provisional", "human_validated"]
+
+
+def origin_runs(root, run_id, prov):
+    """topic -> (run_id, cache_key, name) of the first run of this provider/model that produced it via the API."""
+    runs = []
+    for d in naming_dir(root, run_id).iterdir():
+        mf = d / "manifest.json"
+        if d.is_dir() and mf.is_file() and (d / "results.jsonl").is_file():
+            m = json.loads(mf.read_text(encoding="utf-8"))
+            if m.get("stage") == "generate" and m.get("provider", "groq") == prov.name and m.get("model") == prov.model:
+                runs.append((m.get("generated_utc", ""), d.name, d))
+    origin = {}
+    for _, name, d in sorted(runs):
+        for x in (d / "results.jsonl").read_text(encoding="utf-8").splitlines():
+            r = json.loads(x)
+            if r["status"] == "ok" and not r.get("cached") and r["topic_id"] not in origin:
+                origin[r["topic_id"]] = (name, r["cache_key"], r["provisional_name"])
+    return origin, [n for _, n, _ in sorted(runs)]
+
+
+def assemble(root=ROOT, run_id=RUN_ID, providers=None, expected=fz.EXPECTED, allow_incomplete=False, write=True):
+    """One provisional name per topic from cached answers, in provider priority order (first = kept when both exist).
+    Offline: no API call; every name keeps its provider, model, run ID and cache key. Never overwrites."""
+    providers = providers or [GROQ, make_provider("anthropic")]
+    inp = load_inputs(root, run_id, expected)
+    records = build_evidence(inp)["records"]
+    system = prompt_path(root).read_text(encoding="utf-8")
+    origins, used, problems, rows = {}, {}, [], []
+    for prv in providers:
+        origins[prv.name], used[prv.name] = origin_runs(root, run_id, prv)
+    for r in records:
+        t, row = r["topic_id"], None
+        for prv in providers:
+            req = build_request(system, r["payload"], prv)
+            hit = valid_cache_answer(cache_dir(root, prv), req, prv)
+            if not hit:
+                continue
+            _, ans = hit
+            o = origins[prv.name].get(t)
+            if o and o[1] != req["cache_key"]:
+                problems.append(f"{t}: {prv.name} run cache key differs from the current request")
+            if o and o[2] != ans["provisional_name"]:
+                problems.append(f"{t}: {prv.name} cached name differs from its run result")
+            kept, nf = name_flags(ans, r["payload"])
+            row = {"topic_id": t, "status": "ok", "provisional_name": ans["provisional_name"], "description": ans["description"],
+                   "supporting_skills": kept, "llm_confidence": ans["confidence"], "llm_confidence_reason": ans["confidence_reason"],
+                   "topic_quality_flags": r["topic_quality_flags"], "name_flags": nf, "source_provider": prv.name,
+                   "source_model": prv.model, "source_run_id": o[0] if o else "unknown (cache only)",
+                   "source_cache_key": req["cache_key"], "prompt_version": PROMPT_VERSION, "prompt_sha256": sha(system),
+                   "provisional": True, "human_validated": False}
+            break
+        rows.append(row or {"topic_id": t, "status": "not_attempted", "provisional_name": "", "description": "",
+                            "supporting_skills": [], "llm_confidence": "", "llm_confidence_reason": "",
+                            "topic_quality_flags": r["topic_quality_flags"], "name_flags": [], "source_provider": "",
+                            "source_model": "", "source_run_id": "", "source_cache_key": "", "prompt_version": PROMPT_VERSION,
+                            "prompt_sha256": sha(system), "provisional": True, "human_validated": False})
+    finalise(rows)
+    ids = [r["topic_id"] for r in rows]
+    if len(ids) != len(set(ids)) or set(ids) != set(inp["topic_ids"]):
+        problems.append("assembled topics do not match the frozen topic list exactly once")
+    missing = [r["topic_id"] for r in rows if r["status"] != "ok"]
+    if problems:
+        raise ValueError("assembly problems: " + "; ".join(problems[:5]))
+    if missing and not allow_incomplete:
+        raise ValueError(f"{len(missing)} topics have no name from any provider (e.g. {missing[:3]}); "
+                         "pass --allow-incomplete to assemble anyway")
+    counts = Counter(r["source_provider"] or "missing" for r in rows)
+    files = {"results.jsonl": jsonl(rows), "results.csv": csv_bytes(rows, ASSEMBLED_COLS)}
+    hashes = {n: sha(b) for n, b in sorted(files.items())}
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    name = f"assembled_{PROMPT_VERSION}_{stamp}"
+    manifest = {"schema_version": SCHEMA_VERSION, "stage": "assemble", "assembly_id": name, "clustering_run_id": run_id,
+                "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "providers_in_priority_order": [{"provider": p.name, "model": p.model} for p in providers],
+                "source_runs": used, "counts": {"topics": len(rows), **dict(counts)},
+                "complete": not missing, "missing_topics": missing,
+                "evidence_fingerprint": sha(jsonl(records)), "prompt_sha256": sha(system), "prompt_version": PROMPT_VERSION,
+                "names_provisional": True, "human_validated": False,
+                "note": "mixed-provider provisional names; compare names only with their source_model in mind",
+                "code": code_version(root), "files_sha256": hashes}
+    if write:
+        out, td = naming_dir(root, run_id) / name, tracked_dir(root, run_id) / name
+        if out.exists() or td.exists():
+            raise FileExistsError(f"{name} exists; never overwritten")
+        out.mkdir(parents=True)
+        for n, b in files.items():
+            (out / n).write_bytes(b)
+        text = json.dumps(manifest, indent=1, sort_keys=True) + "\n"
+        (out / "manifest.json").write_text(text, encoding="utf-8")
+        td.mkdir(parents=True)
+        (td / "manifest.json").write_text(text, encoding="utf-8")
+        return out, manifest, rows
+    return None, manifest, rows
+
+
 # ---------- CLI ----------
 def summary(res):
     m = res["manifest"]
     c = m["counts"]
     print(f"inputs verified | snapshot {m['inputs']['snapshot_fingerprint'][:12]} | features {m['inputs']['features_fingerprint'][:12]}")
     mm = m["model"]
-    print(f"prompt {m['prompt']['version']} sha {m['prompt']['sha256'][:12]} | model {mm['provider']}/{mm['model_id']} "
-          f"temperature={mm['temperature']} reasoning_effort={mm['reasoning_effort']} reasoning_format={mm['reasoning_format']} "
-          f"response_format={mm['response_format']['type']} max_completion_tokens={mm['max_completion_tokens']} fallback=None")
+    print(f"prompt {m['prompt']['version']} sha {m['prompt']['sha256'][:12]} | model {mm['provider']}/{mm['model_id']} | "
+          + ", ".join(f"{k}={json.dumps(v) if isinstance(v, dict) else v}" for k, v in mm.items()
+                      if k not in ("provider", "model_id", "api", "output_config")))
     print(f"topics prepared {c['topics']} | requests {c['requests']} | request problems {c['request_problems']}")
     print("review flags: " + ", ".join(f"{f} {c[f]}" for f in REVIEW_FLAGS) + f" | any {c['review_flagged']}")
     print(f"pilot (seed {m['pilot']['seed']}): " + ", ".join(p["topic_id"] for p in res["pilot"]))
@@ -1687,22 +2192,37 @@ def summary(res):
         print(f"PROBLEM {t}: {p}")
 
 
+KEY_RULE_WARNING = ("NOTE: CLAUDE.md:113 says the professor's API key must not be used for pipeline work. A live "
+                    "Anthropic run needs --key-authorization naming who authorised this key for automated pipeline use, "
+                    "and when; it is recorded in the run manifest.")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["prepare", "verify", "generate"])
-    ap.add_argument("--no-write", action="store_true", help="prepare: dry run, write nothing")
+    ap.add_argument("cmd", choices=["prepare", "verify", "generate", "select-missing", "assemble"])
+    ap.add_argument("--provider", choices=sorted(PROVIDERS), default="groq")
+    ap.add_argument("--model", help="model ID (default: the provider's verified model)")
+    ap.add_argument("--no-write", action="store_true", help="prepare / assemble: dry run, write nothing")
     ap.add_argument("--show", type=int, default=0, help="prepare: print N pilot payloads (one per stratum first)")
-    ap.add_argument("--scope", choices=["pilot", "all"], default="pilot")
-    ap.add_argument("--plan", choices=["free", "developer"], default="free", help="rate-limit plan (default free)")
+    ap.add_argument("--scope", choices=["pilot", "all"], help="budget / run-ID label (default pilot; resume: inherited)")
+    ap.add_argument("--plan", help="rate-limit plan (default: the provider's default plan)")
     ap.add_argument("--budget-usd", help="generate: estimated-cost cap for this run (default pilot 1.00, all 10.00)")
     ap.add_argument("--resume", help="generate: previous naming_run_id to continue (same topics, completed ones from cache)")
-    ap.add_argument("--live", action="store_true", help="generate: required, makes real Groq API calls")
+    ap.add_argument("--only-missing-from", choices=sorted(PROVIDERS),
+                    help="generate: only topics without a valid cached answer from this provider")
+    ap.add_argument("--limit", type=int, help="generate: seeded subset of that many topics (pilot)")
+    ap.add_argument("--key-authorization", help="generate (non-Groq): who authorised this API key for pipeline use, when")
+    ap.add_argument("--allow-incomplete", action="store_true", help="assemble: write even if some topics have no name")
+    ap.add_argument("--live", action="store_true", help="generate: required, makes real API calls")
     args = ap.parse_args()
     from dotenv import dotenv_values
     secrets = [v for v in dotenv_values(ROOT / ".env").values() if v and len(v) >= 8]
     try:
+        prov = make_provider(args.provider, args.model)
+        if prov.name != "groq" and args.cmd in ("prepare", "generate"):
+            print(KEY_RULE_WARNING)
         if args.cmd == "prepare":
-            res = prepare(write=not args.no_write, secrets=secrets, plan=args.plan)
+            res = prepare(write=not args.no_write, secrets=secrets, plan=args.plan, prov=prov)
             summary(res)
             by = {r["topic_id"]: r for r in res["records"]}
             seen, picks = set(), []
@@ -1715,20 +2235,45 @@ def main():
             if res["problems"]:
                 sys.exit(1)
             print("\nDRY RUN: nothing written, no API call" if args.no_write
-                  else f"\nwritten -> {prepare_dir(ROOT, RUN_ID).relative_to(ROOT)}")
+                  else f"\nwritten -> {prepare_dir(ROOT, RUN_ID, prov=prov).relative_to(ROOT)}")
         elif args.cmd == "verify":
-            p = verify()
+            p = verify(prov=prov)
             print("OK: prepare outputs match their manifest" if not p else "PROBLEMS:\n  " + "\n  ".join(p))
             sys.exit(1 if p else 0)
+        elif args.cmd == "select-missing":
+            sel = select_missing(source=args.only_missing_from or "groq")
+            print(f"source {sel['only_missing_from']}/{sel['source_model']}: {sel['present_count']} topics with a valid "
+                  f"cached answer, {sel['missing_count']} without (sha {sel['missing_sha256'][:12]}) — no API call")
+            if args.limit:
+                print(f"seeded pilot subset of {args.limit}: {', '.join(pilot_subset(sel['missing'], args.limit))}")
+        elif args.cmd == "assemble":
+            providers = [GROQ, prov] if prov.name != "groq" else [GROQ, make_provider("anthropic")]
+            d, m, _ = assemble(providers=providers, allow_incomplete=args.allow_incomplete, write=not args.no_write)
+            print(f"assembled {m['counts']} | complete {m['complete']} | source runs {m['source_runs']}"
+                  + (f" -> {d.relative_to(ROOT)}" if d else " (dry run, nothing written)"))
         else:
             if not args.live:
-                sys.exit("generate makes live Groq API calls; add --live once it is approved")
-            pm = json.loads((prepare_dir(ROOT, RUN_ID) / "manifest.json").read_text(encoding="utf-8"))
-            ids = None if args.resume else (
-                [p["topic_id"] for p in pm["pilot"]["topics"]] if args.scope == "pilot"
-                else [r["topic_id"] for r in read_csv(prepare_dir(ROOT, RUN_ID) / "topic_flags.csv")])
-            d, m, _, cs, rs = generate(GroqBackend(), ids, scope=args.scope, budget_usd=args.budget_usd, plan=args.plan,
-                                       resume_from=args.resume, secrets=secrets)
+                sys.exit("generate makes live API calls; add --live once it is approved")
+            if prov.name != "groq" and not (args.key_authorization or "").strip():
+                sys.exit("refused: add --key-authorization \"<who authorised this key for pipeline use, and when>\"")
+            selection = None
+            if args.resume:
+                ids = None
+            elif args.only_missing_from:
+                sel = select_missing(source=args.only_missing_from)
+                ids = pilot_subset(sel["missing"], args.limit) if args.limit else sel["missing"]
+                selection = {k: sel[k] for k in ("only_missing_from", "source_model", "present_count", "missing_count",
+                                                 "present_sha256", "missing_sha256")}
+                selection.update({"limit": args.limit, "limit_seed": PILOT_SEED if args.limit else None, "selected": len(ids)})
+            else:
+                pm = json.loads((prepare_dir(ROOT, RUN_ID, prov=prov) / "manifest.json").read_text(encoding="utf-8"))
+                ids = ([p["topic_id"] for p in pm["pilot"]["topics"]] if (args.scope or "pilot") == "pilot"
+                       else [r["topic_id"] for r in read_csv(prepare_dir(ROOT, RUN_ID, prov=prov) / "topic_flags.csv")])
+                if args.limit:
+                    ids = pilot_subset(ids, args.limit)
+            d, m, _, cs, rs = generate(prov.backend(), ids, scope=args.scope, budget_usd=args.budget_usd, plan=args.plan,
+                                       resume_from=args.resume, secrets=secrets, prov=prov,
+                                       key_authorization=args.key_authorization, selection=selection)
             print(f"-> {d.relative_to(ROOT)} | status {m['run_status']} | est. cost ${cs['this_run_estimated_cost_usd']} "
                   f"(billed: unknown) | 429s {rs['requests']['http_429']} | waits {rs['wait_seconds']['total']}s | "
                   f"remaining {rs['remaining_topics']} | problems {m['result_problems']}")

@@ -1,0 +1,171 @@
+{
+ "schema": "phase2_phase3_audit/1",
+ "generated_utc": "2026-11-04T19:31:43+00:00",
+ "script": "src/build_phase3_audit_outputs.py",
+ "script_sha256": "bdafe4a7773f4c29e313f62c927fb95b96e76d4e86c89050119c874583105fd8",
+ "ai_label": "AI-GENERATED, NOT HUMAN-VALIDATED (pending approval)",
+ "inputs": {
+  "skills": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/skills.csv",
+   "sha256": "a7bcfd79827dbd812adcf1bb356faed54d6bd8134aeba1bd3556817ac87b2388"
+  },
+  "vectors": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/vectors.npy",
+   "sha256": "93a9839a0c1ddb8773ea9237c40b119e7cf5e79b2ad62ec850d0e34fd4b82b3e"
+  },
+  "memberships": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/memberships.csv",
+   "sha256": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37"
+  },
+  "topics": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/topics.csv",
+   "sha256": "c403b44ce6bbd1abde1ac783fd7d31b9fbf64e02e46ae25a66bba3098a361324"
+  },
+  "reference_links": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/reference_links.csv",
+   "sha256": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845"
+  },
+  "aliases": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/aliases.csv",
+   "sha256": "3a2bbf7490f394bbdd07297d53255a62e7219929851e524a5afa67810046ee99"
+  },
+  "snapshot_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/manifest.json",
+   "sha256": "fba34be9885083452ff8c9b665b3a4fbab8745ab05e9f01dbdeba0ac54b17ec2"
+  },
+  "similar_topic_pairs": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/similar_topic_pairs.csv",
+   "sha256": "843c1bf2758f49dafa3c5b804cfc7271dd9b8f46c484434139b85f007357262b"
+  },
+  "reference_summary": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/reference_summary.csv",
+   "sha256": "b45f35b311bbc3e36743e364b2421a349e696bed4b10509ab2c5b8fe66a20865"
+  },
+  "names": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/assembled_topic_naming_v1_20261104T003642Z/results.csv",
+   "sha256": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719"
+  },
+  "mentions": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/interim/prepared_mentions.csv",
+   "sha256": "753f905f114f8dcecee29a53ee98ce52f31ec0564fe3e85d19c7883d7b0cf409"
+  },
+  "p1_skill_summary_v2": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_evidence_reconciliation_v2/p1_skill_evidence_summary_v2.csv",
+   "sha256": "fbe570e0e97d33dea4bd572af031c28aedf6a5d78e0a34841a6986870fd85010"
+  },
+  "p1_extraction_evidence_v2": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/p1_review/p1_evidence_reconciliation_v2/p1_extraction_evidence_v2.csv",
+   "sha256": "ed4222be89d45dcd0beb95ce6317849a881e55b0f81efd60cb9b3eaf1510c32e"
+  },
+  "esco_skills": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skills_en.csv",
+   "sha256": "d03b10efca94b4bcfa260a992cfde89c375f0fa12095d6662a663cfd2f9f2950"
+  },
+  "esco_broader": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/broaderRelationsSkillPillar_en.csv",
+   "sha256": "56b70f4852b1f53c6192c979310c34c93f95436621d907083cf0d55b51d8e42d"
+  },
+  "esco_skill_groups": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skillGroups_en.csv",
+   "sha256": "644b68a174299eb05336eec36e0716c4671a0c6bdd4ac268803ecd6533dc739d"
+  },
+  "onet_software": {
+   "path": "~/Desktop/testing/references/onet_31.0/extracted/db_31_0_text/Software Skills.txt",
+   "sha256": "3fd63fb00251af89bf55eb1d24986e654ff61d0e5214fc238fbb56da7b4c4f4c"
+  }
+ },
+ "outputs": {
+  "topic_metrics_374.csv": {
+   "rows": 374,
+   "sha256": "e3e96d94be7d105cde8d340120e562f33a900676ee9e4a1a21b8f8896f5e919d"
+  },
+  "reference_link_verification_38.csv": {
+   "rows": 38,
+   "sha256": "e25c4457a6d141f339ad0ee83f2a46fc369951ceb02ff1b2fbc8e80c2b58db24"
+  },
+  "conflicting_meaning_keys_9.csv": {
+   "rows": 9,
+   "sha256": "37ded8ceb02d5431ba32f614ccd3ca0cf27b182c0ee1f658bd7f4940184bd7e4"
+  },
+  "acronym_resolution_61.csv": {
+   "rows": 61,
+   "sha256": "fd721882e78b6b2eac8cdfa66d9d9bb60a883533220cfec3cf21c7da503b462a"
+  },
+  "non_p1_topic_review_54.csv": {
+   "rows": 54,
+   "sha256": "724b9cd1b9b9949bb09840e0ec5b1794930568b472549b9543581b66200ceb2f"
+  },
+  "topic_pair_review_75.csv": {
+   "rows": 75,
+   "sha256": "7427b7182a1196fb21ef1fc15486919d20fc30f3e1fd27dcffd0dcdc3bdbb643"
+  },
+  "p1_skill_audit_976.csv": {
+   "rows": 976,
+   "sha256": "518ab0e11a375738062dd702c1901f5816d16061f2f51076e2d058f6091aae9c"
+  }
+ },
+ "global_metrics": {
+  "silhouette_cosine_384d_assigned": 0.1132,
+  "silhouette_run_json": 0.0929,
+  "topics_negative_silhouette": 43,
+  "knn10_same_topic_assigned": 0.6161,
+  "knn10_same_topic_weak": 0.2595,
+  "knn10_random_baseline": 0.0037,
+  "same_reference_concept_pairs": 18597,
+  "same_concept_pairs_same_topic_share": 0.1921,
+  "esco_purity_level2_median": 0.5,
+  "topics_with_purity": 311,
+  "pairs_cosine_ge_0.90": 75,
+  "esco_link_uris_missing_from_v1.2.1": 212,
+  "hierarchy_parent_links": 0,
+  "topic_levels": {
+   "topic": 374
+  },
+  "membership_class_counts_p1": {
+   "LIKELY_MISASSIGNED": 615,
+   "COHERENT": 173,
+   "QUESTIONABLE": 103,
+   "INSUFFICIENT_CONTEXT": 85
+  },
+  "link_verdicts": {
+   "CONFIRMED_INCORRECT": 25,
+   "LIKELY_INCORRECT": 9,
+   "CONTEXT_DEPENDENT": 3,
+   "UNVERIFIABLE": 1
+  },
+  "acronym_statuses": {
+   "DOMAIN_IDENTIFIED_ONLY": 30,
+   "POSSIBLE_NON_SKILL": 13,
+   "RESOLVED_WITH_EVIDENCE": 10,
+   "STILL_AMBIGUOUS": 7,
+   "INSUFFICIENT_SOURCE_CONTEXT": 1
+  },
+  "topic54_actions": {
+   "POTENTIAL_SPLIT": 22,
+   "INVESTIGATE_CLUSTER": 18,
+   "KEEP_CANDIDATE": 13,
+   "POTENTIAL_MERGE": 1
+  },
+  "pair_verdicts": {
+   "SIMILAR_BUT_DISTINCT": 20,
+   "POSSIBLE_MERGE": 17,
+   "DO_NOT_MERGE_NOISE": 14,
+   "DO_NOT_MERGE_CROSS_DOMAIN": 12,
+   "INSUFFICIENT_UNTIL_P1_CLEANUP": 7,
+   "STRONG_MERGE_CANDIDATE": 5
+  }
+ },
+ "definitions": {
+  "knn10_same_topic": "share of a skill's 10 nearest neighbours (cosine, frozen 384-d vectors, all 11,093 skills) in the same topic",
+  "same_concept_pairs_same_topic_share": "pairs of skills whose known_skill link has the same ref_id, share placed in the same topic",
+  "esco_purity_level2": "share of a topic's assigned members with a known_skill ESCO link whose second-level ESCO v1.2.1 group (first broader parent path) is the topic's most common one; topics with >=3 links",
+  "silhouette": "cosine, 384-d, assigned members only, topic labels; recomputed here (run.json method not stated)"
+ },
+ "limitations": [
+  "AI review tables are not human-validated; every proposed action is pending approval",
+  "54-topic review read all member names but evidence quotes only for short codes",
+  "no hierarchy exists (all topics level=topic, no parents); not built in this task",
+  "reference links are automatic; ESCO library copy is ~/Desktop/testing/references (project data/reference/ absent)",
+  "Supabase and raw Kaggle postings not accessed; nearest-neighbour agreement definition is ours (not defined in the project)"
+ ]
+}

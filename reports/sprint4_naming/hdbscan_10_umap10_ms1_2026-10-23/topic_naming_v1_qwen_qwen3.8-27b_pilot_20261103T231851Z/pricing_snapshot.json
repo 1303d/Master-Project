@@ -1,0 +1,27 @@
+{
+ "schema": "pricing_snapshot/2",
+ "version": "groq_qwen_qwen3.8-27b_2026-11-03",
+ "provider": "groq",
+ "model_id": "qwen/qwen3.8-27b",
+ "model_name": "Qwen3.8 27B",
+ "model_status": "Preview (Groq: 'intended for evaluation purposes only', 'may be discontinued at short notice')",
+ "currency": "USD",
+ "unit": "per_million_tokens",
+ "rates": {
+  "input": "0.80",
+  "output": "4.00"
+ },
+ "conditions": [
+  "Groq on-demand price per 1M tokens as listed in the models table ('PRICE PER 1M TOKENS': $0.80 input, $4.00 output); the model page shows the same figures (1.3M input tokens / $1, 250,000 output tokens / $1)",
+  "These are PUBLISHED-RATE ESTIMATES. Groq's API returns token usage but no charge, so the billed amount is not determinable from the API",
+  "Groq's documentation does not state whether free-tier usage is charged; billed cost is reported as unknown, never as zero",
+  "No verified discounted rate for cached input tokens: any cached prompt tokens are priced at the full input rate (upper-bound estimate)",
+  "reasoning_effort 'none' is used, so no reasoning tokens are expected; any reported completion tokens are priced at the output rate"
+ ],
+ "sources": [
+  {"url": "https://console.groq.com/docs/models", "sections": ["Preview Models table: PRICE PER 1M TOKENS", "RATE LIMITS (DEVELOPER PLAN)"]},
+  {"url": "https://console.groq.com/docs/model/qwen/qwen3.8-27b", "sections": ["pricing", "context window", "max output tokens", "reasoning_effort values"]}
+ ],
+ "verified_utc_date": "2026-11-03",
+ "verified_by": "Claude Code, fetched from the official Groq documentation pages listed in sources"
+}

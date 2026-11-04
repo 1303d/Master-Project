@@ -1,0 +1,37 @@
+{
+ "schema": "pricing_snapshot/1",
+ "version": "anthropic_claude-sonnet-5-5_2026-11-03",
+ "provider": "anthropic",
+ "model_id": "claude-sonnet-5-5",
+ "model_name": "Claude Sonnet 5.5",
+ "currency": "USD",
+ "unit": "per_million_tokens",
+ "rates": {
+  "input": "2.00",
+  "output": "10.00",
+  "cache_write_5m": "2.50",
+  "cache_write_1h": "4.00",
+  "cache_read": "0.10"
+ },
+ "multipliers": {
+  "inference_geo_global": "1",
+  "inference_geo_us": "1.1"
+ },
+ "conditions": [
+  "Claude API (first-party), synchronous Messages API, standard service tier, global inference (the default; inference_geo not sent)",
+  "Long context: Claude 4.6 and later models (except Claude Haiku 5.5) are billed at standard prices across the full 1M context window; no long-context tier applies",
+  "Thinking tokens are billed as output tokens; usage.output_tokens is the billed output count",
+  "Cache reads on Claude Sonnet 5.5 are 0.05x base input ($0.10 / MTok); 5m writes 1.25x, 1h writes 2x",
+  "inference_geo 'us' applies a 1.1x multiplier to all token categories",
+  "Batch API (50% off: $1 input / $5 output per MTok) is NOT used by this pipeline and is not priced here",
+  "Server tools (web search, web fetch) are not used and are NOT priced here: any such usage is reported as unpriced"
+ ],
+ "unpriced": ["server_tool_use", "service_tier other than standard", "inference_geo other than global or us", "cache writes without a 5m/1h breakdown"],
+ "sources": [
+  {"url": "https://platform.claude.com/docs/en/about-claude/pricing", "sections": ["Model pricing", "Prompt caching", "Data residency pricing", "Batch processing", "Long context pricing"]},
+  {"url": "https://platform.claude.com/docs/en/about-claude/models/overview", "sections": ["Compare models: Claude API ID"]},
+  {"url": "https://platform.claude.com/docs/en/build-with-claude/thinking", "sections": ["thinking tokens billed as output tokens", "between_tools on Claude Sonnet 5.5", "sampling parameters"]}
+ ],
+ "verified_utc_date": "2026-11-03",
+ "verified_by": "Claude Code, fetched from the official Anthropic documentation pages listed in sources"
+}

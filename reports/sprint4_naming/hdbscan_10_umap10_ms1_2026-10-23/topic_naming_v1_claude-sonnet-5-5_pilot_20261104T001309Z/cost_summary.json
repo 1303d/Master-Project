@@ -1,0 +1,129 @@
+{
+ "api_attempts": 20,
+ "api_attempts_by_status": {
+  "ok": 20
+ },
+ "average_estimated_cost_per_successful_topic_usd": "0.00528160",
+ "budget_basis": "estimated cost at published rates (Anthropic returns no charge)",
+ "budget_note": "pre-request checks use an estimate and cannot guarantee an exact cap",
+ "budget_usd": "1.00000000",
+ "cost_usd": {
+  "billed_total": null,
+  "billing_note": "the Messages API returns usage but no charge; check Usage / Billing in the Claude Console. Unknown billing is never reported as zero",
+  "billing_status": "not_determinable_from_api",
+  "estimate_basis": "actual tokens x published Anthropic rates",
+  "estimate_status": "complete",
+  "estimated_cache": "0.00000000",
+  "estimated_input": "0.06830200",
+  "estimated_output": "0.03733000",
+  "estimated_total": "0.10563200"
+ },
+ "error_attempts_without_usage": 0,
+ "latency_ms": {
+  "max": 4370.2,
+  "mean": 2709.9,
+  "median": 2514.4,
+  "n": 20
+ },
+ "offline_estimate": {
+  "assumptions": {
+   "chars_per_token_typical": 3.5,
+   "chars_per_token_upper": 2.5,
+   "no_local_cache_hits": true,
+   "no_retries": true,
+   "overhead_tokens": 400,
+   "typical_output_tokens": 200,
+   "upper_output_tokens": 1024
+  },
+  "full_run": {
+   "estimated_cost_typical_usd": "1.91758600",
+   "estimated_cost_upper_usd": "5.34733400",
+   "quota": {
+    "days_needed_typical": 1,
+    "days_needed_upper": 1,
+    "minutes_of_requests_upper": 54,
+    "plan": "conservative",
+    "requests_per_minute_planning_upper": 7,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": null,
+    "share_of_daily_tokens_typical": null,
+    "share_of_daily_tokens_upper": null
+   },
+   "requests": 374,
+   "tokens_typical": 659593,
+   "tokens_upper": 1141763,
+   "topics": 374
+  },
+  "pricing_version": "anthropic_claude-sonnet-5-5_2026-11-03",
+  "selected": {
+   "estimated_cost_typical_usd": "0.10082200",
+   "estimated_cost_upper_usd": "0.28354800",
+   "quota": {
+    "days_needed_typical": 1,
+    "days_needed_upper": 1,
+    "minutes_of_requests_upper": 3,
+    "plan": "conservative",
+    "requests_per_minute_planning_upper": 7,
+    "safety_factor": 0.9,
+    "share_of_daily_requests": null,
+    "share_of_daily_tokens_typical": null,
+    "share_of_daily_tokens_upper": null
+   },
+   "requests": 20,
+   "tokens_typical": 34411,
+   "tokens_upper": 59854,
+   "topics": 20
+  }
+ },
+ "pricing_snapshot": {
+  "file": "pricing_snapshot.json",
+  "sha256": "e1ca9a7b88e68b8a1474eab7746f7da7c1f1f999eab38b840c7cf7317fc82301",
+  "sources": [
+   "https://platform.claude.com/docs/en/about-claude/pricing",
+   "https://platform.claude.com/docs/en/about-claude/models/overview",
+   "https://platform.claude.com/docs/en/build-with-claude/thinking"
+  ],
+  "verified_utc_date": "2026-11-03",
+  "version": "anthropic_claude-sonnet-5-5_2026-11-03"
+ },
+ "projection": {
+  "basis": "average estimated cost per successful topic in this run (None when unknown)",
+  "completed_overall": 20,
+  "estimated_cost_remaining_usd": "1.86968640",
+  "projected_full_run_usd": "1.97531840",
+  "remaining_topics": 354,
+  "total_topics": 374
+ },
+ "provider": "anthropic",
+ "requested_model": "claude-sonnet-5-5",
+ "retries": 0,
+ "run_id": "topic_naming_v1_claude-sonnet-5-5_pilot_20261104T001309Z",
+ "run_status": "completed",
+ "scope": "pilot",
+ "served_models": [
+  "claude-sonnet-5-5"
+ ],
+ "stop_reason": null,
+ "this_run_estimated_cost_usd": "0.10563200",
+ "tokens": {
+  "cache_creation_input": 0,
+  "cache_read_input": 0,
+  "cached_input": 0,
+  "input": 34151,
+  "note": "local cache hits make no API call; cache_* = provider-side prompt caching, if reported",
+  "output": 3733,
+  "reasoning": 0,
+  "total": 37884
+ },
+ "topics": {
+  "attempted": 20,
+  "failed": 0,
+  "local_cache_hits": 0,
+  "not_attempted": 0,
+  "requested": 20,
+  "resumed_from_previous_run": 0,
+  "successful": 20,
+  "successful_via_api": 20
+ },
+ "unknown_cost_attempts": 0
+}

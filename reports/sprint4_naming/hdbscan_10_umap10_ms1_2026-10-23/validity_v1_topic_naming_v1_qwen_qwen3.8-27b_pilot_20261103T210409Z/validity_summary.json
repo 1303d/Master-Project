@@ -1,0 +1,284 @@
+{
+ "checks": [],
+ "counts": {
+  "all_auto": {
+   "coherent": 312,
+   "mixed": 38,
+   "surface_form_cluster": 24
+  },
+  "all_treatment": {
+   "eligible": 312,
+   "exclude_until_reclustered": 24,
+   "hold_split_candidate": 38
+  },
+  "pilot_auto": {
+   "coherent": 17,
+   "mixed": 3,
+   "surface_form_cluster": 4
+  },
+  "pilot_final": {
+   "coherent": 17,
+   "mixed": 3,
+   "surface_form_cluster": 4
+  }
+ },
+ "files_sha256": {
+  "pilot_validity.csv": "7b54e903523455a5d0455c06b3bf1781219dcb3c210851a43b9eb39041d73fd8",
+  "topic_validity_all.csv": "1825e7579b2b44a842127306a1e689e2e62d96306e805bcd189754d31cf01dd8",
+  "topic_validity_review.md": "e21a06f37669950cbb85e5a2cb01669c854475afd18ca2eaaaac99e62d712fb4"
+ },
+ "generated_utc": "2026-11-03T21:19:17+00:00",
+ "inputs": {
+  "features": "7ed34ef71e306007e7197de7c15b8828f42e47042bd4966de1eba5eda1223ec2",
+  "snapshot": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2"
+ },
+ "naming_run_files_sha256": {
+  "cost_report.csv": "240912a85fa5d1d64ab217807b510bb39ad717cb78f8b738ca47bef32673a5ed",
+  "cost_report.md": "89f93b5f358ef8362aaf4ae52f426f9539b96b4201a4da881b0308a6b1b02e4f",
+  "cost_summary.json": "104a65a72d1a51defd130d6afb8b23cfc8cfdb0604d7d4445f0f84584d99fbcb",
+  "pricing_snapshot.json": "52ee3ff6493f236627063a4ef474531a9485b9ad95edb4b812ad7b7710a96ef0",
+  "rate_limit_report.csv": "9e8a29e8252aedc1ee305abd3f6606c3d470009d4f1dfb5bca48291fb637d32a",
+  "rate_limit_summary.json": "aef859779895e0bfc372a4cc30fdbe02d59e724df46eaf22ade1171d023c708f",
+  "rate_limits_snapshot.json": "449dced0b56234403ccfb51137ad2a34df5d406f4e1d5509d5d85363b6362042",
+  "raw_responses.jsonl": "e6287f87a0986d9e8288d33b960b55e39fd533f6530eb78da51d8a74c57e4d15",
+  "results.csv": "c9c1c76e0cc2475f7887f81e0064ff3d627990c23f059d8bf13e1d809ad82adb",
+  "results.jsonl": "38ab210120f92befb168180fc762c397a263da252fbaf21c5231295b1c14a0e7",
+  "review_queue.csv": "53bf8412ce5a69c018fd7e33dcd6317cfbe7910cbc2f3cae32e984224c656ea1"
+ },
+ "naming_run_id": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z",
+ "pilot": [
+  {
+   "cohesion_band": "high",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0001",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "high",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0019",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "medium",
+   "topic_id": "T0026",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "hold_split_candidate",
+   "llm_confidence": "low",
+   "topic_id": "T0040",
+   "validity_auto": "mixed",
+   "validity_final": "mixed",
+   "validity_source": "review"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0053",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "exclude_until_reclustered",
+   "llm_confidence": "low",
+   "topic_id": "T0088",
+   "validity_auto": "surface_form_cluster",
+   "validity_final": "surface_form_cluster",
+   "validity_source": "review"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "medium",
+   "topic_id": "T0090",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "exclude_until_reclustered",
+   "llm_confidence": "low",
+   "topic_id": "T0103",
+   "validity_auto": "surface_form_cluster",
+   "validity_final": "surface_form_cluster",
+   "validity_source": "review"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0124",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "high",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0153",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0168",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "medium",
+   "topic_id": "T0175",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "medium",
+   "topic_id": "T0252",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "exclude_until_reclustered",
+   "llm_confidence": "medium",
+   "topic_id": "T0262",
+   "validity_auto": "surface_form_cluster",
+   "validity_final": "surface_form_cluster",
+   "validity_source": "review"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "hold_split_candidate",
+   "llm_confidence": "medium",
+   "topic_id": "T0274",
+   "validity_auto": "mixed",
+   "validity_final": "mixed",
+   "validity_source": "review"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0275",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "hold_split_candidate",
+   "llm_confidence": "high",
+   "topic_id": "T0277",
+   "validity_auto": "mixed",
+   "validity_final": "mixed",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0283",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0303",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "high",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0309",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0324",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0336",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "medium",
+   "hierarchy_treatment": "eligible",
+   "llm_confidence": "high",
+   "topic_id": "T0363",
+   "validity_auto": "coherent",
+   "validity_final": "coherent",
+   "validity_source": "auto"
+  },
+  {
+   "cohesion_band": "low",
+   "hierarchy_treatment": "exclude_until_reclustered",
+   "llm_confidence": "low",
+   "topic_id": "T0374",
+   "validity_auto": "surface_form_cluster",
+   "validity_final": "surface_form_cluster",
+   "validity_source": "review"
+  }
+ ],
+ "review": {
+  "path": "/Users/lochan/Documents/AI-Powered-Job-Finder-master-s-Project-/config/topic_validity/pilot_review_v1.json",
+  "reviewed_utc": "2026-11-03",
+  "reviewer": "Claude Code (evidence review of frozen members, cohesion, reference links and the pilot answers)",
+  "sha256": "75be779874fba0ec921729e74bdcb24d9fd3f5d7c0e12e8b88e61a23147bc6e9",
+  "status": "proposed - awaiting human confirmation"
+ },
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "sprint4_validity/1",
+ "thresholds": {
+  "acronym_min": 0.5,
+  "digit_min": 0.5,
+  "head_word_min": 0.3,
+  "initial_min": 0.6,
+  "low_reference": 0.1,
+  "min_assigned": 10
+ }
+}

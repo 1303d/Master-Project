@@ -1,0 +1,129 @@
+{
+ "config_error": null,
+ "config_sha256": "cad61fb262d9a9424a28a0e3cb793470827ee24230f1697fac196bf5cf1491c0",
+ "daily_quota_exhaustion_events": 0,
+ "header_meaning": {
+  "*-reset": "RFC 3339 time of full replenishment",
+  "anthropic-ratelimit-input-tokens-*": "uncached input + cache-write tokens per minute",
+  "anthropic-ratelimit-output-tokens-*": "output tokens per minute",
+  "anthropic-ratelimit-requests-*": "requests per minute (token bucket)",
+  "anthropic-ratelimit-tokens-*": "the most restrictive token limit"
+ },
+ "http_errors": {
+  "by_status": {},
+  "http_529": 0,
+  "http_5xx": 0
+ },
+ "last_quota_stop": null,
+ "limits_configured": {
+  "input_tpm": 30000,
+  "output_tpm": 8000,
+  "rpd": null,
+  "rpm": 50,
+  "tpd": null,
+  "tpm": null
+ },
+ "limits_from_headers": {
+  "input_tpm": 5000000,
+  "output_tpm": 1000000,
+  "rpm": 10000,
+  "tpm": 6000000
+ },
+ "limits_used_at_end": {
+  "input_tpm": 5000000,
+  "output_tpm": 1000000,
+  "rpd": null,
+  "rpm": 10000,
+  "tpd": null,
+  "tpm": 6000000
+ },
+ "plan": "conservative",
+ "provider": "anthropic",
+ "quota": {
+  "local_estimate": {
+   "caps_after_safety": {
+    "input_tpm": 4500000,
+    "output_tpm": 900000,
+    "rpd": null,
+    "rpm": 9000,
+    "tpd": null,
+    "tpm": 5400000
+   },
+   "requests_last_day": 213,
+   "requests_last_minute": 29,
+   "source": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+   "tokens_last_day": 406068,
+   "tokens_last_minute": 54124,
+   "used_for": "RPD only when Groq reported nothing; TPD always (no provider TPD header); RPM/TPM together with the provider TPM header"
+  },
+  "provider_reported": {
+   "from_429_messages": {},
+   "input_tokens_per_minute": {
+    "limit": 5000000,
+    "remaining": 4999000,
+    "reset_at_utc": "2026-11-04T00:35:08+00:00"
+   },
+   "observed_at_utc": "2026-11-04T00:35:08+00:00",
+   "output_tokens_per_minute": {
+    "limit": 1000000,
+    "remaining": 1000000,
+    "reset_at_utc": "2026-11-04T00:35:08+00:00"
+   },
+   "requests_per_day": {
+    "limit": null,
+    "remaining": null,
+    "reset_at_utc": null
+   },
+   "requests_per_minute": {
+    "limit": 10000,
+    "remaining": 9999,
+    "reset_at_utc": "2026-11-04T00:35:08+00:00"
+   },
+   "source": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+   "tokens_per_day": "not reported in headers by Groq",
+   "tokens_per_minute": {
+    "limit": 6000000,
+    "remaining": 5999000,
+    "reset_at_utc": "2026-11-04T00:35:08+00:00"
+   }
+  }
+ },
+ "quota_sources": {
+  "local_estimate": "this machine's own request log, rolling windows; a conservative fallback, NOT Groq's reset rule (Groq does not document how daily limits reset, and its limits are per organization)",
+  "provider_429_message": "parsed from a Groq 429 error message (message format is not documented by Groq; best effort)",
+  "provider_headers": "Groq x-ratelimit-* response headers (requests = per day, tokens = per minute)",
+  "provider_retry_after": "Groq retry-after header on HTTP 429"
+ },
+ "remaining_topics": 0,
+ "requests": {
+  "failed": 0,
+  "http_429": 0,
+  "successful": 193,
+  "total": 193
+ },
+ "resume": {
+  "carried_over_completed": 0,
+  "not_before_is": "not applicable",
+  "not_before_utc": null,
+  "note": "a provider-reported time is the provider's; a local estimate is conservative; unknown = try later",
+  "resume_command": null,
+  "resume_possible": false,
+  "resumed_from": null
+ },
+ "run_id": "topic_naming_v1_claude-sonnet-5-5_all_20261104T002753Z",
+ "run_status": "completed",
+ "safety_factor": 0.9,
+ "source": "https://platform.claude.com/docs/en/api/rate-limits",
+ "spend_limit": null,
+ "stop_reason": null,
+ "throttle_events": 0,
+ "tokens": {
+  "input": 332812,
+  "output": 35372
+ },
+ "wait_seconds": {
+  "backoff_and_retry_after": 0.0,
+  "throttle": 0.0,
+  "total": 0.0
+ }
+}

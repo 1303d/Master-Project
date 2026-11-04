@@ -1,0 +1,21 @@
+topic_id,provisional_topic_name,n_skills,n_assigned,n_weak,n_extraction_records,n_postings,n_single_posting_skills,n_records_context_verified,n_records_context_not_found,n_records_text_unavailable,n_human_review_decisions,n_human_not_a_skill,n_cand_ambiguous_acronym,n_cand_generic_noun,n_cand_reference_mapping,n_cand_conflicting_meaning,n_candidates_for_human_review,models
+T0018,Software Development Tools,69,30,39,252,162,46,252,0,0,39,0,12,18,3,6,29,claude-haiku-5-5=245; qwen/qwen3.8-27b=7
+T0040,Flexible Adaptability,66,28,38,161,152,56,160,1,0,38,5,3,16,4,4,21,claude-haiku-5-5=160; qwen/qwen3.8-27b=1
+T0057,C++ and .NET Development,61,33,28,150,115,44,149,1,0,28,1,5,2,1,2,9,claude-haiku-5-5=148; qwen/qwen3.8-27b=2
+T0103,Enterprise System Acronyms,83,40,43,125,114,64,123,2,0,43,1,52,7,3,8,58,claude-haiku-5-5=123; qwen/qwen3.8-27b=2
+T0104,Mixed Technical Codes,56,38,18,85,72,45,85,0,0,18,0,31,4,1,4,37,claude-haiku-5-5=84; qwen/qwen3.8-27b=1
+T0121,Acronym-Based Technical Standards,56,40,16,71,60,46,69,2,0,16,1,37,2,2,7,40,claude-haiku-5-5=70; qwen/qwen3.8-27b=1
+T0135,Acronym-Based Technical Standards,58,34,24,80,69,46,78,2,0,24,2,36,4,1,5,40,claude-haiku-5-5=79; qwen/qwen3.8-27b=1
+T0140,Garment and Lens Fitting,38,33,5,411,388,25,409,2,0,5,1,1,5,14,11,21,claude-haiku-5-5=394; qwen/qwen3.8-27b=17
+T0162,R Programming Tools,42,25,17,63,57,33,63,0,0,17,0,13,12,0,6,23,claude-haiku-5-5=62; qwen/qwen3.8-27b=1
+T0171,Site and User Journey Design,34,29,5,49,44,29,49,0,0,5,2,0,0,2,3,5,claude-haiku-5-5=48; qwen/qwen3.8-27b=1
+T0172,Quantity Take-Offs and Restructuring,58,30,28,74,67,48,74,0,0,28,2,2,16,3,5,22,claude-haiku-5-5=73; qwen/qwen3.8-27b=1
+T0177,Bill of Materials Management,55,31,24,68,57,47,67,1,0,24,1,39,4,4,5,40,claude-haiku-5-5=68
+T0190,Materials Preparation and Planning,36,27,9,49,41,31,48,1,0,9,0,0,1,4,2,6,claude-haiku-5-5=48; qwen/qwen3.8-27b=1
+T0192,Rigging and Surface Finishing,48,26,22,76,61,36,76,0,0,22,3,0,4,5,5,10,claude-haiku-5-5=74; qwen/qwen3.8-27b=2
+T0193,Painting and Art Techniques,25,23,2,35,24,23,35,0,0,2,0,0,0,1,0,1,claude-haiku-5-5=35
+T0211,Miscellaneous Acronyms and Tools,77,23,54,108,101,63,105,3,0,54,6,33,31,2,6,45,claude-haiku-5-5=108
+T0229,Scaling and Growth Terms,30,14,16,50,47,24,49,1,0,16,0,9,15,3,1,18,claude-haiku-5-5=50
+T0234,Branded Software Platforms,41,22,19,56,50,32,56,0,0,19,0,17,4,1,4,21,claude-haiku-5-5=56
+T0239,Decorative Styling and Decorating,22,22,0,27,18,18,27,0,0,0,0,0,2,5,2,7,claude-haiku-5-5=27
+T0293,Sewing and Stitching,21,19,2,23,15,19,22,1,0,2,0,1,2,6,2,8,claude-haiku-5-5=23

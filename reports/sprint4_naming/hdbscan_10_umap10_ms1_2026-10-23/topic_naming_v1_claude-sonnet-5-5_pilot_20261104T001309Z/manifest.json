@@ -1,0 +1,137 @@
+{
+ "budget_usd": "1.00000000",
+ "clustering_run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "code": {
+  "commit": "fcaf3d73014bf0a78bf2557c7195197d218fb6a7+uncommitted",
+  "numpy": "2.4.6",
+  "platform": "arm64",
+  "python": "3.11.15",
+  "script_sha256": "3f6007673c5b1f277b02db02d8eb854ab1681d3d067b48b369d8b3ec61a2cf15"
+ },
+ "cost": {
+  "api_attempts": 20,
+  "error_attempts_without_usage": 0,
+  "stop_reason": null,
+  "this_run_estimated_cost_usd": "0.10563200",
+  "unknown_cost_attempts": 0
+ },
+ "evidence_fingerprint": "0f6f74b386f4058de6f7e3ffbf095eede4692d7d42517e7be4e705190829daa0",
+ "files_sha256": {
+  "cost_report.csv": "f9657113be5e410c8335232156c9e128d75edc6b51278331698b28632c5e7372",
+  "cost_report.md": "3fc49cf821c59fa0c5cba7e80e887a5d3cf40520b4b23b95271d7d4d2474c2ea",
+  "cost_summary.json": "c3119212b8c6e5851ed43147fa12868c1d72fe8dcc2b1057a5a9852cd8971470",
+  "pricing_snapshot.json": "e1ca9a7b88e68b8a1474eab7746f7da7c1f1f999eab38b840c7cf7317fc82301",
+  "rate_limit_report.csv": "fdc989fc2eca42918797d7768f2a5f1aaa4f6d48c6ae0e3659709bde1901126a",
+  "rate_limit_summary.json": "755f8a76754f6052b701fd22cc435f91c8e4504c7d535b05cd0178c927c25583",
+  "rate_limits_snapshot.json": "cad61fb262d9a9424a28a0e3cb793470827ee24230f1697fac196bf5cf1491c0",
+  "raw_requests.jsonl": "ebd0055d776e80ea1fea5c2385129bd2c7bab7b6fc34e9d6b1be2663648a602b",
+  "raw_responses.jsonl": "872ad5c6ca13746382193d0053d9e7ac64a600f4064362ad0080c9b379d5fa9e",
+  "results.csv": "33f3c712a279292cf01dfff729596f5340d2ca1bc164a138ddf7c94e7b900373",
+  "results.jsonl": "765c4e09c40695029b4ebf686466b420baec02d825497c68796a5f4cf6fc2c67",
+  "review_queue.csv": "a4422ff5db5e941ea9196decc1cf9a457c264d3217237dfb927a44473a8e457b"
+ },
+ "generated_utc": "2026-11-04T00:14:04+00:00",
+ "key_authorization": "Northeastern University approved automated capstone pipeline use of this Anthropic API key - as stated by the user (Lochan Enugula) on 2026-11-03; individual approver and approval date not provided",
+ "model": "claude-sonnet-5-5",
+ "model_settings": {
+  "api": "Anthropic Messages API, official SDK (max_retries=0, raw responses for rate-limit headers)",
+  "fallback": null,
+  "key_authorization_required": true,
+  "max_tokens": 1024,
+  "model_id": "claude-sonnet-5-5",
+  "output_config": {
+   "effort": "medium",
+   "format": {
+    "schema": {
+     "additionalProperties": false,
+     "properties": {
+      "confidence": {
+       "enum": [
+        "high",
+        "medium",
+        "low"
+       ],
+       "type": "string"
+      },
+      "confidence_reason": {
+       "type": "string"
+      },
+      "description": {
+       "type": "string"
+      },
+      "provisional_name": {
+       "type": "string"
+      },
+      "supporting_skills": {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      }
+     },
+     "required": [
+      "provisional_name",
+      "description",
+      "supporting_skills",
+      "confidence",
+      "confidence_reason"
+     ],
+     "type": "object"
+    },
+    "type": "json_schema"
+   }
+  },
+  "provider": "anthropic",
+  "sampling": null,
+  "thinking": {
+   "type": "between_tools"
+  },
+  "tracing": null
+ },
+ "names_provisional": true,
+ "prepare_fingerprint": "4209b6529dc6deb520224bf26d90e1dce4b9c540d40cdc329e8419106736da5c",
+ "prompt_sha256": "9e5a343f76dfb91530965cb8d2ff12c9871cc1829bfab28faf0d28f6059ffaa4",
+ "prompt_version": "topic_naming_v1",
+ "provider": "anthropic",
+ "rate_plan": "conservative",
+ "result_problems": [],
+ "resumed_from": null,
+ "run_id": "topic_naming_v1_claude-sonnet-5-5_pilot_20261104T001309Z",
+ "run_status": "completed",
+ "schema_version": "sprint4_naming/3",
+ "scope": "pilot",
+ "selection": {
+  "limit": 20,
+  "limit_seed": 20261104,
+  "missing_count": 213,
+  "missing_sha256": "e9e1bf52863ea59ea2838c74794b1e6a03eb6a505bc085e446e2826e9189759b",
+  "only_missing_from": "groq",
+  "present_count": 161,
+  "present_sha256": "7bda5e10fa32d0099a7fbcc6c5ce029f81b1dea6be44c5314311c1d0fef61a6d",
+  "selected": 20,
+  "source_model": "qwen/qwen3.8-27b"
+ },
+ "stage": "generate",
+ "topic_ids": [
+  "T0148",
+  "T0152",
+  "T0166",
+  "T0203",
+  "T0208",
+  "T0232",
+  "T0244",
+  "T0246",
+  "T0249",
+  "T0269",
+  "T0282",
+  "T0294",
+  "T0307",
+  "T0308",
+  "T0316",
+  "T0319",
+  "T0325",
+  "T0337",
+  "T0349",
+  "T0369"
+ ]
+}

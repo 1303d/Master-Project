@@ -1,0 +1,303 @@
+{
+ "code": {
+  "commit": "2bbb95a27f5fd1fb7edb22b0c6b61522cbc2ea36+uncommitted",
+  "numpy": "2.4.6",
+  "platform": "arm64",
+  "python": "3.11.15",
+  "script_sha256": "72b823f2249571ac18e8ac59875753661875ad566039e2fc5bc3f99e2bab1732"
+ },
+ "counts": {
+  "low_cohesion": 94,
+  "low_reference_coverage": 64,
+  "near_duplicate_topic": 88,
+  "no_reference_link": 7,
+  "pilot": 24,
+  "request_problems": 0,
+  "requests": 374,
+  "review_flagged": 152,
+  "topics": 374,
+  "transversal": 39,
+  "user_message_chars": {
+   "max": 1777,
+   "median": 1277,
+   "min": 509
+  },
+  "weak_exceeds_assigned": 9
+ },
+ "data_fingerprint": "e31ccfe6e1ffff8dca585e0a34d1c94f3fcfcf92ca5ba6121f1fbc7180cad6f8",
+ "excluded": "no LLM output, no intrusion-test data, no current topic labels, no weak members, no posting text",
+ "files_sha256": {
+  "evidence.jsonl": "0f6f74b386f4058de6f7e3ffbf095eede4692d7d42517e7be4e705190829daa0",
+  "pilot_topics.csv": "47d6b223d740c22bccb9c82f64dd4286e33371a925552f54a9e06bb0b1c1ccd0",
+  "requests.jsonl": "2705203e057160b513d2c91ae5ce4b455329cf8947472c7f846c130d8036d0a0",
+  "topic_flags.csv": "d1e4e70a56435e8d364420aae95e29ae5003d82b28b790b19864310488adea46"
+ },
+ "generated_utc": "2026-11-03T15:16:16+00:00",
+ "inputs": {
+  "features_fingerprint": "7ed34ef71e306007e7197de7c15b8828f42e47042bd4966de1eba5eda1223ec2",
+  "snapshot_fingerprint": "310fab1f668f698f2f25806991c6ad790a7f732c8f03d8ed46d465951076d0d2"
+ },
+ "intrusion_strata_overlap": {
+  "identical": true,
+  "low_cohesion": 94,
+  "low_confidence": 94,
+  "overlap": 94
+ },
+ "model": {
+  "effort": "medium",
+  "fallback": null,
+  "inference_geo": "not sent (global)",
+  "max_tokens": 1024,
+  "model_id": "claude-sonnet-5-5",
+  "provider": "anthropic",
+  "sampling": null,
+  "sdk_max_retries": 0,
+  "service_tier": "not sent (standard)",
+  "structured_output": "output_config.format json_schema",
+  "thinking": {
+   "type": "between_tools"
+  },
+  "tracing": null
+ },
+ "offline_cost_estimate": {
+  "assumptions": {
+   "chars_per_token_typical": 2.5,
+   "chars_per_token_upper": 2.0,
+   "global_inference_standard_tier": true,
+   "no_local_cache_hits": true,
+   "no_retries": true,
+   "overhead_tokens": 400,
+   "typical_output_tokens": 250,
+   "upper_output_tokens": 1024
+  },
+  "full_run": {
+   "topics": 374,
+   "typical_usd": "2.45257400",
+   "upper_bound_one_attempt_usd": "5.65173600"
+  },
+  "pilot": {
+   "topics": 24,
+   "typical_usd": "0.15656000",
+   "upper_bound_one_attempt_usd": "0.36165000"
+  },
+  "pricing_version": "anthropic_claude-sonnet-5-5_2026-11-03"
+ },
+ "pilot": {
+  "per_stratum": 4,
+  "seed": 20261104,
+  "strata": [
+   {
+    "name": "transversal",
+    "rule": "is_transversal"
+   },
+   {
+    "name": "low_cohesion",
+    "rule": "flag low_cohesion and not transversal"
+   },
+   {
+    "name": "near_duplicate",
+    "rule": "flag near_duplicate_topic (a neighbour centroid cosine >= 0.90)"
+   },
+   {
+    "name": "sparse_reference",
+    "rule": "reference coverage_any < 0.30 (includes no link at all)"
+   },
+   {
+    "name": "weak_heavy",
+    "rule": "n_weak > n_assigned"
+   },
+   {
+    "name": "baseline",
+    "rule": "no review flag and not transversal"
+   }
+  ],
+  "topics": [
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "transversal",
+    "topic_id": "T0019"
+   },
+   {
+    "also_matches": "near_duplicate;weak_heavy",
+    "size_tercile": "large",
+    "stratum": "transversal",
+    "topic_id": "T0040"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "transversal",
+    "topic_id": "T0053"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "transversal",
+    "topic_id": "T0153"
+   },
+   {
+    "also_matches": "near_duplicate",
+    "size_tercile": "large",
+    "stratum": "low_cohesion",
+    "topic_id": "T0026"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "low_cohesion",
+    "topic_id": "T0090"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "large",
+    "stratum": "low_cohesion",
+    "topic_id": "T0175"
+   },
+   {
+    "also_matches": "sparse_reference",
+    "size_tercile": "medium",
+    "stratum": "low_cohesion",
+    "topic_id": "T0262"
+   },
+   {
+    "also_matches": "transversal",
+    "size_tercile": "large",
+    "stratum": "near_duplicate",
+    "topic_id": "T0001"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "near_duplicate",
+    "topic_id": "T0252"
+   },
+   {
+    "also_matches": "sparse_reference",
+    "size_tercile": "medium",
+    "stratum": "near_duplicate",
+    "topic_id": "T0283"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "near_duplicate",
+    "topic_id": "T0336"
+   },
+   {
+    "also_matches": "low_cohesion",
+    "size_tercile": "large",
+    "stratum": "sparse_reference",
+    "topic_id": "T0088"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "large",
+    "stratum": "sparse_reference",
+    "topic_id": "T0124"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "small",
+    "stratum": "sparse_reference",
+    "topic_id": "T0303"
+   },
+   {
+    "also_matches": "baseline",
+    "size_tercile": "medium",
+    "stratum": "sparse_reference",
+    "topic_id": "T0324"
+   },
+   {
+    "also_matches": "low_cohesion;near_duplicate;sparse_reference",
+    "size_tercile": "large",
+    "stratum": "weak_heavy",
+    "topic_id": "T0103"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0274"
+   },
+   {
+    "also_matches": "near_duplicate",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0277"
+   },
+   {
+    "also_matches": "low_cohesion;sparse_reference",
+    "size_tercile": "small",
+    "stratum": "weak_heavy",
+    "topic_id": "T0374"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0168"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0275"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "medium",
+    "stratum": "baseline",
+    "topic_id": "T0309"
+   },
+   {
+    "also_matches": "",
+    "size_tercile": "small",
+    "stratum": "baseline",
+    "topic_id": "T0363"
+   }
+  ]
+ },
+ "pricing_snapshot": {
+  "path": "config/pricing/anthropic_claude-sonnet-5-5.json",
+  "sha256": "e1ca9a7b88e68b8a1474eab7746f7da7c1f1f999eab38b840c7cf7317fc82301",
+  "version": "anthropic_claude-sonnet-5-5_2026-11-03"
+ },
+ "prompt": {
+  "path": "prompts/topic_naming_v1.txt",
+  "sha256": "9e5a343f76dfb91530965cb8d2ff12c9871cc1829bfab28faf0d28f6059ffaa4",
+  "version": "topic_naming_v1"
+ },
+ "provenance_gaps": [
+  "input snapshot manifest records source commit '84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted', which is not in this repository's history",
+  "topic features manifest records source commit '84c46e567ef5d575118e4953cf61c2817ed49b11+uncommitted', which is not in this repository's history",
+  "topic features were built with Python 3.14.8 / numpy 2.5.4; this run uses Python 3.11.15 / numpy 2.4.6 (outputs still hash-verified)",
+  "intrusion v2 'low confidence' and 'low cohesion' bottom quartiles are the same 94 topics (score_mean and cos_mean both measure cosine to centroid): one signal, not two; the intrusion result is single-reviewer and exploratory, so it is not used to name or flag topics",
+  "ESCO / O*NET purity is unavailable (snapshot has no broader-group data); reference hints are per-skill matcher output and can be wrong"
+ ],
+ "run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "schema_version": "sprint4_naming/2",
+ "settings": {
+  "additional_members_selection": "assigned non-representative members sorted by cosine to centroid desc, evenly spaced picks",
+  "cohesion_band": {
+   "metric": "cos_mean",
+   "q25": 0.842669,
+   "q75": 0.8846345
+  },
+  "low_reference_coverage": 0.3,
+  "max_user_tokens_estimate": 3000,
+  "n_additional_members": 20,
+  "n_neighbour_skills": 3,
+  "n_neighbours": 3,
+  "n_reference_hints": 5,
+  "n_representatives": 10,
+  "near_duplicate_cosine": 0.9,
+  "review_flags": [
+   "low_cohesion",
+   "weak_exceeds_assigned",
+   "no_reference_link",
+   "near_duplicate_topic"
+  ]
+ },
+ "stage": "prepare"
+}

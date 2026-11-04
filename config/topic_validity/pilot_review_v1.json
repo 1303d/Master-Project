@@ -1,0 +1,86 @@
+{
+ "schema": "topic_validity_review/1",
+ "reviewer": "Claude Code (evidence review of frozen members, cohesion, reference links and the pilot answers)",
+ "status": "proposed - awaiting human confirmation",
+ "reviewed_utc": "2026-11-03",
+ "naming_run_id": "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z",
+ "root_cause_definitions": {
+  "extraction_noise": "members that are not skills (objects, bare codes, unexpanded acronyms) came out of skill extraction",
+  "embedding_similarity": "bge-small places short, context-free strings by their characters (shared letters, digits, one shared word) rather than meaning",
+  "clustering_behavior": "HDBSCAN (min_samples 1, UMAP 10-d; run silhouette 0.093) chains such strings into one cluster and attaches many weak noise points",
+  "naming_prompt_limitation": "the naming step produced a name that breaks the prompt rules or is not grounded in the members",
+  "insufficient_reference_evidence": "few or wrong ESCO / O*NET links, so the members' meaning cannot be checked"
+ },
+ "topics": {
+  "T0040": {
+   "validity": "mixed",
+   "root_causes": ["extraction_noise", "embedding_similarity", "clustering_behavior", "naming_prompt_limitation"],
+   "evidence": [
+    "Centroid skill is 'containers'; lowest cohesion of all 374 topics (percentile 1), margin 0.027, 38 weak members vs 28 assigned, three neighbours with centroid cosine >= 0.91.",
+    "Members are mostly physical objects and product names extracted as skills (doilies, sponges, umbrella, pontoon, box, chutes; Hootsuite, Windchill, AlignRT, TurboCourt).",
+    "A string group shares 'flex' / 'free' (flexibility, flexray, shaft flex, gac flex spanset, freewheel, free float) - character similarity, not meaning.",
+    "Only 2 of 28 members are traits (flexibility, adaptability), yet the name 'Flexible Adaptability' names a trait (prompt rule 3) and the model copied the ESCO hint 'perform services in a flexible manner' as a supporting skill (not a member).",
+    "Reference links are often wrong matches (dock carts -> 'moor vessels')."
+   ],
+   "subthemes": {"packaging and containers": ["containers", "packages", "packing", "packing lists", "box"], "flex/free strings": ["flexray", "shaft flex", "freewheel", "free float"], "traits": ["flexibility", "adaptability"], "software products": ["hootsuite", "windchill", "alignrt"]},
+   "treatment_note": "not a concept node; the 'transversal' flag on this topic should not be trusted; candidates for a packaging/material-handling topic and for removal as noise"
+  },
+  "T0088": {
+   "validity": "surface_form_cluster",
+   "root_causes": ["embedding_similarity", "clustering_behavior", "extraction_noise", "insufficient_reference_evidence"],
+   "evidence": [
+    "25 of 29 members start with 'g' (initial share 0.86) and no word is shared (head-word share 0.10); 55 % are short acronyms.",
+    "The acronyms belong to unrelated fields: GxP regulation (gmp, glp, gcp, cgmp, gvp, ich gcp), lab chemistry (gc/ms/ms, gc operation, gpc), machining (g code, gd&t, gdt), accounting (gl codes, gl tie out), governance (grc, archer grc), office software (g suite).",
+    "Reference links are wrong for several (grc -> 'gel permeation chromatograph', gl codes -> G-code); coverage 0.24.",
+    "The name 'Regulatory Compliance Acronyms' fits only the GxP subgroup."
+   ],
+   "subthemes": {"GxP regulation": ["gmp", "glp", "gcp", "cgmp", "gxp"], "gas chromatography": ["gc/ms/ms", "gc operation"], "machining": ["g code", "gd&t"], "general ledger": ["gl codes", "gl tie out"]},
+   "treatment_note": "exclude; the GxP subgroup is a real knowledge area and should re-form once acronyms are expanded before embedding"
+  },
+  "T0103": {
+   "validity": "surface_form_cluster",
+   "root_causes": ["embedding_similarity", "extraction_noise", "clustering_behavior", "insufficient_reference_evidence"],
+   "evidence": [
+    "85 % of members are 3-4 letter acronyms, most ending in 's' (ams, mes, ims, ats, ias, ids, oas, aas, paas, laas, slas); head-word share 0.05.",
+    "They name unrelated systems: manufacturing execution (mes), IBM IMS, applicant tracking (ats), cloud service models (iaas, paas), storage (asrs, luns), finance standards (ifrs), quality (ishikawa).",
+    "43 weak members vs 40 assigned; cohesion percentile 5.",
+    "Reference links are mostly absent or wrong (ams -> 'use aeronautical mobile service', ifrs -> 'visual flight rules'); coverage 0.23."
+   ],
+   "treatment_note": "exclude; acronyms need expansion (alias sheet) or posting context before they can be clustered by meaning"
+  },
+  "T0262": {
+   "validity": "surface_form_cluster",
+   "root_causes": ["embedding_similarity", "extraction_noise", "insufficient_reference_evidence"],
+   "evidence": [
+    "All 16 members contain digits (digit share 1.00); 75 % are acronym-like; head-word share 0.12.",
+    "A real subgroup is quality-management standards (as9100, ts16949, iatf16949, ich q7, ich q9), but the rest are software (five9, rapid7), an IBM platform (as400), data buses (a429, j1939, mil std 1553) and unexplained codes (7ks, 9ks, 999, ca7).",
+    "Reference coverage 0.06 (one O*NET software link), so the codes' meanings are not checkable from the snapshot."
+   ],
+   "subthemes": {"quality standards": ["as9100", "ts16949", "iatf16949", "ich q7", "ich q9"], "data buses": ["a429", "j1939", "mil std 1553"], "software": ["five9", "rapid7", "as400"]},
+   "treatment_note": "exclude; the quality-standards subgroup is worth keeping as a future concept"
+  },
+  "T0274": {
+   "validity": "mixed",
+   "root_causes": ["embedding_similarity", "extraction_noise", "clustering_behavior"],
+   "evidence": [
+    "Cohesion looks fine (percentile 66) because 10 of 13 members contain the word 'coding' - the shared word dominates the embedding.",
+    "'coding' is used in different senses: programming (coding languages, simulink coder, functional languages), barcode / product labelling (bar coding, barcode systems, equipment coding), legal and accounting billing codes (matter coding, charge coding), and its weak members add medical coding (cpt coding, hcpcs coding, icd 10 coding).",
+    "The extractor kept 'coding' without its domain, so context that separates the senses was lost.",
+    "16 weak members vs 13 assigned. The auto rule catches it only through the weak-member signal; polysemy itself is not visible in string form."
+   ],
+   "subthemes": {"programming": ["coding languages", "simulink coder", "functional languages"], "barcoding": ["bar coding", "barcode systems", "equipment coding"], "billing codes": ["matter coding", "charge coding"]},
+   "treatment_note": "hold; split by sense in a later run (programming belongs with software development, medical coding with health-information topics)"
+  },
+  "T0374": {
+   "validity": "surface_form_cluster",
+   "root_causes": ["embedding_similarity", "extraction_noise", "insufficient_reference_evidence"],
+   "evidence": [
+    "9 of 10 members are short acronyms sharing the letters v / d / a (cvad, avd, mvpd, vdi, edd, erad, lvad, cva, cv); head-word share 0.10.",
+    "Read with domain knowledge they are unrelated: medical devices (CVAD central venous access device, LVAD), TV distribution (MVPD), IT (VDI virtual desktop), a supplier-rating service (EcoVadis), CV/CVA (curriculum vitae or cerebrovascular accident).",
+    "No reference link at all (coverage 0.00) and the smallest allowed size (10), so nothing in the snapshot confirms any shared meaning; the model itself wrote that there is no unifying theme.",
+    "Classified as surface_form_cluster rather than insufficient_evidence because the grouping by letters is visible, not merely unconfirmed."
+   ],
+   "treatment_note": "exclude; members need acronym expansion before re-clustering"
+  }
+ }
+}

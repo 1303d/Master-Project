@@ -1,0 +1,23 @@
+{
+ "schema": "rate_limits/1",
+ "provider": "anthropic",
+ "model_id": "claude-sonnet-5-5",
+ "safety_factor": "0.9",
+ "plans": {
+  "conservative": {
+   "rpm": 50, "rpd": null, "tpm": null, "tpd": null, "input_tpm": 30000, "output_tpm": 8000,
+   "source": "https://platform.claude.com/docs/en/api/rate-limits",
+   "note": "deliberately far below the published Start-tier limits for Claude Sonnet 5.5 (4,000 RPM, 2,000,000 ITPM, 400,000 OTPM): new organisations may be in an Evaluation tier with lower, unpublished limits, and this organisation's tier is not known. The account's actual limits from anthropic-ratelimit-* response headers replace rpm / input_tpm / output_tpm once seen (x safety factor)."
+  }
+ },
+ "headers": {
+  "anthropic-ratelimit-requests-limit / -remaining / -reset": "requests per minute; reset = RFC 3339 time of full replenishment",
+  "anthropic-ratelimit-input-tokens-*": "input tokens per minute (uncached input + cache-write tokens count; cache reads do not)",
+  "anthropic-ratelimit-output-tokens-*": "output tokens per minute (actual output tokens; max_tokens does not count)",
+  "anthropic-ratelimit-tokens-*": "the most restrictive token limit currently in effect",
+  "retry-after": "seconds; not every 429 carries it (the monthly spend-cap 429 never does)"
+ },
+ "header_policy": "provider limits from headers replace the configured rpm / input_tpm / output_tpm (actual account limits); the limiter is a token bucket on the provider side, a sliding 60 s window locally",
+ "spend_limits": "monthly spend cap per tier (Start $500, Build $1,000, Scale $200,000); at the cap the API returns 429 with error.details.error_code enforced_spend_limit_reached and no retry-after (run stops, no retry); a user-set spend limit returns 400 'You have reached your specified ...' (run stops)",
+ "verified_utc_date": "2026-11-03"
+}

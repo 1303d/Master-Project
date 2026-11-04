@@ -1,0 +1,53 @@
+{
+ "assembly_id": "assembled_topic_naming_v1_20261104T003642Z",
+ "clustering_run_id": "hdbscan_10_umap10_ms1_2026-10-23",
+ "code": {
+  "commit": "fcaf3d73014bf0a78bf2557c7195197d218fb6a7+uncommitted",
+  "numpy": "2.4.6",
+  "platform": "arm64",
+  "python": "3.11.15",
+  "script_sha256": "3f6007673c5b1f277b02db02d8eb854ab1681d3d067b48b369d8b3ec61a2cf15"
+ },
+ "complete": true,
+ "counts": {
+  "anthropic": 213,
+  "groq": 161,
+  "topics": 374
+ },
+ "evidence_fingerprint": "0f6f74b386f4058de6f7e3ffbf095eede4692d7d42517e7be4e705190829daa0",
+ "files_sha256": {
+  "results.csv": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719",
+  "results.jsonl": "6a77696af677d41b89080fd45bcafdaab7aeb274c783e08284e46d10fd8d2679"
+ },
+ "generated_utc": "2026-11-04T00:36:42+00:00",
+ "human_validated": false,
+ "missing_topics": [],
+ "names_provisional": true,
+ "note": "mixed-provider provisional names; compare names only with their source_model in mind",
+ "prompt_sha256": "9e5a343f76dfb91530965cb8d2ff12c9871cc1829bfab28faf0d28f6059ffaa4",
+ "prompt_version": "topic_naming_v1",
+ "providers_in_priority_order": [
+  {
+   "model": "qwen/qwen3.8-27b",
+   "provider": "groq"
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "provider": "anthropic"
+  }
+ ],
+ "schema_version": "sprint4_naming/3",
+ "source_runs": {
+  "anthropic": [
+   "topic_naming_v1_claude-sonnet-5-5_pilot_20261104T001309Z",
+   "topic_naming_v1_claude-sonnet-5-5_all_20261104T002753Z"
+  ],
+  "groq": [
+   "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z",
+   "topic_naming_v1_qwen_qwen3.8-27b_all_20261103T224023Z",
+   "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T231820Z",
+   "topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T231851Z"
+  ]
+ },
+ "stage": "assemble"
+}
