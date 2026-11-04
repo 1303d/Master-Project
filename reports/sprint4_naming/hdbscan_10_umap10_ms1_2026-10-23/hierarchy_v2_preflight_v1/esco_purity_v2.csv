@@ -1,0 +1,375 @@
+topic_id,esco_purity_L1_v2,top_group_L1,esco_purity_L2_v2,top_group_L2,n_links,n_used_L1,n_used_L2,n_uri_not_in_v121,audit_v1_column_esco_purity_level2_is_really_L1
+T0001,0.4158,"communication, collaboration and creativity",0.3158,personal skills and development,19,19,19,0,0.5263
+T0002,0.4286,social and communication skills and competences,0.25,collaborating in teams and networks,17,14,14,3,0.4286
+T0003,0.32,thinking skills and competences,0.24,thinking creatively and innovatively,33,25,25,8,0.36
+T0004,0.6667,working with computers,0.6667,"using digital tools for collaboration, content creation and problem solving",3,3,3,0,0.6667
+T0005,0.5714,"communication, collaboration and creativity",0.4286,working with others,8,7,7,1,0.7143
+T0006,0.5556,management skills,0.5,"organising, planning and scheduling work and activities",13,9,9,4,0.7778
+T0007,0.7895,information and communication technologies (icts),0.7895,information and communication technologies (icts),38,38,38,0,0.7895
+T0008,0.5714,working with computers,0.5714,"using digital tools for collaboration, content creation and problem solving",7,7,7,0,0.5714
+T0009,0.5238,"communication, collaboration and creativity",0.5179,solving problems,16,14,14,2,0.5
+T0010,0.6176,"communication, collaboration and creativity",0.3824,liaising and networking,18,17,17,1,0.8824
+T0011,0.4,"business, administration and law",0.4,business and administration,30,30,30,0,0.4
+T0012,0.8,information and communication technologies (icts),0.8,information and communication technologies (icts),10,10,10,0,0.8
+T0013,0.25,"communication, collaboration and creativity",0.25,demonstrating willingness to learn,5,4,4,1,0.5
+T0014,0.4545,"business, administration and law",0.4545,business and administration,33,33,33,0,0.4545
+T0015,0.381,core skills and competences,0.7619,mastering languages,21,21,21,0,0.7619
+T0016,0.5,"communication, collaboration and creativity",0.25,liaising and networking,5,4,4,1,0.5
+T0017,0.3333,"natural sciences, mathematics and statistics",0.2381,mathematics and statistics,21,21,21,0,0.3333
+T0018,0.8,information and communication technologies (icts),0.8,information and communication technologies (icts),5,5,5,0,0.8
+T0019,0.8571,"business, administration and law",0.8571,business and administration,7,7,7,0,0.8571
+T0020,0.2611,management skills,0.2,information and communication technologies (icts),30,30,30,0,0.2
+T0021,0.3611,assisting and caring,0.3611,protecting and enforcing,18,18,18,0,0.3889
+T0022,0.312,services,0.312,hygiene and occupational health services,39,39,39,0,0.4103
+T0023,0.6875,"communication, collaboration and creativity",0.375,presenting information,16,16,16,0,0.9375
+T0024,0.1875,assisting and caring,0.1861,protecting and enforcing,36,36,36,0,0.2778
+T0025,0.6429,information and communication technologies (icts),0.6429,information and communication technologies (icts),7,7,7,0,1.0
+T0026,0.75,"business, administration and law",0.75,law,48,48,48,0,0.75
+T0027,0.35,information and communication technologies (icts),0.35,information and communication technologies (icts),25,20,20,5,0.5
+T0028,0.3438,management skills,0.3125,allocating and controlling resources,18,16,16,2,0.5
+T0029,0.5833,management skills,0.3519,"organising, planning and scheduling work and activities",19,18,18,1,0.7778
+T0030,0.369,information skills,0.2381,performing administrative activities,28,28,28,0,0.4643
+T0031,0.359,management skills,0.1346,"organising, planning and scheduling work and activities",27,26,26,1,0.4231
+T0032,0.2014,information skills,0.1667,information and communication technologies (icts),24,24,24,0,0.2917
+T0033,0.5161,"business, administration and law",0.5161,business and administration,31,31,31,0,0.5161
+T0034,0.3796,"communication, collaboration and creativity",0.3056,supporting others,21,18,18,3,0.5556
+T0035,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),6,6,6,0,1.0
+T0036,0.3529,"communication, collaboration and creativity",0.2647,developing objectives and strategies,17,17,17,0,0.3529
+T0037,0.4286,"business, administration and law",0.4286,business and administration,15,14,14,1,0.4286
+T0038,0.5455,management skills,0.3636,developing objectives and strategies,11,11,11,0,0.5455
+T0039,0.3571,health and welfare,0.3571,health,31,28,28,3,0.3571
+T0040,0.5,"engineering, manufacturing and construction",0.375,engineering and engineering trades,8,8,8,0,0.5
+T0041,0.4556,information skills,0.2,"conducting studies, investigations and examinations",30,30,30,0,0.4667
+T0042,0.4211,information and communication technologies (icts),0.4211,information and communication technologies (icts),19,19,19,0,0.4211
+T0043,0.2647,"communication, collaboration and creativity",0.2647,liaising and networking,17,17,17,0,0.2941
+T0044,0.5833,"business, administration and law",0.5833,business and administration,13,12,12,1,0.5
+T0045,0.4444,"communication, collaboration and creativity",0.4444,communicating,9,9,9,0,0.8889
+T0046,0.2611,management skills,0.2233,"organising, planning and scheduling work and activities",30,30,30,0,0.3
+T0047,0.4259,management skills,0.2222,"organising, planning and scheduling work and activities",9,9,9,0,0.6667
+T0048,0.3333,"business, administration and law",0.3333,business and administration,6,6,6,0,0.3333
+T0049,0.1778,education,0.1778,education,45,45,45,0,0.2
+T0050,0.4667,handling and moving,0.4583,using hand tools,21,20,20,1,0.55
+T0051,0.4062,"business, administration and law",0.4062,business and administration,16,16,16,0,0.375
+T0052,0.45,"business, administration and law",0.45,business and administration,10,10,10,0,0.6
+T0053,0.4167,information and communication technologies (icts),0.4167,information and communication technologies (icts),12,12,12,0,0.5
+T0054,0.7222,"business, administration and law",0.7222,business and administration,18,18,18,0,0.7222
+T0055,0.2963,health and welfare,0.2963,health,27,27,27,0,0.3704
+T0056,0.3077,management skills,0.2692,designing systems and products,26,26,26,0,0.3077
+T0057,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),8,8,8,0,1.0
+T0058,0.5882,working with machinery and specialised equipment,0.3529,driving vehicles,17,17,17,0,0.5882
+T0059,0.2941,"business, administration and law",0.2941,business and administration,17,17,17,0,0.2941
+T0060,0.4286,health and welfare,0.3571,health,28,28,28,0,0.4286
+T0061,,"communication, collaboration and creativity",,designing systems and products,3,2,2,1,
+T0062,0.3406,"communication, collaboration and creativity",0.2609,writing and composing,23,23,23,0,0.3913
+T0063,0.65,handling and moving,0.5167,cleaning,32,30,30,2,0.6667
+T0064,0.5714,"business, administration and law",0.5714,business and administration,21,21,21,0,0.5714
+T0065,0.375,"engineering, manufacturing and construction",0.375,engineering and engineering trades,8,8,8,0,0.375
+T0066,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),10,10,10,0,1.0
+T0067,0.375,"business, administration and law",0.375,business and administration,17,16,16,1,0.375
+T0068,0.3,"business, administration and law",0.3,business and administration,14,10,10,4,0.3
+T0069,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),3,3,3,0,1.0
+T0070,0.3684,services,0.3158,hygiene and occupational health services,19,19,19,0,0.3684
+T0071,0.3793,"business, administration and law",0.3103,business and administration,30,29,29,1,0.3793
+T0072,0.5714,management skills,0.5714,"organising, planning and scheduling work and activities",7,7,7,0,0.8571
+T0073,0.3333,"communication, collaboration and creativity",0.25,advising and consulting,12,12,12,0,0.4167
+T0074,0.3182,health and welfare,0.3182,health,22,22,22,0,0.3182
+T0075,0.4464,health and welfare,0.4464,health,29,28,28,1,0.4643
+T0076,0.6364,information skills,0.5758,"conducting studies, investigations and examinations",12,11,11,1,0.7273
+T0077,0.6429,information and communication technologies (icts),0.6429,information and communication technologies (icts),15,14,14,1,0.6429
+T0078,0.3889,"communication, collaboration and creativity",0.3333,obtaining information verbally,9,9,9,0,0.4444
+T0079,0.3556,social and communication skills and competences,0.3278,communicating,15,15,15,0,0.4667
+T0080,0.7143,information and communication technologies (icts),0.7143,information and communication technologies (icts),7,7,7,0,0.7143
+T0081,0.3333,management skills,0.3333,allocating and controlling resources,3,3,3,0,0.3333
+T0082,0.6923,"engineering, manufacturing and construction",0.6923,engineering and engineering trades,13,13,13,0,0.6923
+T0083,0.3868,working with machinery and specialised equipment,0.1864,"installing, maintaining and repairing mechanical equipment",38,38,38,0,0.4737
+T0084,0.3571,"engineering, manufacturing and construction",0.25,architecture and construction,28,28,28,0,0.3571
+T0085,0.5,"business, administration and law",0.5,business and administration,4,4,4,0,0.5
+T0086,0.5,information and communication technologies (icts),0.5,information and communication technologies (icts),13,13,13,0,0.5385
+T0087,,,,,0,0,0,0,
+T0088,0.4,"engineering, manufacturing and construction",0.4,physical sciences,5,5,5,0,0.4
+T0089,0.6,"business, administration and law",0.6,business and administration,5,5,5,0,0.6
+T0090,0.3333,"communication, collaboration and creativity",0.3333,mastering languages,6,6,6,0,0.3333
+T0091,0.45,assisting and caring,0.45,preparing and serving food and drinks,20,20,20,0,0.45
+T0092,,"natural sciences, mathematics and statistics",,physical sciences,1,1,1,0,
+T0093,0.4,"business, administration and law",0.4,business and administration,15,15,15,0,0.4
+T0094,0.5,"communication, collaboration and creativity",0.5,"creating artistic, visual or instructive materials",3,3,3,0,1.0
+T0095,0.3846,information skills,0.3077,mathematics and statistics,13,13,13,0,0.3846
+T0096,0.6667,"communication, collaboration and creativity",0.5833,writing and composing,7,6,6,1,0.8333
+T0097,0.375,"communication, collaboration and creativity",0.375,liaising and networking,17,16,16,1,0.375
+T0098,0.4394,information skills,0.3864,processing information,11,11,11,0,0.5455
+T0099,0.3333,assisting and caring,0.2727,providing health care or medical treatments,22,22,22,0,0.4091
+T0100,0.3077,arts and humanities,0.3077,arts,13,13,13,0,0.3077
+T0101,0.5833,management skills,0.4583,performing administrative activities,13,12,12,1,0.6667
+T0102,0.25,health and welfare,0.2286,developing objectives and strategies,14,14,14,0,0.4286
+T0103,0.6667,services,0.6667,transport services,3,3,3,0,0.6667
+T0104,,health and welfare,,health,1,1,1,0,
+T0105,0.5,assisting and caring,0.5,providing health care or medical treatments,8,8,8,0,0.5
+T0106,0.4074,"communication, collaboration and creativity",0.3148,"creating artistic, visual or instructive materials",27,27,27,0,0.4444
+T0107,0.45,"communication, collaboration and creativity",0.45,negotiating,10,10,10,0,0.7
+T0108,0.3182,"communication, collaboration and creativity",0.2727,education,24,22,22,2,0.4091
+T0109,0.5,"communication, collaboration and creativity",0.5,"promoting, selling and purchasing",7,7,7,0,0.5714
+T0110,1.0,"business, administration and law",1.0,business and administration,4,4,4,0,1.0
+T0111,1.0,"communication, collaboration and creativity",1.0,"promoting, selling and purchasing",4,4,4,0,1.0
+T0112,,core skills and competences,,"using digital tools for collaboration, content creation and problem solving",1,1,1,0,
+T0113,0.8462,"natural sciences, mathematics and statistics",0.8462,mathematics and statistics,13,13,13,0,0.8462
+T0114,0.4615,information skills,0.3846,analysing and evaluating information and data,13,13,13,0,0.4615
+T0115,0.6111,"engineering, manufacturing and construction",0.6111,engineering and engineering trades,18,18,18,0,0.6111
+T0116,0.2933,working with machinery and specialised equipment,0.29,using precision instrumentation and equipment,25,25,25,0,0.28
+T0117,0.6667,"engineering, manufacturing and construction",0.6667,engineering and engineering trades,4,3,3,1,0.6667
+T0118,0.75,information and communication technologies (icts),0.75,information and communication technologies (icts),12,12,12,0,0.75
+T0119,0.25,"business, administration and law",0.25,business and administration,9,8,8,1,0.25
+T0120,0.4286,health and welfare,0.4286,health,14,14,14,0,0.4286
+T0121,,health and welfare,,health,2,2,2,0,
+T0122,,management skills,,developing objectives and strategies,1,1,1,0,
+T0123,0.4211,information skills,0.4211,managing information,19,19,19,0,0.4211
+T0124,0.1667,"communication, collaboration and creativity",0.1667,liaising and networking,6,6,6,0,0.1667
+T0125,0.6667,information and communication technologies (icts),0.6667,information and communication technologies (icts),6,6,6,0,0.6667
+T0126,0.4062,information skills,0.375,"monitoring, inspecting and testing",16,16,16,0,0.5625
+T0127,,,,,0,0,0,0,
+T0128,,,,,0,0,0,0,
+T0129,0.6,"engineering, manufacturing and construction",0.6,engineering and engineering trades,20,20,20,0,0.6
+T0130,0.4333,information skills,0.4333,"monitoring, inspecting and testing",15,15,15,0,0.5333
+T0131,0.3333,working with computers,0.3333,information and communication technologies (icts),15,15,15,0,0.3333
+T0132,0.3519,services,0.2778,security services,18,18,18,0,0.3889
+T0133,0.4286,"business, administration and law",0.4286,business and administration,7,7,7,0,0.4286
+T0134,0.2917,"communication, collaboration and creativity",0.2083,"promoting, selling and purchasing",13,12,12,1,0.25
+T0135,,,,,0,0,0,0,
+T0136,0.3571,assisting and caring,0.2857,providing general personal care,11,7,7,4,0.4286
+T0137,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),6,6,6,0,1.0
+T0138,0.2857,"engineering, manufacturing and construction",0.2857,engineering and engineering trades,7,7,7,0,0.2857
+T0139,0.3889,information and communication technologies (icts),0.3889,information and communication technologies (icts),18,18,18,0,0.3889
+T0140,0.25,"engineering, manufacturing and construction",0.2083,operating machinery for the manufacture of products,24,24,24,0,0.2917
+T0141,0.3542,information skills,0.25,calculating and estimating,8,8,8,0,0.5
+T0142,0.5714,information and communication technologies (icts),0.5714,information and communication technologies (icts),7,7,7,0,0.5714
+T0143,0.5714,"communication, collaboration and creativity",0.4286,communicating,10,7,7,3,1.0
+T0144,0.3571,services,0.3571,hygiene and occupational health services,14,14,14,0,0.3571
+T0145,0.5,information skills,0.25,working with numbers and measures,4,4,4,0,0.75
+T0146,0.3056,services,0.3056,transport services,18,18,18,0,0.2778
+T0147,0.7143,"engineering, manufacturing and construction",0.7143,engineering and engineering trades,7,7,7,0,0.7143
+T0148,0.6,working with computers,0.6,"using digital tools for collaboration, content creation and problem solving",5,5,5,0,0.6
+T0149,0.2714,management skills,0.2381,business and administration,23,21,21,2,0.2381
+T0150,0.3,life skills and competences,0.3,applying general knowledge,10,10,10,0,0.6
+T0151,0.5,management skills,0.25,recruiting and hiring,7,7,7,0,0.7143
+T0152,0.4394,management skills,0.3939,developing objectives and strategies,11,11,11,0,0.5455
+T0153,0.625,"communication, collaboration and creativity",0.25,"promoting, selling and purchasing",4,4,4,0,0.75
+T0154,0.4333,"communication, collaboration and creativity",0.4083,management skills,10,10,10,0,0.7
+T0155,,,,,0,0,0,0,
+T0156,0.4,management skills,0.3,"processing information, ideas and concepts",5,5,5,0,0.8
+T0157,0.4545,management skills,0.2727,"organising, planning and scheduling work and activities",11,11,11,0,0.4545
+T0158,0.5455,assisting and caring,0.5455,providing health care or medical treatments,11,11,11,0,0.5455
+T0159,0.4286,"social sciences, journalism and information",0.4286,social and behavioural sciences,14,14,14,0,0.5
+T0160,,working with computers,,setting up and protecting computer systems,2,1,1,1,
+T0161,,,,,0,0,0,0,
+T0162,,information and communication technologies (icts),,information and communication technologies (icts),1,1,1,0,
+T0163,0.4,assisting and caring,0.4,protecting and enforcing,10,10,10,0,0.5
+T0164,0.8333,information skills,0.6667,analysing and evaluating information and data,6,6,6,0,0.8333
+T0165,0.8462,"engineering, manufacturing and construction",0.7692,engineering and engineering trades,13,13,13,0,0.8462
+T0166,1.0,working with computers,0.5556,setting up and protecting computer systems,3,3,3,0,1.0
+T0167,0.5714,management skills,0.4286,"organising, planning and scheduling work and activities",7,7,7,0,0.5714
+T0168,0.7778,"communication, collaboration and creativity",0.7778,working with others,11,9,9,2,0.7778
+T0169,0.3333,assisting and caring,0.3333,performing administrative activities,3,3,3,0,0.3333
+T0170,0.4286,"social sciences, journalism and information",0.4286,social and behavioural sciences,14,14,14,0,0.4286
+T0171,0.25,"communication, collaboration and creativity",0.125,thinking creatively and innovatively,8,8,8,0,0.25
+T0172,0.3333,handling and moving,0.1667,performing and entertaining,7,6,6,1,0.3333
+T0173,0.8889,information skills,0.6667,managing information,6,6,6,0,1.0
+T0174,0.4444,information and communication technologies (icts),0.4444,information and communication technologies (icts),9,9,9,0,0.4444
+T0175,0.3182,"communication, collaboration and creativity",0.2727,business and administration,12,11,11,1,0.4545
+T0176,0.4,"business, administration and law",0.4,business and administration,15,15,15,0,0.4
+T0177,0.7778,information skills,0.6667,managing information,3,3,3,0,0.6667
+T0178,0.8571,"communication, collaboration and creativity",0.8571,solving problems,7,7,7,0,0.8571
+T0179,0.5,assisting and caring,0.4,providing general personal care,5,5,5,0,0.6
+T0180,0.5667,social and communication skills and competences,0.5667,leading others,5,5,5,0,0.4
+T0181,0.375,"communication, collaboration and creativity",0.25,designing systems and products,16,16,16,0,0.375
+T0182,0.4091,"communication, collaboration and creativity",0.3182,writing and composing,11,11,11,0,0.3636
+T0183,0.4615,"engineering, manufacturing and construction",0.2308,"engineering, manufacturing and construction not elsewhere classified",13,13,13,0,0.4615
+T0184,,,,,0,0,0,0,
+T0185,0.9286,management skills,0.8571,allocating and controlling resources,7,7,7,0,0.8571
+T0186,1.0,management skills,1.0,"organising, planning and scheduling work and activities",8,8,8,0,1.0
+T0187,,"engineering, manufacturing and construction",,engineering and engineering trades,2,2,2,0,
+T0188,0.625,"communication, collaboration and creativity",0.25,"creating artistic, visual or instructive materials",8,8,8,0,0.625
+T0189,0.8333,arts and humanities,0.8333,arts,12,12,12,0,0.8333
+T0190,0.5385,handling and moving,0.2692,transforming and blending materials,13,13,13,0,0.5385
+T0191,0.5714,health and welfare,0.5714,health,14,14,14,0,0.6429
+T0192,0.2857,working with machinery and specialised equipment,0.1429,operating mobile plant,15,14,14,1,0.2857
+T0193,0.3636,"communication, collaboration and creativity",0.2727,"creating artistic, visual or instructive materials",11,11,11,0,0.3636
+T0194,0.4444,"social sciences, journalism and information",0.4444,social and behavioural sciences,9,9,9,0,0.4444
+T0195,0.6,information and communication technologies (icts),0.6,information and communication technologies (icts),5,5,5,0,0.6
+T0196,0.5,management skills,0.3889,developing objectives and strategies,9,9,9,0,0.6667
+T0197,0.6667,"engineering, manufacturing and construction",0.5556,architecture and construction,9,9,9,0,0.6667
+T0198,,,,,0,0,0,0,
+T0199,0.5,arts and humanities,0.5,arts,6,6,6,0,0.5
+T0200,,,,,0,0,0,0,
+T0201,0.3333,working with machinery and specialised equipment,0.3333,using precision instrumentation and equipment,3,3,3,0,0.3333
+T0202,0.619,"engineering, manufacturing and construction",0.4762,manufacturing and processing,21,21,21,0,0.619
+T0203,,,,,0,0,0,0,
+T0204,0.6,"communication, collaboration and creativity",0.6,negotiating,5,5,5,0,0.6
+T0205,0.5,information and communication technologies (icts),0.5,information and communication technologies (icts),6,6,6,0,0.5
+T0206,0.625,health and welfare,0.625,health,8,8,8,0,0.625
+T0207,1.0,health and welfare,1.0,health,6,6,6,0,1.0
+T0208,0.7273,"engineering, manufacturing and construction",0.7273,engineering and engineering trades,11,11,11,0,0.7273
+T0209,0.5,information and communication technologies (icts),0.5,information and communication technologies (icts),4,4,4,0,0.5
+T0210,0.3333,working with computers,0.3333,accessing and analysing digital data,3,3,3,0,0.3333
+T0211,,working with machinery and specialised equipment,,operating mobile plant,1,1,1,0,
+T0212,0.5,"business, administration and law",0.5,business and administration,4,4,4,0,0.5
+T0213,0.7273,"engineering, manufacturing and construction",0.6364,architecture and construction,11,11,11,0,0.7273
+T0214,0.3333,assisting and caring,0.3333,providing general personal care,3,3,3,0,0.3333
+T0215,0.2941,handling and moving,0.1176,cleaning,17,17,17,0,0.2941
+T0216,0.375,"communication, collaboration and creativity",0.25,designing systems and products,8,8,8,0,0.375
+T0217,0.463,"communication, collaboration and creativity",0.3333,liaising and networking,10,9,9,1,0.4444
+T0218,0.6,"natural sciences, mathematics and statistics",0.6,physical sciences,11,10,10,1,0.6
+T0219,0.75,management skills,0.5,allocating and controlling resources,4,4,4,0,0.75
+T0220,0.5,constructing,0.5,building and repairing structures,6,6,6,0,0.5
+T0221,1.0,information and communication technologies (icts),1.0,information and communication technologies (icts),6,5,5,1,1.0
+T0222,0.375,management skills,0.25,management skills,4,4,4,0,0.5
+T0223,0.5333,working with computers,0.5,accessing and analysing digital data,5,5,5,0,0.6
+T0224,0.2208,"communication, collaboration and creativity",0.1958,demonstrating willingness to learn,9,8,8,1,0.5
+T0225,0.6167,information skills,0.45,calculating and estimating,10,10,10,0,0.8
+T0226,0.625,health and welfare,0.625,health,8,8,8,0,0.625
+T0227,0.25,working with machinery and specialised equipment,0.25,using precision instrumentation and equipment,4,4,4,0,0.25
+T0228,,information and communication technologies (icts),,information and communication technologies (icts),1,1,1,0,
+T0229,,arts and humanities,,arts,2,2,2,0,
+T0230,0.5972,constructing,0.5972,building and repairing structures,8,6,6,2,0.6667
+T0231,,,,,0,0,0,0,
+T0232,0.2,"communication, collaboration and creativity",0.2,"processing information, ideas and concepts",5,5,5,0,0.6
+T0233,0.2857,"engineering, manufacturing and construction",0.2857,engineering and engineering trades,15,14,14,1,0.3571
+T0234,,,,,0,0,0,0,
+T0235,,"business, administration and law",,business and administration,2,2,2,0,
+T0236,0.6111,"communication, collaboration and creativity",0.4444,writing and composing,9,9,9,0,0.6667
+T0237,0.5,"engineering, manufacturing and construction",0.5,engineering and engineering trades,4,4,4,0,0.5
+T0238,0.381,"communication, collaboration and creativity",0.381,"processing information, ideas and concepts",7,7,7,0,0.5714
+T0239,0.3077,arts and humanities,0.2308,arts,13,13,13,0,0.3077
+T0240,0.625,"business, administration and law",0.625,business and administration,8,8,8,0,0.625
+T0241,0.3333,management skills,0.3333,managing information,3,3,3,0,0.3333
+T0242,0.2593,working with machinery and specialised equipment,0.2222,operating machinery for the extraction and processing of raw materials,9,9,9,0,0.2222
+T0243,0.7778,constructing,0.7778,installing interior or exterior infrastructure,9,9,9,0,0.7778
+T0244,0.6,"agriculture, forestry, fisheries and veterinary",0.6,forestry,5,5,5,0,0.6
+T0245,0.25,working with machinery and specialised equipment,0.25,operating mobile plant,4,4,4,0,0.5
+T0246,0.3636,assisting and caring,0.2727,preparing and serving food and drinks,11,11,11,0,0.3636
+T0247,0.3333,working with computers,0.3333,setting up and protecting computer systems,3,3,3,0,0.6667
+T0248,0.6667,"business, administration and law",0.6667,business and administration,3,3,3,0,0.6667
+T0249,0.6667,information skills,0.6667,processing information,3,3,3,0,0.6667
+T0250,0.6667,"social sciences, journalism and information",0.6667,journalism and information,3,3,3,0,0.6667
+T0251,,"engineering, manufacturing and construction",,engineering and engineering trades,2,2,2,0,
+T0252,0.5,"engineering, manufacturing and construction",0.5,engineering and engineering trades,9,9,9,0,0.6667
+T0253,,,,,0,0,0,0,
+T0254,0.6364,"business, administration and law",0.6364,business and administration,11,11,11,0,0.6364
+T0255,,health and welfare,,health,1,1,1,0,
+T0256,0.4167,working with machinery and specialised equipment,0.3333,"installing, maintaining and repairing electrical, electronic and precision equipment",12,12,12,0,0.4167
+T0257,0.3333,information skills,0.3333,documenting and recording information,12,12,12,0,0.3333
+T0258,0.6,management skills,0.6,performing administrative activities,5,5,5,0,0.6
+T0259,0.3077,"engineering, manufacturing and construction",0.2308,engineering and engineering trades,13,13,13,0,0.3077
+T0260,,"communication, collaboration and creativity",,negotiating,1,1,1,0,
+T0261,0.3571,"communication, collaboration and creativity",0.2143,management skills,7,7,7,0,0.5714
+T0262,,,,,0,0,0,0,
+T0263,0.25,working with computers,0.25,information and communication technologies (icts),4,4,4,0,0.5
+T0264,,core skills and competences,,working with numbers and measures,2,2,2,0,
+T0265,0.5714,"engineering, manufacturing and construction",0.5714,engineering and engineering trades,7,7,7,0,0.5714
+T0266,,"engineering, manufacturing and construction",,engineering and engineering trades,2,2,2,0,
+T0267,0.2222,"communication, collaboration and creativity",0.2222,installing interior or exterior infrastructure,9,9,9,0,0.2222
+T0268,,"engineering, manufacturing and construction",,engineering and engineering trades,1,1,1,0,
+T0269,0.5,"social sciences, journalism and information",0.5,journalism and information,8,8,8,0,0.5
+T0270,1.0,"natural sciences, mathematics and statistics",1.0,mathematics and statistics,5,5,5,0,1.0
+T0271,0.6667,education,0.6667,education,5,3,3,2,0.6667
+T0272,0.6,information and communication technologies (icts),0.6,information and communication technologies (icts),5,5,5,0,0.6
+T0273,,"communication, collaboration and creativity",,demonstrating willingness to learn,1,1,1,0,
+T0274,,working with machinery and specialised equipment,,using precision instrumentation and equipment,2,2,2,0,
+T0275,0.3333,management skills,0.3333,management skills,6,6,6,0,0.3333
+T0276,,arts and humanities,,languages,1,1,1,0,
+T0277,0.5,working with machinery and specialised equipment,0.25,operating machinery for the manufacture of products,8,8,8,0,0.5
+T0278,0.5,assisting and caring,0.5,protecting and enforcing,7,7,7,0,0.5714
+T0279,0.7273,handling and moving,0.7273,transforming and blending materials,12,11,11,1,0.7273
+T0280,,working with machinery and specialised equipment,,operating mobile plant,2,2,2,0,
+T0281,0.6667,"engineering, manufacturing and construction",0.5,architecture and construction,6,6,6,0,0.6667
+T0282,,,,,0,0,0,0,
+T0283,0.3333,constructing,0.3333,building and repairing structures,3,3,3,0,0.3333
+T0284,0.3333,working with computers,0.3333,accessing and analysing digital data,5,5,5,0,0.6
+T0285,0.4615,handling and moving,0.4615,moving and lifting,13,13,13,0,0.4615
+T0286,0.3889,information skills,0.3333,processing information,6,6,6,0,0.5
+T0287,0.6667,management skills,0.3333,management skills,3,3,3,0,0.6667
+T0288,0.75,"communication, collaboration and creativity",0.25,"creating artistic, visual or instructive materials",4,4,4,0,0.75
+T0289,0.5833,"communication, collaboration and creativity",0.5833,"creating artistic, visual or instructive materials",12,12,12,0,0.5833
+T0290,0.6,assisting and caring,0.6,protecting and enforcing,5,5,5,0,0.6
+T0291,0.2857,working with computers,0.1429,"conducting studies, investigations and examinations",7,7,7,0,0.4286
+T0292,0.6154,"engineering, manufacturing and construction",0.6154,engineering and engineering trades,13,13,13,0,0.6154
+T0293,0.3333,working with machinery and specialised equipment,0.3333,operating machinery for the manufacture of products,12,12,12,0,0.3333
+T0294,0.5,social and communication skills and competences,0.5,collaborating in teams and networks,8,7,7,1,0.4286
+T0295,,,,,0,0,0,0,
+T0296,0.3333,"communication, collaboration and creativity",0.3333,negotiating,3,3,3,0,0.3333
+T0297,0.6667,information and communication technologies (icts),0.6667,information and communication technologies (icts),6,6,6,0,0.6667
+T0298,0.6667,"communication, collaboration and creativity",0.6667,advising and consulting,3,3,3,0,0.6667
+T0299,,information and communication technologies (icts),,information and communication technologies (icts),1,1,1,0,
+T0300,0.3333,assisting and caring,0.3333,providing health care or medical treatments,6,6,6,0,0.3333
+T0301,,,,,0,0,0,0,
+T0302,,management skills,,recruiting and hiring,2,2,2,0,
+T0303,,constructing,,setting up and protecting computer systems,2,2,2,0,
+T0304,,information skills,,analysing and evaluating information and data,1,1,1,0,
+T0305,,information and communication technologies (icts),,information and communication technologies (icts),1,1,1,0,
+T0306,0.3333,health and welfare,0.3333,health,6,6,6,0,0.3333
+T0307,,,,,0,0,0,0,
+T0308,,assisting and caring,,analysing and evaluating information and data,2,2,2,0,
+T0309,1.0,"communication, collaboration and creativity",0.8,"promoting, selling and purchasing",5,5,5,0,1.0
+T0310,0.8333,health and welfare,0.8333,health,6,6,6,0,0.8333
+T0311,,,,,0,0,0,0,
+T0312,0.4,assisting and caring,0.4,providing health care or medical treatments,11,10,10,1,0.4
+T0313,0.3333,constructing,0.3333,building and repairing structures,6,6,6,0,0.3333
+T0314,0.75,assisting and caring,0.5,protecting and enforcing,4,4,4,0,0.75
+T0315,,,,,0,0,0,0,
+T0316,0.5,assisting and caring,0.5,protecting and enforcing,4,4,4,0,0.5
+T0317,0.375,"communication, collaboration and creativity",0.375,"creating artistic, visual or instructive materials",8,8,8,0,0.375
+T0318,0.375,information skills,0.25,providing health care or medical treatments,4,4,4,0,0.5
+T0319,0.3333,assisting and caring,0.3333,protecting and enforcing,9,9,9,0,0.4444
+T0320,,core skills and competences,,working with numbers and measures,1,1,1,0,
+T0321,0.375,information skills,0.25,"conducting studies, investigations and examinations",8,8,8,0,0.375
+T0322,0.5,"communication, collaboration and creativity",0.5,performing and entertaining,4,4,4,0,0.5
+T0323,0.3333,"communication, collaboration and creativity",0.3333,advising and consulting,3,3,3,0,0.3333
+T0324,1.0,management skills,1.0,performing administrative activities,4,3,3,1,1.0
+T0325,0.4,"business, administration and law",0.4,business and administration,5,5,5,0,0.4
+T0326,0.7,"communication, collaboration and creativity",0.5,advising and consulting,6,5,5,1,0.8
+T0327,0.3333,"engineering, manufacturing and construction",0.3333,engineering and engineering trades,12,12,12,0,0.3333
+T0328,0.3,handling and moving,0.2,using hand tools,10,10,10,0,0.3
+T0329,0.9375,constructing,0.9375,building and repairing structures,8,8,8,0,1.0
+T0330,0.5,information skills,0.4,"monitoring, inspecting and testing",5,5,5,0,0.6
+T0331,0.6667,generic programmes and qualifications,0.6667,personal skills and development,5,3,3,2,0.6667
+T0332,1.0,"business, administration and law",1.0,business and administration,4,4,4,0,1.0
+T0333,1.0,"natural sciences, mathematics and statistics",1.0,physical sciences,4,4,4,0,1.0
+T0334,0.5556,"business, administration and law",0.5556,business and administration,9,9,9,0,0.5556
+T0335,,information skills,,"conducting studies, investigations and examinations",2,2,2,0,
+T0336,0.5556,"engineering, manufacturing and construction",0.5556,engineering and engineering trades,9,9,9,0,0.5556
+T0337,0.5,working with machinery and specialised equipment,0.5,"installing, maintaining and repairing electrical, electronic and precision equipment",4,4,4,0,0.5
+T0338,,,,,0,0,0,0,
+T0339,0.5,information skills,0.5,analysing and evaluating information and data,6,6,6,0,0.5
+T0340,,"engineering, manufacturing and construction",,"engineering, manufacturing and construction not elsewhere classified",1,1,1,0,
+T0341,0.4583,working with computers,0.25,allocating and controlling resources,4,4,4,0,0.25
+T0342,0.3333,education,0.3333,education,3,3,3,0,0.3333
+T0343,0.375,"engineering, manufacturing and construction",0.375,engineering and engineering trades,8,8,8,0,0.375
+T0344,0.8,"business, administration and law",0.8,law,5,5,5,0,0.8
+T0345,,"business, administration and law",,business and administration,2,2,2,0,
+T0346,0.3333,health and welfare,0.3333,health,9,9,9,0,0.3333
+T0347,0.3333,"business, administration and law",0.3333,law,6,6,6,0,0.3333
+T0348,0.2222,"natural sciences, mathematics and statistics",0.1111,architecture and construction,9,9,9,0,0.5556
+T0349,,information and communication technologies (icts),,information and communication technologies (icts),1,1,1,0,
+T0350,1.0,health and welfare,1.0,health,3,3,3,0,1.0
+T0351,0.3833,"communication, collaboration and creativity",0.35,supporting others,10,10,10,0,0.7
+T0352,0.6667,"business, administration and law",0.6667,business and administration,3,3,3,0,0.6667
+T0353,0.4286,working with machinery and specialised equipment,0.2857,operating machinery for the manufacture of products,7,7,7,0,0.4286
+T0354,,management skills,,performing administrative activities,1,1,1,0,
+T0355,0.3333,information skills,0.3333,documenting and recording information,3,3,3,0,0.3333
+T0356,0.5,management skills,0.25,leading others,4,4,4,0,0.75
+T0357,,management skills,,developing objectives and strategies,1,1,1,0,
+T0358,,,,,1,0,0,1,
+T0359,0.8,"engineering, manufacturing and construction",0.8,manufacturing and processing,5,5,5,0,0.8
+T0360,0.5,"business, administration and law",0.5,business and administration,8,8,8,0,0.5
+T0361,0.6,"communication, collaboration and creativity",0.4,negotiating,5,5,5,0,0.6
+T0362,0.3333,"communication, collaboration and creativity",0.3333,"conducting studies, investigations and examinations",3,3,3,0,0.3333
+T0363,0.3333,constructing,0.3333,building and repairing structures,3,3,3,0,0.3333
+T0364,0.5,"engineering, manufacturing and construction",0.5,engineering and engineering trades,6,6,6,0,0.5
+T0365,1.0,"social sciences, journalism and information",1.0,social and behavioural sciences,6,6,6,0,1.0
+T0366,0.5,management skills,0.5,performing administrative activities,4,4,4,0,0.5
+T0367,0.25,"communication, collaboration and creativity",0.25,"conducting studies, investigations and examinations",4,4,4,0,0.25
+T0368,0.4444,"engineering, manufacturing and construction",0.3333,manufacturing and processing,9,9,9,0,0.4444
+T0369,,information skills,,documenting and recording information,1,1,1,0,
+T0370,0.4375,"engineering, manufacturing and construction",0.4375,engineering and engineering trades,8,8,8,0,0.875
+T0371,,"engineering, manufacturing and construction",,engineering and engineering trades,2,2,2,0,
+T0372,,,,,0,0,0,0,
+T0373,,,,,0,0,0,0,
+T0374,,,,,0,0,0,0,

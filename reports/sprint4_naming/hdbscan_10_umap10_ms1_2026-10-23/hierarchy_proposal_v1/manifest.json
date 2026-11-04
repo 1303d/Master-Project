@@ -1,0 +1,130 @@
+{
+ "version": "hierarchy_proposal_v1",
+ "generated_utc": "2026-11-04T19:42:47+00:00",
+ "script": "src/build_hierarchy_proposal.py",
+ "script_sha256": "9649b018e6539dcc36f24f4651d098fc6e241a87912387221ab9359f9d531b50",
+ "ai_label": "AI-GENERATED, UNREVIEWED (pending human approval)",
+ "parameters": {
+  "W_CENTROID": 0.7,
+  "W_MEMBER": 0.15,
+  "W_ESCO": 0.15,
+  "AFFINITY_SCALE": 0.2,
+  "MIN_LINKS": 3,
+  "grid": [
+   0.1,
+   0.5,
+   0.005
+  ],
+  "MAX_SINGLETON_SHARE": 0.1,
+  "MAX_PARENT_SIZE": 30,
+  "LABEL_MIN_SHARE": 0.5,
+  "LABEL_MIN_LINKS": 8,
+  "LOW_MARGIN": 0.02,
+  "ESCO_LEVEL": 2,
+  "linkage": "average",
+  "exclude_treatment": [
+   "exclude_until_reclustered"
+  ],
+  "exclude_audit_action": "INVESTIGATE_CLUSTER",
+  "split_flags": [
+   "hold_split_candidate",
+   "POTENTIAL_SPLIT"
+  ]
+ },
+ "inputs": {
+  "skills": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/skills.csv",
+   "sha256": "a7bcfd79827dbd812adcf1bb356faed54d6bd8134aeba1bd3556817ac87b2388"
+  },
+  "vectors": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/vectors.npy",
+   "sha256": "93a9839a0c1ddb8773ea9237c40b119e7cf5e79b2ad62ec850d0e34fd4b82b3e"
+  },
+  "memberships": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/memberships.csv",
+   "sha256": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37"
+  },
+  "topics": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/topics.csv",
+   "sha256": "c403b44ce6bbd1abde1ac783fd7d31b9fbf64e02e46ae25a66bba3098a361324"
+  },
+  "reference_links": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/reference_links.csv",
+   "sha256": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845"
+  },
+  "snapshot_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/manifest.json",
+   "sha256": "fba34be9885083452ff8c9b665b3a4fbab8745ab05e9f01dbdeba0ac54b17ec2"
+  },
+  "topic_ids": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/topic_ids.csv",
+   "sha256": "a757f2df785230489fc357df963efc3f2a4e0f1d5da913c691220fa4d1b13ac2"
+  },
+  "topic_centroids": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/topic_centroids.npy",
+   "sha256": "64131ea88249c97fd49a353efa3ec71968770b0f03eaa53a318cff8afc7e4864"
+  },
+  "features_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/manifest.json",
+   "sha256": "47d26338cfa5911650ba4e8222f4ced53a1a20b1e249ab2fdaffb6c875fab52f"
+  },
+  "names": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/assembled_topic_naming_v1_20261104T003642Z/results.csv",
+   "sha256": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719"
+  },
+  "validity": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/validity_v1_topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z/topic_validity_all.csv",
+   "sha256": "1825e7579b2b44a842127306a1e689e2e62d96306e805bcd189754d31cf01dd8"
+  },
+  "audit_topic_metrics": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/phase2_phase3_audit_v1/topic_metrics_374.csv",
+   "sha256": "e3e96d94be7d105cde8d340120e562f33a900676ee9e4a1a21b8f8896f5e919d"
+  },
+  "esco_broader": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/broaderRelationsSkillPillar_en.csv",
+   "sha256": "56b70f4852b1f53c6192c979310c34c93f95436621d907083cf0d55b51d8e42d"
+  },
+  "esco_skill_groups": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skillGroups_en.csv",
+   "sha256": "644b68a174299eb05336eec36e0716c4671a0c6bdd4ac268803ecd6533dc739d"
+  },
+  "esco_hierarchy": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skillsHierarchy_en.csv",
+   "sha256": "295133872c6be7b7560de943efa4a6aab833a1b15af4d60c03b050ab0a75edcb"
+  }
+ },
+ "outputs": {
+  "cut_threshold_sweep.csv": "2ed09dccb48da3182719dfe6b4708683d54d78d6c66a0075e720e834899ad616",
+  "hierarchy_proposal.csv": "d7ee9395275b0f5f70d625c67e74384aaf558a645d5947270048968c99d0e966",
+  "parent_categories.csv": "cf4fbccd151854f994862400dd555a910b3ea606d1d162e4ab8d7f8c226679aa",
+  "unresolved_placements.csv": "a82954e725ec05be1586b76b7261f5032350f876c4dd5501dadcea7595cf3ce6",
+  "validation_report.md": "1d8e4506b9f53bacee3cb94f95c56fb7b3fb04a1b78c3cfb2520bad095bdf07b"
+ },
+ "metrics": {
+  "topics": 374,
+  "placed": 303,
+  "parents": 90,
+  "unresolved": 71,
+  "children_closer_to_other_parent": 6,
+  "placed_high": 251,
+  "placed_low_confidence": 52,
+  "unresolved_excluded": 39,
+  "unresolved_singleton": 32,
+  "threshold": 0.335,
+  "eligible_topics": 335,
+  "parent_size_min_med_max": [
+   2,
+   3.0,
+   14
+  ],
+  "parent_coherence_median": 0.8569,
+  "inter_parent_nearest_cos_median": 0.9002,
+  "inter_parent_pairs_ge_0.95": 2,
+  "labels_esco": 18,
+  "labels_medoid": 72,
+  "esco_used": true,
+  "structural_problems": []
+ },
+ "frozen_unchanged": true,
+ "human_approved": false
+}

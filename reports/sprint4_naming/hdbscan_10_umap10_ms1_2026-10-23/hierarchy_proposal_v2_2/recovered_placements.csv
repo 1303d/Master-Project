@@ -1,0 +1,17 @@
+order,topic_id,provisional_name,origin,parent_id,loo_margin,coherence_before,coherence_after,sibling_affinity_after,member_support,new_conflicts,new_low_margin,split_candidate,in_preliminary_77,decision,ai_label,human_approved
+1,T0222,Life and Administrative Skills,v2_singleton_never_reconsidered,Q067,0.0658,0.8514,0.8551,0.5495,0.5385,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+2,T0034,Training Program Development,v2_singleton_never_reconsidered,Q067,0.0693,0.8551,0.8554,0.5462,0.5128,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+3,T0083,Equipment Repair,v2_1_unresolved_conflict,Q025,0.0536,0.8268,0.8295,0.3255,0.3898,0,0,False,False,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+4,T0173,Master Data Management,v2_singleton_never_reconsidered,Q046,0.0488,0.8632,0.8633,0.6425,0.5714,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+5,T0070,Regulatory Compliance and Permitting,v2_singleton_never_reconsidered,Q016,0.0439,0.8938,0.8928,0.5865,0.3333,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+6,T0136,Patient Interaction and Education,v2_singleton_never_reconsidered,Q070,0.0377,0.8588,0.8566,0.7361,0.6111,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+7,T0171,Site and User Journey Design,v2_singleton_never_reconsidered,Q009,0.0322,0.8336,0.8396,0.3704,0.3103,0,0,True,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+8,T0172,Quantity Take-Offs and Restructuring,v2_singleton_never_reconsidered,Q025,0.0313,0.8295,0.8316,0.3506,0.1333,0,1,True,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+9,T0346,Medical Equipment and Devices,v2_singleton_never_reconsidered,Q084,0.0269,0.8619,0.8569,0.5588,0.4545,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+10,T0297,Software Deployment Automation,v2_singleton_never_reconsidered,Q038,0.0214,0.8285,0.8263,0.3784,0.0625,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+11,T0032,Performance Analysis and Monitoring,v2_singleton_never_reconsidered,Q058,0.0207,0.8451,0.8442,0.1719,0.093,0,1,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+12,T0225,Business Metrics Analysis,v2_singleton_never_reconsidered,Q058,0.0236,0.8442,0.835,0.2162,0.15,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+13,T0114,Data Validation and Verification,v2_singleton_never_reconsidered,Q046,0.0195,0.8633,0.8592,0.608,0.3103,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+14,T0175,Procurement and Purchasing,v2_1_unresolved_conflict,Q075,0.0156,0.8322,0.838,0.4274,0.1034,0,1,False,False,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+15,T0210,Data Center Migration,v2_singleton_never_reconsidered,Q038,0.0147,0.8263,0.8251,0.3802,0.2941,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+16,T0300,Visual Inspection and Vision Systems,v2_singleton_never_reconsidered,Q073,0.012,0.8432,0.8392,0.3585,0.2308,0,0,False,True,ACCEPTED,"AI-GENERATED, UNREVIEWED (pending human approval)",False

@@ -1,0 +1,177 @@
+{
+ "version": "hierarchy_proposal_v2_2",
+ "generated_utc": "2026-11-04T20:21:55+00:00",
+ "scripts": {
+  "build_hierarchy_proposal_v2_2.py": "92b90399d5f4f8e596245499bfa32ef6a6c3b20aeae52dbf8b0c2b9822f3977e",
+  "build_hierarchy_proposal_v2_1.py": "08e471dc5c2257cd51cc8235c4eb265668c6cfcf5f5ceba5597d6702595bf606",
+  "build_hierarchy_proposal_v2.py": "9a5b22758a5263621028e8c0d5d98076cffd3e8754f4a73917f4b264fd7c45dc",
+  "esco_levels.py": "5e6c504aed6e0110f858ecc73814d26ee085e4e2257b6aa1e223d2b036b3fbc9"
+ },
+ "inputs": {
+  "v21_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2_1/manifest.json",
+   "sha256": "fbc0727e6782d03fe6f47bf5476bd08aaff7e638ec606ddda70cd924e4dcf3fd"
+  },
+  "v21_hierarchy": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2_1/hierarchy_proposal.csv",
+   "sha256": "919913e3de7bcd1c3a5df579a4adae68506ff76f3c7fbaae0ce03d1a4362116c"
+  },
+  "v21_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2_1/parent_categories.csv",
+   "sha256": "d79bf5969803bedbae86321a1735354dfb482624f52c3eee7d5979c9220aac04"
+  },
+  "v21_decisions": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2_1/topic_placement_decisions.csv",
+   "sha256": "552f1a086c85b5275ac073d8a5833597aeb7c97881d3d57b1f01aa721eddc114"
+  },
+  "v21_comparison": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2_1/fair_comparison.csv",
+   "sha256": "d7366a3f9b0453d45fc53d311faada23069a2b6de6acc916e576e279e5b23ec5"
+  },
+  "v2_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/parent_categories.csv",
+   "sha256": "71e5a692a5a77ac153e99bca47388bd6b32aabaff8f628c3bb0eaffbda8c1f68"
+  },
+  "v2_hierarchy": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/hierarchy_proposal.csv",
+   "sha256": "3a57b1a72b6da4cf76f7200913c874c27793f80e9d0e4a027500b00db6d0fad4"
+  },
+  "v1_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/parent_categories.csv",
+   "sha256": "cf4fbccd151854f994862400dd555a910b3ea606d1d162e4ab8d7f8c226679aa"
+  },
+  "names": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/assembled_topic_naming_v1_20261104T003642Z/results.csv",
+   "sha256": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719"
+  },
+  "mentions": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/interim/prepared_mentions.csv",
+   "sha256": "753f905f114f8dcecee29a53ee98ce52f31ec0564fe3e85d19c7883d7b0cf409"
+  }
+ },
+ "outputs": {
+  "common_population_comparison.csv": "2d09ade92f2f317b0cf82e7eff3bbdab469c728fb161cd545063c3f21e08706a",
+  "esco_purity_attribution.csv": "4aac79344934437d5f696272ab4cb335508066700e9846851139e9070bc4daf7",
+  "esco_purity_attribution.md": "f23e55ad6b8f672ea1efcb6139c9e5237edb7c8f99a73e38affe79eca4738200",
+  "esco_purity_multi_vs_first_parent.csv": "e4be26397d7a8a45fe28ac68e1486029e4b5a357faa3e74eabbdeb84c47b524f",
+  "hierarchy_proposal.csv": "ab4226e63c6c61a3157f4d8bed55ff8edae1f376e5a78c89e258a1ebfb933964",
+  "label_refinement_evidence.csv": "5ea67fe628eb4c9723e8f6bee04aa2dd701fce1c722d8c5ea95bdc66ac9b6be9",
+  "parent_categories.csv": "22b181816d60349c7e63b0bbbf5b7acdc61f9f3c72bc8bcbd8cd4088c5389fe6",
+  "recovered_placements.csv": "ce60b813b19ab2c83d5725bbc9892c49d64e10c5bc374bbffe7ca0d525b383cf",
+  "rejected_candidate_placements.csv": "ceca15f61b3cfd90d3c18e2b4a45c66750193ed98c4ead297560554229ce9287",
+  "v2_1_vs_v2_2_comparison.csv": "c426bcd4c43015e683f928bdb95428e971b2f15acd352d511661c85adf26b966",
+  "validation_report.md": "2de45b78cf0d6c5681d88f595fb4baae0d3b17a2677362fb161cf38458075af5"
+ },
+ "gates": {
+  "MIN_ADD_MARGIN": 0.005,
+  "split_candidate_margin": 0.02,
+  "LOW_COHERENCE": 0.82,
+  "MAX_COH_DROP": 0.01,
+  "MIX_SIB": 0.15,
+  "MIX_PAIR": 0.75,
+  "MAX_NEW_LOW_MARGIN": 1,
+  "SYNONYM_COS": 0.85
+ },
+ "v2_1_verified_counts": {
+  "topics": 374,
+  "eligible": 335,
+  "excluded": 39,
+  "placed": 198,
+  "parents": 59,
+  "confident": 117,
+  "eligible_unresolved": 137
+ },
+ "candidates": 137,
+ "candidate_origin": {
+  "v2_singleton_never_reconsidered": 119,
+  "v2_1_unresolved_parent_dissolved": 13,
+  "v2_1_unresolved_conflict": 5
+ },
+ "preliminary_77": 77,
+ "preliminary_77_accepted": 14,
+ "recovered": 16,
+ "metrics": {
+  "v2_1": {
+   "parents": 59,
+   "eligible": 335,
+   "placed": 198,
+   "loo_conflicts": 14,
+   "low_margin_0_to_0.02": 52,
+   "unresolved": 176,
+   "confident_share_of_eligible": 0.3940298507462687,
+   "placed_share_of_eligible": 0.591044776119403,
+   "median_loo_margin": 0.031636093544283095,
+   "mean_parent_coherence": 0.8691729865334608,
+   "median_parent_separation": 0.8883339694967385,
+   "mixing_parents": 1,
+   "non_mixing_parent_share": 0.9830508474576272,
+   "median_parent_esco_purity_L1": 0.375,
+   "median_parent_esco_purity_L2": 0.34615384615384615,
+   "mean_parent_esco_coverage": 0.4428944135245602,
+   "suspicious_parents": 5,
+   "near_duplicate_parent_pairs": 0,
+   "max_parent_size": 12,
+   "median_parent_size": 3.0,
+   "parents_with_split_pending": 14,
+   "confident_authoritative": 117,
+   "low_confidence_authoritative": 81,
+   "confident_margin_only": 132,
+   "loo_conflict_rate": 0.0707070707070707,
+   "low_margin_rate": 0.26262626262626265,
+   "parents_size_2": 29,
+   "parents_size_3_5": 21,
+   "parents_size_6plus": 9,
+   "labels_high": 1,
+   "labels_medium": 49,
+   "labels_low": 9,
+   "eligible_coverage": 0.591044776119403,
+   "label_same_root_duplicates": 1,
+   "label_unresolved": 5,
+   "label_concatenated_or_generic": 0
+  },
+  "v2_2": {
+   "parents": 59,
+   "eligible": 335,
+   "placed": 214,
+   "loo_conflicts": 10,
+   "low_margin_0_to_0.02": 57,
+   "unresolved": 160,
+   "confident_share_of_eligible": 0.4388059701492537,
+   "placed_share_of_eligible": 0.6388059701492538,
+   "median_loo_margin": 0.03086417520690854,
+   "mean_parent_coherence": 0.8690188875397845,
+   "median_parent_separation": 0.8914495753395603,
+   "mixing_parents": 1,
+   "non_mixing_parent_share": 0.9830508474576272,
+   "median_parent_esco_purity_L1": 0.37333333333333335,
+   "median_parent_esco_purity_L2": 0.3173076923076923,
+   "mean_parent_esco_coverage": 0.44460221002887435,
+   "suspicious_parents": 6,
+   "near_duplicate_parent_pairs": 0,
+   "max_parent_size": 14,
+   "median_parent_size": 3.0,
+   "parents_with_split_pending": 14,
+   "confident_authoritative": 130,
+   "low_confidence_authoritative": 84,
+   "confident_margin_only": 147,
+   "loo_conflict_rate": 0.04672897196261682,
+   "low_margin_rate": 0.26635514018691586,
+   "parents_size_2": 27,
+   "parents_size_3_5": 21,
+   "parents_size_6plus": 11,
+   "labels_high": 1,
+   "labels_medium": 27,
+   "labels_low": 31,
+   "eligible_coverage": 0.6388059701492538,
+   "label_same_root_duplicates": 0,
+   "label_unresolved": 8,
+   "label_concatenated_or_generic": 0,
+   "label_vague_single_word": 11,
+   "label_not_covering_all_children": 21
+  }
+ },
+ "structural_problems": [],
+ "confidence_definition": "CONFIDENT = LOO margin >= 0.02 AND not split-pending",
+ "ai_label": "AI-GENERATED, UNREVIEWED (pending human approval)",
+ "human_approved": false
+}

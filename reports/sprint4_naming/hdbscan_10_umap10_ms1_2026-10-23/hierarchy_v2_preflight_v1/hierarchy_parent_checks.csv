@@ -1,0 +1,91 @@
+parent_id,n_children,child_names,coherence_recomputed,coherence_v1,coherence_match,min_child_pair_cos,sibling_member_affinity,v1_suspicious,mixing_candidate_v2_rule
+P001,4,Professional Communication | Telephony Systems | Email Marketing | Messaging Strategy and Systems,0.8501,0.8501,True,0.797,0.265,False,False
+P002,2,Team Leadership | Cross-Functional Collaboration,0.8775,0.8775,True,0.8775,0.2157,True,False
+P003,2,Creative and Strategic Thinking | Storytelling and Storyboarding,0.8081,0.8081,True,0.8081,0.0469,True,True
+P004,14,Microsoft Software Proficiency | Desktop Computer Operations | Shell Scripting | Mobile Device Technologies | Software Application Usage | Data Entry Software | Cisco Network Security | Data Storage Management | Operating Systems | Subcontractor Management | Version Control Systems | Computer Hardware Design and Integration | Proxy and VPN Administration | Software Deployment Automation,0.8111,0.8111,True,0.7395,0.2882,True,True
+P005,3,Verbal Communication | Multilingual Communication | Speech Language Pathology,0.8718,0.8718,True,0.8295,0.4776,True,False
+P006,4,Workload Prioritization | Calendar and Time Management | Workforce Scheduling | Event Planning and Management,0.8684,0.8684,True,0.8267,0.41,False,False
+P007,6,Database Management Systems | Data Engineering | Cloud Data Platforms | Data Cleansing and Curation | Query and Index Optimization | Big Data and Data Sources,0.9028,0.9028,True,0.8616,0.6685,False,False
+P008,2,Technical Troubleshooting | Problem Identification and Resolution,0.8741,0.8741,True,0.8741,0.25,False,False
+P009,4,Business Process Improvement | Workflow Design and Management | ML Pipeline Orchestration Tools | Flowchart and Process Diagramming,0.8396,0.8396,True,0.8063,0.2234,False,False
+P010,6,Web Front-End Development | REST API Development | User Interface Design | Web Application Development | Site and User Journey Design | SharePoint,0.8678,0.8678,True,0.7905,0.365,True,False
+P011,3,Sales Process Management | Sales Techniques | Salesforce Platform Development,0.8585,0.8585,True,0.7836,0.6036,False,False
+P012,6,General Analytical Methods | Financial and Sales Analysis | Computational Modeling | Statistical Analysis | Valuation and Business Modeling | Regression Modeling,0.8588,0.8588,True,0.7936,0.601,True,False
+P013,6,Project Management Methodologies | Agile Development Methodologies | CRM and CAD Systems | Project Implementation Planning | Business Operations Management | Coordination,0.8146,0.8146,True,0.7176,0.2222,True,True
+P014,4,Software Testing | Quality Inspection | Diagnostic Testing Equipment Operation | Diagnostic Testing,0.8824,0.8824,True,0.8415,0.4472,True,False
+P015,2,Regulatory Compliance | Health Information Privacy,0.8326,0.8326,True,0.8326,0.0794,False,True
+P016,3,Workplace Safety Compliance | Regulatory Compliance and Permitting | Food Safety and Handling,0.8661,0.8661,True,0.8433,0.2151,False,False
+P017,3,Information Security Management | Fire Protection Systems | Cyber Threat Analysis,0.8591,0.8591,True,0.8126,0.3023,True,False
+P018,3,Regulatory Compliance Knowledge | Regulatory Affairs | Procedural and Business Rules,0.8641,0.8641,True,0.8044,0.3388,False,False
+P019,2,Mathematical Calculations | CAD Software Proficiency,0.8372,0.8372,True,0.8372,0.0548,False,True
+P020,5,Budget Management | Financial Forecasting | Cost Estimation | Cost Accounting | Pricing Strategy and Quoting,0.83,0.83,True,0.777,0.301,False,False
+P021,5,Technical Documentation | Medical Record Documentation | Master Data Management | Document Management Systems | Product Labeling Compliance,0.8446,0.8446,True,0.774,0.3468,True,False
+P022,5,Operational Planning | Strategic Planning | Case Management | Corrective Action Planning | Project Scoping,0.8588,0.8588,True,0.8049,0.2197,True,False
+P023,2,Performance Analysis and Monitoring | Business Metrics Analysis,0.8592,0.8592,True,0.8592,0.127,True,True
+P024,3,Training Program Development | Instructional Design and Pedagogy | Rapid Learning Ability,0.8757,0.8757,True,0.8721,0.253,True,False
+P025,2,Risk Management | Data Validation and Verification,0.7685,0.7685,True,0.7685,0.0,True,True
+P026,2,Account Management | Retention and Incentive Programs,0.8607,0.8607,True,0.8607,0.0476,False,True
+P027,7,Cardiac Monitoring | Medical and Surgical Procedures | Diagnostic Radiography | Renal and Medical Specialty Knowledge | Airway and Ventilation Management | IV and Injection Administration | Emergency Triage and First Aid,0.8454,0.8454,True,0.785,0.3946,True,False
+P028,4,Clinical and Educational Assessment | Feedback and Needs Analysis | Screening Procedures | Survey Design and Site Surveying,0.8345,0.8345,True,0.7814,0.2375,True,False
+P029,3,Business Analytics | Optimization Techniques | Machine Learning and AI,0.8542,0.8542,True,0.8466,0.1316,False,True
+P030,4,Commercial Negotiation | Procurement and Purchasing | Contract Management | Commercial Contract Knowledge,0.8528,0.8528,True,0.8048,0.4769,False,False
+P031,2,Preventive Maintenance Planning | Equipment Repair,0.8784,0.8784,True,0.8784,0.2255,True,False
+P032,4,Inventory Management | Order Processing | Ticketing Systems | Retail Operations Management,0.8355,0.8355,True,0.8163,0.2088,True,False
+P033,2,Social Media Management | Digital Advertising Platforms,0.8268,0.8268,True,0.8268,0.1064,True,True
+P034,2,Instrument Calibration and Measurement | Mechanical and Thermal Testing,0.905,0.905,True,0.905,0.2347,True,False
+P035,5,Hand and Power Tool Operation | Garment and Lens Fitting | Quantity Take-Offs and Restructuring | Rigging and Surface Finishing | Pallet Jack Operation,0.8588,0.8588,True,0.7983,0.2819,True,False
+P036,3,Industry and Technical Knowledge | Customer Relationship Management | Consumer Insights Research,0.8203,0.8203,True,0.7902,0.1892,False,False
+P037,4,Quality Management Systems | Policy Administration and Advocacy | Workforce Planning and Staffing | Human Resources Operations,0.8276,0.8276,True,0.7491,0.3053,False,True
+P038,9,Accounting Principles | Financial Planning | Audit Procedures | Financial Software Systems | Loan Origination and Lending | Corporate Finance and Equity Instruments | Banking Products Knowledge | Trading Systems and Markets | Commercial Credit Analysis,0.8313,0.8313,True,0.703,0.4837,False,True
+P039,8,Product Lifecycle Management | System Integration Architecture | ERP System Administration | System Architecture Design | Architectural Design Patterns | Epicor ERP Modules | Enterprise Platform Management | Embedded Firmware Development,0.8307,0.8307,True,0.7497,0.3582,True,True
+P040,2,Material Handling Equipment Operation | Fleet and Transportation Management Systems,0.8641,0.8641,True,0.8641,0.18,True,False
+P041,3,Therapeutic Treatment Planning | Medication Management | Clinical Nutrition Therapy,0.8519,0.8519,True,0.8268,0.2453,True,False
+P042,5,Technical Specifications Development | Industry Standards Compliance | ISO Standards Compliance | Qualification and Eligibility Determination | Regulatory and Coding Requirements Compliance,0.8571,0.8571,True,0.8023,0.3239,True,False
+P043,4,Cleaning and Sanitization | Dental Hygiene and Restorative Care | Sanitation Standards Compliance | Infection and Disease Prevention,0.8383,0.8383,True,0.796,0.3303,True,False
+P044,3,Computer Networking Fundamentals | Network Communication Protocols | Wireless Networking,0.8886,0.8886,True,0.8724,0.5132,False,False
+P045,6,Cloud Infrastructure Engineering | Microsoft Azure Cloud Services | AWS Cloud Services | IT Virtualization Technologies | Power BI and Oracle BI Reporting | Oracle Fusion Cloud Applications,0.8207,0.8207,True,0.7346,0.3071,False,True
+P046,2,SAP ERP Modules | SD-Prefixed Acronyms,0.7947,0.7947,True,0.7947,0.0227,True,True
+P047,4,Insurance Coverage Administration | Dispute and Conflict Resolution | Insurance Claims Processing | Civil Litigation,0.8226,0.8226,True,0.7762,0.2743,False,False
+P048,2,Research Methodologies | Chemistry and Physical Sciences,0.8222,0.8222,True,0.8222,0.1224,False,True
+P049,2,Business Reporting | Financial Reporting,0.9114,0.9114,True,0.9114,0.4906,False,False
+P050,9,Process Automation | Industrial Control Systems | Analog and Power Circuit Design | Electrical Wiring and Cabling | Electrical Systems Design | Electrical Equipment Installation | Electrical Testing and Characterization | Electric Motor Control | Low and High Voltage Systems,0.8293,0.8293,True,0.6913,0.5476,False,True
+P051,3,Structural Engineering Design | IT Infrastructure Architecture | Welding Processes and Equipment,0.8117,0.8117,True,0.7302,0.1111,True,True
+P052,2,IT Service Desk Support | Food and Beverage Service,0.8661,0.8661,True,0.8661,0.2264,True,False
+P053,2,Reading Comprehension | Technical Drawing Interpretation,0.8275,0.8275,True,0.8275,0.0943,True,True
+P054,2,Culinary Preparation Techniques | Menu Planning and Development,0.8514,0.8514,True,0.8514,0.1228,False,True
+P055,2,Adobe Software Proficiency | Media Content Editing,0.8829,0.8829,True,0.8829,0.4872,False,False
+P056,3,Professional Writing | Legal Document Drafting | Proposal Development,0.8179,0.8179,True,0.7892,0.0889,False,True
+P057,4,Digital Visual Design | Layout and Spatial Design | Decorative Styling and Decorating | Software Customization,0.8642,0.8642,True,0.8205,0.2381,True,False
+P058,5,Cash Handling Operations | Billing Processes | Payment Processing | Invoice Processing | Transaction Processing,0.8105,0.8105,True,0.7377,0.4571,True,True
+P059,2,Crisis and Emergency Response | Incident Investigation and Reporting,0.8743,0.8743,True,0.8743,0.2778,True,False
+P060,2,Nursing Fundamentals | Care Plan Development,0.8709,0.8709,True,0.8709,0.2917,False,False
+P061,3,Laboratory Testing Operations | Biological Assay Development | Cell Culture Techniques,0.8712,0.8712,True,0.8402,0.3284,True,False
+P062,6,Mechanical Engineering Knowledge | HVAC and Refrigeration Systems | Engineering Practices and Reliability | Parts Catalog Management | Hydraulic and Brake Systems | Pump and Process Equipment Design,0.8059,0.8059,True,0.7591,0.1383,True,True
+P063,3,KPI Dashboarding | Issue and Project Tracking | Clinical Charting,0.8317,0.8317,True,0.8037,0.1296,True,True
+P064,3,Media Strategy and Planning | Content Strategy and Distribution | News Writing and Monitoring,0.8774,0.8774,True,0.8494,0.3651,True,False
+P065,2,System Monitoring | Network Protocol Analysis,0.8847,0.8847,True,0.8847,0.234,False,False
+P066,3,Patient Interaction and Education | Patient-Centered Care | Perioperative and Postpartum Nursing Care,0.8843,0.8843,True,0.8469,0.75,False,False
+P067,2,Stakeholder Relationship Management | Partnership Management and Accounting,0.8251,0.8251,True,0.8251,0.3103,False,False
+P068,2,Compensation and Benefits Administration | Payroll Administration,0.8567,0.8567,True,0.8567,0.175,False,False
+P069,2,Freight Forwarding Operations | Warehouse Operations Management,0.8401,0.8401,True,0.8401,0.125,True,True
+P070,2,Recruitment and Hiring | Onboarding Processes,0.7995,0.7995,True,0.7995,0.1034,True,True
+P071,2,Marketing Strategy Planning | Brand Management,0.8615,0.8615,True,0.8615,0.3939,False,False
+P072,3,Vendor Relationship Management | Strategic Supplier Sourcing | Procurement Management,0.8601,0.8601,True,0.8191,0.4792,True,False
+P073,4,Behavior Intervention and Management | Human Development Knowledge | Life and Administrative Skills | Psychology Knowledge,0.8589,0.8589,True,0.8224,0.3797,False,False
+P074,2,Production Processes and Planning | Manufacturing Processes Knowledge,0.8901,0.8901,True,0.8901,0.3469,False,False
+P075,3,Video and Broadcast Equipment | Animation and Motion Graphics | Visual Inspection and Vision Systems,0.8392,0.8392,True,0.8107,0.3585,False,False
+P076,2,Water and Wastewater Systems | Plumbing Installation and Repair,0.8782,0.8782,True,0.8782,0.2632,False,False
+P077,2,Specimen Handling and Processing | Sample Collection and Preparation,0.8599,0.8599,True,0.8599,0.1667,False,False
+P078,2,Asset Management Systems | Investment Portfolio Management,0.8997,0.8997,True,0.8997,0.5185,True,False
+P079,2,Tax Types and Taxation Knowledge | Tax Return Preparation and Filing,0.898,0.898,True,0.898,0.675,False,False
+P080,2,Keyboarding and Typing | Switching Equipment,0.8509,0.8509,True,0.8509,0.125,False,True
+P081,4,Equipment Setup and Handling | Industrial Machinery Operation | Medical Equipment and Devices | Specialized Equipment Operation,0.8818,0.8818,True,0.8441,0.6207,True,False
+P082,2,Pipeline Development and Management | Pipe Fabrication and Fitting,0.8626,0.8626,True,0.8626,0.2381,True,False
+P083,2,Clinical Education and Expertise | Clinical Trial Management,0.8581,0.8581,True,0.8581,0.3667,False,False
+P084,2,Data and Barcode Coding | Technical Codes Knowledge,0.8392,0.8392,True,0.8392,0.1154,False,True
+P085,2,HMI and EDI Systems | RFP Response Preparation,0.7837,0.7837,True,0.7837,0.1538,True,False
+P086,2,System Configuration | Product and Fixture Installation,0.8216,0.8216,True,0.8216,0.1071,False,True
+P087,2,Nurse Practice Act Knowledge | Clinical Practice Guidelines,0.8265,0.8265,True,0.8265,0.16,False,False
+P088,2,Authorization and Authentication Processing | User Account and Access Administration,0.8598,0.8598,True,0.8598,0.3333,False,False
+P089,2,Landscaping Products and Installation | Coating and Insulation Materials,0.8597,0.8597,True,0.8597,0.16,True,False
+P090,2,Soldering | PCB Design and Testing,0.8235,0.8235,True,0.8235,0.1905,False,False

@@ -1,0 +1,6 @@
+cut,grandparents,parents_grouped,parents_alone,median_grandparent_esco_L1_purity,largest_grandparent
+0.06,0,0,96,,1
+0.08,2,4,92,0.4781859931113662,2
+0.1,14,29,67,0.3494718309859155,3
+0.12,29,62,34,0.3754716981132075,5
+0.15,26,83,13,0.31236275801493196,8

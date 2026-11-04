@@ -1,0 +1,199 @@
+{
+ "version": "hierarchy_proposal_v2_1",
+ "generated_utc": "2026-11-04T20:10:38+00:00",
+ "scripts": {
+  "build_hierarchy_proposal_v2_1.py": "08e471dc5c2257cd51cc8235c4eb265668c6cfcf5f5ceba5597d6702595bf606",
+  "build_hierarchy_proposal_v2.py": "9a5b22758a5263621028e8c0d5d98076cffd3e8754f4a73917f4b264fd7c45dc",
+  "build_hierarchy_proposal.py": "9649b018e6539dcc36f24f4651d098fc6e241a87912387221ab9359f9d531b50",
+  "esco_levels.py": "5e6c504aed6e0110f858ecc73814d26ee085e4e2257b6aa1e223d2b036b3fbc9"
+ },
+ "inputs": {
+  "v2_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/manifest.json",
+   "sha256": "63bd4217348340e77a7fc08d016fc474992b984134c0d609eb9af6b5c8d64898"
+  },
+  "v2_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/parent_categories.csv",
+   "sha256": "71e5a692a5a77ac153e99bca47388bd6b32aabaff8f628c3bb0eaffbda8c1f68"
+  },
+  "v2_hierarchy": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/hierarchy_proposal.csv",
+   "sha256": "3a57b1a72b6da4cf76f7200913c874c27793f80e9d0e4a027500b00db6d0fad4"
+  },
+  "v2_sweep": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v2/configuration_sweep.csv",
+   "sha256": "e07d7958ff6e440236e1d4fb97676368b635edae47095f3c53d8bc34c5e7ef27"
+  },
+  "v1_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/parent_categories.csv",
+   "sha256": "cf4fbccd151854f994862400dd555a910b3ea606d1d162e4ab8d7f8c226679aa"
+  },
+  "v1_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/manifest.json",
+   "sha256": "a5d0d47f56b4db5052b739c034bea068ae9c7bc7690d5b87a5028a6d6609c21d"
+  },
+  "preflight_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_v2_preflight_v1/manifest.json",
+   "sha256": "2ba6ebed941d0b33a5be5b7daec6c7d1d89acf571568b7198b89effa002ba3e7"
+  },
+  "names": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/assembled_topic_naming_v1_20261104T003642Z/results.csv",
+   "sha256": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719"
+  },
+  "mentions": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/interim/prepared_mentions.csv",
+   "sha256": "753f905f114f8dcecee29a53ee98ce52f31ec0564fe3e85d19c7883d7b0cf409"
+  },
+  "aliases": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/aliases.csv",
+   "sha256": "3a2bbf7490f394bbdd07297d53255a62e7219929851e524a5afa67810046ee99"
+  },
+  "links38": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/phase2_phase3_audit_v1/reference_link_verification_38.csv",
+   "sha256": "e25c4457a6d141f339ad0ee83f2a46fc369951ceb02ff1b2fbc8e80c2b58db24"
+  }
+ },
+ "outputs": {
+  "common_population_comparison.csv": "4dd02dc3c8fc43793ec690aaae3112f09e13ad5891e93f184db59820066bff76",
+  "coverage_quality_tradeoff.csv": "55eff59a0d9211dbd5d5c8c04f90cf9dbcc04bef22c7f42f99719ca92f0768a4",
+  "fair_comparison.csv": "d7366a3f9b0453d45fc53d311faada23069a2b6de6acc916e576e279e5b23ec5",
+  "hierarchy_proposal.csv": "919913e3de7bcd1c3a5df579a4adae68506ff76f3c7fbaae0ce03d1a4362116c",
+  "label_evidence.csv": "9bf27787e7f8030a32aa46436ddf7f8f027e30d640a384944affed17e0685593",
+  "parent_categories.csv": "d79bf5969803bedbae86321a1735354dfb482624f52c3eee7d5979c9220aac04",
+  "parent_consolidation_analysis.csv": "193cc935e0ec294d7ee2670c10e1dfa2838875845fec6eef8cee78082074f6b4",
+  "placement_conflict_analysis.csv": "1fa9231241ebd26b3523d20bcb79920d9d5b42cb9e51a901d64ee5e2913cb104",
+  "topic_placement_decisions.csv": "552f1a086c85b5275ac073d8a5833597aeb7c97881d3d57b1f01aa721eddc114",
+  "validation_report.md": "e0917e219ebedb2b980d829b596d647c7bbfd670448969f7dcc7effc129ea78d"
+ },
+ "parameters": {
+  "LOW_MARGIN": 0.02,
+  "NEAR_TIE": 0.02,
+  "LOW_COHERENCE": 0.82,
+  "MIX_SIB": 0.15,
+  "MIX_PAIR": 0.75,
+  "CONSOLIDATE_COS": 0.92,
+  "MAX_ITER": 10,
+  "TOP_DEST": 3
+ },
+ "confidence_definition": "CONFIDENT = LOO margin >= 0.02 AND not split-pending (all versions)",
+ "reconciliation": {
+  "v2_margin_ge_0.02": 93,
+  "v2_margin_ge_0.02_split_pending": 12,
+  "v2_state_PLACED_CONFIDENT": 81,
+  "v2_manifest_comparison_confident": 93,
+  "reconciled": true
+ },
+ "metrics": {
+  "v1": {
+   "parents": 90,
+   "eligible": 335,
+   "placed": 303,
+   "loo_conflicts": 96,
+   "low_margin_0_to_0.02": 85,
+   "unresolved": 71,
+   "confident_share_of_eligible": 0.3641791044776119,
+   "placed_share_of_eligible": 0.9044776119402985,
+   "median_loo_margin": 0.012770335823347523,
+   "mean_parent_coherence": 0.8501256186111205,
+   "median_parent_separation": 0.9001675427810688,
+   "mixing_parents": 29,
+   "non_mixing_parent_share": 0.6777777777777778,
+   "median_parent_esco_purity_L1": 0.38095238095238093,
+   "median_parent_esco_purity_L2": 0.3157894736842105,
+   "mean_parent_esco_coverage": 0.42972051116313875,
+   "suspicious_parents": 36,
+   "near_duplicate_parent_pairs": 2,
+   "max_parent_size": 14,
+   "median_parent_size": 3.0,
+   "parents_with_split_pending": 24,
+   "confident_authoritative": 106,
+   "low_confidence_authoritative": 197,
+   "confident_margin_only": 122,
+   "loo_conflict_rate": 0.31683168316831684,
+   "low_margin_rate": 0.28052805280528054,
+   "parents_size_2": 42,
+   "parents_size_3_5": 37,
+   "parents_size_6plus": 11
+  },
+  "v2": {
+   "parents": 96,
+   "eligible": 335,
+   "placed": 216,
+   "loo_conflicts": 71,
+   "low_margin_0_to_0.02": 52,
+   "unresolved": 158,
+   "confident_share_of_eligible": 0.27761194029850744,
+   "placed_share_of_eligible": 0.6447761194029851,
+   "median_loo_margin": 0.013141382868813944,
+   "mean_parent_coherence": 0.8742770248919681,
+   "median_parent_separation": 0.8906439000297014,
+   "mixing_parents": 17,
+   "non_mixing_parent_share": 0.8229166666666666,
+   "median_parent_esco_purity_L1": 0.45,
+   "median_parent_esco_purity_L2": 0.375,
+   "mean_parent_esco_coverage": 0.414239421508293,
+   "suspicious_parents": 21,
+   "near_duplicate_parent_pairs": 0,
+   "max_parent_size": 6,
+   "median_parent_size": 2.0,
+   "parents_with_split_pending": 19,
+   "confident_authoritative": 81,
+   "low_confidence_authoritative": 135,
+   "confident_margin_only": 93,
+   "loo_conflict_rate": 0.3287037037037037,
+   "low_margin_rate": 0.24074074074074073,
+   "parents_size_2": 80,
+   "parents_size_3_5": 15,
+   "parents_size_6plus": 1,
+   "labels_high": 0,
+   "labels_medium": 28,
+   "labels_low": 68
+  },
+  "v2_1": {
+   "parents": 59,
+   "eligible": 335,
+   "placed": 198,
+   "loo_conflicts": 14,
+   "low_margin_0_to_0.02": 52,
+   "unresolved": 176,
+   "confident_share_of_eligible": 0.3940298507462687,
+   "placed_share_of_eligible": 0.591044776119403,
+   "median_loo_margin": 0.031636093544283095,
+   "mean_parent_coherence": 0.8691729865334608,
+   "median_parent_separation": 0.8883339694967385,
+   "mixing_parents": 1,
+   "non_mixing_parent_share": 0.9830508474576272,
+   "median_parent_esco_purity_L1": 0.375,
+   "median_parent_esco_purity_L2": 0.34615384615384615,
+   "mean_parent_esco_coverage": 0.4428944135245602,
+   "suspicious_parents": 5,
+   "near_duplicate_parent_pairs": 0,
+   "max_parent_size": 12,
+   "median_parent_size": 3.0,
+   "parents_with_split_pending": 14,
+   "confident_authoritative": 117,
+   "low_confidence_authoritative": 81,
+   "confident_margin_only": 132,
+   "loo_conflict_rate": 0.0707070707070707,
+   "low_margin_rate": 0.26262626262626265,
+   "parents_size_2": 29,
+   "parents_size_3_5": 21,
+   "parents_size_6plus": 9,
+   "labels_high": 1,
+   "labels_medium": 49,
+   "labels_low": 9
+  }
+ },
+ "common_population_size": 196,
+ "structural_problems": [],
+ "decision_counts": {
+  "KEEP": 130,
+  "MOVE": 36,
+  "MOVE_ORPHAN": 23,
+  "UNRESOLVE_ORPHAN": 13,
+  "KEEP_NEAR_TIE": 9,
+  "UNRESOLVE": 5
+ },
+ "ai_label": "AI-GENERATED, UNREVIEWED (pending human approval)",
+ "human_approved": false
+}

@@ -1,0 +1,6 @@
+v1_parent,v1_children,v1_child_names,v1_flagged_suspicious_v1rules,v1_mixing_corrected,v2_placement,children_still_together_in_v2,v2_parents_suspicious
+P035,T0050;T0140;T0172;T0192;T0280,Hand and Power Tool Operation | Garment and Lens Fitting | Quantity Take-Offs and Restructuring | Rigging and Surface Finishing | Pallet Jack Operation,True,False,T0050->Q025; T0140->UNRESOLVED_SINGLETON; T0172->UNRESOLVED_SINGLETON; T0192->Q025; T0280->UNRESOLVED_SINGLETON,False,Q025:True
+P046,T0069;T0301,SAP ERP Modules | SD-Prefixed Acronyms,True,True,T0069->UNRESOLVED_SINGLETON; T0301->UNRESOLVED_SINGLETON,False,
+P052,T0089;T0246,IT Service Desk Support | Food and Beverage Service,True,False,T0089->UNRESOLVED_SINGLETON; T0246->UNRESOLVED_SINGLETON,False,
+P080,T0249;T0266,Keyboarding and Typing | Switching Equipment,False,True,T0249->Q082; T0266->Q082,True,Q082:True
+P085,T0299;T0311,HMI and EDI Systems | RFP Response Preparation,True,False,T0299->Q090; T0311->Q090,True,Q090:True

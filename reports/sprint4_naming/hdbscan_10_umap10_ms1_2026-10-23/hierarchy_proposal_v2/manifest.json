@@ -1,0 +1,269 @@
+{
+ "version": "hierarchy_proposal_v2",
+ "generated_utc": "2026-11-04T20:03:29+00:00",
+ "scripts": {
+  "build_hierarchy_proposal_v2.py": "9a5b22758a5263621028e8c0d5d98076cffd3e8754f4a73917f4b264fd7c45dc",
+  "build_hierarchy_proposal.py": "9649b018e6539dcc36f24f4651d098fc6e241a87912387221ab9359f9d531b50",
+  "esco_levels.py": "5e6c504aed6e0110f858ecc73814d26ee085e4e2257b6aa1e223d2b036b3fbc9"
+ },
+ "inputs": {
+  "v1_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/manifest.json",
+   "sha256": "a5d0d47f56b4db5052b739c034bea068ae9c7bc7690d5b87a5028a6d6609c21d"
+  },
+  "v1_parents": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/parent_categories.csv",
+   "sha256": "cf4fbccd151854f994862400dd555a910b3ea606d1d162e4ab8d7f8c226679aa"
+  },
+  "v1_hierarchy": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_proposal_v1/hierarchy_proposal.csv",
+   "sha256": "d7ee9395275b0f5f70d625c67e74384aaf558a645d5947270048968c99d0e966"
+  },
+  "preflight_manifest": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/hierarchy_v2_preflight_v1/manifest.json",
+   "sha256": "2ba6ebed941d0b33a5be5b7daec6c7d1d89acf571568b7198b89effa002ba3e7"
+  },
+  "links38": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/phase2_phase3_audit_v1/reference_link_verification_38.csv",
+   "sha256": "e25c4457a6d141f339ad0ee83f2a46fc369951ceb02ff1b2fbc8e80c2b58db24"
+  },
+  "skills": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/skills.csv",
+   "sha256": "a7bcfd79827dbd812adcf1bb356faed54d6bd8134aeba1bd3556817ac87b2388"
+  },
+  "vectors": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/vectors.npy",
+   "sha256": "93a9839a0c1ddb8773ea9237c40b119e7cf5e79b2ad62ec850d0e34fd4b82b3e"
+  },
+  "memberships": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/memberships.csv",
+   "sha256": "0d6854f6a4e7610fe0a36d4d2653b3ed79861c641fb6cf29a60bdab455de7a37"
+  },
+  "reference_links": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_input_hdbscan_10_umap10_ms1_2026-10-23/reference_links.csv",
+   "sha256": "1543cb2ce7ee3b786dd591cf3a2d5f72918a2294b738304ee517821fcf68a845"
+  },
+  "topic_centroids": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/topic_centroids.npy",
+   "sha256": "64131ea88249c97fd49a353efa3ec71968770b0f03eaa53a318cff8afc7e4864"
+  },
+  "topic_ids": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_features_hdbscan_10_umap10_ms1_2026-10-23/topic_ids.csv",
+   "sha256": "a757f2df785230489fc357df963efc3f2a4e0f1d5da913c691220fa4d1b13ac2"
+  },
+  "names": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/assembled_topic_naming_v1_20261104T003642Z/results.csv",
+   "sha256": "449de95f0faad663143393249f2605009dca95d8a2473426b327e5b589189719"
+  },
+  "validity": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/data/processed/sprint4_naming_hdbscan_10_umap10_ms1_2026-10-23/validity_v1_topic_naming_v1_qwen_qwen3.8-27b_pilot_20261103T210409Z/topic_validity_all.csv",
+   "sha256": "1825e7579b2b44a842127306a1e689e2e62d96306e805bcd189754d31cf01dd8"
+  },
+  "audit_metrics": {
+   "path": "~/Documents/AI-Powered-Job-Finder-master-s-Project-/reports/sprint4_naming/hdbscan_10_umap10_ms1_2026-10-23/topic_quality_review_v1/phase2_phase3_audit_v1/topic_metrics_374.csv",
+   "sha256": "e3e96d94be7d105cde8d340120e562f33a900676ee9e4a1a21b8f8896f5e919d"
+  },
+  "esco_skills": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skills_en.csv",
+   "sha256": "d03b10efca94b4bcfa260a992cfde89c375f0fa12095d6662a663cfd2f9f2950"
+  },
+  "esco_hierarchy": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/skillsHierarchy_en.csv",
+   "sha256": "295133872c6be7b7560de943efa4a6aab833a1b15af4d60c03b050ab0a75edcb"
+  },
+  "esco_broader": {
+   "path": "~/Desktop/testing/references/esco_v1.2.1/broaderRelationsSkillPillar_en.csv",
+   "sha256": "56b70f4852b1f53c6192c979310c34c93f95436621d907083cf0d55b51d8e42d"
+  }
+ },
+ "outputs": {
+  "configuration_sweep.csv": "e07d7958ff6e440236e1d4fb97676368b635edae47095f3c53d8bc34c5e7ef27",
+  "grandparent_feasibility.csv": "39252a78a0ce90cdf71bbca666ba38de34e214e9faa00c1841f0e4bb7d26272f",
+  "hierarchy_proposal.csv": "3a57b1a72b6da4cf76f7200913c874c27793f80e9d0e4a027500b00db6d0fad4",
+  "known_v1_problem_parents.csv": "0a9cb7715c3ee5c448e181cd5bba56fd681da77694b043a4418a2db7ba4b6712",
+  "parent_categories.csv": "71e5a692a5a77ac153e99bca47388bd6b32aabaff8f628c3bb0eaffbda8c1f68",
+  "suspicious_parent_review.csv": "be8b6d57c07e73ee7e39bb155b9ac8ff39ac2abee7a06da55bbfea69d5a26be0",
+  "unresolved_placements.csv": "372fc081efd14975d8fae86927ae9eb16b2cda449329fb0fd0acf37e8fba2084",
+  "v1_vs_v2_comparison.csv": "48805b78d70a640285e0f34a5ba20cbb848396722cb2c605ca793c8e375143f5",
+  "validation_report.md": "3ab2b876ec83f0bc6b1a4f783f9352e5d532b6e6be6b8bf5cc2e41a88e8bf7a3"
+ },
+ "selection_criteria": {
+  "hard": {
+   "max_parent_size": 15,
+   "min_placed_share_of_eligible": 0.6,
+   "min_threshold_neighbour_ari": 0.8
+  },
+  "objective": "mean percentile rank of: confident_share_of_eligible, mean_parent_coherence, non_mixing_parent_share, median_parent_esco_purity_L2 (higher is better for all four)",
+  "tie_break": "v1 weights, then average linkage, then smaller threshold, then keep_conflicts"
+ },
+ "selected_configuration": {
+  "linkage": "average",
+  "weights": "v1_70_15_15",
+  "weights_values": [
+   0.7,
+   0.15,
+   0.15
+  ],
+  "threshold": 0.24,
+  "mode": "keep_conflicts_low_confidence"
+ },
+ "configuration_space": {
+  "linkages": [
+   "average",
+   "complete",
+   "weighted"
+  ],
+  "weights": {
+   "v1_70_15_15": [
+    0.7,
+    0.15,
+    0.15
+   ],
+   "w60_20_20": [
+    0.6,
+    0.2,
+    0.2
+   ],
+   "w50_30_20": [
+    0.5,
+    0.3,
+    0.2
+   ],
+   "w80_10_10": [
+    0.8,
+    0.1,
+    0.1
+   ]
+  },
+  "thresholds": [
+   0.15,
+   0.5,
+   0.01
+  ],
+  "modes": [
+   "keep_conflicts_low_confidence",
+   "unplace_loo_conflicts"
+  ]
+ },
+ "esco_excluded_links": {
+  "uri_not_in_v121": 91,
+  "suspect_accepted": 29
+ },
+ "suspect_links": [
+  "ams",
+  "boating",
+  "body assembly",
+  "box",
+  "classical hand analysis",
+  "design experience",
+  "dmp",
+  "dmps",
+  "dock carts",
+  "dressing changes",
+  "extrusion press",
+  "filtering",
+  "food styling",
+  "formulation",
+  "garment pressing",
+  "hand sewing",
+  "ifrs",
+  "ifsp",
+  "lens options",
+  "logs",
+  "milestone",
+  "nam",
+  "pressing",
+  "rt",
+  "scales",
+  "scaling",
+  "sem",
+  "site development",
+  "spray booth",
+  "stocking",
+  "style frames",
+  "styling",
+  "tdm",
+  "template building",
+  "timber",
+  "unity",
+  "waxing"
+ ],
+ "metrics_v1_corrected": {
+  "parents": 90,
+  "eligible": 335,
+  "placed": 303,
+  "confident": 122,
+  "low_confidence": 181,
+  "loo_conflicts": 96,
+  "low_margin_0_to_0.02": 85,
+  "unresolved": 71,
+  "confident_share_of_eligible": 0.3641791044776119,
+  "placed_share_of_eligible": 0.9044776119402985,
+  "median_loo_margin": 0.012770335823347523,
+  "mean_parent_coherence": 0.8501256186111205,
+  "median_parent_separation": 0.9001675427810688,
+  "mixing_parents": 29,
+  "non_mixing_parent_share": 0.6777777777777778,
+  "median_parent_esco_purity_L1": 0.38095238095238093,
+  "median_parent_esco_purity_L2": 0.3157894736842105,
+  "mean_parent_esco_coverage": 0.42972051116313875,
+  "suspicious_parents": 36,
+  "near_duplicate_parent_pairs": 2,
+  "max_parent_size": 14,
+  "median_parent_size": 3.0,
+  "parents_with_split_pending": 24
+ },
+ "metrics_v2": {
+  "parents": 96,
+  "eligible": 335,
+  "placed": 216,
+  "confident": 93,
+  "low_confidence": 123,
+  "loo_conflicts": 71,
+  "low_margin_0_to_0.02": 52,
+  "unresolved": 158,
+  "confident_share_of_eligible": 0.27761194029850744,
+  "placed_share_of_eligible": 0.6447761194029851,
+  "median_loo_margin": 0.013141382868813944,
+  "mean_parent_coherence": 0.8742770248919681,
+  "median_parent_separation": 0.8906439000297014,
+  "mixing_parents": 17,
+  "non_mixing_parent_share": 0.8229166666666666,
+  "median_parent_esco_purity_L1": 0.45,
+  "median_parent_esco_purity_L2": 0.375,
+  "mean_parent_esco_coverage": 0.414239421508293,
+  "suspicious_parents": 21,
+  "near_duplicate_parent_pairs": 0,
+  "max_parent_size": 6,
+  "median_parent_size": 2.0,
+  "parents_with_split_pending": 19
+ },
+ "metrics_v2_without_split_candidates": {
+  "parents": 84,
+  "eligible": 298,
+  "placed": 183,
+  "confident": 86,
+  "low_confidence": 97,
+  "loo_conflicts": 54,
+  "low_margin_0_to_0.02": 43,
+  "unresolved": 191,
+  "confident_share_of_eligible": 0.28859060402684567,
+  "placed_share_of_eligible": 0.6140939597315436,
+  "median_loo_margin": 0.01787076046651459,
+  "mean_parent_coherence": 0.8740472140523634,
+  "median_parent_separation": 0.8858680486451401,
+  "mixing_parents": 15,
+  "non_mixing_parent_share": 0.8214285714285714,
+  "median_parent_esco_purity_L1": 0.45454545454545453,
+  "median_parent_esco_purity_L2": 0.375,
+  "mean_parent_esco_coverage": 0.4105676934499834,
+  "suspicious_parents": 17,
+  "near_duplicate_parent_pairs": 0,
+  "max_parent_size": 6,
+  "median_parent_size": 2.0,
+  "parents_with_split_pending": 0
+ },
+ "structural_problems": [],
+ "ai_label": "AI-GENERATED, UNREVIEWED (pending human approval)",
+ "human_approved": false
+}

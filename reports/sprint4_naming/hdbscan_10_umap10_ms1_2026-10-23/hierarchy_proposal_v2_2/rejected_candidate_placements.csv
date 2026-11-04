@@ -1,0 +1,122 @@
+topic_id,provisional_name,origin,split_candidate,in_preliminary_77,closest_parent_tried,best_margin,failed_gates,parents_tried,decision
+T0003,Creative and Strategic Thinking,v2_singleton_never_reconsidered,True,True,Q067,0.0115,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0010,Client Relationship Management,v2_singleton_never_reconsidered,False,True,Q034,0.0002,G1_margin; G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0013,Leadership,v2_singleton_never_reconsidered,False,True,Q002,0.0017,G1_margin; G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0015,Multilingual Communication,v2_singleton_never_reconsidered,True,True,Q004,0.0659,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0020,Software Testing,v2_singleton_never_reconsidered,False,True,Q061,0.013,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0021,Regulatory Compliance,v2_singleton_never_reconsidered,False,True,Q035,0.0009,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0023,Presentation Delivery,v2_singleton_never_reconsidered,False,True,Q017,0.0103,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0027,Mathematical Calculations,v2_singleton_never_reconsidered,True,True,Q024,0.0169,G1_margin; G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0028,Budget Management,v2_singleton_never_reconsidered,False,True,Q063,0.0258,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0029,Workforce Supervision,v2_singleton_never_reconsidered,False,True,Q034,0.024,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0035,Shell Scripting,v2_1_unresolved_parent_dissolved,False,False,Q038,0.0078,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0037,Risk Management,v2_singleton_never_reconsidered,False,True,Q027,0.0027,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0038,Account Management,v2_singleton_never_reconsidered,False,True,Q075,-0.0032,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0042,Business Analytics,v2_singleton_never_reconsidered,False,True,Q046,-0.0108,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0047,Inventory Management,v2_singleton_never_reconsidered,False,False,Q026,-0.0362,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0048,Social Media Management,v2_singleton_never_reconsidered,False,True,Q057,0.0422,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0051,Industry and Technical Knowledge,v2_singleton_never_reconsidered,False,True,Q067,0.0099,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0052,Quality Management Systems,v2_singleton_never_reconsidered,False,True,Q035,0.0224,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0053,Health Information Privacy,v2_singleton_never_reconsidered,False,True,Q093,0.0155,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0056,Product Lifecycle Management,v2_singleton_never_reconsidered,False,True,Q012,0.032,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0058,Material Handling Equipment Operation,v2_singleton_never_reconsidered,True,True,Q025,0.0058,G1_margin; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0069,SAP ERP Modules,v2_singleton_never_reconsidered,False,False,Q038,0.0077,G2_coherence; G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0073,Insurance Coverage Administration,v2_1_unresolved_conflict,False,False,Q085,0.02,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0076,Research Methodologies,v2_singleton_never_reconsidered,False,True,Q052,0.0041,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0077,Mobile Device Technologies,v2_singleton_never_reconsidered,True,False,Q038,0.0234,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0079,Business Reporting,v2_singleton_never_reconsidered,False,True,Q058,-0.0029,G1_margin; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0081,Financial Reconciliation,v2_singleton_never_reconsidered,False,False,Q075,0.0376,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0082,Process Automation,v2_singleton_never_reconsidered,False,False,Q038,0.0067,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0089,IT Service Desk Support,v2_singleton_never_reconsidered,False,True,Q038,0.0148,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0090,Reading Comprehension,v2_singleton_never_reconsidered,False,True,Q050,0.0163,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0091,Culinary Preparation Techniques,v2_singleton_never_reconsidered,False,True,Q071,0.0096,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0096,Professional Writing,v2_singleton_never_reconsidered,False,False,Q017,0.0061,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0099,Medication Management,v2_singleton_never_reconsidered,False,True,Q028,0.0126,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0100,Digital Visual Design,v2_singleton_never_reconsidered,False,False,Q073,0.018,G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0107,Dispute and Conflict Resolution,v2_singleton_never_reconsidered,False,True,Q074,-0.0068,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0110,CRM and CAD Systems,v2_singleton_never_reconsidered,False,False,Q038,0.0203,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0111,Email Marketing,v2_singleton_never_reconsidered,False,True,Q009,0.0026,G1_margin; G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0116,Laboratory Testing Operations,v2_singleton_never_reconsidered,False,True,Q094,0.0227,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0117,Mechanical Engineering Knowledge,v2_1_unresolved_parent_dissolved,False,False,Q025,0.0143,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0123,User Interface Design,v2_singleton_never_reconsidered,False,False,Q009,0.015,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0128,ERP System Administration,v2_1_unresolved_parent_dissolved,False,False,Q012,-0.0007,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0134,Order Processing,v2_singleton_never_reconsidered,False,True,Q005,0.0027,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0138,Regulatory Affairs,v2_singleton_never_reconsidered,False,True,Q016,0.0661,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0140,Garment and Lens Fitting,v2_singleton_never_reconsidered,True,True,Q071,0.0037,G1_margin; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0142,CAD Software Proficiency,v2_singleton_never_reconsidered,False,True,Q071,0.0112,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0144,Food Safety and Handling,v2_singleton_never_reconsidered,False,True,Q013,0.0311,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0146,Freight Forwarding Operations,v2_singleton_never_reconsidered,False,False,Q075,0.0243,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0149,Business Operations Management,v2_singleton_never_reconsidered,False,True,Q012,0.0069,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0150,Professional Ethics,v2_singleton_never_reconsidered,False,False,Q016,-0.0323,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0153,Vendor Relationship Management,v2_singleton_never_reconsidered,False,True,Q069,0.0354,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0156,Case Management,v2_singleton_never_reconsidered,False,False,Q038,-0.0059,G1_margin; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0157,Content Strategy and Distribution,v2_singleton_never_reconsidered,False,True,Q057,0.0122,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0158,Dental Hygiene and Restorative Care,v2_singleton_never_reconsidered,True,False,Q020,0.0036,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0159,Trend Analysis and Monitoring,v2_singleton_never_reconsidered,False,True,Q011,0.0042,G1_margin; G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0163,Sanitation Standards Compliance,v2_1_unresolved_parent_dissolved,False,False,Q016,0.0115,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0166,IT Virtualization Technologies,v2_singleton_never_reconsidered,False,False,Q032,-0.0112,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0167,Event Planning and Management,v2_singleton_never_reconsidered,True,True,Q005,0.0183,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0168,Following Work Instructions,v2_singleton_never_reconsidered,False,False,Q067,0.005,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0169,Deal and Period Closing,v2_singleton_never_reconsidered,False,False,Q075,0.0401,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0180,Sales Lead Generation,v2_singleton_never_reconsidered,False,True,Q018,0.0199,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0185,Payroll Administration,v2_singleton_never_reconsidered,False,False,Q034,0.0278,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0188,Digital Advertising Platforms,v2_singleton_never_reconsidered,False,True,Q066,0.0087,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0199,Printer Installation and Support,v2_singleton_never_reconsidered,False,False,Q043,-0.0042,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0200,Epicor ERP Modules,v2_1_unresolved_parent_dissolved,False,False,Q038,0.0142,G2_coherence; G3_no_mixing; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0203,Power BI and Oracle BI Reporting,v2_singleton_never_reconsidered,False,False,Q046,0.0159,G4_member_support; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0205,Subcontractor Management,v2_singleton_never_reconsidered,True,True,Q060,-0.0019,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0208,HVAC and Refrigeration Systems,v2_singleton_never_reconsidered,False,True,Q025,0.0041,G1_margin; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0213,Electrical Schematics Interpretation,v2_singleton_never_reconsidered,False,False,Q024,-0.0131,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0214,Load Balancing and Concurrency,v2_singleton_never_reconsidered,True,True,Q005,-0.0116,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0217,Corrective Action Planning,v2_singleton_never_reconsidered,False,True,Q018,0.0222,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0218,Chemistry and Physical Sciences,v2_singleton_never_reconsidered,False,True,Q024,0.0002,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0221,Version Control Systems,v2_singleton_never_reconsidered,False,False,Q038,0.0108,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0226,Infection and Disease Prevention,v2_singleton_never_reconsidered,False,True,Q013,0.0283,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0230,Welding Processes and Equipment,v2_singleton_never_reconsidered,False,False,Q025,0.0093,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0236,Proposal Development,v2_singleton_never_reconsidered,False,True,Q018,0.0361,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0238,Interviewing Techniques,v2_singleton_never_reconsidered,False,False,Q078,0.0095,G2_coherence; G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0240,Coordination,v2_singleton_never_reconsidered,False,False,Q002,0.0051,G2_coherence; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0243,Plumbing Installation and Repair,v2_1_unresolved_parent_dissolved,False,False,Q025,0.0606,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0246,Food and Beverage Service,v2_singleton_never_reconsidered,False,True,Q034,0.0111,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0249,Keyboarding and Typing,v2_1_unresolved_parent_dissolved,False,False,Q038,0.0393,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0255,Project Scoping,v2_singleton_never_reconsidered,True,False,Q067,-0.007,G1_margin,59,REJECTED_REMAINS_UNRESOLVED
+T0258,Clinical Charting,v2_singleton_never_reconsidered,False,True,Q017,0.0025,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0265,Parts Catalog Management,v2_singleton_never_reconsidered,False,True,Q025,0.0072,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0267,Pipeline Development and Management,v2_1_unresolved_parent_dissolved,False,False,Q032,-0.0217,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0268,Business Cycle Management,v2_singleton_never_reconsidered,False,True,Q005,0.0296,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0270,Actuarial Science,v2_singleton_never_reconsidered,False,False,Q075,0.0037,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0275,Fundraising Strategy,v2_singleton_never_reconsidered,False,False,Q018,-0.0248,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0280,Pallet Jack Operation,v2_singleton_never_reconsidered,False,False,Q025,0.0069,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0281,Technical Codes Knowledge,v2_1_unresolved_parent_dissolved,False,False,Q016,0.0301,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0285,Warehouse Operations Management,v2_singleton_never_reconsidered,False,False,Q069,-0.016,G1_margin; G2_coherence; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0286,Real-Time Stream Processing,v2_singleton_never_reconsidered,False,False,Q038,0.0012,G1_margin; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0287,Retention and Incentive Programs,v2_singleton_never_reconsidered,True,True,Q034,0.0289,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0288,Storytelling and Storyboarding,v2_singleton_never_reconsidered,False,False,Q073,0.0179,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0294,Cultural Competence,v2_singleton_never_reconsidered,False,False,Q067,0.0157,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0298,Civil Litigation,v2_singleton_never_reconsidered,False,False,Q085,0.0439,G2_coherence; G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0299,HMI and EDI Systems,v2_1_unresolved_conflict,False,False,Q038,0.0126,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0301,SD-Prefixed Acronyms,v2_singleton_never_reconsidered,False,False,Q038,0.0153,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0306,Diagnostic Testing,v2_singleton_never_reconsidered,False,True,Q061,0.0182,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0307,Nurse Practice Act Knowledge,v2_1_unresolved_parent_dissolved,False,False,Q016,0.013,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0309,Bid Preparation,v2_singleton_never_reconsidered,False,False,Q074,0.0026,G1_margin; G2_coherence; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0311,RFP Response Preparation,v2_1_unresolved_parent_dissolved,False,False,Q001,0.0006,G1_margin; G2_coherence; G3_no_mixing; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0312,Emergency Triage and First Aid,v2_singleton_never_reconsidered,False,True,Q020,0.0134,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0319,Environmental Management and Site Plan Review,v2_singleton_never_reconsidered,True,True,Q018,0.0177,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0321,Investigation Techniques,v2_singleton_never_reconsidered,False,True,Q079,0.0067,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0323,Software Customization,v2_singleton_never_reconsidered,False,True,Q009,0.0062,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0326,Consulting and Advisory Services,v2_singleton_never_reconsidered,False,True,Q018,0.0115,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0328,Landscaping Products and Installation,v2_1_unresolved_conflict,True,False,Q025,0.0082,G1_margin; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0329,Soldering,v2_singleton_never_reconsidered,False,True,Q060,-0.0016,G1_margin; G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0333,GIS Mapping Software,v2_singleton_never_reconsidered,False,False,Q038,0.0033,G1_margin; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0339,Underwriting and Underwriting Guidelines,v2_singleton_never_reconsidered,False,False,Q075,0.0067,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0343,Embedded Firmware Development,v2_singleton_never_reconsidered,False,False,Q038,0.0404,G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0351,Menu Planning and Development,v2_singleton_never_reconsidered,False,True,Q071,0.0083,G2_coherence; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0355,Fiber Optic Systems,v2_singleton_never_reconsidered,False,False,Q025,0.0088,G3_no_mixing; G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0356,Fleet and Transportation Management Systems,v2_singleton_never_reconsidered,False,False,Q005,0.0167,G2_coherence; G4_member_support,59,REJECTED_REMAINS_UNRESOLVED
+T0358,Onboarding Processes,v2_1_unresolved_parent_dissolved,False,False,Q045,-0.0006,G1_margin; G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0360,Lease Administration,v2_singleton_never_reconsidered,False,True,Q074,0.0251,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0361,Licensing Requirements Compliance,v2_singleton_never_reconsidered,False,True,Q016,0.0121,G2_coherence,59,REJECTED_REMAINS_UNRESOLVED
+T0362,Flowchart and Process Diagramming,v2_1_unresolved_parent_dissolved,False,False,Q012,0.019,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0364,Pump and Process Equipment Design,v2_singleton_never_reconsidered,False,True,Q025,0.0125,G5_no_new_conflicts,59,REJECTED_REMAINS_UNRESOLVED
+T0367,PCB Design and Testing,v2_singleton_never_reconsidered,False,False,Q060,0.0106,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED
+T0373,Aruba Network Infrastructure,v2_singleton_never_reconsidered,False,False,Q031,0.0114,G2_coherence; G3_no_mixing,59,REJECTED_REMAINS_UNRESOLVED

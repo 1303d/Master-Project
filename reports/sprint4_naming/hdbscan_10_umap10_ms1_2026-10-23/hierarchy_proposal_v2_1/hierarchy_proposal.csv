@@ -1,0 +1,375 @@
+topic_id,provisional_name,parent_id,proposed_parent_label,placement_state,loo_margin,split_candidate,v2_parent,v2_state,ai_label,human_approved
+T0001,Professional Communication,Q001,Communication,PLACED_LOW_CONFIDENCE,0.0054,False,Q001,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0002,Team Leadership,Q002,Team and Collaboration,PLACED_LOW_CONFIDENCE,0.0119,False,Q002,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0003,Creative and Strategic Thinking,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0004,Microsoft Software Proficiency,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0319,False,Q003,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0005,Verbal Communication,Q004,Language,PLACED_CONFIDENT,0.0242,False,Q004,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0006,Workload Prioritization,Q005,Allocation and Meeting,PLACED_LOW_CONFIDENCE,0.0095,False,Q005,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0007,Database Management Systems,Q046,Information and communication technologies (icts),PLACED_CONFIDENT,0.055,False,Q006,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0008,Cross-Functional Collaboration,Q002,Team and Collaboration,PLACED_LOW_CONFIDENCE,0.0182,False,Q002,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0009,Technical Troubleshooting,Q007,Solving problems,PLACED_LOW_CONFIDENCE,0.0126,False,Q007,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0010,Client Relationship Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0011,Business Process Improvement,Q012,Methodologies,PLACED_CONFIDENT,0.0384,False,Q008,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0012,Web Front-End Development,Q009,Web and Framework,PLACED_LOW_CONFIDENCE,0.0296,True,Q009,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0013,Leadership,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0014,Sales Process Management,Q010,Selling and Sales,PLACED_CONFIDENT,0.1016,False,Q010,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0015,Multilingual Communication,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0016,Calendar and Time Management,Q005,Allocation and Meeting,PLACED_CONFIDENT,0.0745,False,Q005,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0017,General Analytical Methods,Q011,Data Analysis and Impact,PLACED_CONFIDENT,0.026,False,Q011,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0018,Software Development Tools,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0019,Project Management Methodologies,Q012,Methodologies,PLACED_CONFIDENT,0.0498,False,Q012,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0020,Software Testing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0021,Regulatory Compliance,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0022,Workplace Safety Compliance,Q013,Safety and Precautions,PLACED_CONFIDENT,0.0571,False,Q013,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0023,Presentation Delivery,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0024,Information Security Management,Q014,Cyber and Security,PLACED_LOW_CONFIDENCE,0.0085,False,Q014,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0025,Desktop Computer Operations,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0751,False,Q015,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0026,Regulatory Compliance Knowledge,Q016,Rules and Federal,PLACED_CONFIDENT,0.0522,False,Q016,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0027,Mathematical Calculations,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0028,Budget Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0029,Workforce Supervision,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0030,Technical Documentation,Q017,Documentation and Label,PLACED_CONFIDENT,0.054,False,Q017,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0031,Operational Planning,Q018,Planning Tools and Plan,PLACED_LOW_CONFIDENCE,0.0105,False,Q018,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0032,Performance Analysis and Monitoring,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0033,Financial and Sales Analysis,Q011,Data Analysis and Impact,PLACED_CONFIDENT,0.0536,False,Q011,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0034,Training Program Development,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0035,Shell Scripting,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q019,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0036,Strategic Planning,Q018,Planning Tools and Plan,PLACED_CONFIDENT,0.028,False,Q018,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0037,Risk Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0038,Account Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0039,Cardiac Monitoring,Q020,Medical and Invasive,PLACED_LOW_CONFIDENCE,0.0628,True,Q020,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0040,Flexible Adaptability,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0041,Clinical and Educational Assessment,Q078,Needs and Assessment,PLACED_CONFIDENT,0.0641,False,Q021,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0042,Business Analytics,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0043,Telephony Systems,Q001,Communication,PLACED_LOW_CONFIDENCE,0.0201,True,Q001,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0044,Agile Development Methodologies,Q012,Methodologies,PLACED_CONFIDENT,0.0333,False,Q012,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0045,Commercial Negotiation,Q074,Contract and Carrier,PLACED_LOW_CONFIDENCE,0.0174,False,Q022,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0046,Preventive Maintenance Planning,Q025,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0339,False,Q023,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0047,Inventory Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0048,Social Media Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0049,Instrument Calibration and Measurement,Q024,Gage and Pressure,PLACED_LOW_CONFIDENCE,0.0144,False,Q024,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0050,Hand and Power Tool Operation,Q025,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,-0.0064,True,Q025,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0051,Industry and Technical Knowledge,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0052,Quality Management Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0053,Health Information Privacy,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0054,Accounting Principles,Q026,Accounting and Expense,PLACED_LOW_CONFIDENCE,0.0109,False,Q026,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0055,Medical Record Documentation,Q017,Documentation and Label,PLACED_CONFIDENT,0.0212,False,Q017,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0056,Product Lifecycle Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0057,C++ and .NET Development,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0058,Material Handling Equipment Operation,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0059,Financial Planning,Q027,Accounting,PLACED_LOW_CONFIDENCE,0.0541,True,Q027,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0060,Therapeutic Treatment Planning,Q028,Therapy and Health,PLACED_CONFIDENT,0.057,False,Q028,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0061,REST API Development,Q009,Web and Framework,PLACED_CONFIDENT,0.0654,False,Q009,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0062,Technical Specifications Development,Q029,Requirements,PLACED_LOW_CONFIDENCE,0.0112,False,Q029,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0063,Cleaning and Sanitization,Q025,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0611,True,Q030,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0064,Audit Procedures,Q026,Accounting and Expense,PLACED_CONFIDENT,0.0617,False,Q026,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0065,Computer Networking Fundamentals,Q031,Network and Wireless,PLACED_CONFIDENT,0.072,False,Q031,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0066,Cloud Infrastructure Engineering,Q032,Cloud and Azure,PLACED_CONFIDENT,0.0462,False,Q032,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0067,Policy Administration and Advocacy,Q034,Human,PLACED_CONFIDENT,0.0414,False,Q033,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0068,Workforce Planning and Staffing,Q034,Human,PLACED_CONFIDENT,0.0295,False,Q034,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0069,SAP ERP Modules,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0070,Regulatory Compliance and Permitting,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0071,Industry Standards Compliance,Q035,Standards Compliance and National,PLACED_CONFIDENT,0.051,False,Q035,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0072,Workforce Scheduling,Q005,Allocation and Meeting,PLACED_CONFIDENT,0.0622,False,Q005,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0073,Insurance Coverage Administration,,,UNRESOLVED_CONFLICT,,False,Q036,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0074,Medical and Surgical Procedures,Q020,Medical and Invasive,PLACED_CONFIDENT,0.0422,False,Q020,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0075,Diagnostic Radiography,Q020,Medical and Invasive,PLACED_LOW_CONFIDENCE,0.0012,True,Q037,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0076,Research Methodologies,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0077,Mobile Device Technologies,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0078,Speech Language Pathology,Q004,Language,PLACED_LOW_CONFIDENCE,0.0572,True,Q004,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0079,Business Reporting,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0080,System Integration Architecture,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0243,False,Q038,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0081,Financial Reconciliation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0082,Process Automation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0083,Equipment Repair,,,UNRESOLVED_CONFLICT,,False,Q023,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0084,Structural Engineering Design,Q071,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0027,True,Q039,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0085,Financial Reporting,Q026,Accounting and Expense,PLACED_CONFIDENT,0.0298,False,Q026,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0086,Software Application Usage,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.027,False,Q040,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0087,Microsoft Azure Cloud Services,Q032,Cloud and Azure,PLACED_LOW_CONFIDENCE,0.0194,False,Q041,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0088,Regulatory Compliance Acronyms,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0089,IT Service Desk Support,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0090,Reading Comprehension,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0091,Culinary Preparation Techniques,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0092,AWS Cloud Services,Q009,Web and Framework,PLACED_LOW_CONFIDENCE,-0.0075,False,Q041,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0093,Financial Forecasting,Q042,Cost,PLACED_LOW_CONFIDENCE,-0.0122,False,Q042,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0094,Adobe Software Proficiency,Q043,Pdf,PLACED_LOW_CONFIDENCE,0.0175,False,Q043,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0095,Computational Modeling,Q044,Modeling and Algorithms,PLACED_CONFIDENT,0.0515,False,Q044,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0096,Professional Writing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0097,Customer Relationship Management,Q045,Customer,PLACED_LOW_CONFIDENCE,0.0002,False,Q045,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0098,Data Engineering,Q046,Information and communication technologies (icts),PLACED_CONFIDENT,0.0817,False,Q046,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0099,Medication Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0100,Digital Visual Design,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0101,Cash Handling Operations,Q075,Transactions and Bank,PLACED_CONFIDENT,0.0442,False,Q047,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0102,Crisis and Emergency Response,Q048,Incident,PLACED_CONFIDENT,0.0289,False,Q048,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0103,Enterprise System Acronyms,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0104,Mixed Technical Codes,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0105,Nursing Fundamentals,Q070,Nursing and Care Planning,PLACED_CONFIDENT,0.0572,False,Q049,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0106,Technical Drawing Interpretation,Q050,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0021,False,Q050,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0107,Dispute and Conflict Resolution,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0108,Instructional Design and Pedagogy,Q067,Learning and Education,PLACED_CONFIDENT,0.06,False,Q051,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0109,Sales Techniques,Q010,Selling and Sales,PLACED_CONFIDENT,0.0788,False,Q010,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0110,CRM and CAD Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0111,Email Marketing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0112,Data Entry Software,Q038,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.009,False,Q040,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0113,Statistical Analysis,Q052,Models,PLACED_LOW_CONFIDENCE,0.0034,False,Q052,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0114,Data Validation and Verification,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0115,Industrial Control Systems,Q053,Controls,PLACED_CONFIDENT,0.0644,False,Q053,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0116,Laboratory Testing Operations,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0117,Mechanical Engineering Knowledge,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q054,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0118,Cisco Network Security,Q031,Network and Wireless,PLACED_CONFIDENT,0.0502,False,Q055,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0119,Project Implementation Planning,Q012,Methodologies,PLACED_CONFIDENT,0.0257,False,Q012,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0120,Clinical Nutrition Therapy,Q028,Therapy and Health,PLACED_CONFIDENT,0.039,False,Q028,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0121,Acronym-Based Technical Standards,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0122,KPI Dashboarding,Q058,Tracking and Network,PLACED_LOW_CONFIDENCE,-0.0058,False,Q056,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0123,User Interface Design,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0124,Media Strategy and Planning,Q057,Media,PLACED_CONFIDENT,0.0504,False,Q057,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0125,Web Application Development,Q009,Web and Framework,PLACED_CONFIDENT,0.0371,False,Q009,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0126,System Monitoring,Q058,Tracking and Network,PLACED_CONFIDENT,0.0411,False,Q058,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0127,Salesforce Platform Development,Q010,Selling and Sales,PLACED_CONFIDENT,0.0234,False,Q010,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0128,ERP System Administration,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q059,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0129,Analog and Power Circuit Design,Q060,Electrical,PLACED_CONFIDENT,0.0735,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0130,Quality Inspection,Q061,Equipment Operation and Vehicle,PLACED_CONFIDENT,0.0362,False,Q061,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0131,Data Storage Management,Q038,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0179,True,Q019,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0132,Fire Protection Systems,Q013,Safety and Precautions,PLACED_LOW_CONFIDENCE,0.0083,True,Q013,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0133,Cost Estimation,Q042,Cost,PLACED_LOW_CONFIDENCE,-0.0132,False,Q042,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0134,Order Processing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0135,Acronym-Based Technical Standards,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0136,Patient Interaction and Education,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0137,Standard Operating Procedures,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0138,Regulatory Affairs,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0139,System Architecture Design,Q062,Architecture and Oriented,PLACED_CONFIDENT,0.049,False,Q062,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0140,Garment and Lens Fitting,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0141,Cost Accounting,Q063,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0252,False,Q063,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0142,CAD Software Proficiency,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0143,Stakeholder Relationship Management,Q064,Partnering,PLACED_LOW_CONFIDENCE,0.0033,False,Q064,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0144,Food Safety and Handling,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0145,Compensation and Benefits Administration,Q034,Human,PLACED_CONFIDENT,0.0452,False,Q033,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0146,Freight Forwarding Operations,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0147,Network Communication Protocols,Q031,Network and Wireless,PLACED_CONFIDENT,0.0602,False,Q031,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0148,Media Content Editing,Q043,Pdf,PLACED_CONFIDENT,0.0419,False,Q043,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0149,Business Operations Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0150,Professional Ethics,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0151,Recruitment and Hiring,Q034,Human,PLACED_CONFIDENT,0.0518,False,Q065,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0152,Marketing Strategy Planning,Q066,Marketing,PLACED_LOW_CONFIDENCE,-0.0002,False,Q066,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0153,Vendor Relationship Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0154,Workflow Design and Management,Q012,Methodologies,PLACED_CONFIDENT,0.0313,False,Q008,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0155,CI/CD Pipelines,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0156,Case Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0157,Content Strategy and Distribution,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0158,Dental Hygiene and Restorative Care,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0159,Trend Analysis and Monitoring,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0160,Operating Systems,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0924,False,Q003,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0161,Robotic Process Automation,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0162,R Programming Tools,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0163,Sanitation Standards Compliance,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q030,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0164,Valuation and Business Modeling,Q044,Modeling and Algorithms,PLACED_LOW_CONFIDENCE,0.0125,False,Q044,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0165,Electrical Wiring and Cabling,Q060,Electrical,PLACED_CONFIDENT,0.0519,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0166,IT Virtualization Technologies,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0167,Event Planning and Management,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0168,Following Work Instructions,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0169,Deal and Period Closing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0170,Behavior Intervention and Management,Q028,Therapy and Health,PLACED_CONFIDENT,0.0391,False,Q067,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0171,Site and User Journey Design,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0172,Quantity Take-Offs and Restructuring,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0173,Master Data Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0174,Optimization Techniques,Q044,Modeling and Algorithms,PLACED_LOW_CONFIDENCE,0.0,False,Q068,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0175,Procurement and Purchasing,,,UNRESOLVED_CONFLICT,,False,Q022,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0176,Strategic Supplier Sourcing,Q069,Supply and Strategic,PLACED_CONFIDENT,0.0459,False,Q069,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0177,Bill of Materials Management,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0178,Problem Identification and Resolution,Q007,Solving problems,PLACED_LOW_CONFIDENCE,0.0022,False,Q007,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0179,Patient-Centered Care,Q070,Nursing and Care Planning,PLACED_CONFIDENT,0.0629,False,Q070,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0180,Sales Lead Generation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0181,Layout and Spatial Design,Q071,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0492,False,Q071,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0182,Legal Document Drafting,Q050,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0178,False,Q050,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0183,Production Processes and Planning,Q072,Manufacturing,PLACED_CONFIDENT,0.0379,False,Q072,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0184,SharePoint,Q009,Web and Framework,PLACED_CONFIDENT,0.0545,False,Q009,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0185,Payroll Administration,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0186,Care Plan Development,Q070,Nursing and Care Planning,PLACED_CONFIDENT,0.0687,False,Q049,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0187,Cloud Data Platforms,Q046,Information and communication technologies (icts),PLACED_LOW_CONFIDENCE,0.0329,True,Q046,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0188,Digital Advertising Platforms,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0189,Video and Broadcast Equipment,Q073,Camera,PLACED_LOW_CONFIDENCE,-0.0113,False,Q073,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0190,Materials Preparation and Planning,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0191,Renal and Medical Specialty Knowledge,Q020,Medical and Invasive,PLACED_LOW_CONFIDENCE,0.032,True,Q020,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0192,Rigging and Surface Finishing,Q025,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0423,True,Q025,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0193,Painting and Art Techniques,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0194,Human Development Knowledge,Q067,Learning and Education,PLACED_LOW_CONFIDENCE,0.0475,True,Q067,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0195,Machine Learning and AI,Q044,Modeling and Algorithms,PLACED_CONFIDENT,0.0416,False,Q068,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0196,Brand Management,Q066,Marketing,PLACED_CONFIDENT,0.0305,False,Q066,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0197,Architectural Design Patterns,Q062,Architecture and Oriented,PLACED_CONFIDENT,0.0546,False,Q062,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0198,Electronic Medical Records Systems,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0199,Printer Installation and Support,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0200,Epicor ERP Modules,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q059,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0201,Wireless Networking,Q031,Network and Wireless,PLACED_CONFIDENT,0.0564,False,Q031,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0202,Manufacturing Processes Knowledge,Q072,Manufacturing,PLACED_LOW_CONFIDENCE,0.0015,False,Q072,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0203,Power BI and Oracle BI Reporting,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0204,Contract Management,Q074,Contract and Carrier,PLACED_CONFIDENT,0.0477,False,Q074,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0205,Subcontractor Management,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0206,Airway and Ventilation Management,Q020,Medical and Invasive,PLACED_LOW_CONFIDENCE,0.0527,True,Q020,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0207,IV and Injection Administration,Q020,Medical and Invasive,PLACED_CONFIDENT,0.054,False,Q020,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0208,HVAC and Refrigeration Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0209,Branded Software and System Tools,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0210,Data Center Migration,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0211,Miscellaneous Acronyms and Tools,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0212,Financial Software Systems,Q027,Accounting,PLACED_LOW_CONFIDENCE,0.0074,False,Q075,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0213,Electrical Schematics Interpretation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0214,Load Balancing and Concurrency,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0215,Water and Wastewater Systems,Q025,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.058,False,Q076,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0216,Engineering Practices and Reliability,Q012,Methodologies,PLACED_LOW_CONFIDENCE,0.0117,False,Q054,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0217,Corrective Action Planning,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0218,Chemistry and Physical Sciences,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0219,Ticketing Systems,Q005,Allocation and Meeting,PLACED_LOW_CONFIDENCE,-0.0047,False,Q077,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0220,IT Infrastructure Architecture,Q038,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0001,False,Q039,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0221,Version Control Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0222,Life and Administrative Skills,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0223,Data Cleansing and Curation,Q046,Information and communication technologies (icts),PLACED_CONFIDENT,0.0569,False,Q046,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0224,Feedback and Needs Analysis,Q078,Needs and Assessment,PLACED_CONFIDENT,0.0209,False,Q078,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0225,Business Metrics Analysis,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0226,Infection and Disease Prevention,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0227,Specimen Handling and Processing,Q079,Collection and Preparation,PLACED_CONFIDENT,0.0261,False,Q079,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0228,Oracle Fusion Cloud Applications,Q032,Cloud and Azure,PLACED_CONFIDENT,0.036,False,Q032,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0229,Scaling and Growth Terms,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0230,Welding Processes and Equipment,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0231,Q-Prefixed Software and Systems,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0232,Procurement Management,Q069,Supply and Strategic,PLACED_CONFIDENT,0.0379,False,Q069,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0233,Computer Hardware Design and Integration,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0498,False,Q015,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0234,Branded Software Platforms,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0235,Loan Origination and Lending,Q075,Transactions and Bank,PLACED_CONFIDENT,0.0403,False,Q075,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0236,Proposal Development,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0237,Engineering Test Acronyms,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0238,Interviewing Techniques,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0239,Decorative Styling and Decorating,Q071,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0482,True,Q071,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0240,Coordination,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0241,Asset Management Systems,Q027,Accounting,PLACED_CONFIDENT,0.0372,False,Q080,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0242,Mechanical and Thermal Testing,Q024,Gage and Pressure,PLACED_LOW_CONFIDENCE,0.0009,False,Q024,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0243,Plumbing Installation and Repair,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q076,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0244,Issue and Project Tracking,Q058,Tracking and Network,PLACED_CONFIDENT,0.0484,False,Q056,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0245,Air and Material Handling Equipment,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0246,Food and Beverage Service,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0247,Proxy and VPN Administration,Q009,Web and Framework,PLACED_LOW_CONFIDENCE,0.0071,False,Q055,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0248,Tax Types and Taxation Knowledge,Q081,Tax and Individual,PLACED_CONFIDENT,0.0658,False,Q081,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0249,Keyboarding and Typing,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q082,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0250,Document Management Systems,Q017,Documentation and Label,PLACED_LOW_CONFIDENCE,0.0303,True,Q083,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0251,Technical Acronyms and Standards,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0252,Electrical Systems Design,Q060,Electrical,PLACED_CONFIDENT,0.1182,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0253,Message Queue Platforms,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0254,Pricing Strategy and Quoting,Q063,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0177,False,Q063,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0255,Project Scoping,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0256,Electrical Equipment Installation,Q060,Electrical,PLACED_CONFIDENT,0.0745,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0257,Equipment Setup and Handling,Q084,Operation and Machines,PLACED_CONFIDENT,0.0383,False,Q084,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0258,Clinical Charting,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0259,Diagnostic Testing Equipment Operation,Q061,Equipment Operation and Vehicle,PLACED_LOW_CONFIDENCE,0.0077,False,Q061,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0260,Partnership Management and Accounting,Q064,Partnering,PLACED_CONFIDENT,0.0285,False,Q064,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0261,Insurance Claims Processing,Q085,Submission and Insurance,PLACED_LOW_CONFIDENCE,-0.0024,False,Q036,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0262,Industry Standards Compliance,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0263,Query and Index Optimization,Q046,Information and communication technologies (icts),PLACED_CONFIDENT,0.0761,False,Q006,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0264,Billing Processes,Q085,Submission and Insurance,PLACED_CONFIDENT,0.0258,False,Q085,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0265,Parts Catalog Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0266,Switching Equipment,Q060,Electrical,PLACED_LOW_CONFIDENCE,0.025,True,Q082,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0267,Pipeline Development and Management,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q086,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0268,Business Cycle Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0269,News Writing and Monitoring,Q057,Media,PLACED_CONFIDENT,0.0837,False,Q057,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0270,Actuarial Science,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0271,Clinical Education and Expertise,Q087,Clinical,PLACED_LOW_CONFIDENCE,-0.0099,False,Q087,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0272,Management System Acronyms,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0273,AD-Prefixed Acronyms and Tools,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0274,Data and Barcode Coding,Q046,Information and communication technologies (icts),PLACED_LOW_CONFIDENCE,0.0018,True,Q088,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0275,Fundraising Strategy,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0276,Shader and Scripting Languages,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0277,Industrial Machinery Operation,Q084,Operation and Machines,PLACED_LOW_CONFIDENCE,0.0353,True,Q084,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0278,Incident Investigation and Reporting,Q048,Incident,PLACED_CONFIDENT,0.0421,False,Q048,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0279,Sample Collection and Preparation,Q079,Collection and Preparation,PLACED_LOW_CONFIDENCE,0.0052,False,Q079,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0280,Pallet Jack Operation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0281,Technical Codes Knowledge,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q088,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0282,ISO Standards Compliance,Q035,Standards Compliance and National,PLACED_LOW_CONFIDENCE,0.0007,False,Q035,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0283,Enterprise Platform Management,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0264,False,Q038,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0284,Big Data and Data Sources,Q046,Information and communication technologies (icts),PLACED_CONFIDENT,0.0644,False,Q046,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0285,Warehouse Operations Management,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0286,Real-Time Stream Processing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0287,Retention and Incentive Programs,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0288,Storytelling and Storyboarding,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0289,Animation and Motion Graphics,Q073,Camera,PLACED_LOW_CONFIDENCE,-0.0084,False,Q073,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0290,Tax Return Preparation and Filing,Q081,Tax and Individual,PLACED_LOW_CONFIDENCE,0.0189,False,Q081,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0291,Scanner Equipment Operation,Q061,Equipment Operation and Vehicle,PLACED_CONFIDENT,0.03,False,Q037,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0292,Hydraulic and Brake Systems,Q025,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0164,False,Q089,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0293,Sewing and Stitching,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0294,Cultural Competence,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0295,Remote Desktop Virtualization Tools,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0296,Corporate Finance and Equity Instruments,Q027,Accounting,PLACED_LOW_CONFIDENCE,0.0188,False,Q027,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0297,Software Deployment Automation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0298,Civil Litigation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0299,HMI and EDI Systems,,,UNRESOLVED_CONFLICT,,False,Q090,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0300,Visual Inspection and Vision Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0301,SD-Prefixed Acronyms,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0302,Qualification and Eligibility Determination,Q029,Requirements,PLACED_CONFIDENT,0.0244,False,Q029,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0303,System Configuration,Q038,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0526,False,Q091,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0304,Cyber Threat Analysis,Q014,Cyber and Security,PLACED_CONFIDENT,0.0612,False,Q014,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0305,Healthcare Coding Systems,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0306,Diagnostic Testing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0307,Nurse Practice Act Knowledge,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q092,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0308,Regulatory and Coding Requirements Compliance,Q029,Requirements,PLACED_CONFIDENT,0.035,False,Q029,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0309,Bid Preparation,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0310,Clinical Trial Management,Q087,Clinical,PLACED_CONFIDENT,0.0304,False,Q087,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0311,RFP Response Preparation,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q090,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0312,Emergency Triage and First Aid,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0313,Product and Fixture Installation,Q038,UNRESOLVED_LABEL,PLACED_LOW_CONFIDENCE,0.0169,False,Q091,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0314,Clinical Practice Guidelines,Q035,Standards Compliance and National,PLACED_CONFIDENT,0.0293,False,Q092,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0315,Authorization and Authentication Processing,Q093,User,PLACED_LOW_CONFIDENCE,-0.0031,False,Q093,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0316,API and Directory Protocols,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0317,Investment Portfolio Management,Q027,Accounting,PLACED_CONFIDENT,0.0852,False,Q080,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0318,Biological Assay Development,Q094,Cell,PLACED_CONFIDENT,0.0281,False,Q094,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0319,Environmental Management and Site Plan Review,,,UNRESOLVED_SINGLETON,,True,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0320,Regression Modeling,Q052,Models,PLACED_LOW_CONFIDENCE,-0.0023,False,Q052,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0321,Investigation Techniques,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0322,Game Development and Operational Playbooks,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0323,Software Customization,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0324,Payment Processing,Q075,Transactions and Bank,PLACED_LOW_CONFIDENCE,0.0197,False,Q085,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0325,Banking Products Knowledge,Q075,Transactions and Bank,PLACED_CONFIDENT,0.0393,False,Q075,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0326,Consulting and Advisory Services,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0327,Electrical Testing and Characterization,Q060,Electrical,PLACED_CONFIDENT,0.0424,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0328,Landscaping Products and Installation,,,UNRESOLVED_CONFLICT,,True,Q095,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0329,Soldering,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0330,Cell Culture Techniques,Q094,Cell,PLACED_CONFIDENT,0.0577,False,Q094,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0331,Human Resources Operations,Q034,Human,PLACED_CONFIDENT,0.0897,False,Q034,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0332,Trading Systems and Markets,Q027,Accounting,PLACED_CONFIDENT,0.0363,False,Q027,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0333,GIS Mapping Software,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0334,Consumer Insights Research,Q045,Customer,PLACED_LOW_CONFIDENCE,0.0131,False,Q045,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0335,Screening Procedures,Q078,Needs and Assessment,PLACED_LOW_CONFIDENCE,0.0089,False,Q021,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0336,Electric Motor Control,Q053,Controls,PLACED_CONFIDENT,0.0466,False,Q053,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0337,Low and High Voltage Systems,Q060,Electrical,PLACED_CONFIDENT,0.1176,False,Q060,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0338,Technical Acronyms and Standards,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0339,Underwriting and Underwriting Guidelines,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0340,Mixed Acronyms and Tool Names,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0341,User Account and Access Administration,Q093,User,PLACED_LOW_CONFIDENCE,0.0079,False,Q093,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0342,Rapid Learning Ability,Q067,Learning and Education,PLACED_LOW_CONFIDENCE,0.0118,False,Q051,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0343,Embedded Firmware Development,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0344,Procedural and Business Rules,Q016,Rules and Federal,PLACED_CONFIDENT,0.0703,False,Q016,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0345,Retail Operations Management,Q010,Selling and Sales,PLACED_LOW_CONFIDENCE,0.0044,False,Q077,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0346,Medical Equipment and Devices,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0347,Commercial Contract Knowledge,Q074,Contract and Carrier,PLACED_CONFIDENT,0.0593,False,Q074,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0348,Survey Design and Site Surveying,Q078,Needs and Assessment,PLACED_LOW_CONFIDENCE,0.0147,False,Q078,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0349,ML Pipeline Orchestration Tools,Q046,Information and communication technologies (icts),PLACED_LOW_CONFIDENCE,-0.0049,False,Q096,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0350,Perioperative and Postpartum Nursing Care,Q070,Nursing and Care Planning,PLACED_CONFIDENT,0.0321,False,Q070,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0351,Menu Planning and Development,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0352,Commercial Credit Analysis,Q075,Transactions and Bank,PLACED_CONFIDENT,0.0314,False,Q075,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0353,Specialized Equipment Operation,Q084,Operation and Machines,PLACED_LOW_CONFIDENCE,0.0151,False,Q084,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0354,Invoice Processing,Q085,Submission and Insurance,PLACED_LOW_CONFIDENCE,0.0066,False,Q085,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0355,Fiber Optic Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0356,Fleet and Transportation Management Systems,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0357,Messaging Strategy and Systems,Q001,Communication,PLACED_CONFIDENT,0.0615,False,Q001,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0358,Onboarding Processes,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q065,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0359,Pipe Fabrication and Fitting,Q025,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0302,False,Q086,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0360,Lease Administration,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0361,Licensing Requirements Compliance,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0362,Flowchart and Process Diagramming,,,UNRESOLVED_PARENT_DISSOLVED,,False,Q096,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0363,Network Protocol Analysis,Q058,Tracking and Network,PLACED_CONFIDENT,0.0365,False,Q058,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0364,Pump and Process Equipment Design,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0365,Psychology Knowledge,Q067,Learning and Education,PLACED_LOW_CONFIDENCE,0.0098,False,Q067,PLACED_CONFIDENT,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0366,Transaction Processing,Q075,Transactions and Bank,PLACED_CONFIDENT,0.0206,False,Q047,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0367,PCB Design and Testing,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0368,Coating and Insulation Materials,Q025,UNRESOLVED_LABEL,PLACED_CONFIDENT,0.0225,False,Q095,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0369,Product Labeling Compliance,Q017,Documentation and Label,PLACED_CONFIDENT,0.0232,False,Q083,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0370,Pneumatic Systems,Q084,Operation and Machines,PLACED_LOW_CONFIDENCE,0.0113,False,Q089,PLACED_LOW_CONFIDENCE,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0371,DSP and Acronym Abbreviations,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0372,Regulatory Code Citations,,,UNRESOLVED_EXCLUDED,,True,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0373,Aruba Network Infrastructure,,,UNRESOLVED_SINGLETON,,False,,UNRESOLVED_SINGLETON,"AI-GENERATED, UNREVIEWED (pending human approval)",False
+T0374,Acronym-Based Technical Codes,,,UNRESOLVED_EXCLUDED,,False,,UNRESOLVED_EXCLUDED,"AI-GENERATED, UNREVIEWED (pending human approval)",False
